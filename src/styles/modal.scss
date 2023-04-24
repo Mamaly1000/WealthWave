@@ -1,0 +1,13 @@
+.modal-container {
+  @apply fixed min-w-[100vw] min-h-[100vh] z-[9999999] bg-transparent top-0 left-0 flex items-center justify-center;
+}
+.modal-overlay {
+  background: rgba(0 0 0 /0.4);
+  @apply w-[100%] h-[100%] absolute top-0 left-0;
+}
+.modal-header {
+  @apply w-full flex justify-between items-center;
+}
+.modal-content {
+  @apply bg-white w-[50%] h-[500px] shadow-2xl z-[9] rounded-[14px] flex ;
+}
