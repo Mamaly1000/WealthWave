@@ -7,5 +7,6 @@
 @import "./modal.scss";
 
 * {
+  box-sizing: border-box;
   @apply p-0 m-0;
 }

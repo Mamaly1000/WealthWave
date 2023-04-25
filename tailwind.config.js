@@ -28,6 +28,7 @@ export default {
       bounce: "bounce 1s infinite",
       "hover-animate":
         "hoverAnimation .13s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
+      fade: "fade .13s linear 1",
     },
     aria: {
       checked: 'checked="true"',
@@ -594,6 +595,14 @@ export default {
         "50%": {
           transform: "none",
           animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
+        },
+      },
+      fade: {
+        "0%": {
+          opacity: 0,
+        },
+        "100%": {
+          opacity: 100,
         },
       },
     },

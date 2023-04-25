@@ -5,7 +5,6 @@ import {
   TAG,
   noteData,
   SimplifiedNote,
-  Note,
   EditBlog,
 } from "../types/noteTypes";
 import { v4 as uuidV4 } from "uuid";
@@ -21,6 +20,8 @@ interface Icontext {
   onAddTag: (tag: TAG) => void;
   onUpdate: (id: string, { tags, ...data }: EditBlog) => void;
   onDelete: (id: string) => void;
+  onDeleteTag: (id: string) => void;
+  onUpdateTag: (id: string, text: string) => void;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -73,9 +74,27 @@ const AppContextComponent = ({ children }: any) => {
       return prev.filter((note) => note.id !== id);
     });
   };
+  const onDeleteTag = (id: string) => {
+    setTags((prev) => {
+      return prev.filter((tag) => tag.id !== id);
+    });
+  };
+  const onUpdateTag = (id: string, label: string) => {
+    setTags((prev) => {
+      return prev.map((tag) => {
+        if (tag.id === id) {
+          return { ...tag, label };
+        } else {
+          return tag;
+        }
+      });
+    });
+  };
   return (
     <AppContext.Provider
       value={{
+        onUpdateTag,
+        onDeleteTag,
         onDelete,
         onUpdate,
         notes,

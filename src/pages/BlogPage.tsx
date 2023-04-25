@@ -10,6 +10,7 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
   const nav = useNavigate();
   const [selectedTags, setselectedTags] = useState<TAG[]>([]);
   const [title, setTitle] = useState<string>("");
+  const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
@@ -29,7 +30,14 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
         <button className="create-blog-btn" onClick={() => nav("/myBlogs/new")}>
           Create
         </button>
-        <button className="edit-tags-btn">Edit Tags</button>
+        <button
+          className="edit-tags-btn"
+          onClick={() => {
+            setShowTagsModal(true);
+          }}
+        >
+          Edit Tags
+        </button>
       </div>
       <form className="create-blog-form">
         <div className="form-layout-md">
@@ -87,7 +95,13 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
             );
           })}
       </div>
-      <EditTagModal show={true} tags={AllAvailableTags} />
+      {showTagModal && (
+        <EditTagModal
+          show={showTagModal}
+          setShow={setShowTagsModal}
+          tags={AllAvailableTags}
+        />
+      )}
     </div>
   );
 };

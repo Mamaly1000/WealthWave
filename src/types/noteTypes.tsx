@@ -61,4 +61,5 @@ export type BlogViewPageProps = {
 export type ModalTagsProps = {
   tags: TAG[];
   show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
