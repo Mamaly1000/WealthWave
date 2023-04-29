@@ -1,0 +1,12 @@
+.HomePage-container {
+  @apply w-full h-fit flex justify-center items-center flex-col py-20;
+  .HomePage-intro-section {
+    @apply bg-violet-500 flex justify-between items-center w-full p-0;
+    .home-page-intro-right-section {
+      @apply w-[450px] h-full;
+    }
+    .home-page-intro-slider {
+      @apply w-[450px] h-full;
+    }
+  }
+}

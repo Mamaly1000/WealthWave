@@ -474,9 +474,13 @@ video {
 @import "./newBlog.scss";
 @import "./blog-list.scss";
 @import "./modal.scss";
-
+@import "./HomePage.scss";
 * {
   box-sizing: border-box;
   margin: 0px;
+  padding: 0px;
+}
+#root {
+  overflow: hidden;
   padding: 0px;
 }

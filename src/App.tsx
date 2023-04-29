@@ -6,11 +6,12 @@ import { useContextFunction } from "./context/AppContext";
 import BlogPage from "./pages/BlogPage";
 import BlogViewPage from "./pages/BlogViewPage";
 import EditBlog from "./pages/EditBlog";
+import HomePage from "./pages/HomePage";
 function App() {
   const contextData = useContextFunction();
   return (
     <Routes>
-      <Route path="/" element={"hi"} />
+      <Route path="/" element={<HomePage />} />
       <Route path="*" element={<Navigate to={"/"} />} />
 
       <Route path="/crypto" element={"crypto main page"} />

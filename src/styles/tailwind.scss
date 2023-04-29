@@ -5,8 +5,11 @@
 @import "./newBlog.scss";
 @import "./blog-list.scss";
 @import "./modal.scss";
-
+@import "./HomePage.scss";
 * {
   box-sizing: border-box;
   @apply p-0 m-0;
+}
+#root {
+  @apply p-0 overflow-hidden;
 }
