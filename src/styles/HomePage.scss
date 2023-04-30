@@ -1,9 +1,30 @@
 .HomePage-container {
   @apply w-full h-fit flex justify-center items-center flex-col py-20;
   .HomePage-intro-section {
-    @apply bg-violet-500 flex justify-between items-center w-full p-0;
-    .home-page-intro-right-section {
-      @apply w-[450px] h-full;
+    @apply flex justify-between items-center w-full h-[450px] p-0 cursor-default;
+    .home-page-intro-section {
+      @apply w-[50%] h-[100%] flex justify-between items-center flex-col pt-10 pb-20 px-10;
+      h1 {
+        font-family: "Raleway", sans-serif;
+        @apply text-[3rem] font-extrabold italic w-[80%] text-white animate-DisplayAnimation;
+        span {
+          @apply text-blue-400;
+        }
+      }
+      .txt-rotate {
+        font-family: "Raleway", sans-serif;
+        @apply text-[1.5rem] w-[50%] text-white -tracking-normal animate-DisplayAnimation;
+        .word-animation {
+          transition-property: color, background, transform, font-weight;
+          transition-duration: 2s;
+          transition-timing-function: linear;
+
+          @apply font-bold animate-wordAnimation;
+        }
+        .selected-word {
+          @apply text-blue-400 scale-110;
+        }
+      }
     }
     .home-page-intro-slider {
       @apply w-[450px] h-full;

@@ -10,56 +10,65 @@ import HomePage from "./pages/HomePage";
 function App() {
   const contextData = useContextFunction();
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="*" element={<Navigate to={"/"} />} />
+    <div
+      style={{
+        background: "linear-gradient(to right, #000428, #004e92)",
+        width: "100vw",
+        height: "100%",
+        paddingInline:"50px"
+      }}
+    >
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<Navigate to={"/"} />} />
 
-      <Route path="/crypto" element={"crypto main page"} />
-      <Route path="/crypto/:id" element={"crypto info"} />
+        <Route path="/crypto" element={"crypto main page"} />
+        <Route path="/crypto/:id" element={"crypto info"} />
 
-      <Route
-        path="/myBlogs"
-        element={
-          <BlogPage
-            AllAvailableTags={contextData!.tags}
-            notes={contextData!.notesWithTags}
-          />
-        }
-      />
-      <Route
-        path="/myBlogs/:id"
-        element={
-          <BlogViewPage
-            notes={contextData!.notesWithTags}
-            onDelete={contextData!.onDelete}
-          />
-        }
-      />
-      <Route
-        path="/myBlogs/new"
-        element={
-          <NewBlog
-            onSubmit={contextData!.onCreateNote}
-            onAddTag={contextData!.onAddTag}
-            AllAvailableTags={contextData!.tags}
-          />
-        }
-      />
-      <Route
-        path="/myBlogs/:id/editBlog"
-        element={
-          <EditBlog
-            onSubmit={contextData!.onUpdate}
-            onAddTag={contextData!.onAddTag}
-            AllAvailableTags={contextData!.tags}
-            notes={contextData!.notesWithTags}
-          />
-        }
-      />
+        <Route
+          path="/myBlogs"
+          element={
+            <BlogPage
+              AllAvailableTags={contextData!.tags}
+              notes={contextData!.notesWithTags}
+            />
+          }
+        />
+        <Route
+          path="/myBlogs/:id"
+          element={
+            <BlogViewPage
+              notes={contextData!.notesWithTags}
+              onDelete={contextData!.onDelete}
+            />
+          }
+        />
+        <Route
+          path="/myBlogs/new"
+          element={
+            <NewBlog
+              onSubmit={contextData!.onCreateNote}
+              onAddTag={contextData!.onAddTag}
+              AllAvailableTags={contextData!.tags}
+            />
+          }
+        />
+        <Route
+          path="/myBlogs/:id/editBlog"
+          element={
+            <EditBlog
+              onSubmit={contextData!.onUpdate}
+              onAddTag={contextData!.onAddTag}
+              AllAvailableTags={contextData!.tags}
+              notes={contextData!.notesWithTags}
+            />
+          }
+        />
 
-      <Route path="/news" element={"news main page"} />
-      <Route path="/news/:id" element={"news single page"} />
-    </Routes>
+        <Route path="/news" element={"news main page"} />
+        <Route path="/news/:id" element={"news single page"} />
+      </Routes>
+    </div>
   );
 }
 

@@ -9,8 +9,33 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectCube, Pagination } from "swiper";
+import { useNavigate } from "react-router-dom";
+
+const sliderData = [
+  {
+    title:
+      "discover the secrets of the cryptocurrency world with just one click !",
+    pathName: "/crypto",
+  },
+  {
+    title:
+      "share your thoughts and insights on the world of cryptocurrency and news by contributing to our blog section .",
+    pathName: "/myBlogs",
+  },
+  {
+    title:
+      "keep your finger on the pulse of the financial world and reading the latest news from wallstreet journal .",
+    pathName: "/news",
+  },
+  {
+    title:
+      "create your profile today and gain access to a wealth of financial resources , including expert advice and market insights .",
+    pathName: "/profile",
+  },
+];
 
 export default function CubeSlider() {
+  const nav = useNavigate();
   return (
     <div className="home-page-intro-slider">
       <Swiper
@@ -26,18 +51,14 @@ export default function CubeSlider() {
         modules={[EffectCube, Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
+        {sliderData.map((data, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <h3>{data.title}</h3>
+              <button onClick={() => nav(data.pathName)}>click now!</button>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

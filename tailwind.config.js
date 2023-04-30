@@ -8,18 +8,6 @@ export default {
       ...theme("colors"),
       auto: "auto",
     }),
-    keyframes: {
-      hoverAnimation: {
-        "0%": {
-          opacity: "0",
-          transform: "translateY(-15px)",
-        },
-        "100%": {
-          opacity: "1",
-          transform: "translateY(0px)",
-        },
-      },
-    },
     animation: {
       none: "none",
       spin: "spin 1s linear infinite",
@@ -29,6 +17,8 @@ export default {
       "hover-animate":
         "hoverAnimation .13s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
       fade: "fade .13s linear 1",
+      wordAnimation: "wordAnimation .5s linear .2s 1 alternate",
+      DisplayAnimation: "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
     },
     aria: {
       checked: 'checked="true"',
@@ -603,6 +593,36 @@ export default {
         },
         "100%": {
           opacity: 100,
+        },
+      },
+      hoverAnimation: {
+        "0%": {
+          opacity: "0",
+          transform: "translateY(-15px)",
+        },
+        "100%": {
+          opacity: "1",
+          transform: "translateY(0px)",
+        },
+      },
+      wordAnimation: {
+        "0%": {
+          opacity: 0,
+          transform: "translatey(100px)",
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translatey(0px)",
+        },
+      },
+      DisplayAnimation: {
+        "0%": {
+          opacity: 0,
+          transform: "translateY(-30px)",
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0px)",
         },
       },
     },

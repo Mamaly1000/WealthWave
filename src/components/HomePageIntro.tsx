@@ -1,4 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  ReactElement,
+  useEffect,
+  useState,
+} from "react";
+
+const wordDetecter = (word: string): boolean => {
+  const WordsArray: string[] = [
+    "wealth",
+    "money",
+    "mindset",
+    "taking",
+    "action",
+    "opportunities",
+    "mindset",
+    "prosperity",
+    "impact",
+  ];
+  const result: boolean = !!WordsArray.find(
+    (w) => w.toLowerCase() === word.toLowerCase()
+  );
+  return result;
+};
+
+const wordSeprator = (text: string) => {
+  const WordsArray: string[] = text.split(" ");
+  return WordsArray.map((word, index) => {
+    return (
+      <span
+        key={index}
+        className={`word-animation ${
+          wordDetecter(word) ? "selected-word" : ""
+        }`}
+      >
+        {word}{" "}
+      </span>
+    );
+  });
+};
 
 const HomePageIntro = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -7,11 +47,11 @@ const HomePageIntro = () => {
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
   const toRotate = [
-    "Building wealth is not about money, it's about mindset and the right wave to ride.",
+    "Building wealth is not about money , it's about mindset and the right wave to ride.",
     "True wealth is not about money, but mindset and habits.",
     "Build wealth by cultivating an abundance mindset and taking action.",
     "Lasting wealth comes from the right mindset and seizing opportunities.",
-    "Wealth is more than money, it's a mindset of prosperity.",
+    "Wealth is more than money , it's a mindset of prosperity.",
     "Success requires an abundance mindset to create wealth and impact.",
   ];
   const period = 2000;
@@ -54,17 +94,13 @@ const HomePageIntro = () => {
   };
 
   return (
-    <div className="home-page-intro-right-section">
+    <div className="home-page-intro-section">
       <h1>
         Hello Wellcome to The <span>WealthWave</span>
-        <span
-          className="txt-rotate"
-          //   dataPeriod="1000"
-          data-rotate='[ "Web Developer", "Web Designer", "UI/UX Designer" ]'
-        >
-          <span className="wrap">{text}</span>
-        </span>
       </h1>
+      <span className="txt-rotate">
+        " <span className="wrap">{wordSeprator(text)}</span> "
+      </span>
     </div>
   );
 };
