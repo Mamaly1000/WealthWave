@@ -1,12 +1,6 @@
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  ReactElement,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
-const wordDetecter = (word: string): boolean => {
+export const wordDetecter = (word: string): boolean => {
   const WordsArray: string[] = [
     "wealth",
     "money",
@@ -17,6 +11,19 @@ const wordDetecter = (word: string): boolean => {
     "mindset",
     "prosperity",
     "impact",
+    "wave",
+    "cryptocurrency",
+    "blog",
+    "financial",
+    "news",
+    "wallstreet",
+    "journal",
+    "profile",
+    "wealth",
+    "financial",
+    "advice",
+    "market",
+    "insights",
   ];
   const result: boolean = !!WordsArray.find(
     (w) => w.toLowerCase() === word.toLowerCase()
@@ -24,7 +31,7 @@ const wordDetecter = (word: string): boolean => {
   return result;
 };
 
-const wordSeprator = (text: string) => {
+export const wordSeprator = (text: string) => {
   const WordsArray: string[] = text.split(" ");
   return WordsArray.map((word, index) => {
     return (

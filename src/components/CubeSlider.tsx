@@ -8,8 +8,9 @@ import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
 // import required modules
-import { EffectCube, Pagination } from "swiper";
+import { EffectCube, Pagination, Autoplay } from "swiper";
 import { useNavigate } from "react-router-dom";
+import { wordSeprator } from "./HomePageIntro";
 
 const sliderData = [
   {
@@ -48,13 +49,17 @@ export default function CubeSlider() {
           shadowScale: 0.94,
         }}
         pagination={true}
-        modules={[EffectCube, Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[EffectCube, Pagination, Autoplay]}
         className="mySwiper"
       >
         {sliderData.map((data, index) => {
           return (
             <SwiperSlide key={index}>
-              <h3>{data.title}</h3>
+              <h3>{wordSeprator(data.title)}</h3>
               <button onClick={() => nav(data.pathName)}>click now!</button>
             </SwiperSlide>
           );

@@ -7,17 +7,11 @@ import BlogPage from "./pages/BlogPage";
 import BlogViewPage from "./pages/BlogViewPage";
 import EditBlog from "./pages/EditBlog";
 import HomePage from "./pages/HomePage";
+import Layout from "./layout/Layout";
 function App() {
   const contextData = useContextFunction();
   return (
-    <div
-      style={{
-        background: "linear-gradient(to right, #000428, #004e92)",
-        width: "100vw",
-        height: "100%",
-        paddingInline:"50px"
-      }}
-    >
+    <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<Navigate to={"/"} />} />
@@ -68,7 +62,7 @@ function App() {
         <Route path="/news" element={"news main page"} />
         <Route path="/news/:id" element={"news single page"} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 

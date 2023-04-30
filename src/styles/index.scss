@@ -471,6 +471,8 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap");
 @import "./newBlog.scss";
 @import "./blog-list.scss";
 @import "./modal.scss";
@@ -481,6 +483,9 @@ video {
   padding: 0px;
 }
 #root {
-  overflow: hidden;
+  margin: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: visible;
   padding: 0px;
 }

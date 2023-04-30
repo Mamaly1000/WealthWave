@@ -7,6 +7,7 @@ export const AllCoinList = async () => {
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
@@ -19,6 +20,7 @@ export const SingleCoinData = async (name: string) => {
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
@@ -35,6 +37,7 @@ export const CoinChart = async (
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
@@ -47,11 +50,13 @@ export const TrendCoins = async () => {
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
   }
 };
+
 export const NFTList = async () => {
   try {
     const response = await axios.get(
@@ -59,6 +64,7 @@ export const NFTList = async () => {
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
@@ -71,6 +77,7 @@ export const SingleNft = async (name: string) => {
     );
     if (response.status === 200) {
       console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);

@@ -1,12 +1,12 @@
 .HomePage-container {
-  @apply w-full h-fit flex justify-center items-center flex-col py-20;
+  @apply w-full h-fit flex justify-center items-center flex-col py-20 px-5 lg:px-10;
   .HomePage-intro-section {
-    @apply flex justify-between items-center w-full h-[450px] p-0 cursor-default;
+    @apply flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full w-fit lg:h-[450px] p-0 cursor-default;
     .home-page-intro-section {
-      @apply w-[50%] h-[100%] flex justify-between items-center flex-col pt-10 pb-20 px-10;
+      @apply w-fit h-[500px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-10;
       h1 {
         font-family: "Raleway", sans-serif;
-        @apply text-[3rem] font-extrabold italic w-[80%] text-white animate-DisplayAnimation;
+        @apply text-[3rem] font-extrabold italic w-[100%] lg:w-[80%] text-white animate-DisplayAnimation;
         span {
           @apply text-blue-400;
         }
@@ -21,13 +21,31 @@
 
           @apply font-bold animate-wordAnimation;
         }
-        .selected-word {
-          @apply text-blue-400 scale-110;
-        }
       }
     }
     .home-page-intro-slider {
-      @apply w-[450px] h-full;
+      @apply w-[450px] h-[450px] text-white text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900 shadow-2xl rounded-[10px];
+      .mySwiper {
+        @apply w-full h-full capitalize;
+        .swiper-slide {
+          @apply shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
+          h3 {
+            @apply w-[70%];
+          }
+          button {
+            @apply w-fit h-fit px-5 py-2 cursor-pointer rounded-[10px] bg-blue-600 shadow-blue-500 border-none shadow-lg hover:shadow-none scale-100 transition-BlogCard active:scale-95;
+          }
+        }
+        .swiper-pagination-bullet {
+          @apply w-[10px] h-[10px] rounded-[2px] bg-blue-400 transition-all;
+        }
+        .swiper-pagination-bullet-active {
+          @apply w-[20px] bg-blue-400;
+        }
+      }
     }
+  }
+  .selected-word {
+    @apply text-blue-400 scale-110;
   }
 }
