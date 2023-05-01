@@ -1,9 +1,9 @@
 .HomePage-container {
-  @apply w-full h-fit flex justify-center items-center flex-col py-20 px-5 lg:px-10;
+  @apply w-full h-fit flex justify-center items-center flex-col gap-10 py-20 px-1 lg:px-10;
   .HomePage-intro-section {
     @apply flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full w-fit lg:h-[450px] p-0 cursor-default;
     .home-page-intro-section {
-      @apply w-fit h-[500px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-10;
+      @apply w-[50%] h-[500px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-10;
       h1 {
         font-family: "Raleway", sans-serif;
         @apply text-[3rem] font-extrabold italic w-[100%] lg:w-[80%] text-white animate-DisplayAnimation;
@@ -44,8 +44,61 @@
         }
       }
     }
+    .selected-word {
+      @apply text-blue-400 scale-110;
+    }
   }
-  .selected-word {
-    @apply text-blue-400 scale-110;
+  .crypto-table-container {
+    @apply w-[100%] h-fit;
+    table {
+      background: rgba(255 255 255 /0.1);
+      backdrop-filter: blur(10px);
+      @apply rounded-[10px]  w-full h-fit;
+
+      tr {
+        @apply w-[100%] grid grid-cols-12 justify-evenly items-center;
+        th,
+        td {
+          @apply text-white py-2 flex justify-start items-center px-5;
+        }
+
+        .td-rate,
+        .th-rate {
+          @apply col-span-2 md:col-span-1;
+        }
+        .td-icon,
+        .th-icon {
+          @apply col-span-2  md:col-span-1;
+        }
+        .td-name,
+        .th-name {
+          @apply col-span-2 lg:col-span-3 text-left text-[.9rem] md:text-[1rem];
+        }
+        .td-price,
+        .th-price {
+          @apply col-span-3 md:col-span-2 text-[.9rem] md:text-[1rem];
+        }
+        .td-high,
+        .th-high_24h {
+          @apply col-span-1 hidden lg:flex;
+        }
+        .td-low,
+        .th-low_24h {
+          @apply col-span-1 hidden lg:flex;
+        }
+        .td-percent,
+        .th-24h {
+          @apply text-[.9rem] md:text-[1rem] col-span-3 md:col-span-2 lg:col-span-1;
+        }
+        .td-cap,
+        .th-Market-Cap {
+          @apply hidden md:flex md:col-span-3 lg:col-span-2;
+        }
+
+        .coin-icon {
+          @apply w-full h-full lg:w-[50px] lg:h-[50px];
+        }
+      }
+    }
   }
 }

@@ -13,9 +13,8 @@ const HomePage = () => {
         <HomePageIntro />
         <CubeSlider />
       </div>
-      <div>
+      <div className="crypto-table-container">
         <CryptoTableRow />
-        <CryptoTable />
       </div>
     </div>
   );
