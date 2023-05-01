@@ -4,7 +4,7 @@
     @apply w-full flex flex-col md:flex-row justify-center items-center gap-5 mb-10;
 
     .create-blog-btn {
-      @apply w-[100%] md:w-fit bg-violet-500 text-white px-5 py-2 rounded-[10px] hover:bg-violet-600;
+      @apply w-[100%] md:w-fit bg-blue-500 text-white px-5 py-2 rounded-[10px] hover:bg-blue-600;
     }
     .edit-tags-btn {
       @apply w-[100%] md:w-fit whitespace-nowrap bg-gray-500 text-white px-5 py-2 rounded-[10px] hover:bg-gray-600;
@@ -14,7 +14,7 @@
     @apply w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-12;
   }
   .blog-card {
-    @apply w-[100%] md:w-[90%] h-[200px] rounded-[14px] shadow-lg cursor-pointer hover:shadow-2xl hover:text-white hover:bg-violet-800 hover:animate-hover-animate transition-BlogCard flex justify-center items-center gap-5 flex-col;
+    @apply w-[100%] md:w-[90%] h-[200px] rounded-[14px] shadow-lg cursor-pointer hover:shadow-2xl hover:text-white hover:bg-blue-800 hover:animate-hover-animate transition-BlogCard flex justify-center items-center gap-5 flex-col;
   }
   .blog-card:hover .tag-badge {
     @apply bg-white text-black;
@@ -23,7 +23,7 @@
     @apply w-[50%] flex justify-center items-center gap-5;
   }
   .tag-badge {
-    @apply animate-hover-animate bg-violet-800 text-white w-fit px-4 py-2 rounded-[10px] flex justify-center items-center shadow-2xl;
+    @apply animate-hover-animate bg-blue-800 text-white w-fit px-4 py-2 rounded-[10px] flex justify-center items-center shadow-2xl;
   }
 }
 @keyframes hoverAnimation {

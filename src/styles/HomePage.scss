@@ -3,17 +3,17 @@
   .HomePage-intro-section {
     @apply flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full w-fit lg:h-[450px] p-0 cursor-default;
     .home-page-intro-section {
-      @apply w-[50%] h-[500px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-10;
+      @apply w-[100%] lg:w-[50%] h-[500px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-10;
       h1 {
         font-family: "Raleway", sans-serif;
-        @apply text-[3rem] font-extrabold italic w-[100%] lg:w-[80%] text-white animate-DisplayAnimation;
+        @apply text-[3rem] font-extrabold italic w-[100%] lg:w-[80%] text-white animate-DisplayAnimation text-center;
         span {
           @apply text-blue-400;
         }
       }
       .txt-rotate {
         font-family: "Raleway", sans-serif;
-        @apply text-[1.5rem] w-[50%] text-white -tracking-normal animate-DisplayAnimation;
+        @apply text-[1.5rem] w-[100%] lg:w-[50%] text-white -tracking-normal animate-DisplayAnimation;
         .word-animation {
           transition-property: color, background, transform, font-weight;
           transition-duration: 2s;
@@ -24,16 +24,13 @@
       }
     }
     .home-page-intro-slider {
-      @apply w-[450px] h-[450px] text-white text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900 shadow-2xl rounded-[10px];
+      @apply w-[350px] h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900 shadow-2xl rounded-[10px];
       .mySwiper {
         @apply w-full h-full capitalize;
         .swiper-slide {
           @apply shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
           h3 {
             @apply w-[70%];
-          }
-          button {
-            @apply w-fit h-fit px-5 py-2 cursor-pointer rounded-[10px] bg-blue-600 shadow-blue-500 border-none shadow-lg hover:shadow-none scale-100 transition-BlogCard active:scale-95;
           }
         }
         .swiper-pagination-bullet {
@@ -49,38 +46,56 @@
     }
   }
   .crypto-table-container {
-    @apply w-[100%] h-fit;
+    @apply w-[100%] h-fit flex flex-col justify-center items-center;
+    div {
+      @apply w-full flex items-center justify-between;
+    }
     table {
       background: rgba(255 255 255 /0.1);
       backdrop-filter: blur(10px);
-      @apply rounded-[10px]  w-full h-fit;
-
+      @apply rounded-[10px]  w-full h-fit overflow-hidden;
+      thead {
+        background: rgba(255 255 255/0.3);
+        @apply text-blue-950;
+      }
+      tbody {
+        tr {
+          background: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+         
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          @apply animate-wordAnimation opacity-0;
+        }
+      }
       tr {
         @apply w-[100%] grid grid-cols-12 justify-evenly items-center;
         th,
         td {
-          @apply text-white py-2 flex justify-start items-center px-5;
+          @apply py-2 flex justify-start items-center px-5;
+        }
+        td {
+          @apply text-white text-[.8rem] font-bold  sm:text-[.9rem] md:text-[1rem];
         }
 
         .td-rate,
         .th-rate {
-          @apply col-span-2 md:col-span-1;
+          @apply hidden sm:flex col-span-2 md:col-span-1;
         }
         .td-icon,
         .th-icon {
-          @apply col-span-2  md:col-span-1;
+          @apply col-span-3 sm:col-span-2  md:col-span-1;
         }
         .td-name,
         .th-name {
-          @apply col-span-2 lg:col-span-3 text-left text-[.9rem] md:text-[1rem];
+          @apply col-span-3 sm:col-span-2  md:col-span-3 text-left;
         }
         .td-price,
         .th-price {
-          @apply col-span-3 md:col-span-2 text-[.9rem] md:text-[1rem];
+          @apply col-span-3 md:col-span-2 lg:col-span-2   justify-start md:justify-end;
         }
         .td-high,
         .th-high_24h {
-          @apply col-span-1 hidden lg:flex;
+          @apply col-span-1 hidden lg:flex justify-end;
         }
         .td-low,
         .th-low_24h {
@@ -88,7 +103,7 @@
         }
         .td-percent,
         .th-24h {
-          @apply text-[.9rem] md:text-[1rem] col-span-3 md:col-span-2 lg:col-span-1;
+          @apply col-span-3 md:col-span-2 lg:col-span-1;
         }
         .td-cap,
         .th-Market-Cap {
@@ -98,7 +113,16 @@
         .coin-icon {
           @apply w-full h-full lg:w-[50px] lg:h-[50px];
         }
+        .increased-rate {
+          @apply text-green-500;
+        }
+        .decreased-rate {
+          color: #ff0000;
+        }
       }
     }
+  }
+  button {
+    @apply text-white capitalize w-fit h-fit px-5 py-2 cursor-pointer rounded-[10px] bg-blue-600 shadow-blue-500 border-none shadow-lg hover:shadow-none scale-100 transition-BlogCard active:scale-95;
   }
 }

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import useCrypto from "../../hooks/useCrypto";
-
+import Loader from "../loader/Loader";
 const CryptoTableRow = () => {
   const { getAllcoins, cryptoList, loading } = useCrypto();
   useEffect(() => {
-    // getAllcoins();
+    getAllcoins();
   }, []);
   return (
-    <table className="">
+    <table>
       <thead>
         <tr>
           {[
@@ -32,7 +32,7 @@ const CryptoTableRow = () => {
         {!loading ? (
           cryptoList?.splice(0, 7)?.map((coin, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} style={{ animationDelay: `${index/10 + 0.1}s` }}>
                 <td className="td-rate">{coin!.market_cap_rank}</td>
                 <td className="td-icon">
                   <img
@@ -46,12 +46,13 @@ const CryptoTableRow = () => {
                 <td className="td-high">{coin!.high_24h}</td>
                 <td className="td-low">{coin!.low_24h}</td>
                 <td
-                  className="td-percent"
-                  style={{
-                    color: coin!.ath_change_percentage > 0 ? "green" : "ED2B2A",
-                  }}
+                  className={`td-percent ${
+                    coin.market_cap_change_percentage_24h > 0
+                      ? "increased-rate"
+                      : "decreased-rate"
+                  }`}
                 >
-                  {coin!.market_cap_change_percentage_24h}
+                  {coin!.market_cap_change_percentage_24h}%
                 </td>
                 <td className="td-cap">{coin!.market_cap}$</td>
               </tr>
@@ -59,7 +60,9 @@ const CryptoTableRow = () => {
           })
         ) : (
           <tr>
-            <td>loading ....</td>
+            <td>
+              <Loader />
+            </td>
           </tr>
         )}
       </tbody>

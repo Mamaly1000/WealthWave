@@ -17,8 +17,9 @@ export default {
       "hover-animate":
         "hoverAnimation .13s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
       fade: "fade .13s linear 1",
-      wordAnimation: "wordAnimation .5s linear .2s 1 alternate",
-      DisplayAnimation: "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
+      wordAnimation: "wordAnimation .3s cubic-bezier(0.5, 1.5, 0.4, 1.4) .2s 1 alternate forwards",
+      DisplayAnimation:
+        "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
     },
     aria: {
       checked: 'checked="true"',
@@ -608,11 +609,11 @@ export default {
       wordAnimation: {
         "0%": {
           opacity: 0,
-          transform: "translatey(100px)",
+          transform: "translateX(100px)",
         },
         "100%": {
           opacity: 1,
-          transform: "translatey(0px)",
+          transform: "translateX(0px)",
         },
       },
       DisplayAnimation: {
