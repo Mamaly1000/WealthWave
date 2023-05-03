@@ -477,6 +477,7 @@ video {
 @import "./blog-list.scss";
 @import "./modal.scss";
 @import "./HomePage.scss";
+@import "./navbar.scss";
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -488,4 +489,14 @@ video {
   max-width: 100%;
   overflow: visible;
   padding: 0px;
+}
+.loader-container {
+  display: flex;
+  min-height: 100px;
+  min-width: 300px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }

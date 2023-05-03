@@ -5,6 +5,7 @@ import {
   SingleCoinData,
   TrendCoins,
 } from "../api/cryptoApi";
+import axios from "axios";
 
 export interface IcryptoData {
   ath: number;
@@ -46,11 +47,16 @@ const useCrypto = () => {
   const getAllcoins = async (): Promise<void> => {
     try {
       setLoading(true);
-      setCryptoList(await AllCoinList());
-      setLoading(false);
+      const response = await axios.get(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+      );
+      console.log(response);
+      if (response.status === 200) {
+        setCryptoList(response.data);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
   const getTrendCoins = async (): Promise<void> => {

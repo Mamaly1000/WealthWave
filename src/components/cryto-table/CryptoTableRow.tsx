@@ -4,7 +4,7 @@ import Loader from "../loader/Loader";
 const CryptoTableRow = () => {
   const { getAllcoins, cryptoList, loading } = useCrypto();
   useEffect(() => {
-    getAllcoins();
+    // getAllcoins();
   }, []);
   return (
     <table>

@@ -8,6 +8,7 @@
 @import "./blog-list.scss";
 @import "./modal.scss";
 @import "./HomePage.scss";
+@import "./navbar.scss";
 * {
   box-sizing: border-box;
   @apply p-0 m-0;
@@ -16,4 +17,7 @@
   max-width: 100% !important;
   max-width: 100% !important;
   @apply p-0 m-0 min-w-[100%] max-w-[100%] overflow-visible;
+}
+.loader-container {
+  @apply min-w-[300px] min-h-[100px] bg-gray-700 rounded-[10px] flex justify-center items-center;
 }
