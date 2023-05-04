@@ -17,9 +17,11 @@ export default {
       "hover-animate":
         "hoverAnimation .13s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
       fade: "fade .13s linear 1",
-      wordAnimation: "wordAnimation .3s cubic-bezier(0.5, 1.5, 0.4, 1.4) .2s 1 alternate forwards",
+      wordAnimation:
+        "wordAnimation .3s cubic-bezier(0.5, 1.5, 0.4, 1.4) .2s 1 alternate forwards",
       DisplayAnimation:
         "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
+      displayComponent: "hoverAnimation .23s linear 1 alternate ",
     },
     aria: {
       checked: 'checked="true"',

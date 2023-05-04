@@ -1,5 +1,5 @@
 .HomePage-container {
-  @apply w-full h-fit flex justify-center items-center flex-col gap-10 py-24 px-0 lg:px-10;
+  @apply w-full h-fit flex justify-center items-center flex-col gap-10 py-24 px-5 lg:px-10;
   .HomePage-intro-section {
     @apply flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full lg:h-[450px] p-0 cursor-default;
     .home-page-intro-section {

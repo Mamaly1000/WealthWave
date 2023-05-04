@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [screenW, setScreenW] = useState<boolean>(
@@ -56,6 +57,16 @@ const NavBar = () => {
           />
         </svg>
       </button>
+      <Link
+        to="/"
+        className="navbar-logo"
+        style={{
+          scale: scrollH ? "1.2" : "0",
+          transition: "scale .13s linear",
+        }}
+      >
+        <span>W</span>ealth<span>W</span>ave
+      </Link>
       <div>
         <button
           className="main-navbar-btn"
