@@ -8,6 +8,7 @@
     @apply hidden sm:flex w-[30px] md:w-[40px] h-[30px] md:h-[40px]  p-1 text-white cursor-pointer rounded-[5px] bg-blue-600 shadow-blue-500 shadow border-none hover:shadow-none scale-100 active:scale-95 transition-BlogCard justify-center items-center text-[.8rem] sm:text-[1rem];
   }
   .navbar-logo {
+    font-family: "Raleway", sans-serif;
     text-shadow: 0 0 10px rgba(255 255 255 /0.2);
     @apply font-semibold italic whitespace-nowrap absolute mx-auto text-[1.5rem] sm:text-[1.7rem] md:text-[2rem] w-[50%] sm:w-[30%] md:w-[20%] left-[25%] sm:left-[35%] md:left-[40%];
     span {

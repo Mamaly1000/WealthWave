@@ -1,3 +1,8 @@
+import profile_Icon from "./../assets/sideBar_Icons/profile.svg";
+import crypto_Icon from "./../assets/sideBar_Icons/crypto.svg";
+import news_Icon from "./../assets/sideBar_Icons/news.svg";
+import blog_Icon from "./../assets/sideBar_Icons/blog.svg";
+
 export const Footer_Links = [
   {
     header: "Customer Care",
@@ -38,5 +43,32 @@ export const Footer_Links = [
   {
     header: "My Account",
     links: ["Sign In/Register", "My Wishlist", "My Cart"],
+  },
+];
+export const SideBar_links = [
+  {
+    title: "Profile",
+    icon: profile_Icon,
+    route: "/profile",
+  },
+  {
+    title: "Crypto Currencies",
+    icon: crypto_Icon,
+    route: "/crypto",
+  },
+  {
+    title: "NFT",
+    icon: "https://img.icons8.com/pastel-glyph/64/000000/nft.png",
+    route: "/nft",
+  },
+  {
+    title: "News",
+    icon: news_Icon,
+    route: "/news",
+  },
+  {
+    title: "Blogs",
+    icon: blog_Icon,
+    route: "/myBlogs",
   },
 ];

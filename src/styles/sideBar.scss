@@ -1,0 +1,48 @@
+.sideBar-container {
+  @apply fixed top-0 left-0 w-full h-screen overflow-hidden text-white;
+  .sideBar-overlay {
+    background: rgba(0 0 0 /0.4);
+    @apply w-full h-full animate-fade transition-opacity;
+  }
+  .sideBar-content {
+    background: rgb(12 42 113 / 32%);
+    box-shadow: 10px 0 10px 0 rgba(0 0 0/0.1);
+    @apply backdrop-blur-sm w-full sm:w-[80%] md:w-[40%] lg:w-[30%] h-full absolute top-0 left-0 flex justify-between items-center flex-col px-10 py-20 transition-all overflow-auto;
+    .sideBar-header {
+      @apply w-full h-fit text-left font-bold italic text-[2rem];
+      span {
+        @apply text-blue-400;
+      }
+    }
+    .sideBar-profile-section {
+      @apply w-full h-fit flex flex-col justify-start items-start gap-[10px];
+      img {
+        @apply w-[120px] h-[120px] rounded-full shadow-md hover:scale-105 cursor-pointer transition-all;
+      }
+      h5 {
+        @apply text-[2rem] font-semibold text-left transition-all;
+      }
+      p {
+        @apply text-[1rem] text-gray-300 italic;
+      }
+    }
+    .sideBar-hamMenu {
+      @apply w-full h-fit flex flex-col items-start justify-center gap-[20px];
+      a {
+        @apply w-full p-1 rounded-[10px] flex gap-[16px] h-[30px] hover:scale-110 transition-all hover:bg-blue-600;
+        img {
+          @apply w-fit h-full;
+        }
+      }
+    }
+    .copyRight-section {
+      @apply relative w-full h-fit py-5 top-20 left-0 text-[.8rem];
+      span {
+        @apply text-blue-300 font-bold cursor-pointer;
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}

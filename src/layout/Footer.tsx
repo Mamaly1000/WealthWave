@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Footer_Links } from "../dumbData/dummy";
+import { Footer_Links } from "../Data/dummy";
 const Footer = () => {
   return (
     <div className="footer-container">
