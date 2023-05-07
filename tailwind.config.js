@@ -22,6 +22,7 @@ export default {
       DisplayAnimation:
         "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
       displayComponent: "hoverAnimation .23s linear 1 alternate ",
+      sideBar: "displaySideBar .23s ease 1",
     },
     aria: {
       checked: 'checked="true"',
@@ -626,6 +627,16 @@ export default {
         "100%": {
           opacity: 1,
           transform: "translateY(0px)",
+        },
+      },
+      displaySideBar: {
+        "0%": {
+          opacity: 0,
+          transform: "translateX(-40vw)",
+        },
+        "100%": {
+          opacity: 100,
+          transform: "translateX(0vw)",
         },
       },
     },

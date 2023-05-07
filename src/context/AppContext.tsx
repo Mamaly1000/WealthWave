@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
   RawNote,
@@ -22,6 +28,8 @@ interface Icontext {
   onDelete: (id: string) => void;
   onDeleteTag: (id: string) => void;
   onUpdateTag: (id: string, text: string) => void;
+  screenW: boolean;
+  scrollH: boolean;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -90,9 +98,35 @@ const AppContextComponent = ({ children }: any) => {
       });
     });
   };
+  const [screenW, setScreenW] = useState<boolean>(
+    window.innerWidth > 450 ? true : false
+  );
+  const [scrollH, setScrollH] = useState<boolean>(
+    window.scrollY > 300 ? true : false
+  );
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 640) {
+        setScreenW(true);
+      } else {
+        setScreenW(false);
+      }
+    });
+  }, [screenW]);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        setScrollH(true);
+      } else {
+        setScrollH(false);
+      }
+    });
+  }, [scrollH]);
   return (
     <AppContext.Provider
       value={{
+        screenW,
+        scrollH,
         onUpdateTag,
         onDeleteTag,
         onDelete,

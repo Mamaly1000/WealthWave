@@ -1,8 +1,10 @@
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SideBar from "../components/sidebar/SideBar";
+import { useState } from "react";
 
 const Layout = ({ children }) => {
+  const [displaySideBar, setDisplaySideBar] = useState<boolean>(false);
   return (
     <div
       style={{
@@ -11,8 +13,8 @@ const Layout = ({ children }) => {
         height: "100%",
       }}
     >
-      <NavBar />
-      <SideBar />
+      <NavBar showSideBar={displaySideBar} setShowSideBar={setDisplaySideBar} />
+      {displaySideBar && <SideBar setShowSideBar={setDisplaySideBar} />}
       {children}
       <Footer />
     </div>

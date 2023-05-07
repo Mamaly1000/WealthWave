@@ -1,46 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContextFunction } from "../context/AppContext";
 
-const NavBar = () => {
-  const [screenW, setScreenW] = useState<boolean>(
-    window.innerWidth > 450 ? true : false
-  );
-  const [scrollH, setScrollH] = useState<boolean>(
-    window.scrollY > 300 ? true : false
-  );
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 450) {
-        setScreenW(true);
-      } else {
-        setScreenW(false);
-      }
-    });
-  }, [screenW]);
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        setScrollH(true);
-      } else {
-        setScrollH(false);
-      }
-    });
-  }, [scrollH]);
+const NavBar = ({ showSideBar, setShowSideBar }) => {
+  const contextData = useContextFunction();
 
   return (
     <div
       className="navBar-container"
       style={{
-        background: scrollH ? "rgba(30 64 175/0.4)" : "rgba(30 64 175/0.2)",
+        background: contextData!.scrollH ? "rgba(30 64 175/0.4)" : "rgba(30 64 175/0.2)",
       }}
     >
       <button
         style={{
-          scale: scrollH ? "1" : "1.2",
+          scale: contextData!.scrollH ? "1" : "1.2",
           transition: "scale .13s linear",
           display: "flex",
         }}
         className="main-navbar-btn"
+        onClick={() => setShowSideBar(true)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +40,7 @@ const NavBar = () => {
         to="/"
         className="navbar-logo"
         style={{
-          scale: scrollH ? "1.2" : "0",
+          scale: contextData!.scrollH ? "1.2" : "0",
           transition: "scale .13s linear",
         }}
       >
@@ -71,7 +50,7 @@ const NavBar = () => {
         <button
           className="main-navbar-btn"
           style={{
-            scale: scrollH ? "1" : "1.2",
+            scale: contextData!.scrollH ? "1" : "1.2",
             transition: "scale .13s linear",
             display: "flex",
           }}
@@ -94,7 +73,7 @@ const NavBar = () => {
         <button
           className="main-navbar-btn"
           style={{
-            scale: scrollH ? "0" : "1.2",
+            scale: contextData!.scrollH ? "0" : "1.2",
             transition: "scale .13s linear",
           }}
         >
@@ -117,7 +96,7 @@ const NavBar = () => {
           style={{
             width: "fit-content",
             paddingInline: 10,
-            scale: scrollH ? "0" : "1.2",
+            scale: contextData!.scrollH ? "0" : "1.2",
             transition: "scale .13s linear",
           }}
           className="main-navbar-btn"
@@ -132,7 +111,7 @@ const NavBar = () => {
             background: "white",
             border: "1px solid rgb(37 99 235)",
             display: "flex",
-            scale: scrollH ? "0" : "1.2",
+            scale: contextData!.scrollH ? "0" : "1.2",
             transition: "scale .13s linear",
           }}
           className="main-navbar-btn"
