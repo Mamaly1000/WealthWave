@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
-import VerticalSlider from "../components/VerticalSlider";
+import { useEffect } from "react";
 import CubeSlider from "../components/CubeSlider";
 import HomePageIntro from "../components/HomePageIntro";
-import { CryptoTable } from "../components/cryto-table/CryptoChart";
 import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import { useNavigate } from "react-router-dom";
 import useNFT from "../hooks/useNFT";
+import NFTslider from "../components/ntf-components/NFTslider";
 
 const HomePage = () => {
   const nav = useNavigate();
-  const { getNftLst, getSingleNft } = useNFT();
-  useEffect(() => {
-    getNftLst(10);
-    getSingleNft("squiggly");
-  }, []);
   return (
     <div className="HomePage-container">
       {/* <VerticalSlider /> */}
@@ -28,7 +22,9 @@ const HomePage = () => {
         </div>
         <CryptoTableRow />
       </div>
-      <div className="nft-list-slider"></div>
+      <div className="nft-list-slider">
+        <NFTslider />
+      </div>
     </div>
   );
 };

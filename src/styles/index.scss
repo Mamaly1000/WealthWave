@@ -480,6 +480,7 @@ video {
 @import "./navbar.scss";
 @import "./footer.scss";
 @import "./sideBar.scss";
+@import "./nftPost.scss";
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -494,8 +495,10 @@ video {
 }
 .loader-container {
   display: flex;
-  min-height: 100px;
-  min-width: 300px;
+  height: 100px;
+  max-height: 100px;
+  width: 200px;
+  max-width: 200px;
   align-items: center;
   justify-content: center;
   border-radius: 10px;

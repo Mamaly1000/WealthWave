@@ -23,6 +23,7 @@ export default {
         "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
       displayComponent: "hoverAnimation .23s linear 1 alternate ",
       sideBar: "displaySideBar .23s ease 1",
+      liking: "liking .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
     },
     aria: {
       checked: 'checked="true"',
@@ -347,6 +348,8 @@ export default {
         '"Courier New"',
         "monospace",
       ],
+      rail: ["Raleway"],
+      number:["Nanum Gothic"]
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],
@@ -637,6 +640,20 @@ export default {
         "100%": {
           opacity: 100,
           transform: "translateX(0vw)",
+        },
+      },
+      liking: {
+        "0%": {
+          opacity: 0.5,
+          scale: 0.5,
+        },
+        "50%": {
+          opacity: 1,
+          scale: "1.1 1.1",
+        },
+        "100%": {
+          opacity: 0,
+          scale: 0.5,
         },
       },
     },

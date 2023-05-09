@@ -4,7 +4,7 @@ import Loader from "../loader/Loader";
 const CryptoTableRow = () => {
   const { getAllcoins, cryptoList, loading } = useCrypto();
   useEffect(() => {
-    // getAllcoins();
+    getAllcoins(7);
   }, []);
   return (
     <table>
@@ -28,11 +28,14 @@ const CryptoTableRow = () => {
           })}
         </tr>
       </thead>
-      <tbody>
-        {!loading ? (
-          cryptoList?.splice(0, 7)?.map((coin, index) => {
+      {!loading ? (
+        <tbody>
+          {cryptoList.map((coin, index) => {
             return (
-              <tr key={index} style={{ animationDelay: `${index/10 + 0.1}s` }}>
+              <tr
+                key={index}
+                style={{ animationDelay: `${index / 10 + 0.1}s` }}
+              >
                 <td className="td-rate">{coin!.market_cap_rank}</td>
                 <td className="td-icon">
                   <img
@@ -57,15 +60,11 @@ const CryptoTableRow = () => {
                 <td className="td-cap">{coin!.market_cap}$</td>
               </tr>
             );
-          })
-        ) : (
-          <tr>
-            <td>
-              <Loader />
-            </td>
-          </tr>
-        )}
-      </tbody>
+          })}
+        </tbody>
+      ) : (
+        <Loader />
+      )}
     </table>
   );
 };
