@@ -5,9 +5,15 @@ import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import { useNavigate } from "react-router-dom";
 import useNFT from "../hooks/useNFT";
 import NFTslider from "../components/ntf-components/NFTslider";
+import useNews from "../hooks/useNews";
+import NewsSection from "../components/news-post-component/NewsSection";
 
 const HomePage = () => {
   const nav = useNavigate();
+  const { getAppleNews } = useNews();
+  useEffect(() => {
+    getAppleNews();
+  }, []);
   return (
     <div className="HomePage-container">
       {/* <VerticalSlider /> */}
@@ -25,6 +31,7 @@ const HomePage = () => {
       <div className="nft-list-slider">
         <NFTslider />
       </div>
+      <NewsSection />
     </div>
   );
 };

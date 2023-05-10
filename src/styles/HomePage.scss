@@ -53,7 +53,7 @@
       tbody {
         @apply w-full;
         tr {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.1);
           box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
           border: 1px solid rgba(255, 255, 255, 0.18);
           @apply w-full animate-wordAnimation opacity-0;
@@ -66,7 +66,7 @@
           @apply py-2 flex justify-start items-center px-5;
         }
         td {
-          @apply text-white text-[.8rem] font-bold  sm:text-[.9rem] md:text-[1rem];
+          @apply text-white text-[.8rem] font-[400]  sm:text-[.9rem] md:text-[1rem];
         }
 
         .td-rate,
@@ -86,11 +86,11 @@
           @apply col-span-3 md:col-span-2 lg:col-span-2   justify-start md:justify-end;
         }
         .td-high,
-        .th-high_24h {
+        .th-high-24h {
           @apply col-span-1 hidden lg:flex justify-end;
         }
         .td-low,
-        .th-low_24h {
+        .th-low-24h {
           @apply col-span-1 hidden lg:flex;
         }
         .td-percent,
@@ -140,5 +140,10 @@
   }
   .swiper-pagination-bullet-active {
     @apply w-[20px] bg-blue-400;
+  }
+}
+@media only screen and (max-width: 600px) {
+  *::-webkit-scrollbar {
+    @apply hidden;
   }
 }

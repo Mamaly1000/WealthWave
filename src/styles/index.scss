@@ -473,6 +473,7 @@ video {
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
 @import "./newBlog.scss";
 @import "./blog-list.scss";
 @import "./modal.scss";
@@ -481,6 +482,8 @@ video {
 @import "./footer.scss";
 @import "./sideBar.scss";
 @import "./nftPost.scss";
+@import "./loader.scss";
+@import "./news-section.scss";
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -492,16 +495,4 @@ video {
   max-width: 100%;
   overflow: visible;
   padding: 0px;
-}
-.loader-container {
-  display: flex;
-  height: 100px;
-  max-height: 100px;
-  width: 200px;
-  max-width: 200px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }

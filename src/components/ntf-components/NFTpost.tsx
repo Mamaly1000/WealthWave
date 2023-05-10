@@ -25,6 +25,11 @@ const NFTpost = ({ name, price, symbol }: nftPostType) => {
       setDoubledClick(false);
     }, 500);
   };
+  const setNFTimage = () => {
+    return nftPics.filter((pic) => pic === nftPic)[
+      Math.floor(Math.random() * nftPics.length - 1)
+    ];
+  };
   return (
     <div className="nft-post-component" onDoubleClick={() => displayLikeIcon()}>
       <img className="nft-post-pic" src={nftPic} alt="nft image" />

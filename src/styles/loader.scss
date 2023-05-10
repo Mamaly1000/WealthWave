@@ -1,0 +1,7 @@
+.loader-container {
+  background: rgba(0 0 0/0.2);
+  @apply max-w-[100px] max-h-[50px] backdrop-blur-sm rounded-[10px] flex justify-center items-center;
+  img {
+    @apply w-full h-full object-contain;
+  }
+}

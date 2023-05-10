@@ -1,6 +1,6 @@
 .nft-post-component {
   background: rgba(0 0 0 /0.2);
-  @apply overflow-hidden relative w-[300px] h-[300px] rounded-md backdrop-blur-sm drop-shadow-xl;
+  @apply overflow-hidden relative w-[300px] h-[300px] rounded-md drop-shadow-xl;
   .nft-post-pic {
     @apply w-full h-full object-cover scale-105;
   }

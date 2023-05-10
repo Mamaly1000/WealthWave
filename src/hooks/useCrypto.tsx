@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AllCoinList,
   CoinChart,
@@ -6,6 +6,7 @@ import {
   TrendCoins,
 } from "../api/cryptoApi";
 import axios from "axios";
+import useLocalStorage from "./useLocalStorage";
 
 export interface IcryptoData {
   ath: number;
@@ -43,20 +44,29 @@ const useCrypto = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [singleCoinData, setSingleCoinData] = useState({});
   const [chartData, setChartData] = useState<unknown[]>([]);
-
-  const getAllcoins = async (limit: number): Promise<void> => {
+  const [LocalCryptoList, setLoacalCryptoList] = useLocalStorage<IcryptoData[]>(
+    "cryptoList",
+    []
+  );
+  const getAllcoins = async (): Promise<void> => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false&locale=en`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=400&page=1&sparkline=false&locale=en`
       );
       console.log(response);
       if (response.status === 200) {
         setCryptoList(response.data);
+        setLoacalCryptoList(response.data);
+        setLoading(false);
+      }
+      if (response.status === 429) {
+        setCryptoList(LocalCryptoList);
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      setCryptoList(LocalCryptoList);
+      setLoading(false);
     }
   };
   const getTrendCoins = async (): Promise<void> => {

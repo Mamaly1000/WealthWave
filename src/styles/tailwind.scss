@@ -13,6 +13,8 @@
 @import "./footer.scss";
 @import "./sideBar.scss";
 @import "./nftPost.scss";
+@import "./loader.scss";
+@import "./news-section.scss";
 * {
   box-sizing: border-box;
   @apply p-0 m-0;
@@ -21,11 +23,4 @@
   max-width: 100% !important;
   max-width: 100% !important;
   @apply p-0 m-0 min-w-[100%] max-w-[100%] overflow-visible;
-}
-.loader-container {
-  height: 10px;
-  @apply bg-gray-700 rounded-[10px] flex justify-center items-center;
-  img {
-    @apply w-full h-full object-contain;
-  }
 }

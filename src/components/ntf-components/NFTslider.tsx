@@ -38,6 +38,9 @@ const NFTslider = () => {
       if (window.innerWidth > 1150) {
         setSpace(3.4);
       }
+      if (window.innerWidth > 1150) {
+        setSpace(3.8);
+      }
     });
   }, [space]);
   return (
@@ -56,13 +59,13 @@ const NFTslider = () => {
           }}
           autoplay={{
             delay: 3000,
-            disableOnInteraction: true,
+            disableOnInteraction: false,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
           className="mySwiper"
         >
           {!loading ? (
-            nftList?.map((nft, index) => {
+            nftList?.slice(0, 10).map((nft, index) => {
               return (
                 <SwiperSlide key={index}>
                   <NFTpost

@@ -6,7 +6,7 @@ export const AppleNewsALL = async () => {
       `https://newsapi.org/v2/everything?q=apple&from=2023-04-26&to=2023-04-26&sortBy=popularity&apiKey=${ApiKey}`
     );
     if (response.status === 200) {
-      console.log(response.data);
+      return response.data;
     }
   } catch (error) {
     console.log(error);
