@@ -10,10 +10,6 @@ import NewsSection from "../components/news-post-component/NewsSection";
 
 const HomePage = () => {
   const nav = useNavigate();
-  const { getAppleNews } = useNews();
-  useEffect(() => {
-    getAppleNews();
-  }, []);
   return (
     <div className="HomePage-container">
       {/* <VerticalSlider /> */}

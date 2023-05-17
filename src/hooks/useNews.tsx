@@ -2,10 +2,20 @@ import React, { useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import { AppleNewsALL } from "../api/NewsApi";
 import axios from "axios";
-
+const ApiKey: string = "a1e647b111ec4f48bda9ed3617ad3251";
+export interface IAppleNews {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: { id: string; name: string };
+  title: string;
+  url: string;
+  urlToImage: string;
+}
 const useNews = () => {
-  const [appleNewsList, setAppleNewsList] = useState<unknown[]>([]);
-  const [localAppleNews, setLocalAppleNews] = useLocalStorage<unknown[]>(
+  const [appleNewsList, setAppleNewsList] = useState<IAppleNews[]>([]);
+  const [localAppleNews, setLocalAppleNews] = useLocalStorage<IAppleNews[]>(
     "appleNews",
     []
   );

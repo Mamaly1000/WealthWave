@@ -1,0 +1,45 @@
+.news-posts {
+  @apply w-full flex flex-row flex-wrap justify-center items-center gap-10 mt-10;
+  .news-post-container {
+    background: rgba(0 0 0/0.3);
+    @apply w-[350px] animate-DisplayAnimation font-yol h-[400px] drop-shadow-2xl text-white rounded-xl overflow-hidden;
+    .news-image {
+      @apply w-full h-[200px] object-fill;
+    }
+    .news-post-actions {
+      box-shadow: 0 0 10px rgba(0 0 0 /0.3);
+      @apply w-full h-[50px] flex justify-between items-center px-3;
+      .news-date {
+        color: rgba(255 255 255 /0.7);
+        @apply h-full w-[60%] text-[14px] font-bold italic p-1 flex items-center justify-start gap-1 whitespace-nowrap;
+        svg {
+          @apply w-[20px] h-[20px];
+        }
+      }
+      div {
+        @apply flex justify-end items-center gap-3;
+        .action-btn {
+          all: unset;
+          background: rgba(0 0 0 /0.2);
+          @apply w-[25px] h-[25px] p-2 backdrop-blur-sm rounded-full cursor-pointer transition-all active:scale-75 hover:shadow-2xl;
+        }
+      }
+    }
+    .news-post-data {
+      @apply px-3;
+      .news-title {
+        @apply text-left text-[1.2rem] leading-tight py-5 w-full capitalize font-bold;
+      }
+      div {
+        @apply w-full flex justify-between items-center h-[50px] absolute bottom-[5%] left-0 px-3;
+        .news-read-more-btn {
+          @apply w-[80%];
+        }
+        .news-save-btn {
+          background: rgba(0 0 0/0.2);
+          @apply w-[15%] h-[100%] rounded-full p-3 shadow-none;
+        }
+      }
+    }
+  }
+}

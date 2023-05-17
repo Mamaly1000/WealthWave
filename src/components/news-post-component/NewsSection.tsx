@@ -1,74 +1,55 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar } from "swiper";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useNews from "../../hooks/useNews";
+import NewsPost from "./NewsPost";
 const NewsSection = () => {
   const nav = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState<string>(
     "WallStreet Journal News"
   );
-  const [space, setSpace] = useState<number>(0);
-  const [slides, setSlides] = useState<number>(0);
-  const getingSpace = () => {
-    return window.addEventListener("resize", () => {
-      if (window.innerWidth > 450) {
-        setSlides(.9);
-        setSpace(10);
-      }
-      if (window.innerWidth > 550) {
-        setSlides(1.1);
-        setSpace(1.5);
-      }
-      if (window.innerWidth > 650) {
-        setSlides(1.1);
-        setSpace(2);
-      }
-      if (window.innerWidth > 750) {
-        setSlides(1.1);
-        setSpace(2.3);
-      }
-      if (window.innerWidth > 850) {
-        setSlides(1.1);
-        setSpace(2.4);
-      }
-      if (window.innerWidth > 950) {
-        setSlides(1.1);
-        setSpace(2.6);
-      }
-      if (window.innerWidth > 1050) {
-        setSlides(1.1);
-        setSpace(2.8);
-      }
-      if (window.innerWidth > 1150) {
-        setSlides(1.1);
-        setSpace(15);
-      }
-      if (window.innerWidth > 1150) {
-        setSlides(1.1);
-        setSpace(15);
-      }
-    });
-  };
+  const { appleNewsList, getAppleNews } = useNews();
   useEffect(() => {
-    getingSpace();
-  }, [space]);
+    getAppleNews();
+  }, []);
+  useEffect(() => {
+    if (appleNewsList.length > 0) {
+      console.log(appleNewsList);
+    }
+  }, [appleNewsList]);
   return (
     <div className="news-section">
       <div className="news-section-header">
-        <h1 className="page-header">News Section</h1>
+        <h2 className="page-header">News</h2>
         <button onClick={() => nav("/news")}>check out all news</button>
       </div>
       <div className="news-topics">
         <Swiper
-          slidesPerView={slides}
-          slidesPerGroupSkip={slides*2}
-          grabCursor={true}
-          spaceBetween={space}
-          scrollbar={true}
-          modules={[Scrollbar]}
+          slidesPerView={1}
+          spaceBetween={10}
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 50,
+            },
+            1200: {
+              slidesPerView: 5,
+              spaceBetween: 60,
+            },
+          }}
           className="mySwiper"
-          style={{ width: "100%" }}
-          loop={true}
+          style={{ paddingBlock: "10px" }}
         >
           {[
             "WallStreet Journal News",
@@ -97,6 +78,12 @@ const NewsSection = () => {
             );
           })}
         </Swiper>
+      </div>
+      <div className="news-posts">
+        {appleNewsList.length > 0 &&
+          appleNewsList.slice(0, 20).map((news, index) => {
+            return <NewsPost news={news} id={index} key={index} />;
+          })}
       </div>
     </div>
   );

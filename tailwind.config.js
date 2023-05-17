@@ -349,7 +349,8 @@ export default {
         "monospace",
       ],
       rail: ["Raleway"],
-      number:["Nanum Gothic"]
+      number: ["Nanum Gothic"],
+      yol: ["Yaldevi"],
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1rem" }],
