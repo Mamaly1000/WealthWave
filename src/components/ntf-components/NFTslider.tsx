@@ -44,42 +44,44 @@ const NFTslider = () => {
     });
   }, [space]);
   return (
-    <div className="nft-slider-container">
-      <div className="nft-slider-header">
-        <h3 className="page-header">Discover our NFT world</h3>
-        <button>whatch more</button>
-      </div>
-      <div className="nft-slider">
-        <Swiper
-          slidesPerView={space ? space : "auto"}
-          spaceBetween={5}
-          freeMode={true}
-          pagination={{
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          modules={[FreeMode, Pagination, Autoplay]}
-          className="mySwiper"
-        >
-          {!loading ? (
-            nftList?.slice(0, 10).map((nft, index) => {
-              return (
-                <SwiperSlide key={index}>
-                  <NFTpost
-                    name={nft.name}
-                    price={nft.asset_platform_id}
-                    symbol={nft.symbol}
-                  />
-                </SwiperSlide>
-              );
-            })
-          ) : (
-            <Loader />
-          )}
-        </Swiper>
+    <div className="nft-list-slider">
+      <div className="nft-slider-container">
+        <div className="nft-slider-header">
+          <h3 className="page-header">Discover our NFT world</h3>
+          <button>whatch more</button>
+        </div>
+        <div className="nft-slider">
+          <Swiper
+            slidesPerView={space ? space : "auto"}
+            spaceBetween={5}
+            freeMode={true}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[FreeMode, Pagination, Autoplay]}
+            className="mySwiper"
+          >
+            {!loading ? (
+              nftList?.slice(0, 10).map((nft, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <NFTpost
+                      name={nft.name}
+                      price={nft.asset_platform_id}
+                      symbol={nft.symbol}
+                    />
+                  </SwiperSlide>
+                );
+              })
+            ) : (
+              <Loader />
+            )}
+          </Swiper>
+        </div>
       </div>
     </div>
   );

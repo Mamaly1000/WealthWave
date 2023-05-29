@@ -15,8 +15,16 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
       return "https://res.cloudinary.com/people-matters/image/upload/fl_immutable_cache,w_624,h_351,q_auto,f_auto/v1531411550/1531411506.jpg";
     }
   };
+  const [doubleClicked, setDoubledClick] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
+  const displayLikeIcon = () => {
+    setDoubledClick(true);
+    setLiked((prev) => !prev);
+    setTimeout(() => {
+      setDoubledClick(false);
+    }, 500);
+  };
   return (
     <div
       className="news-post-container"
@@ -26,7 +34,7 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
         className="news-image"
         src={news!.urlToImage}
         alt={news!.title}
-        onDoubleClick={() => setLiked((prev) => !prev)}
+        onDoubleClick={() => displayLikeIcon()}
       />
       <div className="news-post-actions">
         <span className="news-date">
@@ -127,6 +135,24 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
           </button>
         </div>
       </div>
+      {doubleClicked && (
+        <div className={`likedable-icon`}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill={liked ? "rgba(255 0 0 /1)" : "none"}
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke={liked ? "red" : "rgba(255 255 255/.6)"}
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+            />
+          </svg>
+        </div>
+      )}
     </div>
   );
 };

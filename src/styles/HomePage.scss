@@ -39,8 +39,8 @@
   }
   .crypto-table-container {
     @apply w-[100%] h-fit flex flex-col justify-center items-center;
-    div {
-      @apply w-full flex items-center justify-center flex-col md:flex-row md:justify-between my-10 md:my-5;
+    .crypto-table-header {
+      @apply w-full flex items-center justify-center flex-col md:flex-row md:justify-between gap-5 my-10 md:my-5;
     }
     table {
       background: rgba(255 255 255 /0.1);

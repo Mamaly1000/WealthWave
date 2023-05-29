@@ -56,7 +56,7 @@
       @apply w-[100%];
     }
   }
-  .likedable-icon {
-    @apply w-full h-[20%] p-20 opacity-0 absolute top-[0%] scale-100 animate-liking z-50;
-  }
+}
+.likedable-icon {
+  @apply w-full h-[20%] p-20 opacity-0 absolute top-[0%] scale-100 animate-liking z-50;
 }

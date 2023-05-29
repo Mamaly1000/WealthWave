@@ -17,16 +17,8 @@ const HomePage = () => {
         <HomePageIntro />
         <CubeSlider />
       </div>
-      <div className="crypto-table-container">
-        <div>
-          <h2 className="page-header">Crypto Currencies</h2>
-          <button onClick={() => nav("/crypto")}>track more coins</button>
-        </div>
         <CryptoTableRow />
-      </div>
-      <div className="nft-list-slider">
         <NFTslider />
-      </div>
       <NewsSection />
     </div>
   );

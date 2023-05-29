@@ -1,7 +1,7 @@
 .news-section {
   @apply w-full h-fit py-10;
   .news-section-header {
-    @apply flex items-center justify-between;
+    @apply flex flex-col md:flex-row items-center justify-center md:justify-between gap-5;
   }
   .news-topics {
     @apply w-full flex justify-center items-center h-fit;
