@@ -29,12 +29,15 @@ const useNews = () => {
       if (response.status === 200) {
         setAppleNewsList(response.data.articles);
         setLocalAppleNews(response.data.articles);
-        setLoading(false);
+      }
+      if (response.status === 429) {
+        if (localAppleNews.length > 0) setAppleNewsList(localAppleNews);
       }
     } catch (error) {
       setAppleNewsList(localAppleNews);
-      setLoading(false);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

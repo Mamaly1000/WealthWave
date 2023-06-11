@@ -5,6 +5,7 @@ import axios from "axios";
 type NewsPostProps = {
   news: IAppleNews;
   id: number;
+  index: number;
 };
 const NewsPost = ({ news, id }: NewsPostProps) => {
   const checkImg = async (img: string): Promise<unknown> => {

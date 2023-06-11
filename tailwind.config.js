@@ -20,7 +20,7 @@ export default {
       wordAnimation:
         "wordAnimation .3s cubic-bezier(0.5, 1.5, 0.4, 1.4) .2s 1 alternate forwards",
       DisplayAnimation:
-        "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
+        "DisplayAnimation .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate forwards",
       displayComponent: "hoverAnimation .23s linear 1 alternate ",
       sideBar: "displaySideBar .23s ease 1",
       liking: "liking .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",

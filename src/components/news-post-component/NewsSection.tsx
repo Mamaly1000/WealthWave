@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useNews from "../../hooks/useNews";
 import NewsPost from "./NewsPost";
+
 const NewsSection = () => {
   const nav = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState<string>(
@@ -67,13 +68,13 @@ const NewsSection = () => {
                 key={index}
                 onClick={() => setSelectedTopic(topic)}
               >
-                <button
+                <div
                   className={` ${
                     selectedTopic === topic ? "selected-topic" : ""
                   }`}
                 >
                   {topic}
-                </button>
+                </div>
               </SwiperSlide>
             );
           })}
@@ -82,7 +83,9 @@ const NewsSection = () => {
       <div className="news-posts">
         {appleNewsList.length > 0 &&
           appleNewsList.slice(0, 20).map((news, index) => {
-            return <NewsPost news={news} id={index} key={index} />;
+            return (
+              <NewsPost news={news} id={index} key={index} index={index} />
+            );
           })}
       </div>
     </div>

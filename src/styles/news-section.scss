@@ -7,10 +7,15 @@
     @apply w-full flex justify-center items-center h-fit;
     .news-topic-btns {
       @apply max-w-fit max-h-fit py-2;
-      button {
-        all: unset;
+      .swiper-wrapper {
+        @apply w-[80%];
+      }
+      .swiper-slide {
         background: rgba(0 0 0 /0.2);
-        @apply w-fit h-fit px-5 py-3 whitespace-nowrap drop-shadow-md text-white hover:bg-blue-600 transition-colors rounded-[10px];
+        @apply w-fit h-fit px-5 py-3 drop-shadow-md text-white hover:bg-blue-600 transition-colors rounded-[10px] overflow-hidden;
+        div {
+          @apply w-fit min-h-[30px] whitespace-nowrap text-white;
+        }
       }
       .selected-topic {
         @apply bg-blue-600;
