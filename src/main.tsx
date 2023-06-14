@@ -5,6 +5,7 @@ import "./styles/index.scss";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { BrowserRouter } from "react-router-dom";
 import AppContextComponent from "./context/AppContext.js";
 import { registerSW } from "virtual:pwa-register";

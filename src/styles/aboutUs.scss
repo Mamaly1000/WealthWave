@@ -1,0 +1,70 @@
+.about-us-section {
+  @apply w-[100%] max-w-[100%] min-w-[100%] min-h-fit overflow-hidden flex items-center justify-center relative;
+  .mySwiper {
+    @apply w-[100%] max-w-[100%] min-h-[600px] flex items-center justify-center relative overflow-hidden;
+    .parallax-bg {
+      width: 130%;
+      height: 100%;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+      @apply absolute top-0 left-0 z-[-1];
+    }
+    .swiper-wrapper {
+      .swiper-slide {
+        background: rgba(0 0 0/0.3);
+        @apply max-w-[100%] max-h-fit min-h-fit h-fit text-white text-left rounded-[10px] drop-shadow-sm px-[20px] py-[30px];
+        .title {
+          @apply font-[700] text-[2rem] md:font-[900] md:text-[4rem] font-rail;
+          .bold {
+            @apply text-blue-400;
+          }
+        }
+        .subtitle {
+          @apply font-[100] text-[1rem] md:text-[1.5rem] italic;
+        }
+        .text {
+          @apply font-[500] text-[1rem] md:text-[1.2rem] text-justify;
+        }
+        .text-card-container {
+          @apply w-full flex justify-center items-center gap-[10px] flex-row flex-wrap py-10;
+          .card {
+            row-gap: 5px;
+            background: rgba(0 0 0/0.3);
+            @apply w-[100%] h-[250px] sm:w-[45%] md:w-[350px] md:max-w-[400px] backdrop-blur-2xl md:min-h-[150px] md:max-h-[150px] flex justify-start md:justify-center items-start md:items-center flex-row flex-wrap p-10 px-5 md:px-5 md:p-0  rounded-md drop-shadow-lg animate-DisplayAnimation;
+            .card-topic {
+              @apply w-[80%] md:w-[70%] h-fit font-[500] text-[.9rem] md:text-[.9rem] ps-5 border-b-[.1px] pb-[2px];
+            }
+            .card-desc {
+              @apply w-full font-[400] text-[.8rem];
+            }
+            .card-icon {
+              filter: invert(86%) sepia(98%) saturate(3%) hue-rotate(332deg)
+                brightness(105%) contrast(100%);
+              @apply w-[15%] md:w-[10%]  h-fit rounded border-[1px] border-black;
+            }
+          }
+        }
+        .links-container {
+          @apply w-full flex justify-start items-center gap-5 pt-10;
+          .social-link {
+            filter: invert(86%) sepia(98%) saturate(3%) hue-rotate(332deg)
+              brightness(105%) contrast(100%);
+            @apply w-[40px] h-[40px] scale-100 hover:scale-150 hover:rotate-[720deg] transition-all;
+          }
+          .social-link:hover {
+            filter: invert(34%) sepia(97%) saturate(2235%) hue-rotate(212deg)
+              brightness(89%) contrast(109%);
+          }
+        }
+        .form-container {
+          @apply w-full flex items-center justify-center gap-10;
+        }
+      }
+    }
+  }
+  .next-slide-btn {
+    all: unset;
+    @apply w-[50px] h-[50px] rounded-full p-3 bg-blue-600 text-white flex items-center justify-center absolute bottom-10 right-10 z-[100] cursor-pointer shadow-2xl;
+  }
+}

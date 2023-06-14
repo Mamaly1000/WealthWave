@@ -1,24 +1,20 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { IAppleNews } from "../../hooks/useNews";
-import axios from "axios";
+import replaceInvalidUrl from "./../../helper/imageChecker.js";
+import { randomPics } from "../../utils/randomPics.js";
+import Loader from "../loader/Loader.js";
 type NewsPostProps = {
   news: IAppleNews;
   id: number;
   index: number;
 };
 const NewsPost = ({ news, id }: NewsPostProps) => {
-  const checkImg = async (img: string): Promise<unknown> => {
-    try {
-      const res = await axios.get(img);
-      return res.data;
-    } catch (error) {
-      return "https://res.cloudinary.com/people-matters/image/upload/fl_immutable_cache,w_624,h_351,q_auto,f_auto/v1531411550/1531411506.jpg";
-    }
-  };
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
+  const [postPicUrl, setPostPicUrl] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const displayLikeIcon = () => {
     setDoubledClick(true);
     setLiked((prev) => !prev);
@@ -26,17 +22,32 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
       setDoubledClick(false);
     }, 500);
   };
+  useEffect(() => {
+    if (news) {
+      setPostPicUrl(news!.urlToImage);
+    }
+  }, [news]);
+  useEffect(() => {
+    if (postPicUrl !== "") {
+      replaceInvalidUrl(postPicUrl, randomPics, setPostPicUrl, setLoading);
+    }
+  }, [postPicUrl]);
   return (
     <div
       className="news-post-container"
       style={{ animationDelay: `${id / 10 + 0.1}s` }}
     >
-      <img
-        className="news-image"
-        src={news!.urlToImage}
-        alt={news!.title}
-        onDoubleClick={() => displayLikeIcon()}
-      />
+      {!loading ? (
+        <img
+          className="news-image"
+          src={postPicUrl}
+          alt={news!.title}
+          onDoubleClick={() => displayLikeIcon()}
+          onClick={() => console.log(postPicUrl)}
+        />
+      ) : (
+        <Loader />
+      )}
       <div className="news-post-actions">
         <span className="news-date">
           {moment(news!.publishedAt).format("Y/MM/DD") +

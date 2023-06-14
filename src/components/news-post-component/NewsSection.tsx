@@ -3,19 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useNews from "../../hooks/useNews";
 import NewsPost from "./NewsPost";
-
+import { Autoplay } from "swiper";
 const NewsSection = () => {
   const nav = useNavigate();
-  const [selectedTopic, setSelectedTopic] = useState<string>(
-    "WallStreet Journal News"
-  );
-  const { appleNewsList, getAppleNews } = useNews();
+  const [selectedTopic, setSelectedTopic] = useState<string>("WallStreet");
+  const { appleNewsList, getAppleNews, getWallStreetNews } = useNews();
   useEffect(() => {
     getAppleNews();
+    getWallStreetNews();
   }, []);
   useEffect(() => {
     if (appleNewsList.length > 0) {
-      console.log(appleNewsList);
+      // console.log(appleNewsList);
     }
   }, [appleNewsList]);
   return (
@@ -32,6 +31,14 @@ const NewsSection = () => {
             clickable: true,
           }}
           breakpoints={{
+            340: {
+              slidesPerView: 1.5,
+              spaceBetween: 2,
+            },
+            540: {
+              slidesPerView: 1.2,
+              spaceBetween: 10,
+            },
             640: {
               slidesPerView: 2,
               spaceBetween: 20,
@@ -46,32 +53,36 @@ const NewsSection = () => {
             },
             1200: {
               slidesPerView: 5,
-              spaceBetween: 60,
+              spaceBetween: 40,
             },
           }}
           className="mySwiper"
           style={{ paddingBlock: "10px" }}
+          autoplay={{
+            disableOnInteraction: false,
+            delay: 5000,
+          }}
+          modules={[Autoplay]}
         >
           {[
-            "WallStreet Journal News",
-            "Apple company",
-            "Apple company head-lines",
-            "Tesla company",
-            "Tesla company head-lines",
-            "Top business head-lines(tech-crunch)",
+            "WallStreet",
+            "Apple",
+            "Apple head-lines",
+            "Tesla",
+            "Tesla head-lines",
+            "Top business",
             "Top business head-lines",
-            "Top business(tech-crunch)",
           ].map((topic, index) => {
             return (
               <SwiperSlide
-                className={`news-topic-btns`}
+                className={`news-topic-btns  ${
+                  selectedTopic === topic ? "selected-topic" : ""
+                }`}
                 key={index}
                 onClick={() => setSelectedTopic(topic)}
               >
                 <div
-                  className={` ${
-                    selectedTopic === topic ? "selected-topic" : ""
-                  }`}
+                // style={{ fontSize: topic.length > 20 ? "10px" : "1rem" }}
                 >
                   {topic}
                 </div>
@@ -82,7 +93,7 @@ const NewsSection = () => {
       </div>
       <div className="news-posts">
         {appleNewsList.length > 0 &&
-          appleNewsList.slice(0, 20).map((news, index) => {
+          appleNewsList.slice(0, 9).map((news, index) => {
             return (
               <NewsPost news={news} id={index} key={index} index={index} />
             );

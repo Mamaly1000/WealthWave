@@ -7,6 +7,8 @@ import useNFT from "../hooks/useNFT";
 import NFTslider from "../components/ntf-components/NFTslider";
 import useNews from "../hooks/useNews";
 import NewsSection from "../components/news-post-component/NewsSection";
+import AboutUs from "../components/about_us/AboutUs";
+import ContactUs from "../components/contact-us/ContactUs";
 
 const HomePage = () => {
   const nav = useNavigate();
@@ -17,9 +19,11 @@ const HomePage = () => {
         <HomePageIntro />
         <CubeSlider />
       </div>
-        <CryptoTableRow />
-        <NFTslider />
+      <CryptoTableRow />
+      <NFTslider />
       <NewsSection />
+      <AboutUs />
+      <ContactUs />
     </div>
   );
 };
