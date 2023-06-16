@@ -1,0 +1,27 @@
+.comment-section {
+  @apply w-full h-[500px] flex flex-col justify-center items-center overflow-hidden;
+  .comment-section-header {
+    @apply pb-10 w-full;
+  }
+}
+.comment {
+  @apply w-[350px] h-[200px] bg-red-50 text-white rounded-lg flex flex-col items-center justify-center overflow-hidden p-5;
+  .comment-user-data {
+    @apply w-full h-[30%] flex items-center justify-between;
+    .comment-user-image {
+      @apply w-[25%] h-full;
+    }
+    .comment-user-name {
+      @apply w-[75%] h-full;
+    }
+  }
+  .comment-user-text {
+    @apply w-full h-[30%] flex items-center justify-between text-[.5rem];
+  }
+  .comment-actions {
+    @apply w-full h-[30%] flex items-center justify-between;
+    img {
+      @apply w-[10px] h-[10px];
+    }
+  }
+}

@@ -10,7 +10,7 @@ import githubIcon from "./../assets/about-us/social-links/icons8-github.svg";
 import instagramIcon from "./../assets/about-us/social-links/icons8-instagram.svg";
 import telegramIcon from "./../assets/about-us/social-links/icons8-telegram.svg";
 import twitterIcon from "./../assets/about-us/social-links/icons8-twitter.svg";
-
+import locationIcon from "../assets/about-us/social-links/location.svg";
 export const values = [
   {
     title: "Real-time Updates",
@@ -50,6 +50,7 @@ export const values = [
   },
 ];
 export const socialLinks = [
+  { icon: locationIcon, link: "#location" },
   {
     icon: githubIcon,
     link: "#githubIcon",

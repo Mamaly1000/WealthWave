@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NewBlog from "./pages/NewBlog";
-import React from "react";
 import { useContextFunction } from "./context/AppContext";
 import BlogPage from "./pages/BlogPage";
 import BlogViewPage from "./pages/BlogViewPage";

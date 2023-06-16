@@ -88,7 +88,7 @@ export default function AboutUs() {
             })}
           </div>
         </SwiperSlide>
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div className="title" data-swiper-parallax="-300">
             Social Media Links
           </div>
@@ -107,7 +107,7 @@ export default function AboutUs() {
               );
             })}
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
       <button
         className="next-slide-btn"
