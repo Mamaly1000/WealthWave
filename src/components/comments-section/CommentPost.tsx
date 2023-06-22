@@ -1,32 +1,39 @@
 import like from "../../assets/comments/like.svg";
 import save from "../../assets/comments/save.svg";
+import filled_saved from "../../assets/comments/flled-saved.svg";
 import dislike from "../../assets/comments/dislike.svg";
-
-const CommentPost = () => {
+import { CommentType } from "../../types/noteTypes";
+type commentPostType = {
+  data: CommentType;
+};
+const CommentPost = ({ data }: commentPostType) => {
   return (
     <div className="comment">
       <div className="comment-user-data">
         <div className="comment-user-image">
-          <img
-            src="https://avatars.githubusercontent.com/u/105161078?v=4"
-            alt=""
-          />
+          <img src={data.profilePicUrl} alt="" />
         </div>
         <div className="comment-user-name">
-          <span className="name">mohammad mehdi azizi</span>
-          <span className="email">mamadmehdi.aziz.10@gmail.com</span>
+          <span className="name">{data.name}</span>
+          <div className="comment-date">{data.date}</div>
+          <span className="email">{data.email}</span>
         </div>
       </div>
-      <div className="comment-user-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vitae,
-        labore doloribus, mollitia sequi ut cupiditate quo deleniti voluptatibus
-        cum sed. Dignissimos, quidem autem perspiciatis officiis sequi quisquam.
-        Dolor, nam?
-      </div>
-      <div className="comment-actions">
-        <img src={like} alt="like" />
-        <img src={dislike} alt="dislike" />
-        <img src={save} alt="save" />
+      <div className="comment-user-text">{data.comment}</div>
+      <div className="bottom-comment-side">
+        <div className="comment-actions">
+          <span className="comment-like">
+            <img src={like} alt="like" />
+            {data.liked}
+          </span>
+          <span className="comment-dislike">
+            <img src={dislike} alt="dislike" />
+            {data.disliked}
+          </span>
+          <span>
+            <img src={data.saved ? filled_saved : save} alt="save" />
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -3,11 +3,11 @@
   .bg-container {
     background-position: center;
     background-size: contain;
-    @apply w-[50%] h-[80%] bg-no-repeat;
+    @apply w-[50%] h-[80%] bg-no-repeat hidden md:block;
   }
   .contact-us-form {
     background: rgba(0 0 0 /0.1);
-    @apply w-[50%] h-[80%] flex items-center justify-center flex-col gap-10 rounded-lg p-10;
+    @apply w-full md:w-[50%] h-[80%] flex items-center justify-center flex-col gap-10 rounded-lg p-10;
     h3 {
       @apply font-bold text-[2.5rem] text-white text-left w-full h-[10%];
     }

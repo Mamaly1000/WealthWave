@@ -22,6 +22,7 @@ import nftPic18 from "./../assets/nft/24.png";
 import nftPic19 from "./../assets/nft/26.jfif";
 import nftPic20 from "./../assets/nft/27.webp";
 import nftPic21 from "./../assets/nft/28.jpg";
+import { CommentType } from "../types/noteTypes";
 export const Footer_Links = [
   {
     header: "Customer Care",
@@ -193,5 +194,81 @@ export const randomUserData = [
   {
     name: "William Rodriguez",
     email: "william.rodriguez@example.com",
+  },
+];
+export const dummyComments: CommentType[] = [
+  {
+    name: "John Doe",
+    email: "johndoe@email.com",
+    comment:
+      "This website has been a game changer for me in terms of staying up to date on the latest crypto news and trends. It's user-friendly and informative, making it easy for even a beginner like me to navigate.",
+    profilePicUrl: "https://xsgames.co/randomusers/assets/avatars/male/46.jpg",
+    date: "2021/02/22 20:21PM",
+    liked: 21,
+    disliked: 43,
+    saved: false,
+  },
+
+  {
+    name: "Jane Smith",
+    email: "janesmith@email.com",
+    comment:
+      "I love the fact that this website not only provides news and updates on crypto and NFTs, but also allows users to create their own blogs and share their thoughts with the community. It's a great way to connect with like-minded individuals.",
+    profilePicUrl:
+      "https://media.licdn.com/dms/image/D4E03AQHPA61sNOqeDg/profile-displayphoto-shrink_800_800/0/1683294132906?e=2147483647&v=beta&t=sOHO9_U_zwn50pH8O0Hroo86Z1TnOHq9U3bWvCX3sog",
+    date: "2022/12/05 12:30PM",
+    liked: 9,
+    disliked: 11,
+    saved: false,
+  },
+
+  {
+    name: "Mark Johnson",
+    email: "markjohnson@email.com",
+    comment:
+      "The profile section of this website is a great way to showcase my interests and connect with others who share similar passions. It's easy to use and allows me to personalize my experience on the site.",
+    profilePicUrl:
+      "https://menlocoa.org/wp-content/uploads/2012/10/Tinyen-RSp.jpg",
+    date: "2023/05/13 10:21aM",
+    liked: 24,
+    disliked: 40,
+    saved: false,
+  },
+
+  {
+    name: "Sara Lee",
+    email: "saralee@email.com",
+    comment:
+      "I appreciate how this website offers a comprehensive look at the world of crypto and NFTs, while also providing a platform for users to engage with each other and share their own experiences. It's a valuable resource for anyone interested in this exciting industry.",
+    profilePicUrl:
+      "https://media.licdn.com/dms/image/C5603AQFV2EOeBolFsw/profile-displayphoto-shrink_800_800/0/1582151184490?e=2147483647&v=beta&t=FagPODbSgp6j2no8wquLWmNNuiEzXB7LZkOhjR2zCvY",
+    date: "2020/07/17 15:13PM",
+    liked: 120,
+    disliked: 65,
+    saved: false,
+  },
+
+  {
+    name: "David Kim",
+    email: "davidkim@email.com",
+    comment:
+      "The design of this website is sleek and modern, making it a pleasure to navigate. It's clear that a lot of thought went into creating a user-friendly experience, and it shows.",
+    profilePicUrl: "https://xsgames.co/randomusers/assets/avatars/male/74.jpg",
+    date: "2021/02/22 20:21PM",
+    liked: 53,
+    disliked: 18,
+    saved: false,
+  },
+  {
+    name: "Emily Chen",
+    email: "emilychen@email.com",
+    comment:
+      "I've learned so much about crypto and NFTs since discovering this website. The articles are informative and well-written, and I always come away with a deeper understanding of the industry.",
+    profilePicUrl:
+      "https://www.herbertsmithfreehills.com/.imaging/mte/hsf-corporate-site-theme/person-profile/dam/feed/contact/laurence-vincent_WEB.jpg/jcr:content/laurence-vincent_WEB.jpg",
+    date: "2023/12/12 21:21PM",
+    liked: 70,
+    disliked: 7,
+    saved: false,
   },
 ];

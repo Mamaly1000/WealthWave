@@ -37,17 +37,19 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
       className="news-post-container"
       style={{ animationDelay: `${id / 10 + 0.1}s` }}
     >
-      {!loading ? (
-        <img
-          className="news-image"
-          src={postPicUrl}
-          alt={news!.title}
-          onDoubleClick={() => displayLikeIcon()}
-          onClick={() => console.log(postPicUrl)}
-        />
-      ) : (
-        <Loader />
-      )}
+      <div className="news-post-image-container">
+        {!loading ? (
+          <img
+            className="news-image"
+            src={postPicUrl}
+            alt={news!.title}
+            onDoubleClick={() => displayLikeIcon()}
+            onClick={() => console.log(postPicUrl)}
+          />
+        ) : (
+          <Loader />
+        )}
+      </div>
       <div className="news-post-actions">
         <span className="news-date">
           {moment(news!.publishedAt).format("Y/MM/DD") +
@@ -113,21 +115,8 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
               />
             </svg>
           </button>
-        </div>
-      </div>
-      <div className="news-post-data">
-        <h2 className="news-title">
-          {news!.title.split(" ").slice(0, 6).join(" ") + " ..."}
-        </h2>
-        <div>
           <button
-            className="news-read-more-btn"
-            onClick={() => window.open(news!.url, "_blank")}
-          >
-            read more
-          </button>
-          <button
-            className="news-save-btn"
+            className="action-btn"
             onClick={() => setSaved((prev) => !prev)}
           >
             <svg
@@ -144,6 +133,20 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
                 d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
               />
             </svg>
+          </button>
+        </div>
+      </div>
+      <div className="news-post-data">
+        <h2 className="news-title">
+          {news!.title.split(" ").slice(0, 6).join(" ") + " ..."}
+        </h2>
+        <p className="news-desc">{news.description}</p>
+        <div>
+          <button
+            className="news-read-more-btn"
+            onClick={() => window.open(news!.url, "_blank")}
+          >
+            read more
           </button>
         </div>
       </div>

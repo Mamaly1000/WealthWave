@@ -1,27 +1,55 @@
 .comment-section {
   @apply w-full h-[500px] flex flex-col justify-center items-center overflow-hidden;
   .comment-section-header {
-    @apply pb-10 w-full;
+    @apply pb-10 w-full flex flex-col sm:flex-row gap-5  items-center justify-between;
+  }
+  .mySwiper {
+    @apply w-full py-10;
   }
 }
 .comment {
-  @apply w-[350px] h-[200px] bg-red-50 text-white rounded-lg flex flex-col items-center justify-center overflow-hidden p-5;
+  background: rgba(0 0 0/0.3);
+  @apply w-[380px] h-[220px] drop-shadow-2xl text-white hover:scale-110 transition-all rounded-lg flex flex-col items-center justify-center overflow-hidden p-5;
   .comment-user-data {
-    @apply w-full h-[30%] flex items-center justify-between;
+    @apply w-full h-[40%] flex   items-center justify-between text-left;
     .comment-user-image {
-      @apply w-[25%] h-full;
+      @apply w-[60px] h-[60px] rounded-full overflow-hidden;
     }
     .comment-user-name {
-      @apply w-[75%] h-full;
+      @apply w-[80%] flex flex-row flex-wrap justify-between items-center capitalize max-h-[60px];
+      .name {
+        @apply max-w-[50%] font-bold text-[1rem] font-rail;
+      }
+      .email {
+        @apply min-w-[100%] text-[.8rem] font-[100] lowercase italic text-gray-50;
+      }
+      .comment-date {
+        @apply max-w-[50%] min-h-full italic uppercase text-[.8rem] text-left flex justify-start items-center gap-1 text-blue-300 flex-row;
+      }
     }
   }
   .comment-user-text {
-    @apply w-full h-[30%] flex items-center justify-between text-[.5rem];
+    @apply w-full h-[45%] flex items-center justify-between text-[.8rem] text-justify;
   }
-  .comment-actions {
-    @apply w-full h-[30%] flex items-center justify-between;
-    img {
-      @apply w-[10px] h-[10px];
+  .bottom-comment-side {
+    @apply w-full flex h-[15%] justify-between items-center;
+
+    .comment-actions {
+      @apply w-full h-full flex items-center justify-end gap-2;
+      span {
+        @apply text-[.7rem] flex items-center justify-center gap-1;
+        img {
+          filter: invert(100%) sepia(81%) saturate(0%) hue-rotate(328deg)
+            brightness(107%) contrast(101%);
+          @apply w-[20px] h-[20px] cursor-pointer hover:scale-105 transition-all;
+        }
+      }
+      .comment-like {
+        @apply text-green-200;
+      }
+      .comment-dislike {
+        @apply text-red-200;
+      }
     }
   }
 }
