@@ -1,6 +1,6 @@
 .navBar-container {
   box-shadow: 0px 5px 10px 0 rgba(0 0 0 /0.2);
-  @apply animate-displayComponent text-white w-full flex items-center justify-between h-[56px] sm:h-[60px] backdrop-blur-sm fixed  top-0 left-0 px-10 py-5 md:py-10 md:px-20 z-50 transition-all;
+  @apply text-white w-full flex items-center justify-between h-[56px] sm:h-[60px] backdrop-blur-sm fixed  top-0 left-0 px-10 py-5 md:py-10 md:px-20 z-50 transition-all;
   div {
     @apply w-[90%] flex flex-row-reverse gap-5 md:gap-[30px];
   }

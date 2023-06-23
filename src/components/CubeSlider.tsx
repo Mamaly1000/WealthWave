@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { motion } from "framer-motion";
 // Import Swiper styles
 
 // import required modules
@@ -34,7 +34,11 @@ const sliderData = [
 export default function CubeSlider() {
   const nav = useNavigate();
   return (
-    <div className="home-page-intro-slider">
+    <motion.div
+      initial={{ opacity: 0.2, transform: "translateX(200px)" }}
+      animate={{ opacity: 1, transform: "translateX(0px)" }}
+      className="home-page-intro-slider"
+    >
       <Swiper
         effect={"cube"}
         grabCursor={true}
@@ -61,6 +65,6 @@ export default function CubeSlider() {
           );
         })}
       </Swiper>
-    </div>
+    </motion.div>
   );
 }

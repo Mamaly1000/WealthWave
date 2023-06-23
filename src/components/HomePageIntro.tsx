@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 export const wordDetecter = (word: string): boolean => {
   const WordsArray: string[] = [
     "wealth",
@@ -101,14 +101,22 @@ const HomePageIntro = () => {
   };
 
   return (
-    <div className="home-page-intro-section">
-      <h1>
+    <motion.div
+      initial={{ transform: "translateX(-200px)", opacity: 0.2 }}
+      animate={{ transform: "translateX(0px)", opacity: 1 }}
+      className="home-page-intro-section"
+    >
+      <motion.h1
+        initial={{ fontSize: "2rem" }}
+        animate={{ fontSize: "3rem" }}
+        transition={{ delay: 0.13, duration: 0.5, type: "tween" }}
+      >
         Hello Wellcome to The <span>WealthWave</span>
-      </h1>
+      </motion.h1>
       <span className="txt-rotate">
         " <span className="wrap">{wordSeprator(text)}</span> "
       </span>
-    </div>
+    </motion.div>
   );
 };
 

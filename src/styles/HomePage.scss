@@ -5,19 +5,19 @@
     .home-page-intro-section {
       @apply w-full text-center lg:w-[50%] h-[500px] md:h-[300px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-0 lg:px-10;
       h1 {
-        @apply text-[3rem] font-extrabold italic w-full lg:w-[80%] text-white animate-DisplayAnimation text-center font-rail;
+        @apply font-extrabold italic w-full lg:w-[80%] text-white text-center font-rail transition-all;
         span {
           @apply text-blue-400;
         }
       }
       .txt-rotate {
-        @apply font-rail   text-[1.5rem] w-[100%] lg:w-[50%] text-white -tracking-normal animate-DisplayAnimation;
+        @apply font-rail   text-[1.5rem] w-[100%] lg:w-[50%] text-white -tracking-normal;
         .word-animation {
           transition-property: color, background, transform, font-weight;
           transition-duration: 2s;
           transition-timing-function: linear;
 
-          @apply font-bold animate-wordAnimation;
+          @apply font-bold;
         }
       }
     }

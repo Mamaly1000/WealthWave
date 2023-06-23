@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useContextFunction } from "../context/AppContext";
-
+import { motion } from "framer-motion";
 const NavBar = ({ showSideBar, setShowSideBar }) => {
   const contextData = useContextFunction();
 
   return (
-    <div
+    <motion.div
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, type: "tween" }}
       className="navBar-container"
       style={{
-        background: contextData!.scrollH ? "rgba(30 64 175/0.4)" : "rgba(30 64 175/0.2)",
+        background: contextData!.scrollH
+          ? "rgba(30 64 175/0.4)"
+          : "rgba(30 64 175/0.2)",
       }}
     >
-      <button
+      <motion.button
+        whileHover={{ rotateZ: "360deg" }}
+        transition={{ duration: 0.13, type: "tween" }}
         style={{
           scale: contextData!.scrollH ? "1" : "1.2",
           transition: "scale .13s linear",
@@ -35,7 +42,7 @@ const NavBar = ({ showSideBar, setShowSideBar }) => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-      </button>
+      </motion.button>
       <Link
         to="/"
         className="navbar-logo"
@@ -119,7 +126,7 @@ const NavBar = ({ showSideBar, setShowSideBar }) => {
           sign up
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

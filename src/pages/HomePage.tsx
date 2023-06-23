@@ -6,15 +6,19 @@ import NewsSection from "../components/news-post-component/NewsSection";
 import AboutUs from "../components/about_us/AboutUs";
 import ContactUs from "../components/contact-us/ContactUs";
 import Comments from "../components/comments-section/Comments";
-
+import { motion } from "framer-motion";
 const HomePage = () => {
   return (
     <div className="HomePage-container">
       {/* <VerticalSlider /> */}
-      <div className="HomePage-intro-section">
+      <motion.div
+        initial={{ transform: "translateY(-100px)" }}
+        animate={{ transform: "translateY(0px)" }}
+        className="HomePage-intro-section"
+      >
         <HomePageIntro />
         <CubeSlider />
-      </div>
+      </motion.div>
       <CryptoTableRow />
       <NFTslider />
       <NewsSection />
