@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from "react";
-import { v4 as uuidV4 } from "uuid";
+import { useState, useMemo } from "react";
 import ReactSelect from "react-select";
 import { BlogListProps, TAG } from "../types/noteTypes";
 import BlogCard from "../components/BlogCard";
 import { useNavigate } from "react-router-dom";
-import EditTagModal from "../components/EditTagModal";
-
+import EditTagModal from "../components/edit-tags-modal/EditTagModal";
+import { motion,useCycle } from "framer-motion";
+import { removingPageMotion } from "../motions/motions";
 const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
   const nav = useNavigate();
   const [selectedTags, setselectedTags] = useState<TAG[]>([]);
@@ -24,20 +24,31 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
     });
   }, [title, selectedTags, notes]);
   return (
-    <div className="blog-list-container">
+    <motion.div
+      variants={removingPageMotion}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="blog-list-container"
+    >
       <div className="blog-list-header">
         <h1 className="page-header">My Blogs</h1>
-        <button className="create-blog-btn" onClick={() => nav("/myBlogs/new")}>
-          Create
-        </button>
-        <button
-          className="edit-tags-btn"
-          onClick={() => {
-            setShowTagsModal(true);
-          }}
-        >
-          Edit Tags
-        </button>
+        <div>
+          <button
+            className="create-blog-btn"
+            onClick={() => nav("/myBlogs/new")}
+          >
+            Create
+          </button>
+          <button
+            className="edit-tags-btn"
+            onClick={() => {
+              setShowTagsModal(true);
+            }}
+          >
+            Edit Tags
+          </button>
+        </div>
       </div>
       <form className="create-blog-form">
         <div className="form-layout-md">
@@ -95,14 +106,12 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
             );
           })}
       </div>
-      {showTagModal && (
-        <EditTagModal
-          show={showTagModal}
-          setShow={setShowTagsModal}
-          tags={AllAvailableTags}
-        />
-      )}
-    </div>
+      <EditTagModal
+        show={showTagModal}
+        setShow={setShowTagsModal}
+        tags={AllAvailableTags}
+      />
+    </motion.div>
   );
 };
 

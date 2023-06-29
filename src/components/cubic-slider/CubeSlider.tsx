@@ -1,14 +1,10 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
-// Import Swiper styles
-
-// import required modules
 import { EffectCube, Pagination, Autoplay } from "swiper";
-import { useNavigate } from "react-router-dom";
-import { wordSeprator } from "./HomePageIntro";
+import SingleSlide from "./SingleSlide";
 
-const sliderData = [
+const sliderData: { title: string; pathName: string }[] = [
   {
     title:
       "discover the secrets of the cryptocurrency world with just one click !",
@@ -32,7 +28,6 @@ const sliderData = [
 ];
 
 export default function CubeSlider() {
-  const nav = useNavigate();
   return (
     <motion.div
       initial={{ opacity: 0.2, transform: "translateX(200px)" }}
@@ -56,14 +51,11 @@ export default function CubeSlider() {
         modules={[EffectCube, Pagination, Autoplay]}
         className="mySwiper"
       >
-        {sliderData.map((data, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <h3>{wordSeprator(data.title)}</h3>
-              <button onClick={() => nav(data.pathName)}>click now!</button>
-            </SwiperSlide>
-          );
-        })}
+        {sliderData.map((data, index) => (
+          <SwiperSlide>
+            <SingleSlide key={index} data={data} index={index} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </motion.div>
   );

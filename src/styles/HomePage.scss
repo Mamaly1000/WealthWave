@@ -25,10 +25,15 @@
       @apply w-[350px] h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900 shadow-2xl rounded-[10px];
       .mySwiper {
         @apply w-full h-full capitalize;
+
         .swiper-slide {
           @apply shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
-          h3 {
-            @apply w-[70%];
+          div {
+            @apply w-full h-full shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
+
+            h3 {
+              @apply w-[70%];
+            }
           }
         }
       }
@@ -56,7 +61,7 @@
           background: rgba(0, 0, 0, 0.1);
           box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
           border: 1px solid rgba(255, 255, 255, 0.18);
-          @apply w-full animate-wordAnimation opacity-0;
+          @apply w-full transition-all;
         }
       }
       tr {

@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BlogViewPageProps } from "../types/noteTypes";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-
+import { motion } from "framer-motion";
+import { removingPageMotion } from "../motions/motions";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   const nav = useNavigate();
   const { id } = useParams();
@@ -13,7 +14,13 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   }
 
   return (
-    <div className="blogView-page">
+    <motion.div
+      variants={removingPageMotion}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="blogView-page"
+    >
       <div className="blogPage-header">
         <div>
           <h1>{blog?.title}</h1>
@@ -49,7 +56,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
         </div>
       </div>
       <div className="blogpage-body">{blog?.body}</div>
-    </div>
+    </motion.div>
   );
 };
 

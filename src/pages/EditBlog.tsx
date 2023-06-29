@@ -3,7 +3,8 @@ import CreateableReactSelect from "react-select/creatable";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { EditNoteFormProps, NoteFormProps, TAG } from "../types/noteTypes";
-
+import { motion } from "framer-motion";
+import { removingPageMotion } from "../motions/motions";
 const EditBlog = ({
   notes,
   onSubmit,
@@ -29,7 +30,12 @@ const EditBlog = ({
   };
 
   return (
-    <div>
+    <motion.div
+      variants={removingPageMotion}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <h1 className="page-header">Edit Blog</h1>
 
       <form className="create-blog-form" onSubmit={submitHnadler}>
@@ -132,7 +138,7 @@ const EditBlog = ({
           </div>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

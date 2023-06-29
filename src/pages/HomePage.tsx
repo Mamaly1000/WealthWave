@@ -1,4 +1,4 @@
-import CubeSlider from "../components/CubeSlider";
+import CubeSlider from "../components/cubic-slider/CubeSlider";
 import HomePageIntro from "../components/HomePageIntro";
 import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import NFTslider from "../components/ntf-components/NFTslider";
@@ -7,9 +7,17 @@ import AboutUs from "../components/about_us/AboutUs";
 import ContactUs from "../components/contact-us/ContactUs";
 import Comments from "../components/comments-section/Comments";
 import { motion } from "framer-motion";
+import { removingPageMotion } from "../motions/motions";
+
 const HomePage = () => {
   return (
-    <div className="HomePage-container">
+    <motion.div
+      variants={removingPageMotion}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="HomePage-container"
+    >
       {/* <VerticalSlider /> */}
       <motion.div
         initial={{ transform: "translateY(-100px)" }}
@@ -25,7 +33,7 @@ const HomePage = () => {
       <AboutUs />
       <Comments />
       <ContactUs />
-    </div>
+    </motion.div>
   );
 };
 

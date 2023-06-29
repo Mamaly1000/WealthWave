@@ -1,5 +1,5 @@
 .modal-container {
-  @apply fixed min-w-[100vw] min-h-[100vh] z-[9999999] bg-transparent top-0 left-0 flex items-center justify-center;
+  @apply fixed min-w-[100vw] min-h-[100vh]  bg-transparent top-10 left-0 flex items-center justify-center z-[10000000002034723857098572];
 }
 .modal-overlay {
   background: rgba(0 0 0 /0.4);
@@ -18,7 +18,7 @@
   }
 }
 .form-tags {
-  @apply w-full h-[70%] flex flex-col items-center justify-center overflow-scroll bg-gray-100  gap-2 pt-10 rounded-[10px] animate-hover-animate;
+  @apply w-full h-[70%] flex flex-col items-center justify-start overflow-scroll bg-gray-100  gap-2 py-5 rounded-[10px] animate-hover-animate;
 
   .form-group {
     @apply w-full h-fit flex justify-between px-2;

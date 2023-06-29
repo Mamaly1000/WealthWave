@@ -3,7 +3,8 @@ import CreateableReactSelect from "react-select/creatable";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { NoteFormProps, TAG } from "../types/noteTypes";
-
+import { motion } from "framer-motion";
+import { removingPageMotion } from "../motions/motions";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -23,7 +24,12 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   };
 
   return (
-    <div>
+    <motion.div
+      variants={removingPageMotion}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <h1 className="page-header">new Blog</h1>
 
       <form className="create-blog-form" onSubmit={submitHnadler}>
@@ -123,7 +129,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
           </div>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };
 

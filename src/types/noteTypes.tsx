@@ -63,13 +63,13 @@ export type ModalTagsProps = {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export type CommentType= {
-  name: string ;
-    email: string; 
-    comment: string;  
-      profilePicUrl: string; 
-      date: string ;
-      liked: number;
-      disliked: number;
-      saved: boolean;
-  }
+export type CommentType = {
+  name: string;
+  email: string;
+  comment: string;
+  profilePicUrl: string;
+  date: string;
+  liked: number;
+  disliked: number;
+  saved: boolean;
+};

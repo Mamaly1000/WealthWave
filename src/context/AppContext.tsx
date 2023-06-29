@@ -14,7 +14,6 @@ import {
   EditBlog,
 } from "../types/noteTypes";
 import { v4 as uuidV4 } from "uuid";
-import { useNavigate } from "react-router-dom";
 
 interface Icontext {
   tags: TAG[];
@@ -26,6 +25,7 @@ interface Icontext {
   onAddTag: (tag: TAG) => void;
   onUpdate: (id: string, { tags, ...data }: EditBlog) => void;
   onDelete: (id: string) => void;
+  onFindTag: (id: string) => boolean;
   onDeleteTag: (id: string) => void;
   onUpdateTag: (id: string, text: string) => void;
   screenW: boolean;
@@ -35,7 +35,6 @@ interface Icontext {
 export const AppContext = createContext<Icontext | null>({} as Icontext);
 
 const AppContextComponent = ({ children }: any) => {
-  const nav = useNavigate();
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
 
@@ -81,6 +80,14 @@ const AppContextComponent = ({ children }: any) => {
     setNotes((prev) => {
       return prev.filter((note) => note.id !== id);
     });
+  };
+  const onFindTag = (id: string) => {
+    const selectedTag = tags.findIndex((tag) => tag.id === id);
+    if (selectedTag < 0) {
+      return true;
+    } else {
+      return false;
+    }
   };
   const onDeleteTag = (id: string) => {
     setTags((prev) => {
@@ -138,6 +145,7 @@ const AppContextComponent = ({ children }: any) => {
         notesWithTags,
         onCreateNote,
         onAddTag,
+        onFindTag,
       }}
     >
       {children}

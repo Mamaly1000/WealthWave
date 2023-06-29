@@ -103,7 +103,16 @@ const useCrypto = () => {
       setLoading(false);
     }
   };
-
+  const popCrypto = (id: string) => {
+    if (cryptoList.length > 0) {
+      const newArray = cryptoList.filter((c) => c.id !== id);
+      setCryptoList(newArray);
+      console.log("removed item:" + id, "array list:" + newArray);
+      console.log(newArray);
+    } else {
+      console.log("nothing here");
+    }
+  };
   return {
     getAllcoins,
     getTrendCoins,
@@ -114,6 +123,8 @@ const useCrypto = () => {
     loading,
     singleCoinData,
     chartData,
+    setCryptoList,
+    popCrypto,
   };
 };
 
