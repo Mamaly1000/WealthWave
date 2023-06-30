@@ -1,5 +1,5 @@
 .contact-us-section {
-  @apply min-w-full h-fit md:h-[700px] flex flex-col md:flex-row justify-center items-center;
+  @apply min-w-full h-fit md:h-[700px] flex flex-col md:flex-row justify-center items-center overflow-hidden;
   .bg-container {
     background-position: center;
     background-size: contain;
@@ -38,7 +38,7 @@
         transition-timing-function: cubic-bezier(0.4, 1.2, 0.5, 2) !important;
         transition-duration: 0.3s !important;
         animation-duration: 1s !important;
-        @apply w-[40px] h-[40px] scale-100 hover:scale-150 transition-all animate-wordAnimation opacity-0;
+        @apply w-[40px] h-[40px] scale-100 hover:scale-150 transition-all  opacity-0;
       }
       .social-link:hover {
         filter: invert(34%) sepia(97%) saturate(2235%) hue-rotate(212deg)

@@ -35,14 +35,16 @@ export const wordSeprator = (text: string) => {
   const WordsArray: string[] = text.split(" ");
   return WordsArray.map((word, index) => {
     return (
-      <span
+      <motion.span
+        initial={{ x: 20 }}
+        animate={{ x: 30 }}
         key={index}
         className={`word-animation ${
           wordDetecter(word) ? "selected-word" : ""
         }`}
       >
         {word}{" "}
-      </span>
+      </motion.span>
     );
   });
 };
@@ -113,9 +115,16 @@ const HomePageIntro = () => {
       >
         Hello Wellcome to The <span>WealthWave</span>
       </motion.h1>
-      <span className="txt-rotate">
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        drag
+        dragConstraints={{ top: 0, left: 0, right: 10, bottom: 0 }}
+        whileDrag={{ scale: 1.01 }}
+        className="txt-rotate"
+      >
         " <span className="wrap">{wordSeprator(text)}</span> "
-      </span>
+      </motion.span>
     </motion.div>
   );
 };

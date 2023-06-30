@@ -17,13 +17,13 @@
   }
   .blog-card {
     background: rgba(0 0 0 /0.1);
-    @apply w-[100%] md:w-[90%] h-[200px] rounded-[14px] shadow-lg cursor-pointer hover:shadow-2xl text-white hover:text-white hover:bg-blue-800 transition-BlogCard flex justify-center items-center gap-5 flex-col;
+    @apply w-[100%] md:w-[90%] h-[200px] rounded-[14px] shadow-lg cursor-pointer hover:shadow-2xl text-white hover:text-white hover:bg-blue-800 transition-BlogCard flex justify-center items-center gap-5 flex-col px-5;
   }
   .blog-card:hover .tag-badge {
     @apply bg-white text-blue-800;
   }
   .tags-container {
-    @apply w-[50%] flex justify-center items-center gap-5;
+    @apply w-[90%] flex flex-row flex-wrap justify-center items-center gap-5 text-[.8rem];
   }
   .tag-badge {
     @apply bg-blue-800 text-white w-fit px-4 py-2 rounded-[10px] flex justify-center items-center shadow-2xl;

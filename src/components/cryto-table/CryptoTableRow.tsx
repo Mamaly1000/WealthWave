@@ -1,21 +1,36 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCrypto from "../../hooks/useCrypto";
 import Loader from "../loader/Loader";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import CryptoRow from "./cryptoRow";
+import { componentViewMotion } from "../../motions/motions";
 
 const CryptoTableRow = () => {
   const nav = useNavigate();
   const { getAllcoins, cryptoList, loading } = useCrypto();
+  const [showComponent, setShowComponent] = useState(false);
+  const { scrollYProgress } = useScroll();
+  useEffect(() => {
+    // if (scrollYProgress.get() <= 0) {
+    //   setShowComponent(true);
+    // } else {
+    //   setShowComponent(false);
+    // }
+    console.log(scrollYProgress.get());
+  }, [scrollYProgress]);
   useEffect(() => {
     getAllcoins();
   }, []);
 
-
-
   return (
-    <div className="crypto-table-container">
+    <motion.div
+      className="crypto-table-container"
+      variants={componentViewMotion}
+      initial="hidden"
+      whileInView="view"
+      viewport={{ once: true }}
+    >
       <div className="crypto-table-header">
         <h2 className="page-header">Crypto Currencies</h2>
         <button onClick={() => nav("/crypto")}>track more coins</button>
@@ -78,7 +93,7 @@ const CryptoTableRow = () => {
           </tbody>
         )}
       </table>
-    </div>
+    </motion.div>
   );
 };
 

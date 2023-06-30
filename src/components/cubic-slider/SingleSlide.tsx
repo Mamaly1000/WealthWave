@@ -5,32 +5,17 @@ import { useNavigate } from "react-router-dom";
 type singleSlidesType = {
   data: { title: string; pathName: string };
   index: number;
+  active: boolean;
 };
-const SingleSlide = ({ data, index }: singleSlidesType) => {
+const SingleSlide = ({ data, active }: singleSlidesType) => {
   const nav = useNavigate();
-
-  const [isVisible, setIsVisible] = useState(true);
-  const componentRef = useRef<HTMLDivElement>(null);
-  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-    setIsVisible(entries[0].isIntersecting);
-  };
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersection);
-    if (componentRef.current) {
-      observer.observe(componentRef.current);
-    }
-
-    return () => {
-      if (componentRef.current) {
-        observer.unobserve(componentRef.current);
-      }
-    };
-  }, []);
   return (
-    <motion.div initial={{ opacity: isVisible ? 1 : 0 }} ref={componentRef}>
-      <motion.h3>{wordSeprator(data.title)}</motion.h3>
+    <motion.div>
+      <motion.h3 animate={{ y: !active ? -50 : 0, opacity: !active ? 0 : 1 }}>
+        {wordSeprator(data.title)}
+      </motion.h3>
       <motion.button
-        animate={{ y: isVisible ? 0 : 20 }}
+        animate={{ y: active ? 0 : 30, opacity: active ? 1 : 0 }}
         onClick={() => nav(data.pathName)}
       >
         click now!

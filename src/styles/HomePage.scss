@@ -1,9 +1,9 @@
 .HomePage-container {
   @apply w-full h-fit flex justify-center items-center flex-col gap-10 py-24 px-5 lg:px-10;
   .HomePage-intro-section {
-    @apply flex flex-col lg:flex-row justify-center lg:justify-between items-center w-full lg:h-[450px] p-0 cursor-default;
+    @apply flex flex-col lg:flex-row  justify-center lg:justify-between items-center w-full lg:min-h-[100vh] px-0 sm:pb-[150px] cursor-default;
     .home-page-intro-section {
-      @apply w-full text-center lg:w-[50%] h-[500px] md:h-[300px] lg:h-[100%] flex justify-between items-center flex-col pt-10 pb-10 lg:pb-20 px-0 lg:px-10;
+      @apply w-full text-center lg:w-[50%] h-[500px] md:h-[300px] lg:h-[100%] flex justify-between items-center gap-10 flex-col pt-10 pb-10 lg:pb-20 px-0 lg:px-10;
       h1 {
         @apply font-extrabold italic w-full lg:w-[80%] text-white text-center font-rail transition-all;
         span {
@@ -16,7 +16,6 @@
           transition-property: color, background, transform, font-weight;
           transition-duration: 2s;
           transition-timing-function: linear;
-
           @apply font-bold;
         }
       }

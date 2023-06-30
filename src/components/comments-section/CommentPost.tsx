@@ -3,12 +3,21 @@ import save from "../../assets/comments/save.svg";
 import filled_saved from "../../assets/comments/flled-saved.svg";
 import dislike from "../../assets/comments/dislike.svg";
 import { CommentType } from "../../types/noteTypes";
+import { motion } from "framer-motion";
+import { commentsMotion } from "../../motions/motions";
 type commentPostType = {
   data: CommentType;
+  index: number;
 };
-const CommentPost = ({ data }: commentPostType) => {
+const CommentPost = ({ data, index }: commentPostType) => {
   return (
-    <div className="comment">
+    <motion.div
+      variants={commentsMotion(index)}
+      initial="hidden"
+      whileInView="view"
+      className="comment"
+      viewport={{ once: true }}
+    >
       <div className="comment-user-data">
         <div className="comment-user-image">
           <img src={data.profilePicUrl} alt="" />
@@ -35,7 +44,7 @@ const CommentPost = ({ data }: commentPostType) => {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

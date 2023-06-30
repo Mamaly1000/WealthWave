@@ -4,12 +4,14 @@ import { IAppleNews } from "../../hooks/useNews";
 import replaceInvalidUrl from "./../../helper/imageChecker.js";
 import { randomPics } from "../../utils/randomPics.js";
 import Loader from "../loader/Loader.js";
+import { motion } from "framer-motion";
+import { newsCardMotion } from "../../motions/motions.js";
 type NewsPostProps = {
   news: IAppleNews;
   id: number;
   index: number;
 };
-const NewsPost = ({ news, id }: NewsPostProps) => {
+const NewsPost = ({ news, id, index }: NewsPostProps) => {
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
@@ -33,9 +35,12 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
     }
   }, [postPicUrl]);
   return (
-    <div
+    <motion.div
+      variants={newsCardMotion(index)}
+      initial="hidden"
+      whileInView="view"
+      viewport={{ once: true }}
       className="news-post-container"
-      style={{ animationDelay: `${id / 10 + 0.1}s` }}
     >
       <div className="news-post-image-container">
         {!loading ? (
@@ -168,7 +173,7 @@ const NewsPost = ({ news, id }: NewsPostProps) => {
           </svg>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

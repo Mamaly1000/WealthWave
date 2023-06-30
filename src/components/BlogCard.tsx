@@ -1,16 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { BlogComponentProps } from "../types/noteTypes";
 import { motion } from "framer-motion";
-const BlogCard = ({ id, title, tags }: BlogComponentProps) => {
+import { blogCardsMotions } from "../motions/motions";
+const BlogCard = ({ id, title, tags, index }: BlogComponentProps) => {
   const nav = useNavigate();
   return (
     <motion.div
-      drag
-      dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-      dragElastic={.1}
+      variants={blogCardsMotions(index)}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
       className="blog-card"
-      key={id}
       onClick={() => nav(`/myBlogs/${id}`)}
+      dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+      dragElastic={0.1}
+      drag
+      whileDrag={{ opacity: 0.5, scale: 0.9, cursor: "grab" }}
+      layout
     >
       <h3>{title}</h3>
       <motion.div className="tags-container">

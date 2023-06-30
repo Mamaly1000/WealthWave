@@ -45,7 +45,7 @@ export default function CubeSlider() {
         }}
         pagination={true}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         modules={[EffectCube, Pagination, Autoplay]}
@@ -53,7 +53,14 @@ export default function CubeSlider() {
       >
         {sliderData.map((data, index) => (
           <SwiperSlide>
-            <SingleSlide key={index} data={data} index={index} />
+            {({ isActive }) => (
+              <SingleSlide
+                active={isActive}
+                key={index}
+                data={data}
+                index={index}
+              />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

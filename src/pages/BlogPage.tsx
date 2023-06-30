@@ -4,7 +4,7 @@ import { BlogListProps, TAG } from "../types/noteTypes";
 import BlogCard from "../components/BlogCard";
 import { useNavigate } from "react-router-dom";
 import EditTagModal from "../components/edit-tags-modal/EditTagModal";
-import { motion,useCycle } from "framer-motion";
+import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
   const nav = useNavigate();
@@ -94,7 +94,7 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
       </form>
       <div className="blog-list-cards">
         {filteredNotes.length > 0 &&
-          filteredNotes.map((note) => {
+          filteredNotes.map((note, index) => {
             return (
               <BlogCard
                 title={note!.title}
@@ -102,6 +102,7 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
                 id={note!.id}
                 email={note!.email}
                 key={note!.id}
+                index={index}
               />
             );
           })}

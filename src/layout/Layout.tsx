@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import SideBar from "../components/sidebar/SideBar";
 import { useState } from "react";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: any) => {
   const [displaySideBar, setDisplaySideBar] = useState<boolean>(false);
   return (
     <div

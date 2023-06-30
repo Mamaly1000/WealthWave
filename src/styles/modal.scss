@@ -3,7 +3,7 @@
 }
 .modal-overlay {
   background: rgba(0 0 0 /0.4);
-  @apply w-[100%] h-[100%] absolute top-0 left-0 animate-fade;
+  @apply w-[100%] h-[100%] absolute top-0 left-0;
 }
 .modal-content {
   @apply bg-white w-[50%] h-[500px] shadow-2xl z-[9] rounded-[14px] flex flex-col items-center justify-center px-12 py-5;
@@ -18,7 +18,7 @@
   }
 }
 .form-tags {
-  @apply w-full h-[70%] flex flex-col items-center justify-start overflow-scroll bg-gray-100  gap-2 py-5 rounded-[10px] animate-hover-animate;
+  @apply w-full h-[70%] flex flex-col items-center justify-start overflow-scroll bg-gray-100  gap-2 py-5 rounded-[10px];
 
   .form-group {
     @apply w-full h-fit flex justify-between px-2;

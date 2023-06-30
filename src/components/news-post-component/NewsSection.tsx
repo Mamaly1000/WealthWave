@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import useNews from "../../hooks/useNews";
 import NewsPost from "./NewsPost";
 import { Autoplay } from "swiper";
+import { motion } from "framer-motion";
+import { componentViewMotion } from "../../motions/motions";
 const NewsSection = () => {
   const nav = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState<string>("WallStreet");
@@ -18,7 +20,13 @@ const NewsSection = () => {
     }
   }, [appleNewsList]);
   return (
-    <div className="news-section">
+    <motion.div
+      variants={componentViewMotion}
+      initial="hidden"
+      whileInView="view"
+      viewport={{ once: true }}
+      className="news-section"
+    >
       <div className="news-section-header">
         <h2 className="page-header">News</h2>
         <button onClick={() => nav("/news")}>check out all news</button>
@@ -99,7 +107,7 @@ const NewsSection = () => {
             );
           })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

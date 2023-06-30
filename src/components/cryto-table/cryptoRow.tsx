@@ -69,9 +69,9 @@ const CryptoRow = ({ coin, index }: tableRowType) => {
       exit={{ x: 1000, opacity: 0 }}
       variants={tableRowsAnimation}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
       whileHover="hover"
-      key={index}
+      viewport={{ once: true }}
       onClick={() => setClicked(true)}
     >
       <td className="td-rate">{coin!.market_cap_rank}</td>
@@ -79,7 +79,8 @@ const CryptoRow = ({ coin, index }: tableRowType) => {
         <motion.img
           variants={childrenNimation}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="coin-icon"
           src={coin!.image}
           alt="coin-icon"
@@ -88,7 +89,8 @@ const CryptoRow = ({ coin, index }: tableRowType) => {
       <motion.td
         variants={textAnimation}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true }}
         className="td-name"
       >
         {coin!.name}

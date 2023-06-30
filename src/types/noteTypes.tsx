@@ -53,6 +53,7 @@ export type BlogComponentProps = {
   email: string;
   id: string;
   tags: TAG[];
+  index: number;
 };
 export type BlogViewPageProps = {
   notes: Note[];

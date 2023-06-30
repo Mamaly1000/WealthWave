@@ -2,10 +2,18 @@ import { dummyComments } from "../../Data/dummy";
 import CommentPost from "./CommentPost";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Pagination, Autoplay } from "swiper";
+import { motion } from "framer-motion";
+import { componentViewMotion } from "../../motions/motions";
 
 const Comments = () => {
   return (
-    <div className="comment-section">
+    <motion.div
+      variants={componentViewMotion}
+      initial="hidden"
+      whileInView="view"
+      viewport={{ once: true }}
+      className="comment-section"
+    >
       <div className="comment-section-header">
         <h3 className="page-header">Wealth Wave impacts</h3>
         <button>what is your idea ?</button>
@@ -52,15 +60,19 @@ const Comments = () => {
             slidesPerView: 2.8,
             spaceBetween: 10,
           },
+          1200: {
+            slidesPerView: 3.2,
+            spaceBetween: 5,
+          },
         }}
       >
         {dummyComments.map((c, index) => (
           <SwiperSlide key={index}>
-            <CommentPost data={c} />
+            <CommentPost data={c} index={index} />
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

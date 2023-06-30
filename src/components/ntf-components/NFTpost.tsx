@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { nftPics, randomUserData } from "../../Data/dummy";
+import { motion } from "framer-motion";
+import { nftCardsMotion } from "../../motions/motions";
 type nftPostType = {
   name: string;
   price: string;
   symbol: string;
+  index: number;
 };
 
-const NFTpost = ({ name, price, symbol }: nftPostType) => {
+const NFTpost = ({ name, price, index }: nftPostType) => {
   const [nftOwner, setNftOwner] = useState(
     randomUserData[Math.floor(Math.random() * randomUserData.length)]
   );
   const [liked, setLiking] = useState<boolean>(false);
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
-  const [nftPic, setNftPic] = useState<string>(
+  const [nftPic] = useState<string>(
     nftPics[Math.floor(Math.random() * nftPics.length)]
   );
-  const [nftPrice, setNftPrice] = useState<number>(
+  const [nftPrice] = useState<number>(
     Math.floor((Math.random() * 123423400) / 1000000) / 100
   );
   const displayLikeIcon = () => {
@@ -25,13 +28,15 @@ const NFTpost = ({ name, price, symbol }: nftPostType) => {
       setDoubledClick(false);
     }, 500);
   };
-  const setNFTimage = () => {
-    return nftPics.filter((pic) => pic === nftPic)[
-      Math.floor(Math.random() * nftPics.length - 1)
-    ];
-  };
   return (
-    <div className="nft-post-component" onDoubleClick={() => displayLikeIcon()}>
+    <motion.div
+      variants={nftCardsMotion(index)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="nft-post-component"
+      onDoubleClick={() => displayLikeIcon()}
+    >
       <img className="nft-post-pic" src={nftPic} alt="nft image" />
       <div className="nft-post-data">
         <div className="ntf-owner-data">
@@ -106,7 +111,7 @@ const NFTpost = ({ name, price, symbol }: nftPostType) => {
           </svg>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

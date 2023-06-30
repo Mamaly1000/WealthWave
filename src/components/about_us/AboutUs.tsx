@@ -1,15 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from "swiper/react";
 import { Parallax, Pagination, Autoplay } from "swiper";
 import bgImage from "./../../assets/about-us/12322bd8-c76a-4b5a-989f-a562a91c53f7.png";
-import { socialLinks, values } from "../../utils/about-us-values";
+import { values } from "../../utils/about-us-values";
+import { motion } from "framer-motion";
+import { componentViewMotion } from "../../motions/motions";
 export default function AboutUs() {
   const sliderRef =
     useRef<
       React.FunctionComponent<React.RefAttributes<SwiperRef> & SwiperProps>
     >(null);
   return (
-    <div className="about-us-section">
+    <motion.div
+      variants={componentViewMotion}
+      initial="hidden"
+      whileInView="view"
+      viewport={{ once: true }}
+      className="about-us-section"
+    >
       <Swiper
         speed={600}
         parallax={true}
@@ -132,6 +140,6 @@ export default function AboutUs() {
           />
         </svg>
       </button>
-    </div>
+    </motion.div>
   );
 }
