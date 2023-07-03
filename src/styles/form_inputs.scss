@@ -1,0 +1,16 @@
+form {
+  @apply flex justify-center items-center flex-row flex-wrap w-full gap-2 h-[80%];
+  input {
+    background: rgba(0 0 0/0.3);
+    box-shadow: 0 0 10px 1px rgba(0 0 0/0.3) inset;
+    @apply w-[80%] rounded-md px-10 py-3 text-white outline-none;
+  }
+  textarea {
+    background: rgba(0 0 0/0.3);
+    box-shadow: 0 0 10px 1px rgba(0 0 0/0.3) inset;
+    @apply w-[80%] rounded-md px-10 py-3 text-white outline-none max-h-[150px];
+  }
+  button {
+    @apply w-[30%] mt-5;
+  }
+}

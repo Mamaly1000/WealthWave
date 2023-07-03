@@ -12,6 +12,7 @@ export type noteData = {
   body: string;
   email: string;
   tags: TAG[];
+  img: string;
 };
 
 export type NoteFormProps = {
@@ -34,6 +35,7 @@ export type RawNoteData = {
   title: string;
   email: string;
   body: string;
+  img: string;
   tagIDs: string[];
 };
 export type SimplifiedNote = {
@@ -42,6 +44,7 @@ export type SimplifiedNote = {
   id: string;
   body: string;
   email: string;
+  img: string;
 };
 export type BlogListProps = {
   AllAvailableTags: TAG[];
