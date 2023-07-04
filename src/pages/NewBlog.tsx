@@ -1,17 +1,20 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import CreateableReactSelect from "react-select/creatable";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { NoteFormProps, TAG } from "../types/noteTypes";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
-import ValidateAndDownloadImage from "../utils/imageChecker";
+import urlValidation from "../utils/imageChecker";
+import tickImg from "./../assets/blogs/click.svg";
+import Loader from "../components/loader/Loader";
+import imgPreview from "./../assets/blogs/pewview.svg";
+import ImagePreview from "../components/image-preview-modal/ImagePreview";
+import { toast } from "react-toastify";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
-  ValidateAndDownloadImage("www.google.com/image/asjfsdkfjsdfmk.jpg");
-  ValidateAndDownloadImage(
-    "https://blogs.nasa.gov/commercialcrew/wp-content/uploads/sites/230/2019/12/317188-33_CST_Flip_fr01_.jpg"
-  );
-
+  const [imgLoading, setImgLoading] = useState<boolean>(false);
+  const [imageSRC, setImageSRC] = useState<string>("");
+  const [preview, setImagePreview] = useState<boolean>(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -20,16 +23,38 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const nav = useNavigate();
   const submitHnadler = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit({
-      title: titleRef.current!.value,
-      email: emailRef.current!.value,
-      body: textAreaRef.current!.value,
-      img: imageRef.current!.value,
-      tags: selectedTags,
-      id: uuidV4(),
-    });
-    nav(-1);
+
+    if (titleRef.current!.value.length === 0) {
+      toast.warn("title input can not be empty!");
+    } else if (emailRef.current!.value.length === 0) {
+      toast.warn("email input can not be empty!");
+    } else if (imageRef.current!.value.length === 0) {
+      toast.warn("image input can not be empty!");
+    } else if (imageSRC.length === 0) {
+      toast.warn("please submit your blog picture");
+    } else if (textAreaRef.current!.value.length === 0) {
+      toast.warn("blog description can not be empty!");
+    } else {
+      onSubmit({
+        title: titleRef.current!.value,
+        email: emailRef.current!.value,
+        body: textAreaRef.current!.value,
+        img: imageRef.current!.value,
+        tags: selectedTags,
+        id: uuidV4(),
+        published_date: new Date(),
+      });
+      nav(-1);
+    }
   };
+  useEffect(() => {
+    if (imageRef.current!.value.length === 0) {
+      setImageSRC("");
+    }
+    if (imageSRC.length === 0) {
+      imageRef.current!.value = "";
+    }
+  }, [imageRef, imageSRC]);
 
   return (
     <motion.div
@@ -43,30 +68,87 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
 
       <form className="create-blog-form" onSubmit={submitHnadler}>
         <div className="blog-detail-container">
-          <input
+          <motion.input
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5, type: "tween" }}
             type="text"
             name="floating_title"
             id="floating_title"
             placeholder="title"
-            required
             ref={titleRef}
           />
-          <input
+          <motion.input
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.63, duration: 0.5, type: "tween" }}
             type="email"
             placeholder="email"
             name="floating_email"
             id="floating_email"
-            required
             ref={emailRef}
           />
-          <input
-            type="text"
-            name="floating_title"
-            id="floating_title"
-            placeholder="image url"
-            required
-            ref={imageRef}
-          />
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5, type: "tween" }}
+            className="blog-image-container"
+          >
+            <input
+              type="text"
+              name="floating_title"
+              id="floating_title"
+              placeholder="image url"
+              ref={imageRef}
+            />
+            <AnimatePresence>
+              {!imgLoading && imageSRC.length === 0 && (
+                <motion.img
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    type: "tween",
+                  }}
+                  src={tickImg}
+                  alt="tick"
+                  className="tick-img"
+                  onClick={() => {
+                    if (imageRef.current!.value.length !== 0) {
+                      urlValidation(
+                        imageRef.current!.value,
+                        setImgLoading,
+                        setImageSRC
+                      );
+                    } else {
+                      toast.error("input is empty");
+                    }
+                  }}
+                />
+              )}
+            </AnimatePresence>
+            <AnimatePresence>{imgLoading && <Loader />}</AnimatePresence>
+            <AnimatePresence>
+              {imageSRC.length > 0 && imageRef.current!.value.length !== 0 && (
+                <motion.img
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    type: "tween",
+                  }}
+                  src={imgPreview}
+                  alt="image preview"
+                  className="preview-img"
+                  onClick={() => {
+                    setImagePreview(true);
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
         <div className="blog-desc-container">
           <CreateableReactSelect
@@ -104,11 +186,14 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
               };
             })}
           />
-          <textarea
+          <motion.textarea
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5, type: "tween" }}
             id="message"
             placeholder="your blog description"
             ref={textAreaRef}
-          ></textarea>
+          ></motion.textarea>
         </div>
         <div className="form-action-group">
           <button type="submit" className="form-submit-btn">
@@ -121,6 +206,12 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
           </Link>
         </div>
       </form>
+      <ImagePreview
+        setShow={setImagePreview}
+        show={preview}
+        src={imageSRC}
+        setSRC={setImageSRC}
+      />
     </motion.div>
   );
 };

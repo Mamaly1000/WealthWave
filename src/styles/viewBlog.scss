@@ -1,0 +1,63 @@
+.blogView-page {
+  @apply px-5 py-24 flex justify-center items-center flex-col gap-10;
+  .blogPage-header {
+    @apply w-full flex flex-col md:flex-row justify-center md:justify-between items-center gap-5;
+    div {
+      @apply flex gap-2 w-[45%] text-white;
+    }
+    .blogPage-title {
+      @apply flex-col justify-center md:justify-start items-center md:items-start w-full;
+      h1 {
+        @apply font-rail font-extrabold  text-blue-400 text-[3rem];
+      }
+      div {
+        @apply text-[1rem] w-full flex flex-row flex-wrap justify-center md:justify-start items-center md:items-start;
+        span {
+          @apply px-2 py-1 rounded-lg bg-blue-700;
+        }
+      }
+    }
+    .blogPage-controls {
+      @apply flex-row justify-center md:justify-end items-center md:items-end;
+      .edit-blog-btn {
+        @apply bg-yellow-500 shadow-yellow-500;
+      }
+      .delete-blog-btn {
+        @apply bg-red-500 shadow-red-500;
+      }
+      .back-btn {
+        @apply bg-gray-500 shadow-gray-500;
+      }
+    }
+  }
+  .blog-description-container {
+    @apply w-full flex flex-col-reverse md:flex-row justify-center md:justify-between items-center;
+    .blog-image {
+      @apply min-w-[45%] object-fill fixed top-[30vh] end-5 rounded-lg drop-shadow-2xl;
+    }
+    .blogpage-body {
+      @apply w-[45%] min-h-[500px] h-fit flex justify-start items-start text-justify text-[1.3rem] text-white;
+    }
+  }
+  .author-data-container {
+    @apply text-white w-full min-h-[200px] flex flex-row justify-start items-start gap-5 z-10;
+    img {
+      @apply max-w-[100px] max-h-[100px] rounded-full;
+    }
+    div {
+      @apply w-fit h-full py-5 flex flex-col justify-center items-center md:justify-start md:items-start gap-2;
+      .author-email {
+        @apply text-[1.2rem] capitalize flex items-center gap-2;
+        img {
+          @apply max-w-[20px] max-h-[20px];
+        }
+      }
+      .blog-published-date {
+        @apply text-[.9rem] text-gray-100 font-[100] italic flex items-center gap-2;
+        img {
+          @apply max-w-[20px] max-h-[20px];
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BlogViewPageProps } from "../types/noteTypes";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
+import dateIcon from "./../assets/blogs/dateIcon.svg";
+import authorIcon from "../assets/blogs/authorIcon.svg";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   const nav = useNavigate();
   const { id } = useParams();
@@ -22,7 +23,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
       className="blogView-page"
     >
       <div className="blogPage-header">
-        <div>
+        <div className="blogPage-title">
           <h1>{blog?.title}</h1>
           <div>
             {blog?.tags.map((t) => {
@@ -50,12 +51,26 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
           >
             Delete
           </button>
-          <button className="back-btn" onClick={() => nav(-1)}>
+          <button className="back-btn" onClick={() => nav("/myBlogs")}>
             Back
           </button>
         </div>
       </div>
-      <div className="blogpage-body">{blog?.body}</div>
+      <div className="author-data-container">
+        <img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
+        <div>
+          <span className="author-email">
+            {blog?.email} <img src={authorIcon} alt="author" />
+          </span>
+          <span className="blog-published-date">
+            2023/12/02 <img src={dateIcon} alt="date icon" />
+          </span>
+        </div>
+      </div>
+      <div className="blog-description-container">
+        <div className="blogpage-body">{blog?.body}</div>
+        <img src={blog?.img} alt="blog-image" className="blog-image" />
+      </div>
     </motion.div>
   );
 };

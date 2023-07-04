@@ -24,12 +24,13 @@ export const BlogTagsOverlay = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.13,
+      duration: 0.5,
       type: "tween",
     },
   },
   exit: {
-    transition: {},
+    opacity: 0,
+    transition: { duration: 0.1, type: "tween" },
   },
 };
 export const BlogTagsInputs = (index: number) => {
@@ -64,11 +65,11 @@ export const modalMotion = {
     scale: 0,
   },
   visible: {
-    borderRadius: 0,
+    borderRadius: "10px",
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.12,
+      duration: 0.5,
       type: "spring",
     },
   },
@@ -77,7 +78,7 @@ export const modalMotion = {
     opacity: 0,
     scale: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.5,
       type: "spring",
     },
   },
@@ -95,7 +96,6 @@ export const blogCardsMotions = (index: number) => {
         duration: 0.3,
         delay: index / 10 + 0.1,
         type: "tween",
-        ease: "linear",
       },
     },
     hover: {
@@ -104,6 +104,10 @@ export const blogCardsMotions = (index: number) => {
         ease: "linear",
         duration: 0.1,
       },
+    },
+    exit: {
+      opacity: 0,
+      y: -100,
     },
   };
 };

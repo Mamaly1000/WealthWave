@@ -8,6 +8,8 @@ import EditBlog from "./pages/EditBlog";
 import HomePage from "./pages/HomePage";
 import Layout from "./layout/Layout";
 import { AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const location = useLocation();
   const contextData = useContextFunction();
@@ -65,6 +67,18 @@ function App() {
           <Route path="/news/:id" element={"news single page"} />
         </Routes>
       </AnimatePresence>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Layout>
   );
 }

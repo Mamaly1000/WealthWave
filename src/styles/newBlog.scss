@@ -2,7 +2,7 @@
   @apply font-bold text-5xl capitalize text-blue-400 w-full text-center md:text-left;
 }
 .create-blog-page {
-  @apply px-5 py-24  flex flex-wrap justify-center items-center gap-5;
+  @apply px-5 py-24  flex flex-wrap justify-center items-center gap-5 overflow-hidden;
   .create-blog-form {
     @apply flex flex-wrap justify-center items-start gap-5;
     .blog-detail-container {
@@ -45,6 +45,40 @@
       }
       .form-cancel-btn {
         @apply text-white bg-gray-700 hover:bg-gray-800 shadow-gray-500 shadow-lg hover:shadow-none;
+      }
+    }
+  }
+  .blog-image-container {
+    @apply w-full h-fit relative flex items-center justify-center md:justify-start flex-row;
+    .tick-img {
+      @apply absolute end-[15%] md:end-[22%] top-[9px] max-w-[30px] max-h-[30px] bg-green-600 rounded-md cursor-pointer;
+    }
+    .preview-img {
+      @apply absolute end-[15%] md:end-[22%] top-[9px] max-w-[30px] max-h-[30px] bg-blue-600 p-1 rounded-md cursor-pointer;
+    }
+    .loader-container {
+      @apply max-w-[50px] max-h-[30px] absolute end-[15%] md:end-[22%] top-[9px];
+    }
+  }
+  .preview-modal {
+    .modal-content {
+      @apply flex flex-col items-center justify-center gap-5;
+      .modal-header {
+        button {
+          @apply max-w-[32px] max-h-[32px] min-w-[32px] min-h-[32px] p-1;
+        }
+      }
+      img {
+        @apply max-w-[400px] max-h-[300px];
+      }
+      .modal-actions {
+        @apply w-full flex flex-wrap flex-row justify-end items-center h-fit gap-2;
+        .submit-button {
+          @apply bg-red-50 max-w-[32px] min-h-[32px] max-h-[32px] p-1 min-w-[32px];
+        }
+        .reset-button {
+          @apply max-w-[37px] min-h-[37px] p-1 min-w-[37px] bg-yellow-500 shadow-yellow-500 rounded-lg;
+        }
       }
     }
   }

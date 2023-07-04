@@ -1,20 +1,22 @@
-import axios from "axios";
-
-export default async function ValidateAndDownloadImage(url: string) {
+import { toast } from "react-toastify";
+import { validateImage } from "image-validator";
+export default async function urlValidation(
+  url: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setImageSRC: React.Dispatch<React.SetStateAction<string>>
+) {
   try {
-    const response = await axios.head(url);
-    const contentType = response.headers["content-type"];
-    if (contentType && contentType.startsWith("image/")) {
-      // Image URL is valid, you can display it
+    setLoading(true);
+    const isValidImage = await validateImage(url);
+    if (isValidImage) {
       const image = new Image();
       image.src = url;
-      document.body.appendChild(image);
-    } else {
-      // URL does not point to an image
-      console.log("Invalid image URL");
+      setImageSRC(image.src);
+      toast.success("image added successfully !", { isLoading: false });
     }
   } catch (error) {
-    // Error occurred while fetching the URL
-    console.log("Error fetching image:", error);
+    toast.error("image added unsuccessfully !");
+  } finally {
+    setLoading(false);
   }
 }

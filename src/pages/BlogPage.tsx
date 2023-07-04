@@ -51,46 +51,34 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
         </div>
       </div>
       <form className="create-blog-form">
-        <div className="form-layout-md">
-          <div className="form-group">
-            <label htmlFor="floating_title" className="form-label">
-              title
-            </label>
-            <input
-              type="text"
-              name="floating_title"
-              id="floating_title"
-              className="form-input"
-              placeholder=""
-              required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="countries" className="form-label">
-              selectedTags
-            </label>
-            <ReactSelect
-              className="form-select"
-              isMulti
-              id="countries"
-              value={selectedTags.map((tag) => {
-                return { label: tag.label, value: tag.id };
-              })}
-              options={AllAvailableTags.map((tag) => {
-                return { label: tag.label, value: tag.id };
-              })}
-              onChange={(tags) => {
-                setselectedTags(
-                  tags.map((tag) => {
-                    return { label: tag.label, id: tag.value };
-                  })
-                );
-              }}
-            />
-          </div>
-        </div>
+        <input
+          type="text"
+          name="floating_title"
+          id="floating_title"
+          placeholder="Search ..."
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <ReactSelect
+          className="form-select"
+          isMulti
+          id="countries"
+          value={selectedTags.map((tag) => {
+            return { label: tag.label, value: tag.id };
+          })}
+          options={AllAvailableTags.map((tag) => {
+            return { label: tag.label, value: tag.id };
+          })}
+          onChange={(tags) => {
+            setselectedTags(
+              tags.map((tag) => {
+                return { label: tag.label, id: tag.value };
+              })
+            );
+          }}
+        />
       </form>
       <div className="blog-list-cards">
         {filteredNotes.length > 0 &&
@@ -103,6 +91,7 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
                 email={note!.email}
                 key={note!.id}
                 index={index}
+                published_date={note!.published_date}
               />
             );
           })}

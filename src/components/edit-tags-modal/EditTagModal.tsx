@@ -6,13 +6,7 @@ const EditTagModal = ({ tags, show, setShow }: ModalTagsProps) => {
   return (
     <AnimatePresence mode="wait">
       {show && (
-        <motion.div
-          variants={modalMotion}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="modal-container"
-        >
+        <motion.div className="modal-container">
           <motion.div
             variants={BlogTagsOverlay}
             initial="hidden"
@@ -20,7 +14,13 @@ const EditTagModal = ({ tags, show, setShow }: ModalTagsProps) => {
             className="modal-overlay"
             onClick={() => setShow(false)}
           ></motion.div>
-          <div className="modal-content">
+          <motion.div
+            variants={modalMotion}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="modal-content"
+          >
             <div className="modal-header">
               <h4>Tags List</h4>
               <button
@@ -50,7 +50,7 @@ const EditTagModal = ({ tags, show, setShow }: ModalTagsProps) => {
                 <SingleTag tag={tag} index={index} key={tag.id} />
               ))}
             </form>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

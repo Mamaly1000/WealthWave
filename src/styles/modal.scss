@@ -6,7 +6,7 @@
   @apply w-[100%] h-[100%] absolute top-0 left-0;
 }
 .modal-content {
-  @apply bg-white w-[50%] h-[500px] shadow-2xl z-[9] rounded-[14px] flex flex-col items-center justify-center px-12 py-5;
+  @apply w-[50%] h-[500px] bg-blue-950  relative bottom-20 shadow-2xl z-[9] rounded-[14px] flex flex-col items-center justify-center px-12 py-5;
 }
 .modal-header {
   @apply w-full h-fit p-4 flex justify-between items-center;
@@ -18,12 +18,13 @@
   }
 }
 .form-tags {
-  @apply w-full h-[70%] flex flex-col items-center justify-start overflow-scroll bg-gray-100  gap-2 py-5 rounded-[10px];
+  @apply w-full h-[75%]   items-center justify-start overflow-y-scroll overflow-x-hidden  gap-2 py-5 rounded-[10px];
 
   .form-group {
-    @apply w-full h-fit flex justify-between px-2;
+    @apply w-full h-fit flex justify-between items-center px-2;
     .delete-tag-btn {
-      @apply w-[40px] h-[40px] border-[1px] border-red-500 text-red-500 text-lg hover:scale-105 transition-transform rounded-[50%] p-2 flex justify-center items-center;
+      background: rgba(255 255 255/0.1);
+      @apply w-[40px] h-[40px] border-[1px] m-0 shadow-none border-red-500 text-red-500 text-lg hover:scale-105 transition-transform rounded-[50%] p-2 flex justify-center items-center;
     }
     .tag-label-input {
       @apply w-[90%] h-[100%] bg-gray-200 border-[1px] border-blue-300 outline-none rounded-[4px] px-2 focus:border-blue-700 transition-colors;

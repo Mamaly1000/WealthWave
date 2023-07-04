@@ -24,7 +24,6 @@ const SingleTag = ({ tag, index }: singleTagType) => {
           <input
             type="text"
             value={tag.label}
-            className="tag-label-input"
             onChange={(e) => contextData!.onUpdateTag(tag.id, e.target.value)}
           />
           <button
