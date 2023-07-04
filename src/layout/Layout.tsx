@@ -11,6 +11,7 @@ const Layout = ({ children }: any) => {
         background: "linear-gradient(to right, #000428, #004e92)",
         width: "100%",
         height: "100%",
+        overflow: "hidden",
       }}
     >
       <NavBar showSideBar={displaySideBar} setShowSideBar={setDisplaySideBar} />

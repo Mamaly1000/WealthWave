@@ -4,6 +4,13 @@ import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import dateIcon from "./../assets/blogs/dateIcon.svg";
 import authorIcon from "../assets/blogs/authorIcon.svg";
+import {
+  tagsMotions,
+  viewBlogActionButtons,
+} from "../motions/view_blog_motions";
+import { useEffect, useRef, useState } from "react";
+import defailtImage from "./../assets/blogs/online-message-blog-chat-communication-envelop-graphic-icon-concept_53876-139717.avif";
+import moment from "moment";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   const nav = useNavigate();
   const { id } = useParams();
@@ -13,64 +20,143 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   if (blog === null) {
     nav("/myBlogs");
   }
-
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
+  const blogImageRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    blogImageRef.current?.addEventListener("load", () => {
+      setImageLoading(true);
+    });
+  }, []);
   return (
     <motion.div
       variants={removingPageMotion}
       initial="hidden"
       animate="visible"
       exit="exit"
+      onAnimationComplete={() => setShow(true)}
       className="blogView-page"
     >
-      <div className="blogPage-header">
-        <div className="blogPage-title">
-          <h1>{blog?.title}</h1>
-          <div>
-            {blog?.tags.map((t) => {
-              return (
-                <span className="tag-badge" key={t.id}>
-                  {t.label}
-                </span>
-              );
-            })}
+      {show && (
+        <div className="blogPage-header">
+          <div className="blogPage-title">
+            <motion.h1
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.8, type: "tween" }}
+            >
+              {blog?.title}
+            </motion.h1>
+            <div>
+              {blog?.tags.map((t, index) => {
+                return (
+                  <motion.span
+                    variants={tagsMotions(index)}
+                    initial="hidden"
+                    animate="visible"
+                    className="tag-badge"
+                    key={t.id}
+                  >
+                    {t.label}
+                  </motion.span>
+                );
+              })}
+            </div>
+          </div>
+          <div className="blogPage-controls">
+            <motion.button
+              variants={viewBlogActionButtons(0.5)}
+              initial="hidden"
+              animate="visible"
+              onClick={() => nav(`/myBlogs/${blog?.id}/editBlog`)}
+              className="edit-blog-btn"
+            >
+              Edit
+            </motion.button>
+            <motion.button
+              variants={viewBlogActionButtons(0.7)}
+              initial="hidden"
+              animate="visible"
+              className="delete-blog-btn"
+              onClick={() => {
+                onDelete(blog!.id);
+                nav(-1);
+              }}
+            >
+              Delete
+            </motion.button>
+            <motion.button
+              variants={viewBlogActionButtons(0.9)}
+              initial="hidden"
+              animate="visible"
+              className="back-btn"
+              onClick={() => nav("/myBlogs")}
+            >
+              Back
+            </motion.button>
           </div>
         </div>
-        <div className="blogPage-controls">
-          <button
-            onClick={() => nav(`/myBlogs/${blog?.id}/editBlog`)}
-            className="edit-blog-btn"
-          >
-            Edit
-          </button>
-          <button
-            className="delete-blog-btn"
-            onClick={() => {
-              onDelete(blog!.id);
-              nav(-1);
+      )}
+      {show && (
+        <div className="author-data-container">
+          <motion.img
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
             }}
+            className="loading-animation"
+            transition={{ duration: 0.5, delay: 1, type: "tween" }}
+            src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"
+          />
+          <div>
+            <motion.span
+              variants={viewBlogActionButtons(0.5)}
+              initial="hidden"
+              animate="visible"
+              className="author-email"
+            >
+              {blog?.email} <img src={authorIcon} alt="author" />
+            </motion.span>
+            <motion.span
+              variants={viewBlogActionButtons(0.7)}
+              initial="hidden"
+              animate="visible"
+              className="blog-published-date"
+            >
+              {moment(blog?.published_date).format("YYYY-MM-DD HH:MM")}{" "}
+              <img src={dateIcon} alt="date icon" />
+            </motion.span>
+          </div>
+        </div>
+      )}
+      {show && (
+        <div className="blog-description-container">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1, type: "spring" }}
+            className="blogpage-body"
           >
-            Delete
-          </button>
-          <button className="back-btn" onClick={() => nav("/myBlogs")}>
-            Back
-          </button>
+            {blog?.body}
+          </motion.div>
+          <div
+            className={`blog-image ${!imageLoading ? "loading-animation" : ""}`}
+          >
+            <motion.img
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: imageLoading ? 1 : 0,
+                scale: imageLoading ? 1 : 0,
+              }}
+              transition={{ duration: 0.5, delay: 1, type: "tween" }}
+              ref={blogImageRef}
+              src={blog?.img}
+              alt="blog-image"
+            />
+          </div>
         </div>
-      </div>
-      <div className="author-data-container">
-        <img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
-        <div>
-          <span className="author-email">
-            {blog?.email} <img src={authorIcon} alt="author" />
-          </span>
-          <span className="blog-published-date">
-            2023/12/02 <img src={dateIcon} alt="date icon" />
-          </span>
-        </div>
-      </div>
-      <div className="blog-description-container">
-        <div className="blogpage-body">{blog?.body}</div>
-        <img src={blog?.img} alt="blog-image" className="blog-image" />
-      </div>
+      )}
     </motion.div>
   );
 };

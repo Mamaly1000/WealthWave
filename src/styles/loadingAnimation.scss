@@ -1,0 +1,20 @@
+.loading-animation {
+  background: linear-gradient(
+    141deg,
+    rgba(134, 134, 134, 0.4599089635854342) 45%,
+    rgba(255, 255, 255, 0.44030112044817926) 49%,
+    rgba(255, 255, 255, 0.4234943977591037) 52%,
+    rgba(134, 134, 134, 0.468312324929972) 56%
+  );
+  background-size: 400% 400%;
+  background-position: 0 50%;
+  animation: skeletonAnimation 3s linear infinite;
+}
+@keyframes skeletonAnimation {
+  from {
+    background-position: 0 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
