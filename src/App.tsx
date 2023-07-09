@@ -10,62 +10,69 @@ import Layout from "./layout/Layout";
 import { AnimatePresence } from "framer-motion";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Crypto_page from "./pages/Crypto_page";
+import View_Crypto from "./pages/View_Crypto";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 function App() {
   const location = useLocation();
   const contextData = useContextFunction();
   return (
     <Layout>
       <AnimatePresence mode="wait">
-        <Routes location={location} key={location.key}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<Navigate to={"/"} />} />
+        <QueryClientProvider client={new QueryClient()}>
+          <Routes location={location} key={location.key}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<Navigate to={"/"} />} />
 
-          <Route path="/crypto" element={"crypto main page"} />
-          <Route path="/crypto/:id" element={"crypto info"} />
+            <Route path="/crypto" element={<Crypto_page />} />
+            <Route path="/crypto/:id" element={<View_Crypto />} />
 
-          <Route
-            path="/myBlogs"
-            element={
-              <BlogPage
-                AllAvailableTags={contextData!.tags}
-                notes={contextData!.notesWithTags}
-              />
-            }
-          />
-          <Route
-            path="/myBlogs/:id"
-            element={
-              <BlogViewPage
-                notes={contextData!.notesWithTags}
-                onDelete={contextData!.onDelete}
-              />
-            }
-          />
-          <Route
-            path="/myBlogs/new"
-            element={
-              <NewBlog
-                onSubmit={contextData!.onCreateNote}
-                onAddTag={contextData!.onAddTag}
-                AllAvailableTags={contextData!.tags}
-              />
-            }
-          />
-          <Route
-            path="/myBlogs/:id/editBlog"
-            element={
-              <EditBlog
-                onSubmit={contextData!.onUpdate}
-                onAddTag={contextData!.onAddTag}
-                AllAvailableTags={contextData!.tags}
-                notes={contextData!.notesWithTags}
-              />
-            }
-          />
+            <Route
+              path="/myBlogs"
+              element={
+                <BlogPage
+                  AllAvailableTags={contextData!.tags}
+                  notes={contextData!.notesWithTags}
+                />
+              }
+            />
+            <Route
+              path="/myBlogs/:id"
+              element={
+                <BlogViewPage
+                  notes={contextData!.notesWithTags}
+                  onDelete={contextData!.onDelete}
+                />
+              }
+            />
+            <Route
+              path="/myBlogs/new"
+              element={
+                <NewBlog
+                  onSubmit={contextData!.onCreateNote}
+                  onAddTag={contextData!.onAddTag}
+                  AllAvailableTags={contextData!.tags}
+                />
+              }
+            />
+            <Route
+              path="/myBlogs/:id/editBlog"
+              element={
+                <EditBlog
+                  onSubmit={contextData!.onUpdate}
+                  onAddTag={contextData!.onAddTag}
+                  AllAvailableTags={contextData!.tags}
+                  notes={contextData!.notesWithTags}
+                />
+              }
+            />
 
-          <Route path="/news" element={"news main page"} />
-          <Route path="/news/:id" element={"news single page"} />
-        </Routes>
+            <Route path="/news" element={"news main page"} />
+            <Route path="/news/:id" element={"news single page"} />
+          </Routes>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right"  />
+        </QueryClientProvider>
       </AnimatePresence>
       <ToastContainer
         position="top-right"

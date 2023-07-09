@@ -31,7 +31,7 @@ export const BlogTagsOverlay = {
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.1, type: "tween" },
+    transition: { duration: 0.5, type: "tween" },
   },
 };
 export const BlogTagsInputs = (index: number) => {
@@ -79,7 +79,7 @@ export const modalMotion = {
     opacity: 0,
     scale: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.7,
       type: "spring",
     },
   },
@@ -172,6 +172,32 @@ export const commentsMotion = (index: number) => {
       transition: {
         duration: 0.13,
         delay: index / 10 + 0.1,
+        type: "tween",
+      },
+    },
+  };
+};
+export const cryptoRowMotion = (index: number) => {
+  return {
+    hidden: {
+      opacity: 0,
+      x: 100,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        delay: index / 10 + 0.1,
+        type: "spring",
+      },
+    },
+    exit: {
+      opacity: 0,
+      x: 200,
+      transition: {
+        duration: 1,
+        delay: 1,
         type: "tween",
       },
     },

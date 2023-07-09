@@ -24,6 +24,7 @@ export default {
       displayComponent: "hoverAnimation .23s linear 1 alternate ",
       sideBar: "displaySideBar .23s ease 1",
       liking: "liking .5s cubic-bezier(0.5, 1.5, 0.4, 1.4) 1 alternate",
+      bg_loading_animation: "bg_animation 3s linear infinite",
     },
     aria: {
       checked: 'checked="true"',
@@ -655,6 +656,14 @@ export default {
         "100%": {
           opacity: 0,
           scale: 0.5,
+        },
+      },
+      bg_animation: {
+        "0%": {
+          backgroundPosition: " 0 50%",
+        },
+        "100%": {
+          backgroundPosition: " 100% 50%",
         },
       },
     },

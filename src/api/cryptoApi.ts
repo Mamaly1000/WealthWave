@@ -16,7 +16,8 @@ export const AllCoinList = async () => {
 export const SingleCoinData = async (name: string) => {
   try {
     const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${name}`
+      `https://api.coingecko.com/api/v3/coins/${name}?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true
+      `
     );
     if (response.status === 200) {
       console.log(response.data);
@@ -26,23 +27,7 @@ export const SingleCoinData = async (name: string) => {
     console.log(error);
   }
 };
-export const CoinChart = async (
-  name: string,
-  currency: string,
-  day: string
-) => {
-  try {
-    const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=${currency}&days=${day}`
-    );
-    if (response.status === 200) {
-      console.log(response.data);
-      return response.data;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 export const TrendCoins = async () => {
   try {
     const response = await axios.get(

@@ -9,7 +9,8 @@ import "swiper/css/navigation";
 import { BrowserRouter } from "react-router-dom";
 import AppContextComponent from "./context/AppContext.js";
 import { registerSW } from "virtual:pwa-register";
-
+import { Provider } from "react-redux";
+import store from "./features/store/store.js";
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("/sw.js");
@@ -29,9 +30,11 @@ const updateSW = registerSW({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AppContextComponent>
-        <App />
-      </AppContextComponent>
+      <Provider store={store}>
+        <AppContextComponent>
+          <App />
+        </AppContextComponent>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import ReactSelect from "react-select";
 import { BlogListProps, TAG } from "../types/noteTypes";
-import BlogCard from "../components/BlogCard";
+import BlogCard from "../components/blog-car-component/BlogCard";
 import { useNavigate } from "react-router-dom";
 import EditTagModal from "../components/edit-tags-modal/EditTagModal";
 import { motion } from "framer-motion";

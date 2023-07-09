@@ -8,8 +8,9 @@ import ContactUs from "../components/contact-us/ContactUs";
 import Comments from "../components/comments-section/Comments";
 import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
-
-const HomePage = () => {
+import { FC } from "react";
+import globeSVG from "./../assets/globe.svg";
+const HomePage: FC<any> = () => {
   return (
     <motion.div
       variants={removingPageMotion}
@@ -23,6 +24,7 @@ const HomePage = () => {
         initial={{ transform: "translateY(-100px)" }}
         animate={{ transform: "translateY(0px)" }}
         className="HomePage-intro-section"
+        style={{ backgroundImage: `url(${globeSVG})`,backgroundBlendMode:"darken" }}
       >
         <HomePageIntro />
         <CubeSlider />

@@ -9,8 +9,15 @@ type imgPreviewPropTypes = {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   src: string;
   setSRC: React.Dispatch<React.SetStateAction<string>>;
+  setImageSRCurl: React.Dispatch<React.SetStateAction<string>>;
 };
-const ImagePreview = ({ show, setShow, src, setSRC }: imgPreviewPropTypes) => {
+const ImagePreview = ({
+  show,
+  setShow,
+  src,
+  setSRC,
+  setImageSRCurl,
+}: imgPreviewPropTypes) => {
   return (
     <AnimatePresence mode="wait">
       {show && (
@@ -49,6 +56,7 @@ const ImagePreview = ({ show, setShow, src, setSRC }: imgPreviewPropTypes) => {
                   alt="reset"
                   onClick={() => {
                     setSRC("");
+                    setImageSRCurl("");
                     setShow(false);
                     toast.warn("image removed !");
                   }}

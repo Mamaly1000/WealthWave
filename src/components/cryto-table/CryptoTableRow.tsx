@@ -1,27 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import useCrypto from "../../hooks/useCrypto";
 import Loader from "../loader/Loader";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import CryptoRow from "./cryptoRow";
 import { componentViewMotion } from "../../motions/motions";
+import { fetchCoins } from "../../features/crypto_slice/crypto_slice";
+import { useDispatch } from "react-redux";
 
 const CryptoTableRow = () => {
   const nav = useNavigate();
-  const { getAllcoins, cryptoList, loading } = useCrypto();
-  const [showComponent, setShowComponent] = useState(false);
-  const { scrollYProgress } = useScroll();
+  const { cryptosList, cryptoSelector, setLoacalCryptoList, LocalCryptoList } =
+    useCrypto();
+  const dispatch = useDispatch();
   useEffect(() => {
-    // if (scrollYProgress.get() <= 0) {
-    //   setShowComponent(true);
-    // } else {
-    //   setShowComponent(false);
-    // }
-    console.log(scrollYProgress.get());
-  }, [scrollYProgress]);
-  useEffect(() => {
-    getAllcoins();
-  }, []);
+    if (cryptosList.data) {
+      setLoacalCryptoList(cryptosList.data.data);
+      dispatch(fetchCoins(cryptosList.data.data));
+    }
+    if (cryptosList.isError) {
+      dispatch(fetchCoins(LocalCryptoList));
+    }
+  }, [cryptosList]);
 
   return (
     <motion.div
@@ -56,9 +56,9 @@ const CryptoTableRow = () => {
             })}
           </tr>
         </thead>
-        {!loading ? (
+        {!cryptosList.isLoading ? (
           <tbody>
-            {cryptoList.slice(0, 10).map((coin, index) => {
+            {cryptoSelector.coinlist.slice(0, 10).map((coin, index) => {
               return <CryptoRow coin={coin} key={index} index={index} />;
             })}
           </tbody>

@@ -18,10 +18,11 @@ const EditBlog = ({
   AllAvailableTags,
 }: EditNoteFormProps) => {
   const { id } = useParams();
+  const blog = notes.find((note) => note.id === id);
+  const [imageSRCurl, setImageSRCurl] = useState<string>("");
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [imageSRC, setImageSRC] = useState<string>("");
   const [preview, setImagePreview] = useState<boolean>(false);
-  const blog = notes.find((note) => note.id === id);
   const titleRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -54,16 +55,8 @@ const EditBlog = ({
     }
   };
   useEffect(() => {
-    if (imageRef.current!.value.length === 0) {
-      setImageSRC("");
-    }
-    if (imageSRC.length === 0) {
-      imageRef.current!.value = "";
-    }
-    if (blog!.img.length > 0 && imageSRC.length === 0) {
-      imageRef.current!.value = blog!.img;
-    }
-  }, [imageRef, imageSRC, blog]);
+    setImageSRCurl(blog!.img);
+  }, []);
 
   return (
     <motion.div
@@ -111,8 +104,7 @@ const EditBlog = ({
               id="floating_title"
               placeholder="image url"
               ref={imageRef}
-              value={blog?.img}
-              defaultValue={blog?.img}
+              defaultValue={imageSRCurl}
             />
             <AnimatePresence>
               {!imgLoading && imageSRC.length === 0 && (
@@ -227,6 +219,7 @@ const EditBlog = ({
         show={preview}
         src={imageSRC}
         setSRC={setImageSRC}
+        setImageSRCurl={setImageSRCurl}
       />
     </motion.div>
   );

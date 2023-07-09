@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 type tableRowType = {
   coin: IcryptoData;
   index: number;
@@ -8,6 +9,7 @@ type tableRowType = {
 const CryptoRow = ({ coin, index }: tableRowType) => {
   const [clicked, setClicked] = useState<boolean>(false);
   const { popCrypto } = useCrypto();
+  const nav = useNavigate();
   const tableRowsAnimation = {
     hidden: {
       opacity: 0,
@@ -72,7 +74,7 @@ const CryptoRow = ({ coin, index }: tableRowType) => {
       whileInView="visible"
       whileHover="hover"
       viewport={{ once: true }}
-      onClick={() => setClicked(true)}
+      onClick={() => nav(`/crypto/${coin!.id}`)}
     >
       <td className="td-rate">{coin!.market_cap_rank}</td>
       <td className="td-icon">

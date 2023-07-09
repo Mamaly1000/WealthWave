@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { BlogComponentProps } from "../types/noteTypes";
+import { BlogComponentProps } from "../../types/noteTypes";
 import { AnimatePresence, motion } from "framer-motion";
-import { blogCardsMotions } from "../motions/motions";
+import { blogCardsMotions } from "../../motions/motions";
 const BlogCard = ({ id, title, tags, index }: BlogComponentProps) => {
   const nav = useNavigate();
   return (

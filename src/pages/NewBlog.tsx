@@ -18,7 +18,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-  const imageRef = useRef<HTMLInputElement>(null);
+  const [imageSRCurl, setImageSRCurl] = useState<string>("");
   const [selectedTags, setselectedTags] = useState<TAG[]>([]);
   const nav = useNavigate();
   const submitHnadler = (e: FormEvent) => {
@@ -28,7 +28,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
       toast.warn("title input can not be empty!");
     } else if (emailRef.current!.value.length === 0) {
       toast.warn("email input can not be empty!");
-    } else if (imageRef.current!.value.length === 0) {
+    } else if (imageSRCurl.length === 0) {
       toast.warn("image input can not be empty!");
     } else if (imageSRC.length === 0) {
       toast.warn("please submit your blog picture");
@@ -39,7 +39,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
         title: titleRef.current!.value,
         email: emailRef.current!.value,
         body: textAreaRef.current!.value,
-        img: imageRef.current!.value,
+        img: imageSRCurl,
         tags: selectedTags,
         id: uuidV4(),
         published_date: new Date(),
@@ -48,13 +48,10 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
     }
   };
   useEffect(() => {
-    if (imageRef.current!.value.length === 0) {
+    if (imageSRCurl.length === 0) {
       setImageSRC("");
     }
-    if (imageSRC.length === 0) {
-      imageRef.current!.value = "";
-    }
-  }, [imageRef, imageSRC]);
+  }, [imageSRCurl, imageSRC]);
 
   return (
     <motion.div
@@ -99,7 +96,8 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
               name="floating_title"
               id="floating_title"
               placeholder="image url"
-              ref={imageRef}
+              value={imageSRCurl}
+              onChange={(e) => setImageSRCurl(e.target.value)}
             />
             <AnimatePresence>
               {!imgLoading && imageSRC.length === 0 && (
@@ -115,12 +113,8 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
                   alt="tick"
                   className="tick-img"
                   onClick={() => {
-                    if (imageRef.current!.value.length !== 0) {
-                      urlValidation(
-                        imageRef.current!.value,
-                        setImgLoading,
-                        setImageSRC
-                      );
+                    if (imageSRCurl.length !== 0) {
+                      urlValidation(imageSRCurl, setImgLoading, setImageSRC);
                     } else {
                       toast.error("input is empty");
                     }
@@ -130,7 +124,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
             </AnimatePresence>
             <AnimatePresence>{imgLoading && <Loader />}</AnimatePresence>
             <AnimatePresence>
-              {imageSRC.length > 0 && imageRef.current!.value.length !== 0 && (
+              {imageSRC.length > 0 && imageSRCurl.length !== 0 && (
                 <motion.img
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -211,6 +205,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
         show={preview}
         src={imageSRC}
         setSRC={setImageSRC}
+        setImageSRCurl={setImageSRCurl}
       />
     </motion.div>
   );

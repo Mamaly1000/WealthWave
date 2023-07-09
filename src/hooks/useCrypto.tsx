@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import {
-  AllCoinList,
-  CoinChart,
-  SingleCoinData,
-  TrendCoins,
-} from "../api/cryptoApi";
+import { useEffect, useState } from "react";
+import { SingleCoinData, TrendCoins } from "../api/cryptoApi";
 import axios from "axios";
 import useLocalStorage from "./useLocalStorage";
-
+import { useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCoins,
+  selectCrypto,
+} from "../features/crypto_slice/crypto_slice";
+import { toast } from "react-toastify";
 export interface IcryptoData {
   ath: number;
   ath_change_percentage: number;
@@ -37,42 +38,52 @@ export interface IcryptoData {
   total_supply: number;
   total_volume: number;
 }
-
+export interface IcryptoChart {
+  id: string | number;
+  data: [number, number][];
+}
 const useCrypto = () => {
-  const [trendCurrencies, setTrendCurrencies] = useState<unknown[]>([]);
-  const [cryptoList, setCryptoList] = useState<IcryptoData[]>([]);
+  const cryptoSelector = useSelector(selectCrypto);
+
+  const dispatch = useDispatch();
+  const cryptosList = useQuery(
+    "crypto_list",
+    () => {
+      return axios.get(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=400&page=1&sparkline=false&locale=en`
+      );
+    },
+    {
+      // cacheTime: 100000,
+      // staleTime: 0,
+      // refetchOnWindowFocus: true,
+      // refetchOnMount: true,
+      // refetchInterval: 100000,
+      // enabled: true,
+      // onSuccess: () => {
+      //   toast.success("data refreshed");
+      // },
+      // onError: () => {
+      //   toast.error("unable to refresh the data");
+      // },
+    }
+  );
+
   const [loading, setLoading] = useState<boolean>(false);
-  const [singleCoinData, setSingleCoinData] = useState({});
   const [chartData, setChartData] = useState<unknown[]>([]);
   const [LocalCryptoList, setLoacalCryptoList] = useLocalStorage<IcryptoData[]>(
     "cryptoList",
     []
   );
-  const getAllcoins = async (): Promise<void> => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=400&page=1&sparkline=false&locale=en`
-      );
-      console.log(response);
-      if (response.status === 200) {
-        setCryptoList(response.data);
-        setLoacalCryptoList(response.data);
-        setLoading(false);
-      }
-      if (response.status === 429) {
-        setCryptoList(LocalCryptoList);
-        setLoading(false);
-      }
-    } catch (error) {
-      setCryptoList(LocalCryptoList);
-      setLoading(false);
-    }
-  };
+  const [LocalChartsData, setLocalChartsData] = useLocalStorage<IcryptoChart[]>(
+    "charts",
+    []
+  );
+
   const getTrendCoins = async (): Promise<void> => {
     try {
       setLoading(true);
-      setTrendCurrencies(await TrendCoins());
+      // setTrendCurrencies(await TrendCoins());
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -82,49 +93,55 @@ const useCrypto = () => {
   const getSingleCoinData = async (name: string): Promise<void> => {
     try {
       setLoading(true);
-      setSingleCoinData(await SingleCoinData(name));
-      setLoading(false);
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${name}?tickers=false&market_data=true&community_data=true&developer_data=true&sparkline=false
+        `
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+      }
     } catch (error) {
       console.log(error);
+    } finally {
       setLoading(false);
     }
   };
-  const getChartData = async (
-    name: string,
-    currency: string,
-    day: string
-  ): Promise<void> => {
+  const getChartData = async (name: string): Promise<void> => {
     try {
       setLoading(true);
-      setChartData(await CoinChart(name, currency, day));
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=max`
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        if (LocalChartsData.findIndex((chart) => chart.id === name) < 0) {
+          setLocalChartsData([
+            ...LocalChartsData,
+            {
+              id: name,
+              data: response.data.prices,
+            },
+          ]);
+        }
+      }
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
-  const popCrypto = (id: string) => {
-    if (cryptoList.length > 0) {
-      const newArray = cryptoList.filter((c) => c.id !== id);
-      setCryptoList(newArray);
-      console.log("removed item:" + id, "array list:" + newArray);
-      console.log(newArray);
-    } else {
-      console.log("nothing here");
-    }
-  };
+
   return {
-    getAllcoins,
     getTrendCoins,
     getSingleCoinData,
     getChartData,
-    trendCurrencies,
-    cryptoList,
     loading,
-    singleCoinData,
+    setChartData,
     chartData,
-    setCryptoList,
-    popCrypto,
+    cryptosList,
+    setLoacalCryptoList,
+    LocalCryptoList,
+    cryptoSelector,
   };
 };
 
