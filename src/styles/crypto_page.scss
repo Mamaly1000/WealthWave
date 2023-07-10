@@ -88,7 +88,7 @@
         @apply py-2 px-3 h-[60px] max-h-[60px] text-[.9rem] flex items-center;
       }
       .rank-td {
-        @apply min-w-[75px] w-[75px] max-w-[75px] text-right flex items-center justify-between;
+        @apply min-w-[100px] w-[100px] max-w-[100px] text-right flex items-center justify-end gap-3;
         button {
           @apply w-[30px] h-[30px] p-2 rounded-md shadow-blue-400 shadow-md hover:shadow-none;
         }
@@ -123,6 +123,34 @@
       .chart-td {
         @apply min-w-[150px] w-[150px] max-w-[150px];
       }
+    }
+  }
+  .pagination-container {
+    @apply w-full   h-fit;
+    .crypto-pagination {
+      @apply flex justify-center items-center gap-5 py-3;
+      li {
+        background: rgba(0 0 0 /0.2);
+        @apply overflow-hidden w-fit h-fit flex items-center justify-center  p-0 rounded-md text-white hover:bg-blue-900 hover:scale-110 transition-all;
+        .crypto-pagination-links {
+          @apply min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] p-3;
+        }
+      }
+      .crypto-pagination-nav {
+        @apply min-w-fit min-h-fit p-0;
+        a {
+          @apply w-full h-full p-3;
+        }
+      }
+      .crypto-pagination-breaks {
+        @apply w-[50px] h-[50px] p-0;
+        a {
+          @apply w-full h-full p-3;
+        }
+      }
+    }
+    .activeClassName {
+      @apply bg-blue-900;
     }
   }
   .green {

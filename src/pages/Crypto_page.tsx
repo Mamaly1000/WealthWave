@@ -5,7 +5,7 @@ import {
   nftCardsMotion,
   removingPageMotion,
 } from "../motions/motions";
-import { CryptoTable } from "../components/cryto-table/CryptoChart";
+import { CryptoTable, data } from "../components/cryto-table/CryptoChart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper";
 import useCrypto from "../hooks/useCrypto";
@@ -16,6 +16,8 @@ import FilterCryptoModal from "../components/cryto-table/FilterCryptoModal";
 import saveIcon from "../assets/crypto/save.svg";
 import { useDispatch } from "react-redux";
 import { fetchCoins } from "../features/crypto_slice/crypto_slice";
+import ReactPaginate from "react-paginate";
+import { toast } from "react-toastify";
 const Crypto_page = () => {
   const dispatch = useDispatch();
   const { cryptosList, setLoacalCryptoList, LocalCryptoList, cryptoSelector } =
@@ -23,6 +25,13 @@ const Crypto_page = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [displayFilterModal, setDisplayFilterModal] = useState<boolean>(false);
   const nav = useNavigate();
+  const [itemOffset, setItemOffset] = useState(0);
+  const pageCount = Math.ceil(cryptoSelector.coinlist.length / 10);
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * 10) % cryptoSelector.coinlist.length;
+    setItemOffset(newOffset);
+    window.scroll({ top: 100 });
+  };
 
   useEffect(() => {
     if (cryptosList.data) {
@@ -32,7 +41,6 @@ const Crypto_page = () => {
     if (cryptosList.isError) {
       dispatch(fetchCoins(LocalCryptoList));
     }
-    console.log(cryptosList.isFetching, cryptosList.isLoading);
   }, [cryptosList]);
   return (
     <motion.div
@@ -166,71 +174,73 @@ const Crypto_page = () => {
           </thead>
           <motion.tbody>
             {!cryptosList.isLoading || !cryptosList.isFetching
-              ? cryptoSelector.coinlist.slice(0, 10).map((coin, index) => {
-                  return (
-                    <motion.tr
-                      variants={cryptoRowMotion(index)}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      key={index}
-                      onClick={() => nav(`/crypto/${coin!.id}`)}
-                    >
-                      <td className="rank-td">
-                        <button>
-                          <img src={saveIcon} alt="save" />
-                        </button>
-                        {coin.market_cap_rank}
-                      </td>
-                      <td className="coin-td">
-                        <img src={coin!.image} alt={coin.id} />
-                        {coin.id}
-                        <span>{coin.symbol}</span>
-                      </td>
-                      <td className="price-td">${coin.current_price}</td>
-                      <td
-                        className={`low-td ${
-                          +coin.low_24h > +coin.high_24h
-                            ? "green-text"
-                            : "red-text"
-                        }`}
+              ? cryptoSelector.coinlist
+                  .slice(itemOffset, itemOffset + 10)
+                  .map((coin, index) => {
+                    return (
+                      <motion.tr
+                        variants={cryptoRowMotion(index)}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        key={index}
+                        onClick={() => nav(`/crypto/${coin!.id}`)}
                       >
-                        ${coin.low_24h}
-                      </td>
-                      <td
-                        className={`high-td ${
-                          +coin.high_24h > +coin.low_24h
-                            ? "green-text"
-                            : "red-text"
-                        }`}
-                      >
-                        ${coin.high_24h}
-                      </td>
-                      <td
-                        className={`percentage-td ${
-                          +coin.price_change_percentage_24h > 0
-                            ? "green-text"
-                            : "red-text"
-                        }`}
-                      >
-                        {coin.price_change_percentage_24h}%
-                      </td>
-                      <td className="volume-td">{coin.total_volume}$</td>
-                      <td
-                        className={`market-cap-td ${
-                          +coin.market_cap_change_24h > 0
-                            ? "green-text"
-                            : "red-text"
-                        }`}
-                      >
-                        {coin.market_cap_change_24h}$
-                      </td>
-                      <td className="chart-td">
-                        <CryptoTable width={"130px"} height={"100%"} />
-                      </td>
-                    </motion.tr>
-                  );
-                })
+                        <td className="rank-td">
+                          <button>
+                            <img src={saveIcon} alt="save" />
+                          </button>
+                          {coin.market_cap_rank}
+                        </td>
+                        <td className="coin-td">
+                          <img src={coin!.image} alt={coin.id} />
+                          {coin.id}
+                          <span>{coin.symbol}</span>
+                        </td>
+                        <td className="price-td">${coin.current_price}</td>
+                        <td
+                          className={`low-td ${
+                            +coin.low_24h > +coin.high_24h
+                              ? "green-text"
+                              : "red-text"
+                          }`}
+                        >
+                          ${coin.low_24h}
+                        </td>
+                        <td
+                          className={`high-td ${
+                            +coin.high_24h > +coin.low_24h
+                              ? "green-text"
+                              : "red-text"
+                          }`}
+                        >
+                          ${coin.high_24h}
+                        </td>
+                        <td
+                          className={`percentage-td ${
+                            +coin.price_change_percentage_24h > 0
+                              ? "green-text"
+                              : "red-text"
+                          }`}
+                        >
+                          {coin.price_change_percentage_24h}%
+                        </td>
+                        <td className="volume-td">{coin.total_volume}$</td>
+                        <td
+                          className={`market-cap-td ${
+                            +coin.market_cap_change_24h > 0
+                              ? "green-text"
+                              : "red-text"
+                          }`}
+                        >
+                          {coin.market_cap_change_24h}$
+                        </td>
+                        <td className="chart-td">
+                          <CryptoTable width={"130px"} height={"100%"} />
+                        </td>
+                      </motion.tr>
+                    );
+                  })
               : "123456".split("").map((c, index) => {
                   return (
                     <motion.tr
@@ -245,6 +255,32 @@ const Crypto_page = () => {
                 })}
           </motion.tbody>
         </motion.table>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, type: "tween" }}
+        className="pagination-container"
+      >
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="Previous"
+          renderOnZeroPageCount={null}
+          containerClassName="crypto-pagination"
+          pageLinkClassName="crypto-pagination-links"
+          activeLinkClassName="activeClassName"
+          onPageActive={() => {
+            window.scroll({ top: 100 });
+            toast.success("you are already at this page");
+          }}
+          nextClassName="crypto-pagination-nav"
+          previousClassName="crypto-pagination-nav"
+          breakClassName="crypto-pagination-breaks"
+        />
       </motion.div>
       <FilterCryptoModal
         show={displayFilterModal}

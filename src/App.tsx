@@ -71,7 +71,7 @@ function App() {
             <Route path="/news" element={"news main page"} />
             <Route path="/news/:id" element={"news single page"} />
           </Routes>
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right"  />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>
       </AnimatePresence>
       <ToastContainer
