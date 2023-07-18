@@ -6,6 +6,7 @@ export const removingPageMotion = {
     x: 0,
     transition: {
       duration: 0.5,
+      delay: 0,
       type: "tween",
       when: "beforeChidlren",
     },
@@ -181,15 +182,15 @@ export const cryptoRowMotion = (index: number) => {
   return {
     hidden: {
       opacity: 0,
-      x: 100,
+      x: 200,
     },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.5,
-        delay: index / 10 + 0.1,
-        type: "spring",
+        duration: 0.6,
+        delay: index / 10 + 0.5,
+        type: "tween",
       },
     },
     exit: {

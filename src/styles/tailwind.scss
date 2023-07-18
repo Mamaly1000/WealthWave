@@ -26,6 +26,7 @@
 @import "./loadingAnimation.scss";
 @import "./edit-blog.scss";
 @import "./crypto_page.scss";
+@import "./viewCrypto.scss";
 * {
   box-sizing: border-box;
   @apply p-0 m-0;
@@ -35,4 +36,3 @@
   max-width: 100% !important;
   @apply p-0 m-0 min-w-[100%] max-w-[100%] overflow-visible;
 }
-

@@ -1,0 +1,91 @@
+.view-crypto-page {
+  @apply min-h-[600px] text-white px-5 py-24;
+  .top-section {
+    @apply flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full min-h-[300px] max-h-fit;
+  }
+  .crypto-overAll {
+    @apply w-full md:w-[45%] min-h-fit flex flex-col gap-10;
+    .top-overall-container {
+      @apply flex flex-col items-center justify-start gap-2 w-full max-h-[180px] text-white;
+      .rank-container {
+        @apply w-full h-fit flex justify-start items-center;
+        .rank {
+          @apply text-[.8rem] py-1 px-2 rounded-md font-bold bg-blue-700;
+        }
+      }
+      .crypto-name {
+        @apply w-full h-fit flex items-center gap-2;
+        img {
+          @apply w-[40px] h-[40px] bg-red-50 rounded-full;
+        }
+        .bold {
+          @apply font-bold capitalize;
+        }
+        .light {
+          @apply font-light uppercase text-gray-200;
+        }
+      }
+      .crypto-price-percentage {
+        @apply w-full h-fit flex items-center justify-start gap-2;
+        .bold {
+          @apply text-[2rem] font-bold;
+        }
+        .percentage {
+          @apply cursor-default flex items-center gap-1 text-[1.2rem] font-semibold;
+          img {
+            @apply w-[25px] h-[25px];
+          }
+        }
+        .info {
+          @apply w-[20px] h-[20px] cursor-pointer hover:scale-110 transition-all;
+        }
+      }
+      .crypto-price-per-btc {
+        @apply w-full flex items-center justify-start gap-2 text-[.9rem];
+        .crypto-price-btc {
+          @apply text-gray-200 whitespace-nowrap;
+        }
+        .crypto-percent-btc {
+          @apply flex items-center justify-start gap-1;
+          img {
+            @apply w-[15px] h-[15px];
+          }
+        }
+      }
+      .crypto-actions-container {
+        @apply w-full h-[30px] flex justify-start items-center gap-2;
+        .btn-container {
+          @apply flex h-full justify-start items-center gap-1;
+          button {
+            @apply w-[40px] h-[40px] p-3;
+          }
+        }
+        .wish-List {
+          @apply flex items-center justify-start gap-1 w-fit py-1 px-2 rounded-md text-[.75rem] text-white bg-blue-700;
+          img {
+            @apply w-[15px] h-[15px];
+          }
+        }
+      }
+    }
+    .crypto-data-list {
+      @apply w-full h-fit pt-5;
+      .list-item {
+        border-bottom: 1px solid rgba(255 255 255/0.2);
+        @apply w-full max-h-[40px] min-h-[40px] flex justify-between items-center;
+        .title {
+          @apply w-fit h-full flex items-center justify-start gap-1 font-light text-[1rem] text-gray-200;
+          img {
+            @apply w-[20px] h-[20px] hover:scale-110 transition-all;
+          }
+        }
+        .value {
+          @apply text-[1rem] text-white;
+        }
+      }
+    }
+  }
+  .extra-detail {
+    @apply w-full md:w-[45%] min-h-full bg-green-500;
+  }
+}

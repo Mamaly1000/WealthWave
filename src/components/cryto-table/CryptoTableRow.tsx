@@ -13,15 +13,23 @@ const CryptoTableRow = () => {
   const { cryptosList, cryptoSelector, setLoacalCryptoList, LocalCryptoList } =
     useCrypto();
   const dispatch = useDispatch();
+  const currentCryptoData = cryptosList(
+    () => {},
+    () => {},
+    true,
+    false,
+    false,
+    50000
+  );
   useEffect(() => {
-    if (cryptosList.data) {
-      setLoacalCryptoList(cryptosList.data.data);
-      dispatch(fetchCoins(cryptosList.data.data));
+    if (currentCryptoData.data) {
+      setLoacalCryptoList(currentCryptoData.data.data);
+      dispatch(fetchCoins(currentCryptoData.data.data));
     }
-    if (cryptosList.isError) {
+    if (currentCryptoData.isError) {
       dispatch(fetchCoins(LocalCryptoList));
     }
-  }, [cryptosList]);
+  }, [currentCryptoData]);
 
   return (
     <motion.div
@@ -56,7 +64,7 @@ const CryptoTableRow = () => {
             })}
           </tr>
         </thead>
-        {!cryptosList.isLoading ? (
+        {!currentCryptoData.isLoading ? (
           <tbody>
             {cryptoSelector.coinlist.slice(0, 10).map((coin, index) => {
               return <CryptoRow coin={coin} key={index} index={index} />;
