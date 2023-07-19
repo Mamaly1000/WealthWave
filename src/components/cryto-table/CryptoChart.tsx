@@ -103,7 +103,7 @@ export function CryptoTable({
             data: sparkLine.map((coin) => coin),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#379237",
-            borderWidth: 1.1,
+            borderWidth: 2,
             tension: 0.1,
           },
         ]);
@@ -113,13 +113,13 @@ export function CryptoTable({
             data: sparkLine.map((coin) => coin),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#FF6666",
-            borderWidth: 1.1,
+            borderWidth: 2,
             tension: 0.1,
           },
         ]);
       }
       setLabels(
-        Array.from({ length: sparkLine.length }, (_, i) => {
+        Array.from({ length: sparkLine.length / 2 }, (_, i) => {
           const date = new Date(today);
           date.setDate(today.getDate() - i);
           return date;
@@ -133,7 +133,7 @@ export function CryptoTable({
             data: defChart.map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#379237",
-            borderWidth: 1.1,
+            borderWidth: 1,
             tension: 0.1,
           },
         ]);
@@ -143,7 +143,7 @@ export function CryptoTable({
             data: defChart.map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#FF6666",
-            borderWidth: 1.1,
+            borderWidth: 1,
             tension: 0.1,
           },
         ]);
@@ -180,6 +180,7 @@ export function CryptoTable({
               point: {
                 radius: 1,
                 hitRadius: 5,
+                borderWidth: 2,
               },
             },
             scales: {
@@ -218,7 +219,6 @@ export function CryptoTable({
               },
             },
             responsive: true,
-            // maintainAspectRatio: false,
           }}
         />
       )}
@@ -232,8 +232,12 @@ export function CryptoTable({
           options={{
             elements: {
               point: {
-                radius: 1,
-                hitRadius: 5,
+                radius: 0,
+                hoverRadius: 0,
+                hitRadius: 0,
+              },
+              line: {
+                borderWidth: 5,
               },
             },
             scales: {
@@ -246,7 +250,6 @@ export function CryptoTable({
                   color: "rgba(0 0 0/.0)",
                   backdropColor: "rgba(0 0 0/0)",
                 },
-                beginAtZero: false,
                 border: {
                   width: 0,
                 },
@@ -271,8 +274,8 @@ export function CryptoTable({
                 enabled: false,
               },
             },
+            animation: false,
             responsive: true,
-            // maintainAspectRatio: false,
           }}
         />
       )}

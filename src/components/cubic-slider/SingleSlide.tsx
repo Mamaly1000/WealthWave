@@ -11,10 +11,14 @@ const SingleSlide = ({ data, active }: singleSlidesType) => {
   const nav = useNavigate();
   return (
     <motion.div>
-      <motion.h3 animate={{ y: !active ? -50 : 0, opacity: !active ? 0 : 1 }}>
+      <motion.h3
+        transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
+        animate={{ y: !active ? -50 : 0, opacity: !active ? 0 : 1 }}
+      >
         {wordSeprator(data.title)}
       </motion.h3>
       <motion.button
+        transition={{ duration: 0.3, delay: 0.1, type: "tween" }}
         animate={{ y: active ? 0 : 30, opacity: active ? 1 : 0 }}
         onClick={() => nav(data.pathName)}
       >

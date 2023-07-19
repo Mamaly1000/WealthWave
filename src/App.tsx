@@ -14,11 +14,13 @@ import Crypto_page from "./pages/Crypto_page";
 import View_Crypto from "./pages/View_Crypto";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import ScrollToTop from "./components/scroll-component/ScrollToTop";
 function App() {
   const location = useLocation();
   const contextData = useContextFunction();
   return (
     <Layout>
+      <ScrollToTop />
       <AnimatePresence mode="wait">
         <QueryClientProvider client={new QueryClient()}>
           <Routes location={location} key={location.key}>
@@ -84,6 +86,8 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        draggableDirection="x"
+        draggablePercent={20}
         theme="dark"
       />
     </Layout>

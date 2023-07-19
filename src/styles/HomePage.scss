@@ -1,6 +1,10 @@
 .HomePage-container {
-  @apply w-full h-fit flex justify-center items-center flex-col gap-10 py-24 px-5 lg:px-10;
+  @apply relative w-full h-fit flex justify-center items-center flex-col gap-10 py-24 px-5 lg:px-10;
   .HomePage-intro-section {
+    background-image: url("./../assets/globe.svg");
+    background-repeat: no-repeat;
+    background-position: 0% 55%;
+    background-size: 500px 500px;
     @apply flex flex-col lg:flex-row  justify-center lg:justify-between items-center w-full lg:min-h-[100vh] px-0 sm:pb-[150px] cursor-default;
     .home-page-intro-section {
       @apply w-full text-center lg:w-[50%] h-[500px] md:h-[300px] lg:h-[100%] flex justify-between items-center gap-10 flex-col pt-10 pb-10 lg:pb-20 px-0 lg:px-10;
@@ -44,78 +48,90 @@
   .crypto-table-container {
     @apply w-[100%] h-fit flex flex-col justify-center items-center;
     .crypto-table-header {
-      @apply w-full flex items-center justify-center flex-col md:flex-row md:justify-between gap-5 my-10 md:my-5;
+      @apply text-[1rem] w-full flex items-center justify-center flex-col md:flex-row md:justify-between gap-5 my-10 md:my-5;
+      h2 {
+        @apply text-[2rem];
+      }
+      button {
+        @apply whitespace-nowrap;
+      }
     }
-    table {
-      background: rgba(255 255 255 /0.1);
-      backdrop-filter: blur(10px);
-      @apply rounded-[10px] w-full h-fit overflow-hidden font-number flex flex-col justify-center items-center;
-      thead {
-        background: rgba(255 255 255/0.3);
-        @apply w-full text-blue-950;
-      }
-      tbody {
-        @apply w-full;
-        tr {
-          background: rgba(0, 0, 0, 0.1);
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          @apply w-full transition-all;
+    .crypto-table-container {
+      @apply w-full h-fit  overflow-hidden flex items-start justify-start;
+      table {
+        background: rgba(255 255 255/0.1);
+        @apply text-white w-fit min-w-fit h-fit flex justify-center items-center flex-col  overflow-hidden rounded-lg;
+        thead {
+          @apply w-full flex justify-start items-start;
+          th {
+            @apply w-full flex items-center gap-2;
+            td {
+            }
+          }
         }
-      }
-      tr {
-        @apply w-[100%] grid grid-cols-12 justify-evenly items-center;
-        th,
+        tbody {
+          @apply w-full;
+          tr {
+            border-top: 0.1px solid rgba(255 255 255/0.1);
+            @apply flex items-center
+              gap-2 hover:bg-blue-950 transition-all cursor-pointer min-w-full min-h-[60px];
+          }
+          .chart-td {
+            @apply py-0 px-3 overflow-hidden;
+          }
+        }
         td {
-          @apply py-2 flex justify-start items-center px-5;
+          @apply py-2 px-3 h-[60px] max-h-[60px] text-[.9rem] flex items-center;
         }
-        td {
-          @apply text-white text-[.8rem] font-[400]  sm:text-[.9rem] md:text-[1rem];
+        .rank-td {
+          @apply min-w-[100px] w-[100px] max-w-[100px] text-right flex items-center justify-between gap-3;
+          button {
+            @apply w-[30px] h-[30px] p-2 rounded-md shadow-blue-400 shadow-md hover:shadow-none;
+          }
         }
-
-        .td-rate,
-        .th-rate {
-          @apply hidden sm:flex col-span-2 md:col-span-1;
+        .coin-td {
+          @apply min-w-[200px] w-[200px] max-w-[200px] text-left flex gap-2 items-center capitalize;
+          img {
+            @apply max-w-[30px] max-h-[30px] min-w-[30px] min-h-[30px] w-[30px] h-[30px];
+          }
+          span {
+            @apply text-[.8rem] text-gray-400 uppercase;
+          }
         }
-        .td-icon,
-        .th-icon {
-          @apply col-span-3 sm:col-span-2  md:col-span-1;
+        .price-td {
+          @apply min-w-[200px] w-[200px] max-w-[200px] text-right;
         }
-        .td-name,
-        .th-name {
-          @apply col-span-3 sm:col-span-2  md:col-span-3 text-left;
+        .low-td {
+          @apply min-w-[150px] w-[150px] max-w-[150px] text-right;
         }
-        .td-price,
-        .th-price {
-          @apply col-span-3 md:col-span-2 lg:col-span-2   justify-start md:justify-end;
+        .high-td {
+          @apply min-w-[150px] w-[150px] max-w-[150px] text-right;
         }
-        .td-high,
-        .th-high-24h {
-          @apply col-span-1 hidden lg:flex justify-end;
+        .percentage-td {
+          @apply min-w-[100px] w-[100px] max-w-[100px] text-right;
         }
-        .td-low,
-        .th-low-24h {
-          @apply col-span-1 hidden lg:flex;
+        .volume-td {
+          @apply min-w-[150px] w-[150px] max-w-[150px] text-right;
         }
-        .td-percent,
-        .th-24h {
-          @apply col-span-3 md:col-span-2 lg:col-span-1;
+        .market-cap-td {
+          @apply min-w-[165px] w-[165px] max-w-[165px] text-right;
         }
-        .td-cap,
-        .th-Market-Cap {
-          @apply hidden md:flex md:col-span-3 lg:col-span-2;
-        }
-
-        .coin-icon {
-          @apply w-full h-full lg:w-[50px] lg:h-[50px];
-        }
-        .increased-rate {
-          @apply text-green-500;
-        }
-        .decreased-rate {
-          color: #ff0000;
+        .chart-td {
+          @apply min-w-[150px] w-[150px] max-w-[150px];
         }
       }
+    }
+    .green {
+      @apply bg-green-800;
+    }
+    .red {
+      @apply bg-red-800;
+    }
+    .green-text {
+      @apply text-green-300;
+    }
+    .red-text {
+      @apply text-red-300;
     }
   }
   .nft-list-slider {
@@ -123,7 +139,13 @@
     .nft-slider-container {
       @apply w-[100%] flex flex-col justify-center items-center gap-10;
       .nft-slider-header {
-        @apply w-full h-fit flex flex-col md:flex-row justify-center md:justify-between items-center;
+        @apply text-[1rem] w-full h-fit flex flex-col md:flex-row justify-center md:justify-between items-center gap-5 my-10 md:my-5;
+        h2 {
+          @apply text-[2rem];
+        }
+        button {
+          @apply whitespace-nowrap;
+        }
       }
       .nft-slider {
         @apply w-full;

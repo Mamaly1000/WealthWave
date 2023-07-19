@@ -5,10 +5,12 @@ import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ItrendCoin,
+  fetchCoins,
+  fetchTrendCoins,
   selectCrypto,
   setCryptoChart,
 } from "../features/crypto_slice/crypto_slice";
-import { IchartDataSet } from "../components/cryto-table/CryptoChart";
+import { IchartDataSet, data } from "../components/cryto-table/CryptoChart";
 import { toast } from "react-toastify";
 import { btc_chart_data } from "../Data/charts";
 export interface IcryptoData {
@@ -49,27 +51,28 @@ const useCrypto = () => {
   const QueryClient = useQueryClient();
   const dispatch = useDispatch();
   const cryptosList = (
-    onSuccess?: () => void,
-    onError?: () => void,
-    enabled?: boolean,
-    refetchOnWindowFocus?: boolean,
-    refetchOnMount?: boolean,
-    cacheTime?: number
+    cache_name: string,
+    enable: boolean,
+    refetchOnMount: boolean
   ) => {
     return useQuery(
-      "crypto_list",
+      `${cache_name}`,
       () => {
         return axios.get(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=400&page=1&sparkline=true&locale=en`
         );
       },
       {
-        cacheTime: cacheTime,
-        refetchOnWindowFocus: refetchOnWindowFocus,
+        cacheTime: 50000,
         refetchOnMount: refetchOnMount,
-        enabled: enabled,
-        onSuccess,
-        onError,
+        enabled: enable,
+        onSuccess: (data) => {
+          dispatch(fetchCoins(data.data));
+          setLoacalCryptoList(data.data);
+        },
+        onError: () => {
+          dispatch(fetchCoins(LocalCryptoList));
+        },
       }
     );
   };
@@ -167,26 +170,23 @@ const useCrypto = () => {
     ItrendCoin[]
   >("trendCoins", []);
 
-  const getTrendCoins = (
-    onSuccess?: () => void,
-    onError?: () => void,
-    enabled?: boolean,
-    refetchOnWindowFocus?: boolean,
-    refetchOnMount?: boolean,
-    cacheTime?: number
-  ) => {
+  const getTrendCoins = () => {
     return useQuery(
       "trend-coins",
       () => {
         return axios.get("https://api.coingecko.com/api/v3/search/trending");
       },
       {
-        cacheTime: cacheTime,
-        refetchOnWindowFocus: refetchOnWindowFocus,
-        refetchOnMount: refetchOnMount,
-        enabled: enabled,
-        onSuccess,
-        onError,
+        cacheTime: 50000,
+        refetchOnMount: true,
+        enabled: true,
+        onSuccess: (data) => {
+          dispatch(fetchTrendCoins(data.data.coins));
+          setTrendCryptoList(data.data.coins);
+        },
+        onError: () => {
+          dispatch(fetchTrendCoins(localTrendCryptoList));
+        },
       }
     );
   };

@@ -15,7 +15,7 @@
       .news-date {
         color: rgba(255 255 255 /0.7);
         @apply h-full w-[60%] text-[14px] font-bold italic p-1 flex items-center justify-start gap-1 whitespace-nowrap;
-        svg {
+        img {
           @apply w-[20px] h-[20px];
         }
       }
@@ -39,7 +39,7 @@
       div {
         @apply w-full flex justify-between items-center h-[50px] absolute bottom-[5%] left-0 px-3;
         .news-read-more-btn {
-          @apply w-[80%];
+          @apply w-[100%];
         }
       }
     }

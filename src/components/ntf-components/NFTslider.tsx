@@ -23,13 +23,13 @@ const NFTslider = () => {
     >
       <div className="nft-slider-container">
         <div className="nft-slider-header">
-          <h3 className="page-header">Discover our NFT world</h3>
+          <h2 className="page-header">Discover our NFT world</h2>
           <button>whatch more</button>
         </div>
         <div className="nft-slider">
           <Swiper
             slidesPerView={"auto"}
-            spaceBetween={5}
+            spaceBetween={10}
             freeMode={true}
             pagination={{
               clickable: true,

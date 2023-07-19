@@ -30,8 +30,9 @@ const sliderData: { title: string; pathName: string }[] = [
 export default function CubeSlider() {
   return (
     <motion.div
-      initial={{ opacity: 0.2, transform: "translateX(200px)" }}
-      animate={{ opacity: 1, transform: "translateX(0px)" }}
+      initial={{ opacity: 0, x: 200 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 1, type: "tween" }}
       className="home-page-intro-slider"
     >
       <Swiper
@@ -52,7 +53,7 @@ export default function CubeSlider() {
         className="mySwiper"
       >
         {sliderData.map((data, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             {({ isActive }) => (
               <SingleSlide
                 active={isActive}

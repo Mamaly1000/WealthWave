@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";
 import { toast } from "react-toastify";
@@ -19,14 +19,7 @@ const Crypto_Search = ({ setDisplayFilterModal }: cryptoSearchPropType) => {
   const [searchText, setSearchText] = useState<string>("");
   const { cryptosList, setLoacalCryptoList } = useCrypto();
   const dispatch = useDispatch();
-  const { data, refetch } = cryptosList(
-    () => toast.success("data refreshed successfully"),
-    () => toast.error("please try again to refresh"),
-    false,
-    false,
-    false,
-    50000
-  );
+  const { data, isError, refetch } = cryptosList("refresh-data", false, false);
   const setSearchTextCallBack = useMemo(() => {
     dispatch(setCryptoSearch(searchText));
   }, [searchText]);
@@ -34,6 +27,9 @@ const Crypto_Search = ({ setDisplayFilterModal }: cryptoSearchPropType) => {
     if (data) {
       dispatch(fetchCoins(data.data));
       setLoacalCryptoList(data.data);
+      toast.success("data refreshed successfuly !");
+    } else if (isError) {
+      toast.error("please refresh again !");
     }
   }, [data]);
 

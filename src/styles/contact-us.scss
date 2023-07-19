@@ -24,7 +24,7 @@
         @apply w-[80%] rounded-md px-10 py-3 text-white outline-none max-h-[150px];
       }
       button {
-        @apply w-[30%] mt-5;
+        @apply bg-blue-600 w-[30%] mt-5;
       }
       .reset-btn {
         @apply bg-gray-600 shadow-gray-500;
@@ -32,6 +32,9 @@
     }
     .links-container {
       @apply text-white font-rail font-bold w-full h-[10%] flex justify-start items-center gap-5;
+      span {
+        @apply whitespace-nowrap;
+      }
       .social-link {
         filter: invert(86%) sepia(98%) saturate(3%) hue-rotate(332deg)
           brightness(105%) contrast(100%);

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { cryptoRowMotion, removingPageMotion } from "../motions/motions";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,11 +6,6 @@ import { Pagination, Autoplay } from "swiper";
 import useCrypto from "../hooks/useCrypto";
 import { useNavigate } from "react-router-dom";
 import FilterCryptoModal from "../components/cryto-table/FilterCryptoModal";
-import { useDispatch } from "react-redux";
-import {
-  fetchCoins,
-  fetchTrendCoins,
-} from "../features/crypto_slice/crypto_slice";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import Crypto_Search from "../components/search-components/Crypto_Search";
@@ -19,58 +14,17 @@ import { useContextFunction } from "../context/AppContext";
 import TopCryptoCard from "../components/crypto-component/TopCryptoCard";
 import TrendCryptoCard from "../components/crypto-component/TrendCryptoCard";
 const Crypto_page = () => {
-  const dispatch = useDispatch();
   const nav = useNavigate();
-  const {
-    cryptosList,
-    setLoacalCryptoList,
-    LocalCryptoList,
-    cryptoSelector,
-    getTrendCoins,
-    setTrendCryptoList,
-    localTrendCryptoList,
-  } = useCrypto();
+  const { cryptosList, cryptoSelector, getTrendCoins } = useCrypto();
   const contextData = useContextFunction();
   const [displayFilterModal, setDisplayFilterModal] = useState<boolean>(false);
   const [displayTrendCoins, setDisplayTrendCoins] = useState<boolean>(false);
   const [displayCryptoLines, setDisplayCryptoLines] = useState<boolean>(false);
   const [itemOffset, setItemOffset] = useState(0);
   const pageCount = Math.ceil(cryptoSelector.coinlist.length / 10);
-  const currentCryptoData = cryptosList(
-    () => {
-      return;
-    },
-    () => {
-      return;
-    },
-    true,
-    false,
-    false,
-    50000
-  );
-  const fetch_trend_coins = getTrendCoins(
-    () => {},
-    () => {},
-    true,
-    false,
-    false,
-    5000
-  );
-  useEffect(() => {
-    if (fetch_trend_coins.data) {
-      dispatch(fetchTrendCoins(fetch_trend_coins.data.data.coins));
-      setTrendCryptoList(fetch_trend_coins.data.data.coins);
-    } else if (fetch_trend_coins.isError) {
-      dispatch(fetchTrendCoins(localTrendCryptoList));
-    }
+  const currentCryptoData = cryptosList("fetch-crypto-list", true, true);
+  const fetch_trend_coins = getTrendCoins();
 
-    if (currentCryptoData.data) {
-      dispatch(fetchCoins(currentCryptoData.data.data));
-      setLoacalCryptoList(currentCryptoData.data.data);
-    } else if (currentCryptoData.isError) {
-      dispatch(fetchCoins(LocalCryptoList));
-    }
-  }, [fetch_trend_coins, currentCryptoData]);
   const cryptoData = useMemo(() => {
     return cryptoSelector.coinlist
       .slice(itemOffset, itemOffset + 10)

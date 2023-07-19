@@ -1,3 +1,5 @@
+import { IAppleNews } from "../hooks/useNews";
+
 export const removingPageMotion = {
   hidden: {
     x: "100vw",
@@ -5,10 +7,9 @@ export const removingPageMotion = {
   visible: {
     x: 0,
     transition: {
-      duration: 0.5,
-      delay: 0,
-      type: "tween",
-      when: "beforeChidlren",
+      when: "beforeChildren",
+      duration: 0.3,
+      ease: "easeInOut",
     },
   },
   exit: {
@@ -136,10 +137,18 @@ export const nftCardsMotion = (index: number) => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.13,
+        duration: 0.5,
         delay: index / 10 + 0.1,
         type: "tween",
         ease: "easeInOut",
+      },
+    },
+    exit: {
+      x: 100,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        type: "tween",
       },
     },
   };
@@ -149,14 +158,26 @@ export const newsCardMotion = (index: number) => {
     hidden: {
       opacity: 0,
       y: 20,
+      scale: 1,
     },
     view: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
         duration: 0.13,
         type: "tween",
         delay: index / 10 + 0.1,
+      },
+    },
+    exit: {
+      opacity: 1,
+      y: 0,
+      scale: 0,
+      transition: {
+        duration: 0.13,
+        type: "tween",
+        delay: 0,
       },
     },
   };
@@ -182,15 +203,21 @@ export const cryptoRowMotion = (index: number) => {
   return {
     hidden: {
       opacity: 0,
-      x: 200,
+      x: 50,
     },
     visible: {
       opacity: 1,
       x: 0,
       transition: {
         duration: 0.6,
-        delay: index / 10 + 0.5,
-        type: "tween",
+        delay: index / 10 + 0.1,
+        type: "spring",
+        ease: "linear",
+        when: "beforeChildren",
+        x: {
+          duration: 0.6,
+          type: "tween",
+        },
       },
     },
     exit: {

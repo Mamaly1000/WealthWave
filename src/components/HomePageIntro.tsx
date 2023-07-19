@@ -104,20 +104,22 @@ const HomePageIntro = () => {
 
   return (
     <motion.div
-      initial={{ transform: "translateX(-200px)", opacity: 0.2 }}
-      animate={{ transform: "translateX(0px)", opacity: 1 }}
+      initial={{ opacity: 0, x: -200 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 1, type: "tween" }}
       className="home-page-intro-section"
     >
       <motion.h1
         initial={{ fontSize: "2rem" }}
         animate={{ fontSize: "3rem" }}
-        transition={{ delay: 0.13, duration: 0.5, type: "tween" }}
+        transition={{ delay: 1.2, duration: 0.5, type: "tween" }}
       >
         Hello Wellcome to The <span>WealthWave</span>
       </motion.h1>
       <motion.span
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 1.2, type: "tween" }}
         drag
         dragConstraints={{ top: 0, left: 0, right: 10, bottom: 0 }}
         whileDrag={{ scale: 1.01 }}

@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import { FC } from "react";
 import globeSVG from "./../assets/globe.svg";
+import SelectedNewsPost from "../components/selectedNewsPost/selectedNewsPost";
 const HomePage: FC<any> = () => {
   return (
     <motion.div
@@ -20,12 +21,7 @@ const HomePage: FC<any> = () => {
       className="HomePage-container"
     >
       {/* <VerticalSlider /> */}
-      <motion.div
-        initial={{ transform: "translateY(-100px)" }}
-        animate={{ transform: "translateY(0px)" }}
-        className="HomePage-intro-section"
-        style={{ backgroundImage: `url(${globeSVG})`,backgroundBlendMode:"darken" }}
-      >
+      <motion.div className="HomePage-intro-section">
         <HomePageIntro />
         <CubeSlider />
       </motion.div>

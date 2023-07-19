@@ -10,47 +10,8 @@ type trendCryptoCardPropsType = {
   index: number;
 };
 const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
-  const {
-    getCryptoPercentage,
-    chartLists,
-    LocalChartsData,
-    LocalChartsData2,
-    setLocalChartsData,
-    setLocalChartsData2,
-  } = useCrypto();
+  const { getCryptoPercentage } = useCrypto();
   const [coinPercentage, setCoinPercentage] = useState<number>(0);
-  const fetch_Chart_Data = chartLists(
-    coin!.item.id,
-    () => {},
-    () => {},
-    true,
-    false,
-    false,
-    50000
-  );
-  // useEffect(() => {
-  //   if (fetch_Chart_Data.data) {
-  //     if (LocalChartsData.findIndex((chart) => chart.id === coin.item.id) < 0) {
-  //       if (LocalChartsData.length > 50) {
-  //         setLocalChartsData2([
-  //           ...LocalChartsData2,
-  //           {
-  //             id: coin.item.id,
-  //             data: fetch_Chart_Data.data.data.prices,
-  //           },
-  //         ]);
-  //       } else {
-  //         setLocalChartsData([
-  //           ...LocalChartsData,
-  //           {
-  //             id: coin.item.id,
-  //             data: fetch_Chart_Data.data.data.prices,
-  //           },
-  //         ]);
-  //       }
-  //     }
-  //   }
-  // }, [fetch_Chart_Data]);
   useEffect(() => {
     if (coin) {
       setCoinPercentage(
@@ -100,7 +61,7 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
         id={coin.item.id}
         width={"200px"}
         percent={coinPercentage}
-        defChart={default_charts_data[index].prices}
+        defChart={default_charts_data[index]!.prices}
         sparkLine={[]}
       />
     </motion.div>

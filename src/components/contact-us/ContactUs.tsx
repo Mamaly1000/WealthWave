@@ -28,7 +28,11 @@ const ContactUs = () => {
         className="contact-us-form"
       >
         <h3>Get In Touch</h3>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <input
             type="text"
             value={userName}
@@ -86,6 +90,9 @@ const ContactUs = () => {
         }}
         className="bg-container"
         style={{ backgroundImage: `url(${bgImage})` }}
+        drag
+        dragConstraints={{ top: 10, left: 10, right: 10, bottom: 10 }}
+        dragSnapToOrigin
       ></motion.div>
     </motion.div>
   );

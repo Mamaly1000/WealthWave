@@ -1,10 +1,16 @@
 .comment-section {
   @apply w-full h-[500px] flex flex-col justify-center items-center overflow-hidden;
   .comment-section-header {
-    @apply pb-10 w-full flex flex-col sm:flex-row gap-5  items-center justify-between;
+    @apply w-full flex flex-col sm:flex-row items-center justify-between text-[1rem] whitespace-nowrap gap-5 my-10 md:my-5;
+    h2 {
+      @apply text-[2rem];
+    }
   }
   .mySwiper {
     @apply w-full py-10;
+    .swiper-slide {
+      @apply w-[380px] h-[220px];
+    }
   }
 }
 .comment {

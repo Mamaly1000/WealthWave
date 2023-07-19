@@ -5,13 +5,14 @@ import saveIcon from "../../assets/crypto/save.svg";
 import { IcryptoData } from "../../hooks/useCrypto";
 import { CryptoTable } from "../cryto-table/CryptoChart";
 import useCrypto from "../../hooks/useCrypto";
+import { useState } from "react";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
 };
 const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
   const nav = useNavigate();
-  const {} = useCrypto();
+  const [displayChart, setDisplayChart] = useState<boolean>(false);
   return (
     <motion.tr
       variants={cryptoRowMotion(index)}
@@ -19,6 +20,9 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       animate="visible"
       exit="exit"
       key={index}
+      onAnimationComplete={() => {
+        setDisplayChart(true);
+      }}
     >
       <td className="rank-td">
         <button>
@@ -27,7 +31,13 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         {coin.market_cap_rank}
       </td>
       <td className="coin-td" onClick={() => nav(`/crypto/${coin!.id}`)}>
-        <img src={coin!.image} alt={coin.id} />
+        <motion.img
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.5, type: "tween" }}
+          src={coin!.image}
+          alt={coin.id}
+        />
         {coin.id}
         <span>{coin.symbol}</span>
       </td>
@@ -65,14 +75,16 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       </td>
       <td className="chart-td">
         <AnimatePresence mode="wait">
-          <CryptoTable
-            width={"130px"}
-            height={"100%"}
-            id={coin.id}
-            percent={coin.price_change_percentage_24h}
-            sparkLine={coin!.sparkline_in_7d!.price}
-            defChart={[]}
-          />
+          {displayChart && (
+            <CryptoTable
+              width={"130px"}
+              height={"100%"}
+              id={coin.id}
+              percent={coin.price_change_percentage_24h}
+              sparkLine={coin!.sparkline_in_7d!.price}
+              defChart={[]}
+            />
+          )}
         </AnimatePresence>
       </td>
     </motion.tr>

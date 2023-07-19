@@ -14,6 +14,7 @@ import {
   EditBlog,
 } from "../types/noteTypes";
 import { v4 as uuidV4 } from "uuid";
+import { IAppleNews } from "../hooks/useNews";
 
 interface Icontext {
   tags: TAG[];
@@ -30,6 +31,8 @@ interface Icontext {
   onUpdateTag: (id: string, text: string) => void;
   screenW: boolean;
   scrollH: boolean;
+  selectedId: IAppleNews | null;
+  setSelectedId: React.Dispatch<React.SetStateAction<IAppleNews | null>>;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -37,6 +40,7 @@ export const AppContext = createContext<Icontext | null>({} as Icontext);
 const AppContextComponent = ({ children }: any) => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
+  const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
 
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -146,6 +150,8 @@ const AppContextComponent = ({ children }: any) => {
         onCreateNote,
         onAddTag,
         onFindTag,
+        selectedId,
+        setSelectedId,
       }}
     >
       {children}
