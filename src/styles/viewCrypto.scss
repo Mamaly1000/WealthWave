@@ -1,91 +1,188 @@
 .view-crypto-page {
-  @apply min-h-[600px] text-white px-5 py-24;
+  @apply flex flex-col items-start justify-start gap-10 min-h-[600px] text-white px-5 py-24;
   .top-section {
-    @apply flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start w-full min-h-[300px] max-h-fit;
-  }
-  .crypto-overAll {
-    @apply w-full md:w-[45%] min-h-fit flex flex-col gap-10;
-    .top-overall-container {
-      @apply flex flex-col items-center justify-start gap-2 w-full max-h-[180px] text-white;
-      .rank-container {
-        @apply w-full h-fit flex justify-start items-center;
-        .rank {
-          @apply text-[.8rem] py-1 px-2 rounded-md font-bold bg-blue-700;
-        }
-      }
-      .crypto-name {
-        @apply w-full h-fit flex items-center gap-2;
-        img {
-          @apply w-[40px] h-[40px] bg-red-50 rounded-full;
-        }
-        .bold {
-          @apply font-bold capitalize;
-        }
-        .light {
-          @apply font-light uppercase text-gray-200;
-        }
-      }
-      .crypto-price-percentage {
-        @apply w-full h-fit flex items-center justify-start gap-2;
-        .bold {
-          @apply text-[2rem] font-bold;
-        }
-        .percentage {
-          @apply cursor-default flex items-center gap-1 text-[1.2rem] font-semibold;
-          img {
-            @apply w-[25px] h-[25px];
+    @apply flex flex-col gap-5 md:gap-0 md:flex-row justify-center md:justify-between items-center md:items-start w-full min-h-[500px] max-h-fit;
+    .crypto-overAll {
+      @apply w-full md:w-[45%] min-h-[450px] max-h-fit flex flex-col gap-10;
+      .top-overall-container {
+        @apply flex flex-col items-center justify-start gap-2 w-full max-h-[180px] min-h-[180px] text-white;
+        .rank-container {
+          @apply w-full h-fit flex justify-start items-center;
+          .rank {
+            @apply text-[.8rem] py-1 px-2 rounded-md font-bold bg-blue-700;
           }
         }
-        .info {
-          @apply w-[20px] h-[20px] cursor-pointer hover:scale-110 transition-all;
-        }
-      }
-      .crypto-price-per-btc {
-        @apply w-full flex items-center justify-start gap-2 text-[.9rem];
-        .crypto-price-btc {
-          @apply text-gray-200 whitespace-nowrap;
-        }
-        .crypto-percent-btc {
-          @apply flex items-center justify-start gap-1;
+        .crypto-name {
+          @apply w-full min-h-[40px] flex items-center gap-2;
           img {
-            @apply w-[15px] h-[15px];
+            @apply w-[40px] h-[40px] bg-red-50 rounded-full;
+          }
+          .bold {
+            @apply font-bold capitalize;
+          }
+          .light {
+            @apply font-light uppercase text-gray-200;
+          }
+        }
+        .crypto-price-percentage {
+          @apply w-full h-fit flex items-center justify-start gap-2;
+          .bold {
+            @apply text-[2rem] font-bold;
+          }
+          .percentage {
+            @apply w-fit h-fit px-3 py-2 rounded-3xl cursor-default flex items-center gap-1 text-[1.2rem] font-semibold transition-all;
+            img {
+              @apply w-[25px] h-[25px];
+            }
+          }
+          .info {
+            @apply w-[20px] h-[20px] cursor-pointer hover:scale-110 transition-all;
+          }
+        }
+        .crypto-price-per-btc {
+          @apply w-full flex items-center justify-start gap-2 text-[.9rem];
+          .crypto-price-btc {
+            @apply text-gray-200 whitespace-nowrap;
+          }
+          .crypto-percent-btc {
+            @apply flex items-center justify-start gap-1;
+            img {
+              @apply w-[15px] h-[15px];
+            }
+          }
+        }
+        .crypto-actions-container {
+          @apply w-full h-[30px] flex justify-start items-center gap-2;
+          .btn-container {
+            @apply flex h-full justify-start items-center gap-1;
+            button {
+              @apply w-[40px] h-[40px] p-3;
+            }
+          }
+          .wish-List {
+            @apply flex items-center justify-start gap-1 w-fit py-1 px-2 rounded-md text-[.75rem] text-white bg-blue-700;
+            img {
+              @apply w-[15px] h-[15px];
+            }
           }
         }
       }
-      .crypto-actions-container {
-        @apply w-full h-[30px] flex justify-start items-center gap-2;
-        .btn-container {
-          @apply flex h-full justify-start items-center gap-1;
-          button {
-            @apply w-[40px] h-[40px] p-3;
+      .crypto-data-list {
+        @apply w-full h-fit pt-5 flex flex-col flex-wrap;
+        .list-item {
+          border-bottom: 1px solid rgba(255 255 255/0.2);
+          @apply w-full max-h-fit min-h-[40px] flex justify-between items-center flex-row flex-wrap capitalize;
+          .title {
+            @apply w-1/3 h-full flex items-center justify-start whitespace-nowrap gap-1 font-light text-[1rem] text-gray-200;
+            img {
+              @apply w-[20px] h-[20px] hover:scale-110 transition-all;
+            }
           }
-        }
-        .wish-List {
-          @apply flex items-center justify-start gap-1 w-fit py-1 px-2 rounded-md text-[.75rem] text-white bg-blue-700;
-          img {
-            @apply w-[15px] h-[15px];
+          .value {
+            @apply w-2/3 text-[1rem] text-white flex items-center justify-end gap-2;
+            img {
+              @apply w-[15px] h-[15px] hover:scale-110 transition-all;
+            }
           }
         }
       }
     }
-    .crypto-data-list {
-      @apply w-full h-fit pt-5;
-      .list-item {
-        border-bottom: 1px solid rgba(255 255 255/0.2);
-        @apply w-full max-h-[40px] min-h-[40px] flex justify-between items-center;
-        .title {
-          @apply w-fit h-full flex items-center justify-start gap-1 font-light text-[1rem] text-gray-200;
-          img {
-            @apply w-[20px] h-[20px] hover:scale-110 transition-all;
+    .crypto-info {
+      @apply text-left w-full md:w-[45%] min-h-full;
+      h3 {
+        @apply text-[2rem] font-bold;
+      }
+      .info-table {
+        @apply min-h-[100px] w-full;
+        .info-table-row {
+          @apply py-2 text-white flex justify-start items-start w-full h-fit gap-2;
+          .row-title {
+            @apply w-1/3 text-[.9rem] text-gray-200 font-light capitalize;
           }
-        }
-        .value {
-          @apply text-[1rem] text-white;
+          .row-data {
+            @apply w-2/3 flex flex-row flex-wrap gap-2;
+            span {
+              @apply capitalize flex items-center gap-1 w-fit h-fit text-[.8rem] px-2 py-1 bg-blue-700 font-bold rounded-md drop-shadow-lg cursor-pointer;
+              img {
+                @apply w-[15px] h-[15px];
+              }
+            }
+          }
         }
       }
     }
   }
-  .extra-detail {
-    @apply w-full md:w-[45%] min-h-full bg-green-500;
+  .bottom-section {
+    @apply w-full min-h-[450px] max-h-fit flex flex-col md:flex-row justify-start md:justify-between items-start gap-5 md:gap-0;
+    .left-section {
+      @apply w-full md:w-[66%] min-h-[300px] flex items-center justify-start flex-col gap-5;
+      .view-crypto-tabs-container {
+        border-bottom: 1px solid;
+        @apply w-full min-h-[40px] border-b-blue-950 flex flex-wrap justify-start   items-center gap-[1px] transition-all;
+        span {
+          @apply min-h-[20px] bg-blue-950 w-4/12 md:w-fit h-fit flex flex-row items-center justify-center gap-1 px-3 py-2 capitalize font-bold font-rail rounded-t-md cursor-pointer transition-all;
+          img {
+            @apply w-[20px] h-[20px];
+          }
+        }
+        .selected-tab {
+          background: #0079ff;
+          @apply text-white drop-shadow-2xl;
+        }
+      }
+      .chart-section {
+        @apply w-full flex flex-col items-center justify-center gap-5;
+        .chart-settings {
+          @apply w-full flex justify-between items-center flex-row;
+          .chart-data-titles {
+            @apply w-[40%] flex flex-row flex-wrap justify-start items-center gap-2;
+            span {
+              @apply w-fit h-fit px-3 py-2 rounded-lg bg-blue-900 hover:bg-blue-700 transition-all cursor-pointer;
+            }
+            .selected-title {
+              @apply bg-blue-700;
+            }
+          }
+          .chart-days {
+            @apply w-[55%] flex items-center justify-start gap-2 flex-row flex-wrap;
+            span {
+              @apply w-fit h-fit px-3 py-2 rounded-lg bg-blue-900 hover:bg-blue-700 cursor-pointer transition-all text-white;
+            }
+            .selected-day {
+              @apply bg-blue-700;
+            }
+          }
+        }
+        .chart-container {
+          @apply w-full;
+          .apexcharts-menu {
+            @apply bg-blue-950;
+          }
+        }
+      }
+    }
+    .right-section {
+      @apply w-full md:w-[30%] min-h-[300px] bg-violet-400 flex items-start justify-center;
+    }
+  }
+  .green {
+    @apply bg-green-800;
+  }
+  .red {
+    @apply bg-red-800;
+  }
+  .green-text {
+    @apply text-green-300;
+  }
+  .red-text {
+    @apply text-red-300;
+  }
+  .red-filter {
+    filter: invert(74%) sepia(11%) saturate(1680%) hue-rotate(308deg)
+      brightness(90%) contrast(92%);
+  }
+  .green-filter {
+    filter: invert(88%) sepia(16%) saturate(1036%) hue-rotate(80deg)
+      brightness(99%) contrast(89%);
   }
 }

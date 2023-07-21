@@ -22,6 +22,13 @@ import nftPic18 from "./../assets/nft/24.png";
 import nftPic19 from "./../assets/nft/26.jfif";
 import nftPic20 from "./../assets/nft/27.webp";
 import nftPic21 from "./../assets/nft/28.jpg";
+import redditIcon from "./../assets/social-medias/icons8-reddit.svg";
+import facebookIcon from "./../assets/social-medias/icons8-facebook.svg";
+import twitterIcon from "./../assets/social-medias/icons8-twitter.svg";
+import instagramIcon from "./../assets/social-medias/icons8-instagram.svg";
+import pinterestIcon from "./../assets/social-medias/icons8-pinterest.svg";
+import telegramIcon from "./../assets/social-medias/icons8-telegram-app.svg";
+import linkedInIcon from "./../assets/social-medias/icons8-linkedin.svg";
 import { CommentType } from "../types/noteTypes";
 import {
   btc_chart_data,
@@ -293,4 +300,34 @@ export const default_charts_data = [
   injective_protocol,
   staked_ether,
   moon,
+];
+export const socialMedia = [
+  {
+    name: "reddit",
+    pic: redditIcon,
+  },
+  {
+    name: "facebook",
+    pic: facebookIcon,
+  },
+  {
+    name: "twitter",
+    pic: twitterIcon,
+  },
+  {
+    name: "instagram",
+    pic: instagramIcon,
+  },
+  {
+    name: "pinterest",
+    pic: pinterestIcon,
+  },
+  {
+    name: "telegram",
+    pic: telegramIcon,
+  },
+  {
+    name: "linkedIn",
+    pic: linkedInIcon,
+  },
 ];

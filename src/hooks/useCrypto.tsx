@@ -78,6 +78,7 @@ const useCrypto = () => {
   };
   const chartLists = (
     name: string,
+    day: number,
     onSuccess?: (data: unknown) => void,
     onError?: () => void,
     enabled?: boolean,
@@ -89,7 +90,7 @@ const useCrypto = () => {
       ["charts-data", name],
       () => {
         return axios.get(
-          `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=max`
+          `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=${day}`
         );
       },
       {

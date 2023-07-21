@@ -36,7 +36,7 @@ interface crypto_slice_interface {
   book_marked_coins: BookmarkedCrypto[];
   trend_coins: ItrendCoin[];
   cryptoSearch: string;
-  cryptoChartDisplayType: "prices" | "market_cap" | "volumes";
+  cryptoChartDisplayType: "prices" | "market-cap" | "total-volumes";
 }
 
 type BookmarkedCrypto = {
@@ -214,7 +214,7 @@ const initialState: crypto_slice_interface = {
   cryptoChartDisplayType: "prices",
 };
 
-const cryptoReducer = createSlice({
+const CryptoReducer = createSlice({
   name: "crypto",
   initialState: initialState,
   reducers: {
@@ -238,7 +238,7 @@ const cryptoReducer = createSlice({
           toast.warn("you cant track more than three crypto chart");
         }
       } else {
-        toast.warn("you have already choosed this chart");
+        // toast.warn("you have already choosed this chart");
       }
     },
     setBookmarkCrypto: (state, action) => {
@@ -261,6 +261,12 @@ const cryptoReducer = createSlice({
     setEmptyCryptoCharts: (state) => {
       state.cryptoCharts = [];
     },
+    setChartType: (state, action) => {
+      state.cryptoChartDisplayType = action.payload as
+        | "prices"
+        | "market-cap"
+        | "total-volumes";
+    },
   },
 });
 export const {
@@ -272,8 +278,9 @@ export const {
   fetchTrendCoins,
   setCryptoSearch,
   setEmptyCryptoCharts,
-} = cryptoReducer.actions;
-export default cryptoReducer.reducer;
+  setChartType,
+} = CryptoReducer.actions;
+export default CryptoReducer.reducer;
 export const selectCrypto = (state: RootState) => {
   return state.crypto;
 };
