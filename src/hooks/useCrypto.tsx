@@ -8,10 +8,8 @@ import {
   fetchCoins,
   fetchTrendCoins,
   selectCrypto,
-  setCryptoChart,
 } from "../features/crypto_slice/crypto_slice";
-import { IchartDataSet, data } from "../components/cryto-table/CryptoChart";
-import { toast } from "react-toastify";
+import { IchartDataSet } from "../components/cryto-table/CryptoChart";
 import { btc_chart_data } from "../Data/charts";
 export interface IcryptoData {
   ath: number;
@@ -46,10 +44,30 @@ export interface IcryptoChart {
   id: string | number;
   data: [number, number][];
 }
+export const fetchChart = async (name: string, day: number) => {
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=${day}`
+  );
+  return res?.data;
+};
 const useCrypto = () => {
   const cryptoSelector = useSelector(selectCrypto);
   const QueryClient = useQueryClient();
   const dispatch = useDispatch();
+  const [LocalCryptoList, setLoacalCryptoList] = useLocalStorage<IcryptoData[]>(
+    "cryptoList",
+    []
+  );
+  const [LocalChartsData, setLocalChartsData] = useLocalStorage<IcryptoChart[]>(
+    "charts",
+    []
+  );
+  const [LocalChartsData2, setLocalChartsData2] = useLocalStorage<
+    IcryptoChart[]
+  >("charts2", []);
+  const [localTrendCryptoList, setTrendCryptoList] = useLocalStorage<
+    ItrendCoin[]
+  >("trendCoins", []);
   const cryptosList = (
     cache_name: string,
     enable: boolean,
@@ -103,40 +121,6 @@ const useCrypto = () => {
       }
     );
   };
-  const getChartData = async (name: string): Promise<void> => {
-    try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=max`
-      );
-      if (response.status === 200) {
-        console.log(response.data);
-        if (
-          LocalChartsData.findIndex((chart) => chart.id === name) < 0 ||
-          LocalChartsData2.findIndex((chart) => chart.id === name) < 0
-        ) {
-          if (LocalChartsData.length > 50) {
-            setLocalChartsData2([
-              ...LocalChartsData2,
-              {
-                id: name,
-                data: response.data.prices,
-              },
-            ]);
-          } else {
-            setLocalChartsData([
-              ...LocalChartsData,
-              {
-                id: name,
-                data: response.data.prices,
-              },
-            ]);
-          }
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const chartValidation = (
     id: string,
     setDataSets: React.Dispatch<React.SetStateAction<IchartDataSet[]>>,
@@ -156,21 +140,6 @@ const useCrypto = () => {
       ]);
     }
   };
-  const [LocalCryptoList, setLoacalCryptoList] = useLocalStorage<IcryptoData[]>(
-    "cryptoList",
-    []
-  );
-  const [LocalChartsData, setLocalChartsData] = useLocalStorage<IcryptoChart[]>(
-    "charts",
-    []
-  );
-  const [LocalChartsData2, setLocalChartsData2] = useLocalStorage<
-    IcryptoChart[]
-  >("charts2", []);
-  const [localTrendCryptoList, setTrendCryptoList] = useLocalStorage<
-    ItrendCoin[]
-  >("trendCoins", []);
-
   const getTrendCoins = () => {
     return useQuery(
       "trend-coins",
@@ -238,28 +207,9 @@ const useCrypto = () => {
       return cryptoSelector.coinlist[selectedCoin].price_change_percentage_24h;
     }
   };
-  const getSelectedChart = (id: string) => {
-    const { data } = chartLists(
-      id,
-      () => {
-        toast.success(`success to get ${id} chart data`);
-      },
-      () => {
-        toast.error(`failed to get ${id} chart data`);
-      },
-      true,
-      false,
-      false,
-      0
-    );
-    if (data) {
-      dispatch(setCryptoChart({ id: id, data: data.data }));
-    }
-  };
   return {
     getTrendCoins,
     getSingleCoinData,
-    getChartData,
     cryptosList,
     setLoacalCryptoList,
     LocalCryptoList,
@@ -273,7 +223,6 @@ const useCrypto = () => {
     getCryptoPercentage,
     LocalChartsData2,
     setLocalChartsData2,
-    getSelectedChart,
   };
 };
 

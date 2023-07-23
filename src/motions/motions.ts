@@ -1,5 +1,3 @@
-import { IAppleNews } from "../hooks/useNews";
-
 export const removingPageMotion = {
   hidden: {
     x: "100vw",
@@ -8,7 +6,7 @@ export const removingPageMotion = {
     x: 0,
     transition: {
       when: "beforeChildren",
-      duration: 0.3,
+      duration: 0.6,
       ease: "easeInOut",
     },
   },

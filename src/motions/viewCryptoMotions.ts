@@ -12,15 +12,13 @@ export const tagsMotion = (
         duration: duration ? duration : 0.3,
         type: "tween",
         delay: index ? index / 10 + 0.1 : 0,
-        ease: "linear",
       },
     },
     exit: {
       scale: 0,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
-        type: "just",
+        type: "tween",
         delay: index ? index / 10 + 0.1 : 0,
       },
     },
@@ -39,7 +37,6 @@ export const viewFromLeft = (
       opacity: 1,
       x: 0,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -49,7 +46,6 @@ export const viewFromLeft = (
       opacity: 0,
       x: -100,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -70,7 +66,6 @@ export const viewFromRight = (
       opacity: 1,
       x: 0,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -80,7 +75,6 @@ export const viewFromRight = (
       opacity: 0,
       x: 100,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -101,7 +95,6 @@ export const viewFromTop = (
       opacity: 1,
       y: 0,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -111,7 +104,6 @@ export const viewFromTop = (
       opacity: 0,
       y: -100,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -132,7 +124,6 @@ export const viewFromDown = (
       opacity: 1,
       y: 0,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",
@@ -142,7 +133,6 @@ export const viewFromDown = (
       opacity: 0,
       y: 100,
       transition: {
-        ease: "linear",
         duration: duration ? duration : 0.3,
         delay: index ? index / 10 + 0.1 : 0,
         type: "tween",

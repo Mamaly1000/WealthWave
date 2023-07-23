@@ -22,6 +22,7 @@ export interface ItrendCoin {
 
 export interface IviewPageChartData {
   id: string;
+  day: number;
   data: {
     prices: number[][];
     market_caps: number[][];
@@ -37,6 +38,7 @@ interface crypto_slice_interface {
   trend_coins: ItrendCoin[];
   cryptoSearch: string;
   cryptoChartDisplayType: "prices" | "market-cap" | "total-volumes";
+  cryptoDay: number;
 }
 
 type BookmarkedCrypto = {
@@ -46,6 +48,7 @@ type BookmarkedCrypto = {
 const initialState: crypto_slice_interface = {
   coinlist: [],
   selectedCoin: {
+    contract_address: "",
     id: "",
     symbol: "",
     name: "",
@@ -55,7 +58,7 @@ const initialState: crypto_slice_interface = {
     block_time_in_minutes: 0,
     hashing_algorithm: "",
     categories: [],
-    public_notice: null,
+    public_notice: "",
     additional_notices: [],
     localization: {},
     description: {
@@ -212,6 +215,7 @@ const initialState: crypto_slice_interface = {
   trend_coins: [],
   cryptoSearch: "",
   cryptoChartDisplayType: "prices",
+  cryptoDay: 1,
 };
 
 const CryptoReducer = createSlice({
@@ -241,6 +245,35 @@ const CryptoReducer = createSlice({
         // toast.warn("you have already choosed this chart");
       }
     },
+    removeCryptoChart: (state, action) => {
+      const checkChartID = state.cryptoCharts.findIndex(
+        (chart) => chart.id === action.payload
+      );
+      if (checkChartID > 0) {
+        const newArray = state.cryptoCharts.filter(
+          (chart) => chart.id !== action.payload
+        );
+        state.cryptoCharts = newArray;
+        toast.success(
+          `${action.payload} chart data has been removed successfully`
+        );
+      } else {
+        toast.error("it doesnt fucking work");
+      }
+    },
+    updateCryptoChart: (state, action) => {
+      const selectedChart = state.cryptoCharts.filter(
+        (c) => c.id !== action.payload.id
+      );
+      state.cryptoCharts = [
+        ...selectedChart,
+        {
+          id: action.payload.id,
+          data: action.payload.data,
+          day: action.payload.day,
+        },
+      ];
+    },
     setBookmarkCrypto: (state, action) => {
       const selectedCoin = state.coinlist.find(
         (c) => c.id === action.payload.id
@@ -267,6 +300,9 @@ const CryptoReducer = createSlice({
         | "market-cap"
         | "total-volumes";
     },
+    setCryptoDay: (state, action) => {
+      state.cryptoDay = action.payload;
+    },
   },
 });
 export const {
@@ -279,6 +315,9 @@ export const {
   setCryptoSearch,
   setEmptyCryptoCharts,
   setChartType,
+  removeCryptoChart,
+  updateCryptoChart,
+  setCryptoDay,
 } = CryptoReducer.actions;
 export default CryptoReducer.reducer;
 export const selectCrypto = (state: RootState) => {

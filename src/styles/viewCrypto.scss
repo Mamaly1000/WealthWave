@@ -27,10 +27,10 @@
         .crypto-price-percentage {
           @apply w-full h-fit flex items-center justify-start gap-2;
           .bold {
-            @apply text-[2rem] font-bold;
+            @apply min-w-[120] text-[2rem] font-bold;
           }
           .percentage {
-            @apply w-fit h-fit px-3 py-2 rounded-3xl cursor-default flex items-center gap-1 text-[1.2rem] font-semibold transition-all;
+            @apply min-w-[120] w-fit h-fit px-3 py-2 rounded-3xl cursor-default flex items-center gap-1 text-[1.2rem] font-semibold transition-all;
             img {
               @apply w-[25px] h-[25px];
             }
@@ -115,27 +115,29 @@
   .bottom-section {
     @apply w-full min-h-[450px] max-h-fit flex flex-col md:flex-row justify-start md:justify-between items-start gap-5 md:gap-0;
     .left-section {
-      @apply w-full md:w-[66%] min-h-[300px] flex items-center justify-start flex-col gap-5;
+      @apply w-full md:w-[66%] min-h-[600px] flex items-center justify-start flex-col gap-5;
       .view-crypto-tabs-container {
         border-bottom: 1px solid;
         @apply w-full min-h-[40px] border-b-blue-950 flex flex-wrap justify-start   items-center gap-[1px] transition-all;
         span {
-          @apply min-h-[20px] bg-blue-950 w-4/12 md:w-fit h-fit flex flex-row items-center justify-center gap-1 px-3 py-2 capitalize font-bold font-rail rounded-t-md cursor-pointer transition-all;
+          @apply min-h-[20px] bg-blue-950 min-w-[120px]  w-4/12 md:w-fit h-fit flex flex-row items-center justify-center gap-1 px-3 py-2 capitalize font-bold font-rail rounded-t-md cursor-pointer transition-all;
           img {
             @apply w-[20px] h-[20px];
           }
         }
         .selected-tab {
-          background: #0079ff;
-          @apply text-white drop-shadow-2xl;
+          @apply text-white bg-blue-700 drop-shadow-2xl;
         }
+      }
+      .main-chart-container {
+        @apply min-w-full min-h-[400px] md:min-h-[500px];
       }
       .chart-section {
         @apply w-full flex flex-col items-center justify-center gap-5;
         .chart-settings {
-          @apply w-full flex justify-between items-center flex-row;
+          @apply w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-5 md:gap-0;
           .chart-data-titles {
-            @apply w-[40%] flex flex-row flex-wrap justify-start items-center gap-2;
+            @apply capitalize w-full md:w-[40%] flex flex-row flex-wrap justify-start items-center gap-2;
             span {
               @apply w-fit h-fit px-3 py-2 rounded-lg bg-blue-900 hover:bg-blue-700 transition-all cursor-pointer;
             }
@@ -144,8 +146,9 @@
             }
           }
           .chart-days {
-            @apply w-[55%] flex items-center justify-start gap-2 flex-row flex-wrap;
-            span {
+            @apply capitalize w-full md:w-[55%] flex items-center justify-start gap-2 flex-row flex-wrap;
+
+            .swiper-slide {
               @apply w-fit h-fit px-3 py-2 rounded-lg bg-blue-900 hover:bg-blue-700 cursor-pointer transition-all text-white;
             }
             .selected-day {
@@ -154,15 +157,266 @@
           }
         }
         .chart-container {
-          @apply w-full;
+          @apply w-full max-h-fit min-h-[400px];
           .apexcharts-menu {
             @apply bg-blue-950;
+          }
+        }
+        .compare-charts-container {
+          @apply w-full flex flex-col min-h-[100px] md:min-h-[50px] md:flex-row justify-start md:justify-between items-center z-10;
+          .select-coin-container {
+            @apply hover:bg-blue-950 cursor-pointer whitespace-nowrap w-full md:min-h-[45px]  md:w-3/12 px-3 py-2 rounded-t-lg md:rounded-t-none  md:rounded-s-lg  h-full bg-blue-700 flex items-center justify-center gap-2 transition-all;
+            img {
+              @apply w-[20px] h-[20px] transition-all;
+            }
+          }
+          .selected-coin-container {
+            @apply relative min-h-[45px]  md:min-h-[45px] w-full md:w-9/12;
+            .selected-coins {
+              background: rgba(0 0 0 /0.3);
+              @apply absolute top-0 min-w-full min-h-full rounded-b-lg  md:rounded-b-none md:rounded-e-lg border-[1px] border-blue-700 drop-shadow-2xl p-1 flex items-center justify-start gap-2;
+              span {
+                @apply w-fit h-fit px-3 py-2 text-[.8rem] bg-blue-700 hover:bg-red-800 cursor-pointer transition-all hover:scale-105 rounded-lg capitalize flex items-center justify-center gap-2;
+                img {
+                  @apply w-[15px] h-[15px] rounded-full;
+                }
+              }
+            }
+            .coins-list-container {
+              background: rgba(0 0 0 /0.6);
+              @apply w-full flex justify-start items-start flex-col min-h-[40px] max-h-[200px] z-40 rounded-lg drop-shadow-2xl absolute top-[50px] overflow-hidden;
+            }
+            .coins-list {
+              @apply min-w-full max-h-full overflow-x-visible   overflow-y-scroll flex justify-start items-start flex-col;
+              .coin-row {
+                border-color: rgba(255 255 255/0.4);
+                @apply border-b-[1px] transition-all cursor-pointer hover:bg-blue-950 min-w-full p-2 flex items-center justify-between flex-row whitespace-nowrap;
+                span {
+                  @apply w-1/4 text-left;
+                }
+                img {
+                  @apply w-[25px] h-[25px] rounded-full;
+                }
+              }
+            }
+            .coins-list::-webkit-scrollbar {
+              background-color: rgba(255 255 255/0.1);
+              border-radius: 10px;
+              overflow: hidden;
+            }
+            .coins-list::-webkit-scrollbar-thumb {
+              background-color: #2563eb;
+              border-radius: 10px;
+              color: rgb(23 37 84);
+            }
+          }
+        }
+      }
+      .selected-crypto-percentage-table-container {
+        @apply w-full min-h-[100px] overflow-hidden rounded-lg flex justify-center items-center;
+        table {
+          @apply min-w-fit h-full overflow-hidden border-separate border-blue-950 rounded-2xl;
+          thead {
+            @apply w-fit h-[40px] bg-blue-700;
+            th {
+              @apply text-center uppercase font-semibold min-w-[100px] p-2;
+            }
+          }
+          tbody {
+            @apply text-center uppercase font-semibold min-w-fit h-[40px];
+            tr {
+              @apply min-w-fit h-full;
+              td {
+                @apply text-center uppercase font-semibold p-2;
+              }
+            }
+          }
+        }
+      }
+      .selected-coin-description {
+        @apply min-w-full flex items-start justify-start gap-3 flex-col min-h-[400px] max-h-fit;
+        .description-top-section {
+          @apply w-full min-h-[200px] flex justify-start items-center gap-3 md:justify-start md:items-start flex-col md:flex-row;
+          img {
+            @apply w-[250px] h-[250px] md:w-[150px] md:h-[150px];
+          }
+          .description-top-section-context {
+            @apply w-4/6 flex items-center justify-start flex-col text-left;
+            .description-name {
+              @apply text-[2.5rem] uppercase text-blue-300 w-full;
+            }
+            .description-tags {
+              @apply w-full flex flex-row flex-wrap items-center justify-start gap-2;
+              span {
+                @apply flex items-center gap-2 capitalize text-[.9rem] max-w-fit h-fit px-2 py-1 rounded-lg bg-blue-700;
+              }
+            }
+          }
+        }
+        .description-bottom-section {
+          @apply w-full flex justify-center items-start gap-2 flex-col;
+          h4 {
+            @apply text-[1.5rem] capitalize w-full text-left;
+          }
+          p {
+            @apply text-[1.2rem] font-light text-gray-300  text-justify;
+          }
+          a {
+            @apply text-blue-400 font-semibold;
+          }
+        }
+      }
+      .selected-coin-market-container {
+        @apply w-full min-h-[400px] flex flex-col items-start justify-start gap-3;
+        .market-header {
+          @apply w-full max-h-[100px] flex justify-center items-center flex-col md:justify-between md:flex-row gap-3;
+          h2 {
+            @apply text-[1.5rem] font-semibold capitalize w-full md:w-fit whitespace-nowrap  text-blue-300;
+          }
+          input {
+            @apply w-full md:w-[40%];
+          }
+        }
+        .markets-table-container {
+          @apply w-full min-h-[200px] overflow-hidden rounded-lg flex justify-start items-start;
+          table {
+            background: rgba(0 0 0 /0.3);
+            @apply min-w-fit min-h-[200px] max-h-fit overflow-visible rounded-lg  flex items-start justify-start flex-col border-collapse border-[1px] border-blue-950;
+            thead {
+              @apply w-full bg-blue-700 max-h-[40px] rounded-t-lg;
+            }
+            tbody {
+              @apply w-full min-h-[300px] flex flex-col justify-start items-start  rounded-b-lg;
+            }
+            th,
+            td {
+              @apply min-h-[40px] whitespace-nowrap text-[.9rem] font-light p-2 capitalize border-b-[1px] border-gray-300;
+            }
+            tr {
+              @apply hover:bg-blue-950 transition-all;
+            }
+            .rank {
+              @apply min-w-[50px] max-w-[50px] text-left;
+            }
+            .exchange {
+              @apply min-w-[150px] max-w-[150px] text-left;
+            }
+            .pair {
+              @apply min-w-[100px] max-w-[100px] text-left;
+            }
+            .converted_last {
+              @apply min-w-[150px] max-w-[150px] text-left;
+            }
+            .converted_volume {
+              @apply min-w-[150px] max-w-[150px] text-left;
+            }
+            .last {
+              @apply min-w-[150px] max-w-[150px] text-left;
+            }
+            .last_fetch_at {
+              @apply min-w-[200px] max-w-[200px] text-left;
+            }
+            .last_traded_at {
+              @apply min-w-[200px] max-w-[200px] text-left;
+            }
+            .volume {
+              @apply min-w-[100px] max-w-[100px] text-left;
+            }
+            .trust_score {
+              @apply min-w-[100px] max-w-[100px] text-center;
+              .score {
+                @apply min-w-[20px] mx-auto max-w-[20px] w-[20px] h-[20px] min-h-[20px] max-h-[20px] rounded-full text-transparent;
+              }
+              .green {
+                @apply bg-green-500;
+              }
+              .yellow {
+                @apply bg-yellow-500;
+              }
+            }
           }
         }
       }
     }
     .right-section {
-      @apply w-full md:w-[30%] min-h-[300px] bg-violet-400 flex items-start justify-center;
+      @apply w-full md:w-[30%] min-h-[300px] flex flex-col items-start justify-start gap-5;
+      .coin-convertor-container {
+        @apply drop-shadow-2xl w-full bg-blue-950 rounded-lg min-h-[200px] flex items-start justify-start gap-2 flex-col p-5;
+        .convertor-top-section {
+          @apply text-[1.5rem] capitalize text-left font-semibold;
+        }
+        .convertor-inputs-container {
+          @apply w-full flex flex-col items-start justify-start gap-1;
+          .input-group {
+            @apply w-full max-h-[50px] flex;
+            span {
+              @apply w-4/12 min-h-full border-[1px] border-blue-300 text-blue-300 rounded-s-lg uppercase flex justify-center items-center;
+            }
+            input {
+              @apply w-8/12 overflow-x-scroll rounded-s-none text-blue-300;
+            }
+          }
+          span {
+            @apply text-[1.2rem] font-semibold w-full;
+          }
+        }
+      }
+      .Price-Statistics-container {
+        @apply drop-shadow-2xl w-full min-h-fit rounded-lg p-5 bg-blue-950;
+        h4 {
+          @apply w-full capitalize text-left text-[1.5rem] font-semibold;
+        }
+        .data-table {
+          @apply w-full flex flex-col justify-start items-start;
+          .table-row {
+            border-color: rgba(255 255 255/0.1);
+            @apply w-full min-h-[40px] flex justify-between items-center p-2 border-b-[1px];
+            .row-title {
+              @apply text-[.9rem] text-gray-300 whitespace-nowrap;
+            }
+            .row-data {
+              @apply w-fit flex justify-start items-start  flex-wrap gap-1 text-[.8rem];
+              .all-time-HL {
+                @apply w-[250px] flex flex-row flex-wrap items-end justify-end gap-1;
+                .price {
+                  @apply min-w-fit text-white;
+                }
+                .percentage {
+                  @apply min-w-fit;
+                }
+                .date {
+                  @apply min-w-full text-right;
+                }
+              }
+            }
+          }
+        }
+      }
+      .related-coins-container {
+        @apply drop-shadow-2xl w-full rounded-lg min-h-[400px] max-h-fit bg-blue-950 p-5 flex flex-col justify-start items-start gap-5;
+        h4 {
+          @apply w-full text-left text-[1.5rem] font-semibold;
+        }
+        .related-coins-table {
+          @apply w-full min-h-[300px] flex items-center justify-start flex-col;
+          .coin-row {
+            border-color: rgba(255 255 255/0.1);
+            @apply w-full max-h-[60px] p-2 rounded-lg cursor-pointer hover:bg-blue-900 transition-all border-b-[1px] flex flex-row justify-between items-center;
+            .coins-left-section {
+              @apply w-1/2 h-full flex items-center justify-start gap-2;
+              img {
+                @apply w-[40px] h-[40px] rounded-full;
+              }
+              span {
+                @apply text-[.8rem] uppercase whitespace-nowrap;
+              }
+            }
+            .coins-right-section {
+              @apply w-fit h-full flex items-center gap-2 text-[.9rem];
+            }
+          }
+        }
+      }
     }
   }
   .green {

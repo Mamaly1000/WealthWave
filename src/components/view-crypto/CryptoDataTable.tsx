@@ -70,7 +70,9 @@ const CryptoDataTable = ({
               >
                 <span className="title">{d.name}</span>
                 <span className="value">
-                  {data.data === undefined || data.data === null
+                  {data.value === undefined || data.data === null
+                    ? "N/A"
+                    : data.value
                     ? "$" + data.value?.toLocaleString()
                     : "N/A"}
                 </span>

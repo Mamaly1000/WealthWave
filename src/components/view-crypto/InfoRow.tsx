@@ -22,7 +22,7 @@ const InfoRow = ({
             "scores",
           ].includes(row.name) === false && (
             <motion.span
-              variants={tagsMotion(index, 0.5)}
+              variants={tagsMotion(index + 40, 0.5)}
               whileInView="visible"
               initial="hidden"
             >
@@ -33,7 +33,7 @@ const InfoRow = ({
           ? row.data.map((d, index) => {
               return (
                 <motion.span
-                  variants={tagsMotion(index, 0.5)}
+                  variants={tagsMotion(index + 40, 0.5)}
                   whileInView="visible"
                   initial="hidden"
                   key={index}
@@ -47,7 +47,7 @@ const InfoRow = ({
           ? row.data.map((d, index) => {
               return (
                 <motion.span
-                  variants={tagsMotion(index, 0.5)}
+                  variants={tagsMotion(index + 40, 0.5)}
                   whileInView="visible"
                   initial="hidden"
                   key={index}
@@ -62,7 +62,7 @@ const InfoRow = ({
           ? row.data.map((d, index) => {
               return (
                 <motion.span
-                  variants={tagsMotion(index, 0.5)}
+                  variants={tagsMotion(index + 40, 0.5)}
                   whileInView="visible"
                   initial="hidden"
                   key={index}
@@ -76,7 +76,7 @@ const InfoRow = ({
           ? row.data.map((d, index) => {
               return (
                 <motion.span
-                  variants={tagsMotion(index, 0.5)}
+                  variants={tagsMotion(index + 40, 0.5)}
                   whileInView="visible"
                   initial="hidden"
                   key={index}

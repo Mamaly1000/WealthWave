@@ -1,6 +1,6 @@
 import useCrypto from "../hooks/useCrypto";
 import { useNavigate, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import { toast } from "react-toastify";
 import {
@@ -10,7 +10,6 @@ import {
   setSelectedCoin,
 } from "../features/crypto_slice/crypto_slice";
 import { useDispatch } from "react-redux";
-import Crypto_Chart_Data from "../components/crypto-component/Crypto_Chart_Data";
 import infoIcon from "./../assets/crypto/info.svg";
 import arrowIcon from "./../assets/crypto/arrow.svg";
 import arrowPerIcon from "./../assets/crypto/arrowPerIcon.svg";
@@ -22,14 +21,19 @@ import { socialMedia } from "../Data/dummy";
 import { useState } from "react";
 import CryptoDataTable from "../components/view-crypto/CryptoDataTable";
 import InfoRow from "../components/view-crypto/InfoRow";
+import backIcon from "./../assets/crypto/back.svg";
 import {
   tagsMotion,
   viewFromLeft,
   viewFromRight,
-  viewFromTop,
 } from "../motions/viewCryptoMotions";
 import TabsSection from "../components/view-crypto/TabsSection";
 import CoinChart from "../components/view-crypto/CoinChart";
+import CryptoDescription from "../components/view-crypto/CryptoDescription";
+import MarketsTable from "../components/view-crypto/MarketsTable";
+import CoinConvertor from "../components/view-crypto/CoinConvertor";
+import CoinDataTable from "../components/view-crypto/CoinDataTable";
+import RelatedCoins from "../components/view-crypto/RelatedCoins";
 
 const View_Crypto = () => {
   const { id } = useParams();
@@ -39,16 +43,10 @@ const View_Crypto = () => {
     start: Math.floor(Math.random() * (socialMedia.length - 3)),
     end: socialMedia.length,
   });
-  const [day, setDay] = useState<number>(1);
   const [selectedTab, setSelectedTab] = useState<string>("overview");
   const [displayChildren, setDisplayChildren] = useState<boolean>(false);
-  const {
-    getChartData,
-    getSingleCoinData,
-    cryptoSelector,
-    chartLists,
-    getSelectedChart,
-  } = useCrypto();
+  const { getSingleCoinData, cryptoSelector, chartLists, cryptosList } =
+    useCrypto();
   const seletedCoin = cryptoSelector.selectedCoin;
   const fetchSingleCoin = getSingleCoinData(
     id as string,
@@ -168,7 +166,9 @@ const View_Crypto = () => {
     },
     {
       name: "genesis date",
-      data: seletedCoin.genesis_date.replaceAll("-", "/"),
+      data: seletedCoin.genesis_date
+        ? seletedCoin.genesis_date.replaceAll("-", "/")
+        : "N/A",
     },
     {
       name: "last updated",
@@ -192,10 +192,14 @@ const View_Crypto = () => {
   ];
   const fetchChart = chartLists(
     id as string,
-    day,
+    cryptoSelector.cryptoDay,
     (data) => {
       dispatch(
-        setCryptoChart({ id: id, data: data!.data } as IviewPageChartData)
+        setCryptoChart({
+          id: id,
+          data: data!.data,
+          day: cryptoSelector.cryptoDay,
+        } as IviewPageChartData)
       );
     },
     () => {
@@ -206,6 +210,7 @@ const View_Crypto = () => {
     true,
     5000
   );
+  const fetchCoins = cryptosList("fetch-related-coins", true, true);
 
   return (
     <motion.div
@@ -224,7 +229,7 @@ const View_Crypto = () => {
             <div className="top-overall-container">
               <div className="rank-container">
                 <motion.span
-                  variants={tagsMotion(undefined, 0.5)}
+                  variants={tagsMotion(20, 0.5)}
                   initial="hidden"
                   whileInView="visible"
                   className="rank"
@@ -232,39 +237,29 @@ const View_Crypto = () => {
                   Rank #{seletedCoin.market_data.market_cap_rank}
                 </motion.span>
               </div>
-              <div className="crypto-name">
-                {seletedCoin.image.thumb && (
-                  <motion.img
-                    variants={tagsMotion(0.5, 0.5)}
-                    initial="hidden"
-                    whileInView="visible"
-                    src={seletedCoin.image.thumb}
-                    alt=""
-                  />
-                )}
+              <motion.div
+                variants={viewFromLeft(25, 0.5)}
+                initial="hidden"
+                animate="visible"
+                className="crypto-name"
+              >
+                <img src={seletedCoin.image.thumb} alt="" />
+                <span className="bold">{seletedCoin.id}</span>
+                <span className="light">{seletedCoin.symbol}</span>
+              </motion.div>
+              <div className="crypto-price-percentage">
                 <motion.span
-                  variants={viewFromLeft(2, 0.5)}
+                  variants={viewFromLeft(10, 0.2)}
                   initial="hidden"
-                  whileInView="visible"
+                  animate="visible"
                   className="bold"
                 >
-                  {seletedCoin.id}
+                  ${seletedCoin.market_data.current_price.usd.toLocaleString()}
                 </motion.span>
                 <motion.span
-                  variants={viewFromLeft(3, 0.5)}
+                  variants={viewFromLeft(32, 0.2)}
                   initial="hidden"
-                  whileInView="visible"
-                  className="light"
-                >
-                  {seletedCoin.symbol}
-                </motion.span>
-              </div>
-              <div className="crypto-price-percentage">
-                <motion.span variants={viewFromTop(1, 0.5)} className="bold">
-                  ${seletedCoin.market_data.current_price.usd}
-                </motion.span>
-                <motion.span
-                  variants={viewFromRight(1, 0.5)}
+                  animate="visible"
                   className={`percentage ${
                     +seletedCoin.market_data.price_change_percentage_24h > 0
                       ? "green"
@@ -284,19 +279,16 @@ const View_Crypto = () => {
                   {seletedCoin.market_data.price_change_percentage_24h}%
                 </motion.span>
                 <motion.img
-                  variants={tagsMotion(2, 0.5)}
+                  variants={viewFromLeft(33, 0.2)}
+                  initial="hidden"
+                  animate="visible"
                   className="info"
                   src={infoIcon}
                   alt="info"
                 />
               </div>
               <div className="crypto-price-per-btc">
-                <motion.span
-                  variants={viewFromLeft(1, 0.5)}
-                  initial="hidden"
-                  animate="visible"
-                  className="crypto-price-btc"
-                >
+                <motion.span className="crypto-price-btc">
                   {seletedCoin.market_data.current_price.btc} BTC
                 </motion.span>
                 <motion.span
@@ -326,25 +318,25 @@ const View_Crypto = () => {
               </div>
               <div className="crypto-actions-container">
                 <div className="btn-container">
-                  <motion.button
-                    variants={tagsMotion(3, 1)}
-                    initial="hidden"
-                    animate="visible"
-                    className="share"
+                  <button
+                    onClick={() => {
+                      dispatch(setEmptyCryptoCharts());
+                      nav(-1);
+                    }}
                   >
+                    <img src={backIcon} alt="back" />
+                  </button>
+                  <motion.button className="share">
                     <img src={shareIcon} alt="share" />
                   </motion.button>
-                  <motion.button
-                    variants={tagsMotion(3, 1)}
-                    initial="hidden"
-                    animate="visible"
-                    className="save"
-                  >
+                  <motion.button className="save">
                     <img src={saveIcon} alt="save" />
                   </motion.button>
                 </div>
                 <motion.span
-                  variants={viewFromRight(3, 1)}
+                  variants={viewFromRight(30, 1)}
+                  initial="hidden"
+                  animate="visible"
                   className="wish-List"
                 >
                   <img src={starIcon} alt="star" />
@@ -365,11 +357,14 @@ const View_Crypto = () => {
         </div>
         <div className="crypto-info">
           <h3>Info</h3>
-          <div className="info-table">
-            {info_table_data.map((row, index) => {
-              return <InfoRow row={row} index={index} key={index} />;
-            })}
-          </div>
+          {displayChildren && (
+            <div className="info-table">
+              {displayChildren &&
+                info_table_data.map((row, index) => {
+                  return <InfoRow row={row} index={index} key={index} />;
+                })}
+            </div>
+          )}
         </div>
       </div>
       <div className="bottom-section">
@@ -378,29 +373,23 @@ const View_Crypto = () => {
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
           />
-
-          {selectedTab === "overview" && (
-            <CoinChart day={day} setDay={setDay} />
-          )}
+          <AnimatePresence>
+            {selectedTab === "overview" && <CoinChart />}
+          </AnimatePresence>
+          <AnimatePresence presenceAffectsLayout>
+            {selectedTab === "description" && <CryptoDescription />}
+          </AnimatePresence>
+          <AnimatePresence presenceAffectsLayout>
+            {selectedTab === "markets" && <MarketsTable />}
+          </AnimatePresence>
         </div>
-        <div className="right-section"></div>
+        <div className="right-section">
+          <CoinConvertor />
+          <CoinDataTable />
+          <RelatedCoins />
+        </div>
       </div>
-      <button
-        onClick={() => {
-          fetchChart.refetch();
-        }}
-      >
-        get chart data
-      </button>
-      <button
-        onClick={() => {
-          dispatch(setEmptyCryptoCharts());
-          nav(-1);
-        }}
-      >
-        back
-      </button>
-      {cryptoSelector!.selectedCoin?.name}
+
       {/* <Crypto_Chart_Data /> */}
     </motion.div>
   );

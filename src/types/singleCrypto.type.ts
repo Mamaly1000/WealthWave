@@ -7,9 +7,10 @@ export interface ISingleCoin {
   detail_platforms: object;
   block_time_in_minutes: number;
   hashing_algorithm: string;
+  contract_address: string;
   categories: string[];
-  public_notice: null;
-  additional_notices: [];
+  public_notice: null | string;
+  additional_notices: Array<string | number>;
   localization: object;
   description: {
     en: string;

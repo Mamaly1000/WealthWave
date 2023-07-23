@@ -5,6 +5,7 @@ import chartIcon from "./../../assets/crypto/chart.svg";
 import textIcon from "./../../assets/crypto/text.svg";
 import marketIcon from "./../../assets/crypto/market.svg";
 import { useContextFunction } from "../../context/AppContext";
+import useCrypto from "../../hooks/useCrypto";
 const TabsSection = ({
   selectedTab,
   setSelectedTab,
@@ -12,6 +13,7 @@ const TabsSection = ({
   selectedTab: string;
   setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const { cryptoSelector } = useCrypto();
   const contextdata = useContextFunction();
   const tabs = [
     { tab: "overview", pic: chartIcon },
@@ -20,27 +22,14 @@ const TabsSection = ({
   ];
 
   return (
-    <motion.div
-      className="view-crypto-tabs-container"
-      variants={viewFromLeft(1, 0.4)}
-      whileInView="visible"
-      initial="hidden"
-    >
+    <motion.div className="view-crypto-tabs-container">
       {tabs.map((tab, index) => {
         return (
           <motion.span
-            initial={{ width: "default" }}
-            animate={{
-              width:
-                selectedTab === tab.tab && contextdata?.screenW
-                  ? "200px"
-                  : "fit-content",
-            }}
-            transition={{
-              duration: 0.3,
-              type: "just",
-              ease: "linear",
-            }}
+            variants={tagsMotion(index, 0.3)}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             key={index}
             onClick={() => setSelectedTab(tab.tab)}
             className={`${selectedTab === tab.tab ? "selected-tab" : ""}`}
