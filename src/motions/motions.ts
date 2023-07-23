@@ -124,6 +124,14 @@ export const componentViewMotion = {
       when: "beforeChidlren",
     },
   },
+  exit: {
+    y: 40,
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      type: "tween",
+    },
+  },
 };
 export const nftCardsMotion = (index: number) => {
   return {

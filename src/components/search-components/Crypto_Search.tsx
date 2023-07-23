@@ -1,5 +1,11 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import React, {
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from "react";
+import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -9,49 +15,101 @@ import {
 } from "../../features/crypto_slice/crypto_slice";
 import filterIcon from "../../assets/crypto/filter.svg";
 import refreshIcon from "../../assets/crypto/refresh.svg";
+import TreeChart from "../../assets/crypto/TreeChart.svg";
+import lineChart from "../../assets/crypto/lineChart.svg";
 
-type cryptoSearchPropType = {
-  displayFilterModal: boolean;
-  setDisplayFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Crypto_Search = ({ setDisplayFilterModal }: cryptoSearchPropType) => {
-  const [searchText, setSearchText] = useState<string>("");
-  const { cryptosList, setLoacalCryptoList } = useCrypto();
+const Crypto_Search = ({
+  DisplayType,
+  setDisplayType,
+}: {
+  DisplayType: string;
+  setDisplayType: React.Dispatch<React.SetStateAction<"line" | "tree">>;
+}) => {
   const dispatch = useDispatch();
-  const { data, isError, refetch } = cryptosList("refresh-data", false, false);
+  const { cryptosList } = useCrypto();
+  const [searchText, setSearchText] = useState<string>("");
+  const [displayFilterModal, setDisplayFilterModal] = useState<boolean>(false);
+  const { data, isError, refetch, isLoading } = cryptosList(
+    "refresh-data",
+    false,
+    false
+  );
+  const controls = useAnimationControls();
+  const [_pending, setTransition] = useTransition();
   const setSearchTextCallBack = useMemo(() => {
     dispatch(setCryptoSearch(searchText));
   }, [searchText]);
   useEffect(() => {
-    if (data) {
-      dispatch(fetchCoins(data.data));
-      setLoacalCryptoList(data.data);
-      toast.success("data refreshed successfuly !");
-    } else if (isError) {
-      toast.error("please refresh again !");
+    if (isLoading) {
+      controls.start({
+        rotate: [0, 360],
+        transition: {
+          repeat: Infinity,
+        },
+      });
+    } else {
+      controls.stop();
     }
-  }, [data]);
+  }, [isLoading]);
 
   return (
     <motion.div className="search-crypto-container">
       <motion.input
         value={searchText}
         onChange={(e) => {
-          setSearchText(e.target.value);
+          setTransition(() => {
+            setSearchText(e.target.value);
+          });
         }}
         placeholder="Search ... "
       />
-      <motion.button onClick={() => setDisplayFilterModal(true)}>
-        <img src={filterIcon} alt="filter" />
+      <motion.button
+        onClick={() => {
+          setTransition(() => {
+            setDisplayType("line");
+          });
+        }}
+        className={`${DisplayType === "line" ? "selected" : ""}`}
+      >
+        <img src={lineChart} />
       </motion.button>
       <motion.button
         onClick={() => {
-          refetch();
+          setTransition(() => {
+            setDisplayType("tree");
+          });
+        }}
+        className={`${DisplayType === "tree" ? "selected" : ""}`}
+      >
+        <img src={TreeChart} />
+      </motion.button>
+      <motion.button
+        onClick={() => {
+          setTransition(() => {
+            toast.promise(refetch(), {
+              pending: "Refreshing Data !",
+              success: "Data Refreshed Successfully !",
+              error: "Unable To Refresh Data !",
+            });
+          });
         }}
       >
-        <img src={refreshIcon} alt="refresh" />
+        <motion.img
+          initial={{ rotate: 0 }}
+          animate={controls}
+          transition={{
+            duration: 0.1,
+            type: "tween",
+            ease: "linear",
+          }}
+          src={refreshIcon}
+          alt="refresh"
+        />
       </motion.button>
+      <motion.button onClick={() => setDisplayFilterModal(true)}>
+        <img src={filterIcon} alt="filter" />
+      </motion.button>
+      <AnimatePresence>{displayFilterModal && <div></div>}</AnimatePresence>
     </motion.div>
   );
 };

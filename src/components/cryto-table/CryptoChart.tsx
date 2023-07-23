@@ -162,7 +162,7 @@ export function CryptoTable({
       transition={{ duration: 2, delay: 1, type: "tween" }}
       style={{ width: width, height: height }}
     >
-      {/* {datasets.length > 0 && sparkLine.length === 0 && defChart.length > 0 && (
+      {datasets.length > 0 && sparkLine.length === 0 && defChart.length > 0 && (
         <Line
           data={{
             labels: defChart.map((coin: any) => {
@@ -279,7 +279,7 @@ export function CryptoTable({
             responsive: true,
           }}
         />
-      )} */}
+      )}
     </motion.div>
   );
 }

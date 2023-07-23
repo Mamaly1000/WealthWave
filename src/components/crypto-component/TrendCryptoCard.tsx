@@ -12,6 +12,7 @@ type trendCryptoCardPropsType = {
 const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
   const { getCryptoPercentage } = useCrypto();
   const [coinPercentage, setCoinPercentage] = useState<number>(0);
+  const [displayChart, setDisplayChart] = useState<boolean>(false);
   useEffect(() => {
     if (coin) {
       setCoinPercentage(
@@ -32,6 +33,9 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
       whileInView="visible"
       exit="exit"
       className="trend-crypto-component"
+      onAnimationComplete={() => {
+        setDisplayChart(true);
+      }}
     >
       <motion.div className="trend-crypto-content">
         <motion.div>
@@ -56,14 +60,16 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
           {coinPercentage}%
         </span>
       </motion.div>
-      <CryptoTable
-        height={"150px"}
-        id={coin.item.id}
-        width={"200px"}
-        percent={coinPercentage}
-        defChart={default_charts_data[index]!.prices}
-        sparkLine={[]}
-      />
+      {displayChart && (
+        <CryptoTable
+          height={"150px"}
+          id={coin.item.id}
+          width={"200px"}
+          percent={coinPercentage}
+          defChart={default_charts_data[index]!.prices}
+          sparkLine={[]}
+        />
+      )}
     </motion.div>
   );
 };

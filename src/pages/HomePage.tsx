@@ -11,7 +11,11 @@ import { removingPageMotion } from "../motions/motions";
 import { FC } from "react";
 import globeSVG from "./../assets/globe.svg";
 import SelectedNewsPost from "../components/selectedNewsPost/selectedNewsPost";
+import useCrypto from "../hooks/useCrypto";
 const HomePage: FC<any> = () => {
+  const {
+    cryptoSelector: { coinlist },
+  } = useCrypto();
   return (
     <motion.div
       variants={removingPageMotion}
@@ -25,7 +29,7 @@ const HomePage: FC<any> = () => {
         <HomePageIntro />
         <CubeSlider />
       </motion.div>
-      <CryptoTableRow />
+      <CryptoTableRow crypto_data={coinlist} header={true} />
       <NFTslider />
       <NewsSection />
       <AboutUs />
