@@ -6,8 +6,10 @@ import Loader from "../loader/Loader";
 import NFTpost from "./NFTpost";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
+import { useNavigate } from "react-router-dom";
 
 const NFTslider = () => {
+  const nav = useNavigate();
   const { getNftLst, loading, nftList } = useNFT();
   useEffect(() => {
     getNftLst(10);
@@ -24,7 +26,7 @@ const NFTslider = () => {
       <div className="nft-slider-container">
         <div className="nft-slider-header">
           <h2 className="page-header">Discover our NFT world</h2>
-          <button>whatch more</button>
+          <button onClick={() => nav("/nfts")}>whatch more</button>
         </div>
         <div className="nft-slider">
           <Swiper

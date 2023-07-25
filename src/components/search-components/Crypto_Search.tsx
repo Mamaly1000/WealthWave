@@ -10,13 +10,23 @@ import useCrypto from "../../hooks/useCrypto";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import {
-  fetchCoins,
   setCryptoSearch,
+  sortCryptoTable,
 } from "../../features/crypto_slice/crypto_slice";
 import filterIcon from "../../assets/crypto/filter.svg";
 import refreshIcon from "../../assets/crypto/refresh.svg";
 import TreeChart from "../../assets/crypto/TreeChart.svg";
 import lineChart from "../../assets/crypto/lineChart.svg";
+
+export type FilterType =
+  | "RANK"
+  | "NAME"
+  | "PRICE"
+  | "LOW_24H"
+  | "HIGH_24H"
+  | "24H"
+  | "24H_VOLUME"
+  | "MKT_CAP";
 
 const Crypto_Search = ({
   DisplayType,
@@ -29,11 +39,7 @@ const Crypto_Search = ({
   const { cryptosList } = useCrypto();
   const [searchText, setSearchText] = useState<string>("");
   const [displayFilterModal, setDisplayFilterModal] = useState<boolean>(false);
-  const { data, isError, refetch, isLoading } = cryptosList(
-    "refresh-data",
-    false,
-    false
-  );
+  const { refetch, isLoading } = cryptosList("refresh-data", false, false);
   const controls = useAnimationControls();
   const [_pending, setTransition] = useTransition();
   const setSearchTextCallBack = useMemo(() => {
@@ -106,7 +112,17 @@ const Crypto_Search = ({
           alt="refresh"
         />
       </motion.button>
-      <motion.button onClick={() => setDisplayFilterModal(true)}>
+      <motion.button
+        onClick={() => {
+          dispatch(
+            sortCryptoTable({
+              type_name: "RANK",
+              type: "ASC",
+            })
+          );
+          toast.success("sorts has been cleared successfully !");
+        }}
+      >
         <img src={filterIcon} alt="filter" />
       </motion.button>
       <AnimatePresence>{displayFilterModal && <div></div>}</AnimatePresence>

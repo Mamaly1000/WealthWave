@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useTransition } from "react";
 import { useDispatch } from "react-redux";
 import {
   setChartType,
@@ -14,6 +14,7 @@ import { Autoplay } from "swiper";
 const ChartSetting = () => {
   const dispatch = useDispatch();
   const { cryptoSelector } = useCrypto();
+  const [_pending, setTransition] = useTransition();
   const days = [1, 7, 14, 30, 60, 90, 180];
   const refetch_chart_day = useQueries(
     cryptoSelector.cryptoCharts.map((chart) => {
@@ -60,7 +61,11 @@ const ChartSetting = () => {
                   ? "selected-title"
                   : ""
               }`}
-              onClick={() => dispatch(setChartType(value))}
+              onClick={() => {
+                setTransition(() => {
+                  dispatch(setChartType(value));
+                });
+              }}
             >
               {value}
             </span>
@@ -82,7 +87,9 @@ const ChartSetting = () => {
                   cryptoSelector.cryptoDay === d ? "selected-day" : ""
                 }`}
                 onClick={() => {
-                  dispatch(setCryptoDay(d));
+                  setTransition(() => {
+                    dispatch(setCryptoDay(d));
+                  });
                 }}
               >
                 {d === 1 ? d + " day" : d + " days"}

@@ -12,6 +12,7 @@ type CryptoLinePropsType = {
 };
 const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
   const nav = useNavigate();
+  const { cryptoSelector } = useCrypto();
   const [displayChart, setDisplayChart] = useState<boolean>(false);
   return (
     <motion.tr
@@ -24,13 +25,22 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         setDisplayChart(true);
       }}
     >
-      <td className="rank-td">
+      <td
+        className={`${
+          cryptoSelector.filterType.type_name === "RANK" ? "selected-td" : ""
+        } rank-td`}
+      >
         <button>
           <img src={saveIcon} alt="save" />
         </button>
         {coin.market_cap_rank}
       </td>
-      <td className="coin-td" onClick={() => nav(`/crypto/${coin!.id}`)}>
+      <td
+        className={`${
+          cryptoSelector.filterType.type_name === "NAME" ? "selected-td" : ""
+        } coin-td`}
+        onClick={() => nav(`/crypto/${coin!.id}`)}
+      >
         <motion.img
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -41,37 +51,61 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         {coin.id}
         <span>{coin.symbol}</span>
       </td>
-      <td className="price-td">${coin.current_price}</td>
       <td
-        className={`low-td ${
-          +coin.low_24h > +coin.high_24h ? "green-text" : "red-text"
-        }`}
+        className={`${
+          cryptoSelector.filterType.type_name === "PRICE" ? "selected-td" : ""
+        } price-td`}
       >
-        ${coin.low_24h}
+        {coin.current_price ? "$" + coin.current_price.toLocaleString() : "N/A"}
       </td>
       <td
-        className={`high-td ${
+        className={`${
+          cryptoSelector.filterType.type_name === "LOW_24H" ? "selected-td" : ""
+        } low-td ${+coin.low_24h > +coin.high_24h ? "green-text" : "red-text"}`}
+      >
+        {coin.low_24h ? "$" + coin.low_24h.toLocaleString() : "N/A"}
+      </td>
+      <td
+        className={`${
+          cryptoSelector.filterType.type_name === "HIGH_24H"
+            ? "selected-td"
+            : ""
+        } high-td  ${
           +coin.high_24h > +coin.low_24h ? "green-text" : "red-text"
         }`}
         onClick={() => nav(`/crypto/${coin!.id}`)}
       >
-        ${coin.high_24h}
+        {coin.high_24h ? "$" + coin.high_24h.toLocaleString() : "N/A"}
       </td>
       <td
-        className={`percentage-td ${
+        className={`${
+          cryptoSelector.filterType.type_name === "24H" ? "selected-td" : ""
+        } percentage-td  ${
           +coin.price_change_percentage_24h > 0 ? "green-text" : "red-text"
         }`}
         onClick={() => nav(`/crypto/${coin!.id}`)}
       >
-        {coin.price_change_percentage_24h}%
+        {coin.price_change_percentage_24h
+          ? "%" + coin.price_change_percentage_24h.toLocaleString()
+          : "N/A"}
       </td>
-      <td className="volume-td">{coin.total_volume}$</td>
       <td
-        className={`market-cap-td ${
+        className={`${
+          cryptoSelector.filterType.type_name === "24H_VOLUME"
+            ? "selected-td"
+            : ""
+        } volume-td`}
+      >
+        {coin.total_volume ? "$" + coin.total_volume.toLocaleString() : "N/A"}
+      </td>
+      <td
+        className={`${
+          cryptoSelector.filterType.type_name === "MKT_CAP" ? "selected-td" : ""
+        } market-cap-td  ${
           +coin.market_cap_change_24h > 0 ? "green-text" : "red-text"
         }`}
       >
-        {coin.market_cap_change_24h}$
+        {coin.market_cap ? "$" + coin.market_cap.toLocaleString() : "N/A"}
       </td>
       <td className="chart-td">
         <AnimatePresence mode="wait">

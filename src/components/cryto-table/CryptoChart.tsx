@@ -131,7 +131,7 @@ export function CryptoTable({
       if (percent > 0) {
         setDataSets([
           {
-            data: defChart.map((coin) => coin[1]),
+            data: defChart.slice(0, 50).map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#379237",
             borderWidth: 1,
@@ -141,7 +141,7 @@ export function CryptoTable({
       } else if (percent <= 0) {
         setDataSets([
           {
-            data: defChart.map((coin) => coin[1]),
+            data: defChart.slice(0, 50).map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
             borderColor: "#FF6666",
             borderWidth: 1,
@@ -165,7 +165,7 @@ export function CryptoTable({
       {datasets.length > 0 && sparkLine.length === 0 && defChart.length > 0 && (
         <Line
           data={{
-            labels: defChart.map((coin: any) => {
+            labels: defChart.slice(0, 50).map((coin: any) => {
               let date = new Date(coin[0]);
               let time =
                 date.getHours() > 12
@@ -179,10 +179,22 @@ export function CryptoTable({
           options={{
             elements: {
               point: {
-                radius: 1,
-                hitRadius: 5,
-                borderWidth: 2,
+                borderWidth: 0,
+                hitRadius: 0,
+                rotation: 12,
+                backgroundColor: "rgba(0 0 0/.0)",
+                radius: 0,
+                borderColor: "rgba(0 0 0/.0)",
+                hoverBackgroundColor: "rgba(0 0 0/.0)",
+                hoverBorderColor: "rgba(0 0 0/.0)",
+                hoverBorderWidth: 0,
+                hoverRadius: 0,
+                pointStyle: "triangle",
+                drawActiveElementsOnTop: false,
               },
+              line:{
+                borderWidth:2
+              }
             },
             scales: {
               x: {

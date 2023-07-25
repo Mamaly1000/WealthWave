@@ -8,6 +8,7 @@ import {
   fetchCoins,
   fetchTrendCoins,
   selectCrypto,
+  setCryptoPagination,
 } from "../features/crypto_slice/crypto_slice";
 import { IchartDataSet } from "../components/cryto-table/CryptoChart";
 import { btc_chart_data } from "../Data/charts";
@@ -87,9 +88,11 @@ const useCrypto = () => {
         onSuccess: (data) => {
           dispatch(fetchCoins(data.data));
           setLoacalCryptoList(data.data);
+          dispatch(setCryptoPagination(data.data));
         },
         onError: () => {
           dispatch(fetchCoins(LocalCryptoList));
+          dispatch(setCryptoPagination(LocalCryptoList));
         },
       }
     );

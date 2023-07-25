@@ -15,6 +15,7 @@ import View_Crypto from "./pages/View_Crypto";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ScrollToTop from "./components/scroll-component/ScrollToTop";
+import Nft_Page from "./pages/Nft_Page";
 function App() {
   const location = useLocation();
   const contextData = useContextFunction();
@@ -72,6 +73,8 @@ function App() {
 
             <Route path="/news" element={"news main page"} />
             <Route path="/news/:id" element={"news single page"} />
+
+            <Route path="/nfts" element={<Nft_Page />} />
           </Routes>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>

@@ -62,7 +62,7 @@ const CryptoTreeChart = ({
             },
           },
           title: {
-            text: "Crypto Price Tree Map",
+            text: "Crypto Percentage Tree Map",
             style: {
               color: "rgba(255 255 255 /1)",
               fontSize: "1rem",

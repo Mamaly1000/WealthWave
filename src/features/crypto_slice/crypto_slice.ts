@@ -3,6 +3,7 @@ import { IcryptoData } from "../../hooks/useCrypto";
 import { RootState } from "../store/store";
 import { toast } from "react-toastify";
 import { ISingleCoin } from "../../types/singleCrypto.type";
+import { FilterType } from "../../components/search-components/Crypto_Search";
 
 export interface ItrendCoin {
   item: {
@@ -39,6 +40,15 @@ interface crypto_slice_interface {
   cryptoSearch: string;
   cryptoChartDisplayType: "prices" | "market-cap" | "total-volumes";
   cryptoDay: number;
+  filterType: {
+    type_name: FilterType | "";
+    mode: "ASC" | "DESC" | "";
+  };
+  pagination: {
+    total_pages: number;
+    current_page: number;
+    offset: number;
+  };
 }
 
 type BookmarkedCrypto = {
@@ -216,6 +226,15 @@ const initialState: crypto_slice_interface = {
   cryptoSearch: "",
   cryptoChartDisplayType: "prices",
   cryptoDay: 1,
+  filterType: {
+    type_name: "",
+    mode: "",
+  },
+  pagination: {
+    total_pages: 0,
+    current_page: 0,
+    offset: 0,
+  },
 };
 
 const CryptoReducer = createSlice({
@@ -303,6 +322,73 @@ const CryptoReducer = createSlice({
     setCryptoDay: (state, action) => {
       state.cryptoDay = action.payload;
     },
+    sortCryptoTable: (state, action) => {
+      let sortedArray = [...state.coinlist];
+      switch (action.payload.type_name as FilterType) {
+        case "RANK":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.market_cap_rank > b.market_cap_rank ? 1 : -1;
+          });
+          break;
+        case "NAME":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.id > b.id ? 1 : -1;
+          });
+          break;
+        case "PRICE":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.current_price - b.current_price;
+          });
+          break;
+        case "LOW_24H":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.low_24h - b.low_24h;
+          });
+          break;
+        case "HIGH_24H":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.high_24h - b.high_24h;
+          });
+          break;
+        case "24H":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return (
+              a.price_change_percentage_24h - b.price_change_percentage_24h
+            );
+          });
+          break;
+        case "24H_VOLUME":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return a.total_volume - b.total_volume;
+          });
+          break;
+        case "MKT_CAP":
+          sortedArray = state.coinlist.sort((a, b) => {
+            return (
+              a.market_cap_change_percentage_24h -
+              b.market_cap_change_percentage_24h
+            );
+          });
+          break;
+        default:
+          state.coinlist = state.coinlist;
+      }
+      if (action.payload.type === "DESC") {
+        sortedArray.reverse();
+      }
+      state.filterType.mode = action.payload.type;
+      state.filterType.type_name = action.payload.type_name;
+      state.coinlist = sortedArray;
+    },
+    setCryptoPagination: (state, action) => {
+      state.pagination.total_pages = Math.ceil(action.payload.length / 10);
+    },
+    setCurrentCryptoPage: (state, action) => {
+      state.pagination.current_page = action.payload;
+    },
+    setCryptoPageOffSet: (state, action) => {
+      state.pagination.offset = action.payload;
+    },
   },
 });
 export const {
@@ -318,6 +404,10 @@ export const {
   removeCryptoChart,
   updateCryptoChart,
   setCryptoDay,
+  sortCryptoTable,
+  setCryptoPagination,
+  setCurrentCryptoPage,
+  setCryptoPageOffSet,
 } = CryptoReducer.actions;
 export default CryptoReducer.reducer;
 export const selectCrypto = (state: RootState) => {

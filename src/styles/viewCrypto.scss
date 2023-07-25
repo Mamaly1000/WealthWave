@@ -241,7 +241,7 @@
             @apply w-[250px] h-[250px] md:w-[150px] md:h-[150px];
           }
           .description-top-section-context {
-            @apply w-4/6 flex items-center justify-start flex-col text-left;
+            @apply w-full  md:w-4/6 flex items-center justify-start flex-col text-left;
             .description-name {
               @apply text-[2.5rem] uppercase text-blue-300 w-full;
             }

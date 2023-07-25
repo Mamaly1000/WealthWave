@@ -105,6 +105,9 @@
         th {
           @apply w-full flex items-center gap-2;
           td {
+            .th-arrow {
+              @apply ms-1 w-[15px] h-[15px] min-w-[15px] min-h-[15px] max-w-[15px] max-h-[15px] transition-all;
+            }
           }
         }
       }
@@ -120,7 +123,8 @@
         }
       }
       td {
-        @apply py-2 px-3 h-[60px] max-h-[60px] text-[.9rem] flex items-center;
+        transition-duration: 1s;
+        @apply py-2 px-3 h-[60px] max-h-[60px] text-[.9rem] flex items-center transition-all;
       }
       .rank-td {
         @apply min-w-[100px] w-[100px] max-w-[100px] text-right flex items-center justify-between gap-3;
@@ -157,6 +161,9 @@
       }
       .chart-td {
         @apply min-w-[150px] w-[150px] max-w-[150px];
+      }
+      .selected-td {
+        @apply bg-blue-950;
       }
     }
   }
