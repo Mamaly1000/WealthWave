@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { nftPics, randomUserData } from "../../Data/dummy";
+import { useState } from "react";
+import { randomUserData } from "../../Data/dummy";
 import { motion } from "framer-motion";
 import { nftCardsMotion } from "../../motions/motions";
+import { nftPics } from "../../Data/nftPic";
 type nftPostType = {
   name: string;
   price: string;
@@ -10,7 +11,7 @@ type nftPostType = {
 };
 
 const NFTpost = ({ name, price, index }: nftPostType) => {
-  const [nftOwner, setNftOwner] = useState(
+  const [nftOwner, _setNftOwner] = useState(
     randomUserData[Math.floor(Math.random() * randomUserData.length)]
   );
   const [liked, setLiking] = useState<boolean>(false);

@@ -1,3 +1,143 @@
 .nfts-page {
-  @apply min-h-[600px] py-24 px-5 lg:px-10;
+  @apply w-full flex flex-col items-start justify-start gap-20 min-h-[600px] py-24 px-5 lg:px-10 text-white;
+  .nft-page-intro {
+    @apply w-full flex flex-col items-start justify-start gap-2 min-h-[400px] max-h-fit;
+    .intro-context {
+      @apply w-full flex flex-col items-start justify-start py-10;
+      .part {
+        @apply relative w-full flex flex-col md:flex-row justify-center items-center gap-10 min-h-[100px];
+        p {
+          @apply max-w-[350px] uppercase font-light text-[.8rem];
+        }
+        h1 {
+          @apply whitespace-nowrap text-blue-300 max-w-full md:max-w-[300px] font-extrabold text-[3rem] font-rail uppercase;
+        }
+      }
+    }
+    .nft-intro-image {
+      @apply relative w-full flex justify-center items-center max-h-[300px] min-h-[300px] h-[300px] md:max-h-[500px] md:min-h-[500px] md:h-[500px] p-10;
+      div {
+        background-image: url("./../assets/nft/wal-2.jpg");
+        background-size: 300% 100%;
+        @apply absolute min-w-[30%] min-h-full bg-red-50 rounded-lg drop-shadow-2xl shadow-violet-300;
+      }
+      .image-part-4 {
+        background-position: 90% 0%;
+        clip-path: polygon(50% 0, 100% 0, 100% 100%, 25% 100%);
+        @apply end-0;
+      }
+      .image-part-1 {
+        background-position: 0% 0%;
+        clip-path: polygon(0 0, 75% 0, 50% 100%, 0% 100%);
+        @apply start-1;
+      }
+      .image-part-2 {
+        background-position: 25% 0%;
+        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        @apply start-[21%];
+      }
+      .image-part-3 {
+        background-position: 65% 0%;
+        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        @apply end-[21%];
+      }
+    }
+  }
+  .nft-page-content {
+    @apply w-full flex flex-col items-start justify-start gap-10;
+    .top-nft {
+      @apply w-full flex flex-col items-start justify-start gap-5;
+      .mySwiper {
+        @apply w-full min-h-[300px];
+        .swiper-slide {
+          @apply w-fit h-fit;
+          .top-nft-post {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            @apply flex items-center justify-center overflow-hidden max-w-[250px] max-h-[250px] min-w-[250px] min-h-[250px] rounded-lg drop-shadow-2xl p-2;
+            .nft-post-favorites {
+              @apply p-1 rounded-lg absolute left-2 top-2  min-h-[35px] flex z-10 flex-row items-center justify-start;
+              span {
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                @apply text-white relative w-[35px] h-[35px] max-h-[35px] max-w-[35px] rounded-full flex justify-center items-center border-[1px] border-white bg-blend-saturation text-[.6rem];
+              }
+            }
+            .nft-post-actions {
+              clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75%);
+              background: rgba(0 0 0 /0.2);
+              @apply absolute top-0 end-0 w-[50px] h-fit flex flex-col gap-2 items-center justify-center p-2 pb-12 drop-shadow-2xl;
+              button {
+                @apply w-[35px] h-[35px] p-2 shadow-none;
+              }
+            }
+            .nft-post-data {
+              background: rgba(0 0 0 /0.5);
+              box-shadow: -10px 0 10px rgba(0 0 0 /0.5);
+              @apply flex items-center justify-between p-2 gap-2 absolute bottom-0 start-0 rounded-lg w-full;
+              .nft-post-name {
+                @apply text-[1rem] uppercase font-semibold text-left;
+              }
+              .nft-post-price {
+                @apply flex items-center gap-1 text-[.9rem] font-semibold;
+                img {
+                  @apply w-[20px] h-[20px];
+                }
+              }
+            }
+            .nft-post-readmore-btn {
+              @apply absolute w-fit h-fit px-3 py-2 z-10 whitespace-nowrap flex items-center justify-center gap-1;
+              img {
+                @apply w-[20px] h-[20px];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .swiper-container {
+    @apply w-full;
+  }
+  h2 {
+    @apply w-full text-left text-[2rem] text-blue-300 font-bold capitalize;
+  }
+  .nft-divider {
+    background: linear-gradient(
+      0deg,
+      rgba(190, 241, 255, 0.1) 0%,
+      rgba(0, 228, 255, 1) 29%,
+      rgba(155, 249, 244, 1) 42%,
+      rgba(102, 247, 231, 1) 52%,
+      rgba(0, 228, 255, 1) 64%,
+      rgba(108, 244, 255, 0.1) 100%
+    );
+    position: relative;
+    z-index: 1;
+  }
+  .nft-divider::after {
+    content: "";
+
+    position: absolute;
+    inset: -0.625em;
+    background: linear-gradient(
+      0deg,
+      rgba(190, 241, 255, 1) 0%,
+      rgba(0, 228, 255, 1) 29%,
+      rgba(155, 249, 244, 1) 42%,
+      rgba(102, 247, 231, 1) 52%,
+      rgba(0, 228, 255, 1) 64%,
+      rgba(108, 244, 255, 1) 100%
+    );
+    filter: blur(2em);
+    z-index: -1;
+  }
+  .swiper-pagination-bullet {
+    @apply w-[10px] h-[10px] rounded-[2px] bg-blue-400 transition-all;
+  }
+  .swiper-pagination-bullet-active {
+    @apply w-[20px] bg-blue-400;
+  }
 }

@@ -1,64 +1,88 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
-
-interface Inft {
-  asset_platform_id: string;
-  contract_address: string;
-  id: string;
-  name: string;
-  symbol: string;
-}
+import { useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  INFT,
+  fetchNFTs,
+  fetchSingleNFT,
+  selectNFT,
+} from "../features/nft_slice/nft_slice";
 
 const useNFT = () => {
-  const [nftList, setNftList] = useState<Inft[]>([]);
-  const [singleNft, setSingleNft] = useState<Inft>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [loacalNFTlist, setLocalNFTlist] = useLocalStorage<Inft[]>(
+  const nftSelector = useSelector(selectNFT);
+  const dispatch = useDispatch();
+  const [loacalNFTlist, setLocalNFTlist] = useLocalStorage<INFT[]>(
     "nftList",
     []
   );
-  const getNftLst = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/nfts/list?per_page=500`
-      );
-      if (response.status === 200) {
-        setNftList(response.data);
-        setLocalNFTlist(response.data);
-        setLoading(false);
+  const [loacalSingleNFTlist, setLocalSingleNFTlist] = useLocalStorage<
+    INFT | {}
+  >("last_checked_nft", {});
+  const getNftLst = (
+    name: string,
+    enabled: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean,
+    cacheTime: number
+  ) => {
+    return useQuery(
+      [name],
+      () => {
+        return axios.get(
+          `https://api.coingecko.com/api/v3/nfts/list?per_page=500`
+        );
+      },
+      {
+        onSuccess: (data) => {
+          dispatch(fetchNFTs(data.data));
+          setLocalNFTlist(data.data);
+        },
+        onError: () => {
+          dispatch(fetchNFTs(loacalNFTlist));
+        },
+        enabled,
+        refetchOnMount,
+        refetchOnReconnect,
+        refetchOnWindowFocus,
+        cacheTime,
       }
-      if (response.status === 429) {
-        setNftList(loacalNFTlist);
-        setLoading(false);
-      }
-    } catch (error) {
-      setNftList(loacalNFTlist);
-      setLoading(false);
-    }
+    );
   };
-  const getSingleNft = async (name: string) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/nfts/${name}`
-      );
-      if (response.status === 200) {
-        console.log(response.data);
-        setSingleNft(response.data);
-        setLoading(false);
+  const getSingleNft = (
+    name: string,
+    enabled: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean,
+    cacheTime: number
+  ) => {
+    return useQuery(
+      ["all-single-nft-data", name],
+      () => {
+        return axios.get(`https://api.coingecko.com/api/v3/nfts/${name}`);
+      },
+      {
+        onSuccess: (data) => {
+          dispatch(fetchSingleNFT(data.data));
+          setLocalSingleNFTlist(data.data);
+        },
+        onError: () => {
+          dispatch(fetchSingleNFT(loacalSingleNFTlist));
+        },
+        enabled,
+        refetchOnMount,
+        refetchOnReconnect,
+        refetchOnWindowFocus,
+        cacheTime,
       }
-    } catch (error) {
-      console.log(error);
-    }
+    );
   };
   return {
     getNftLst,
     getSingleNft,
-    loading,
-    nftList,
-    setLoading,
+    nftSelector,
   };
 };
 
