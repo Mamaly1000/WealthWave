@@ -8,9 +8,7 @@ import ContactUs from "../components/contact-us/ContactUs";
 import Comments from "../components/comments-section/Comments";
 import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
-import { FC } from "react";
-import globeSVG from "./../assets/globe.svg";
-import SelectedNewsPost from "../components/selectedNewsPost/selectedNewsPost";
+import { FC } from "react"; 
 import useCrypto from "../hooks/useCrypto";
 const HomePage: FC<any> = () => {
   const {

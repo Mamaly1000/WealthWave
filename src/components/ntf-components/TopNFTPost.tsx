@@ -2,7 +2,6 @@ import { nftPics } from "../../Data/nftPic";
 import { AvatarPics } from "../../Data/profilePics";
 import { INFT } from "../../features/nft_slice/nft_slice";
 import { motion } from "framer-motion";
-import { viewFromLeft } from "../../motions/viewCryptoMotions";
 import { useEffect, useState } from "react";
 import { nftCardsMotion } from "../../motions/motions";
 import ethIMG from "./../../assets/nft/icons8-ethereum-logo.svg";

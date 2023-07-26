@@ -97,6 +97,40 @@
         }
       }
     }
+    .best-sellers-nft {
+      @apply w-full flex flex-col items-start justify-start gap-5;
+      .mySwiper {
+        @apply w-full min-h-[300px];
+        .swiper-slide {
+          @apply w-fit h-fit;
+          .best-seller-nft-post {
+            @apply w-[200px] h-[250px] flex flex-col items-center justify-center gap-2 transition-all hover:bg-blue-900 rounded-lg;
+            .nft-post-image-container {
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              @apply cursor-pointer w-[150px] h-[150px] relative flex items-center justify-center rounded-lg drop-shadow-2xl;
+              .badge {
+                @apply w-[30px] h-[30px] absolute top-[-15px] end-[-15px] drop-shadow-2xl;
+              }
+            }
+            .nft-post-data {
+              @apply cursor-pointer w-[200px] h-[50px] flex flex-col items-center justify-center gap-1;
+              .name {
+                @apply h-fit text-[.9rem] font-bold uppercase w-full text-center;
+              }
+              .price {
+                background: rgba(0 0 0 /0.2);
+                @apply w-fit h-fit px-3 py-1  rounded-2xl text-center flex justify-center items-center gap-1 text-[.9rem] font-semibold;
+                img {
+                  @apply w-[20px] h-[20px] drop-shadow-2xl;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
   .swiper-container {
     @apply w-full;

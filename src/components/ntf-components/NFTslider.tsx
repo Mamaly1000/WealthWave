@@ -10,10 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 const NFTslider = () => {
   const nav = useNavigate();
-  const { getNftLst, loading, nftList } = useNFT();
-  useEffect(() => {
-    getNftLst(10);
-  }, []);
+  const { getNftLst, nftSelector } = useNFT();
+  const fetchNfts = getNftLst("get-all-nfts", true, true, true, false, 5000);
 
   return (
     <motion.div
@@ -43,8 +41,8 @@ const NFTslider = () => {
             modules={[FreeMode, Pagination, Autoplay]}
             className="mySwiper"
           >
-            {!loading ? (
-              nftList?.slice(0, 10).map((nft, index) => {
+            {!fetchNfts.isLoading ? (
+              nftSelector.nft_list?.slice(0, 10).map((nft, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <NFTpost

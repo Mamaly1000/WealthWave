@@ -6,6 +6,7 @@ import { Pagination, Autoplay } from "swiper";
 import { viewFromDown, viewFromLeft } from "../motions/viewCryptoMotions";
 import TopNFTPost from "../components/ntf-components/TopNFTPost";
 import useNFT from "../hooks/useNFT";
+import BestSellerNFTPost from "../components/ntf-components/BestSellerNFTPost";
 
 const Nft_Page = () => {
   const { getNftLst, nftSelector } = useNFT();
@@ -85,6 +86,39 @@ const Nft_Page = () => {
                   return (
                     <SwiperSlide>
                       <TopNFTPost index={index} nft={nft} key={index} />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+          </motion.div>
+        </div>
+        <div className="best-sellers-nft">
+          <motion.h2
+            variants={viewFromLeft(1, 0.3)}
+            initial="hidden"
+            whileInView="visible"
+          >
+            Best Sellers NFTs
+          </motion.h2>
+          <motion.div
+            variants={viewFromDown(1.2, 0.4)}
+            initial="hidden"
+            whileInView="visible"
+            className="swiper-container"
+          >
+            <Swiper
+              slidesPerView={"auto"}
+              spaceBetween={10}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              modules={[Pagination, Autoplay]}
+              className="mySwiper"
+            >
+              {!fetchNfts.isLoading &&
+                nftSelector.nft_list.slice(10, 20).map((nft, index) => {
+                  return (
+                    <SwiperSlide>
+                      <BestSellerNFTPost index={index} nft={nft} key={index} />
                     </SwiperSlide>
                   );
                 })}
