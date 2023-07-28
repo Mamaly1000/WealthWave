@@ -7,6 +7,7 @@ import {
   fetchNFTs,
   fetchSingleNFT,
   selectNFT,
+  setNFTTotalPages,
 } from "../features/nft_slice/nft_slice";
 
 const useNFT = () => {
@@ -38,6 +39,7 @@ const useNFT = () => {
         onSuccess: (data) => {
           dispatch(fetchNFTs(data.data));
           setLocalNFTlist(data.data);
+          dispatch(setNFTTotalPages(data.data.length));
         },
         onError: () => {
           dispatch(fetchNFTs(loacalNFTlist));

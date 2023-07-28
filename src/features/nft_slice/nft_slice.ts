@@ -91,6 +91,7 @@ interface Inft_slice {
     current_page: number;
     offset: number;
   };
+  nftSearch: string;
 }
 const InitialState: Inft_slice = {
   nft_list: [],
@@ -101,9 +102,10 @@ const InitialState: Inft_slice = {
   },
   pagination: {
     total_pages: 0,
-    current_page: 0,
+    current_page: 1,
     offset: 0,
   },
+  nftSearch: "",
 };
 const Nft_Reducer = createSlice({
   name: "nft_slice",
@@ -147,6 +149,12 @@ const Nft_Reducer = createSlice({
     setNFTPageOffSet: (state, action) => {
       state.pagination.offset = action.payload;
     },
+    setNFTsearch: (state, action) => {
+      state.nftSearch = action.payload;
+    },
+    setNFTTotalPages: (state, action) => {
+      state.pagination.total_pages = action.payload;
+    },
   },
 });
 export const {
@@ -156,6 +164,8 @@ export const {
   setNFTPagination,
   setCurrentNFTPage,
   setNFTPageOffSet,
+  setNFTsearch,
+  setNFTTotalPages,
 } = Nft_Reducer.actions;
 export default Nft_Reducer.reducer;
 export const selectNFT = (state: RootState) => {

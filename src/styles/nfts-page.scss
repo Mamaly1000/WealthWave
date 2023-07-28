@@ -56,15 +56,7 @@
             background-repeat: no-repeat;
             background-position: center;
             @apply flex items-center justify-center overflow-hidden max-w-[250px] max-h-[250px] min-w-[250px] min-h-[250px] rounded-lg drop-shadow-2xl p-2;
-            .nft-post-favorites {
-              @apply p-1 rounded-lg absolute left-2 top-2  min-h-[35px] flex z-10 flex-row items-center justify-start;
-              span {
-                background-position: center;
-                background-size: cover;
-                background-repeat: no-repeat;
-                @apply text-white relative w-[35px] h-[35px] max-h-[35px] max-w-[35px] rounded-full flex justify-center items-center border-[1px] border-white bg-blend-saturation text-[.6rem];
-              }
-            }
+
             .nft-post-actions {
               clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75%);
               background: rgba(0 0 0 /0.2);
@@ -135,8 +127,251 @@
   .swiper-container {
     @apply w-full;
   }
+  .nft-page-topwork-explore {
+    @apply w-full min-h-[350px] max-h-fit flex items-start justify-end flex-col-reverse  md:flex-row gap-2;
+    .explore-images-container {
+      @apply relative w-full md:min-w-[50%] h-full flex items-start justify-start gap-[1%];
+      .image-left-section {
+        @apply justify-end;
+        .big-card {
+          background-position: 10% 60%;
+        }
+        .small-card {
+          background-position: 30% 30%;
+        }
+        .medium-card {
+          background-position: 23% 100%;
+        }
+        .last-card {
+          background-position: 6% 90%;
+          background-color: transparent;
+        }
+      }
+      .image-right-section {
+        @apply justify-start items-end;
+        .big-card {
+          background-position: 100% 60%;
+        }
+        .small-card {
+          background-position: 100% 30%;
+        }
+        .medium-card {
+          background-position: 90% 17%;
+        }
+        .last-card {
+          background-position: 76% 90%;
+        }
+      }
+      .image-left-section,
+      .image-right-section {
+        @apply relative space-y-1 gap-[1%] min-w-[49%] h-full flex flex-row flex-wrap;
+        div {
+          background-image: url("./../assets/avatars/gold-wall-papre.jpg");
+          background-size: 1000px 400px;
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+          @apply rounded-lg drop-shadow-2xl bg-red-100;
+        }
+      }
+
+      .big-card {
+        @apply min-w-full h-[150px];
+      }
+      .small-card {
+        @apply min-w-[30%] h-[50px];
+      }
+      .medium-card {
+        @apply min-w-[69%] h-[100px];
+      }
+    }
+    .explre-data-container {
+      @apply w-full md:min-w-[50%] md:max-w-[50%] min-h-full flex items-start justify-start md:justify-between gap-2 flex-col;
+      .explore-top-section {
+        @apply w-full  flex flex-col items-start justify-start gap-2;
+        h3 {
+          @apply w-full text-[1.5rem] text-blue-300 capitalize text-left font-bold;
+        }
+        p {
+          @apply w-[90%] text-left text-[.9rem] font-semibold capitalize;
+        }
+      }
+      .explre-bottom-section {
+        @apply w-full flex flex-row flex-wrap justify-start items-start gap-2;
+        .benefit {
+          @apply min-w-full p-2 md:p-0  md:min-w-[49%] max-w-[49%] h-1/2 flex flex-col  items-start  justify-start gap-1;
+          .light {
+            @apply text-[.9rem] capitalize font-semibold text-gray-300;
+          }
+          .bold {
+            @apply font-extrabold text-[1.1rem];
+          }
+          .nft-divider {
+            @apply min-w-full;
+          }
+        }
+      }
+    }
+  }
+  .nft-page-artists {
+    @apply w-full min-h-[400px] flex flex-col md:flex-row items-start justify-center gap-[2%] text-left;
+    .artists-left-container {
+      @apply w-full md:min-w-[49%] md:max-w-[49%] min-h-[300px]   max-h-fit flex flex-col  items-center justify-center gap-5;
+      .nft-divider {
+        @apply min-w-full;
+      }
+      p {
+        @apply w-full;
+      }
+    }
+    .artists-right-container {
+      @apply w-full md:min-w-[49%] md:max-w-[49%] h-full;
+      .mySwiper {
+        @apply w-full h-full flex flex-col items-center justify-between;
+        .swiper-slide {
+          @apply w-fit h-fit;
+          .nft-artist-card {
+            @apply relative min-w-[250px] max-w-[250px] min-h-[350px] rounded-lg drop-shadow-2xl;
+            .bg-image-container {
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              @apply w-full rounded-lg h-[150px] drop-shadow-2xl;
+            }
+            .nft-artist-image-container {
+              @apply max-w-[70px] flex items-center justify-center max-h-[70px] rounded-full absolute top-[100px] start-[90px] overflow-hidden p-2 drop-shadow-2xl;
+              img {
+                @apply rounded-full max-w-[60px]  max-h-[60px] min-w-[60px]  min-h-[60px] object-contain;
+              }
+            }
+            .nft-artist-data {
+              @apply w-full h-[200px] flex items-center justify-between gap-1 flex-row flex-wrap  absolute bottom-0 p-3 text-center py-5;
+              .nft-artist-name {
+                @apply w-[49%] font-bold text-[1rem] capitalize font-rail text-left;
+              }
+              .nft-artist-rate {
+                background: rgba(0 0 0 /0.4);
+                @apply w-fit flex items-center gap-1 font-semibold uppercase text-right px-2 py-1 rounded-lg;
+                img {
+                  filter: invert(100%) sepia(0%) saturate(7500%)
+                    hue-rotate(110deg) brightness(98%) contrast(108%);
+                  @apply w-[15px] h-[15px];
+                }
+              }
+              .nft-artist-description {
+                @apply text-[.9rem] font-light text-center;
+              }
+              button {
+                box-shadow: 0 0 10px rgba(0 0 0 /0.4);
+                @apply flex items-center justify-center gap-2 flex-row w-full bg-transparent hover:bg-blue-950 drop-shadow-2xl;
+                span {
+                  @apply w-full h-full flex items-center justify-center gap-2;
+                }
+                img {
+                  @apply w-[20px] h-[20px];
+                }
+              }
+              .followed {
+                @apply bg-blue-950 hover:bg-transparent;
+              }
+            }
+          }
+        }
+        .swiper-pagination {
+          @apply bottom-0;
+        }
+      }
+    }
+  }
+  .nft-search-container {
+    @apply w-full max-h-[50px] min-h-[50px] flex flex-wrap items-center justify-center rounded-lg overflow-hidden p-0;
+    input {
+      width: calc(100% - 110px);
+      @apply min-h-full rounded-e-none;
+    }
+    button {
+      @apply w-[50px] h-[50px] rounded-none bg-blue-700 p-2 hover:bg-blue-950 shadow-none;
+      img {
+        @apply w-[30px] h-[30px];
+      }
+    }
+    .rounded {
+      @apply rounded-e-lg;
+    }
+  }
+  .nft-list-container {
+    @apply w-full min-h-[500px] flex flex-wrap gap-5 items-start justify-center;
+    .nft-card {
+      background: rgba(0 0 0 /0.2);
+      @apply overflow-hidden min-w-[300px] min-h-[110px] rounded-lg drop-shadow-2xl  cursor-pointer hover:bg-blue-900 transition-all flex items-center justify-start p-2 gap-2;
+      .image-container {
+        @apply w-[100px] h-[100px] rounded-lg overflow-hidden drop-shadow-2xl;
+        img {
+          @apply w-full h-full object-cover;
+        }
+      }
+      .nft-card-data {
+        @apply relative w-[200px] min-h-[100px] rounded-lg flex flex-col gap-1 items-start justify-start;
+        .nft-name {
+          @apply text-[1.2rem] capitalize font-bold text-left w-full;
+        }
+        .nft-price {
+          @apply w-full flex items-center justify-start gap-1;
+          img {
+            @apply w-[20px] h-[20px];
+          }
+        }
+        .nft-post-favorites {
+          @apply absolute -bottom-12 left-[-2%];
+        }
+        .save-nft-btn {
+          @apply absolute bottom-2 right-0 w-[35px] h-[35px] max-w-[35px] max-h-[35px]  rounded-lg p-2;
+          img {
+            @apply w-full h-full;
+          }
+        }
+      }
+    }
+  }
+  .nft-list-pagination {
+    @apply w-full   h-fit;
+    .crypto-pagination {
+      @apply flex flex-row flex-wrap justify-center items-center gap-5 py-3;
+      li,
+      .selected {
+        background: rgba(0 0 0 /0.2);
+        @apply min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] p-0 overflow-hidden flex items-center justify-center  rounded-md text-white hover:bg-blue-900 hover:scale-110 transition-all;
+        a {
+          @apply p-3;
+        }
+      }
+      .crypto-pagination-nav {
+        @apply min-w-fit min-h-fit p-0;
+        a {
+          @apply w-full h-full p-3;
+        }
+      }
+      .crypto-pagination-breaks {
+        @apply w-[50px] h-[50px] p-0;
+        a {
+          @apply w-full h-full p-3;
+        }
+      }
+    }
+    .activeClassName {
+      @apply w-full h-full bg-blue-900;
+    }
+  }
   h2 {
     @apply w-full text-left text-[2rem] text-blue-300 font-bold capitalize;
+  }
+  .nft-post-favorites {
+    @apply p-1 rounded-lg absolute left-2 top-2  min-h-[35px] flex z-10 flex-row items-center justify-start;
+    span {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      @apply text-white relative w-[35px] h-[35px] max-h-[35px] max-w-[35px] rounded-full flex justify-center items-center border-[1px] border-white bg-blend-saturation text-[.6rem];
+    }
   }
   .nft-divider {
     background: linear-gradient(

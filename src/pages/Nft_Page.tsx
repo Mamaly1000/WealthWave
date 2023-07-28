@@ -3,14 +3,37 @@ import { removingPageMotion } from "../motions/motions";
 import Divider from "../components/ntf-components/Divider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper";
-import { viewFromDown, viewFromLeft } from "../motions/viewCryptoMotions";
+import {
+  viewFromDown,
+  viewFromLeft,
+  viewFromRight,
+  viewFromTop,
+} from "../motions/viewCryptoMotions";
 import TopNFTPost from "../components/ntf-components/TopNFTPost";
 import useNFT from "../hooks/useNFT";
 import BestSellerNFTPost from "../components/ntf-components/BestSellerNFTPost";
+import CountUp from "react-countup";
+import { useMemo, useState } from "react";
+import { Artists } from "../Data/Artists";
+import ArtistComponent from "../components/ntf-components/ArtistComponent";
+import NftSearchComponent from "../components/search-components/NftSearchComponent";
+import NftListComponent from "../components/ntf-components/NftListComponent";
+import NFTPagination from "../components/ntf-components/NFTPagination";
 
 const Nft_Page = () => {
   const { getNftLst, nftSelector } = useNFT();
+  const [displayExploreImage, setDisplayExploreImage] =
+    useState<boolean>(false);
   const fetchNfts = getNftLst("get-all-nfts", true, true, true, false, 5000);
+  const nftData = useMemo(() => {
+    return nftSelector.nft_list
+      .slice(nftSelector.pagination.offset, nftSelector.pagination.offset + 10)
+      .filter(
+        (nft) =>
+          nft.id.toLowerCase().includes(nftSelector.nftSearch.toLowerCase()) ||
+          nft.name.toLowerCase().includes(nftSelector.nftSearch.toLowerCase())
+      );
+  }, [nftSelector.nftSearch, nftSelector.pagination.offset, fetchNfts]);
   return (
     <motion.div
       variants={removingPageMotion}
@@ -27,6 +50,7 @@ const Nft_Page = () => {
             x: [-5, 0, 5],
           }}
           transition={{
+            delay: 3,
             repeatType: "mirror",
             repeat: Infinity,
             duration: 5,
@@ -35,30 +59,192 @@ const Nft_Page = () => {
           className="intro-context"
         >
           <div className="part">
-            <p>
+            <motion.p variants={viewFromTop(3, 0.5)}>
               Discover the world of unique digital assets with our NFT tracker
-            </p>
+            </motion.p>
 
             <Divider width={5} height={30} />
-            <h1>WealthWave</h1>
+            <motion.h1 variants={viewFromRight(3, 0.5)}>WealthWave</motion.h1>
           </div>
           <div className="part">
-            <h1>Track nfts</h1>
+            <motion.h1 variants={viewFromLeft(3, 0.5)}>Track nfts</motion.h1>
             <Divider width={5} height={30} />
-            <p>
+            <motion.p variants={viewFromDown(3, 0.5)}>
               Experience the power of blockchain technology with our NFT
               platform
-            </p>
+            </motion.p>
           </div>
         </motion.section>
         <motion.section className="nft-intro-image">
-          <motion.div className="image-part-1"></motion.div>
-          <motion.div className="image-part-2"></motion.div>
-          <motion.div className="image-part-3"></motion.div>
-          <motion.div className="image-part-4"></motion.div>
+          <motion.div
+            variants={viewFromLeft(3, 0.5)}
+            className="image-part-1"
+          ></motion.div>
+          <motion.div
+            variants={viewFromLeft(4, 0.5)}
+            className="image-part-2"
+          ></motion.div>
+          <motion.div
+            variants={viewFromLeft(5, 0.5)}
+            className="image-part-3"
+          ></motion.div>
+          <motion.div
+            variants={viewFromLeft(6, 0.5)}
+            className="image-part-4"
+          ></motion.div>
         </motion.section>
       </section>
-      <div className="nft-page-content">
+      <section className="nft-page-content">
+        <div className="best-sellers-nft">
+          <motion.h2
+            variants={viewFromLeft(5, 0.3)}
+            initial="hidden"
+            whileInView="visible"
+          >
+            Best Sellers NFTs
+          </motion.h2>
+          <motion.div
+            variants={viewFromDown(1.2, 0.4)}
+            initial="hidden"
+            whileInView="visible"
+            className="swiper-container"
+          >
+            <Swiper
+              slidesPerView={"auto"}
+              spaceBetween={10}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              modules={[Pagination, Autoplay]}
+              className="mySwiper"
+            >
+              {!fetchNfts.isLoading &&
+                nftSelector.nft_list.slice(10, 20).map((nft, index) => {
+                  return (
+                    <SwiperSlide>
+                      <BestSellerNFTPost index={index} nft={nft} key={index} />
+                    </SwiperSlide>
+                  );
+                })}
+            </Swiper>
+          </motion.div>
+        </div>
+        <motion.div
+          variants={viewFromDown(5, 1)}
+          initial="hidden"
+          whileInView="visible"
+          className="nft-page-topwork-explore"
+          onAnimationComplete={() => {
+            setDisplayExploreImage(true);
+          }}
+        >
+          {displayExploreImage && (
+            <div className="explore-images-container">
+              <div className="image-left-section">
+                <motion.div
+                  variants={viewFromTop(2, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  className="small-card"
+                ></motion.div>
+                <motion.div
+                  className="big-card"
+                  variants={viewFromLeft(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                ></motion.div>
+                <motion.div
+                  variants={viewFromTop(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  className="small-card last-card"
+                ></motion.div>
+                <motion.div
+                  variants={viewFromDown(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  className="medium-card"
+                ></motion.div>
+              </div>
+              <div className="image-right-section">
+                <motion.div
+                  className="medium-card"
+                  variants={viewFromTop(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                ></motion.div>
+                <motion.div
+                  variants={viewFromTop(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  className="small-card"
+                ></motion.div>
+                <motion.div
+                  className="big-card"
+                  variants={viewFromLeft(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                ></motion.div>
+                <motion.div
+                  variants={viewFromTop(3, 0.5)}
+                  initial="hidden"
+                  whileInView="visible"
+                  className="small-card last-card"
+                ></motion.div>
+              </div>
+            </div>
+          )}
+          {displayExploreImage && (
+            <motion.div
+              variants={viewFromDown(3, 0.4)}
+              initial="hidden"
+              animate="visible"
+              className="explre-data-container"
+            >
+              <div className="explore-top-section">
+                <h3>
+                  Discover the Beauty and Rarity of Digital Art with Our NFT
+                  Tracker
+                </h3>
+                <p>
+                  Digital art is beautiful and rare, and our NFT tracker allows
+                  you to discover it fully. With our platform, you can explore a
+                  world of unique digital art that is authenticated through
+                  blockchain technology.
+                </p>
+              </div>
+              <div className="explre-bottom-section">
+                <div className="benefit">
+                  <span className="light">Active Artists</span>
+                  <span className="bold">
+                    <CountUp delay={1} end={100} />K
+                  </span>
+                  <Divider height={1} width={40} />
+                </div>
+                <div className="benefit">
+                  <span className="light">Collectors</span>
+                  <span className="bold">
+                    <CountUp delay={1} end={100} />K
+                  </span>
+                  <Divider height={1} width={40} />
+                </div>
+                <div className="benefit">
+                  <span className="light">Investors</span>
+                  <span className="bold">
+                    <CountUp delay={1} end={100} />K
+                  </span>
+                  <Divider height={1} width={40} />
+                </div>
+                <div className="benefit">
+                  <span className="light">Gamers</span>
+                  <span className="bold">
+                    <CountUp delay={1} end={100} />K
+                  </span>
+                  <Divider height={1} width={40} />
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
         <div className="top-nft">
           <motion.h2
             variants={viewFromLeft(1, 0.3)}
@@ -92,42 +278,44 @@ const Nft_Page = () => {
             </Swiper>
           </motion.div>
         </div>
-        <div className="best-sellers-nft">
-          <motion.h2
-            variants={viewFromLeft(1, 0.3)}
-            initial="hidden"
-            whileInView="visible"
-          >
-            Best Sellers NFTs
-          </motion.h2>
-          <motion.div
-            variants={viewFromDown(1.2, 0.4)}
-            initial="hidden"
-            whileInView="visible"
-            className="swiper-container"
-          >
-            <Swiper
-              slidesPerView={"auto"}
-              spaceBetween={10}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              modules={[Pagination, Autoplay]}
-              className="mySwiper"
-            >
-              {!fetchNfts.isLoading &&
-                nftSelector.nft_list.slice(10, 20).map((nft, index) => {
-                  return (
-                    <SwiperSlide>
-                      <BestSellerNFTPost index={index} nft={nft} key={index} />
-                    </SwiperSlide>
-                  );
-                })}
-            </Swiper>
-          </motion.div>
+      </section>
+      <section className="nft-page-artists">
+        <div className="artists-left-container">
+          <h2>our top artists</h2>
+          <Divider height={1} width={10} />
+          <p>
+            Elevate your collection with our high-quality and authenticated NFT
+            designs. Our talented artists create pieces that are not only
+            visually stunning but also backed by the security and transparency
+            of blockchain technology.
+          </p>
         </div>
-      </div>
-      <div className="nft-page-explore"> page explore </div>
-      <div className="nft-page-artists"> top artists </div>
+        <motion.div
+          variants={viewFromDown(1.2, 0.4)}
+          initial="hidden"
+          whileInView="visible"
+          className="artists-right-container"
+        >
+          <Swiper
+            slidesPerView={"auto"}
+            spaceBetween={10}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            modules={[Autoplay]}
+            className="mySwiper"
+          >
+            {Artists.map((artist, index) => {
+              return (
+                <SwiperSlide>
+                  <ArtistComponent artist={artist} key={index} index={index} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </motion.div>
+      </section>
+      <NftSearchComponent />
+      <NftListComponent data={nftData} />
+      <NFTPagination />
     </motion.div>
   );
 };

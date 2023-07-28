@@ -9,6 +9,7 @@ import DefImg from "./../../assets/nft/icons8-avalanche-64.png";
 import rightIcon from "./../../assets/nft/rightArrow.svg";
 import { useNavigate } from "react-router-dom";
 import { useContextFunction } from "../../context/AppContext";
+import NftFavorites from "./NftFavorites";
 const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
   const nav = useNavigate();
   const contextData = useContextFunction();
@@ -52,34 +53,11 @@ const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
         setDisplayButton(false);
       }}
     >
-      <motion.div
-        animate={{ y: displayButton ? -100 : 0 }}
-        className="nft-post-favorites"
-      >
-        {AvatarPics.slice(index, index + 4).map((pic, i) => {
-          return i !== 3 ? (
-            <motion.span
-              key={i}
-              style={{
-                backgroundImage: `url(${pic})`,
-                zIndex: i + 1,
-                right: i !== 0 ? `${i * 10}px` : "",
-              }}
-            ></motion.span>
-          ) : (
-            <motion.span
-              style={{
-                right: `${i * 10}px`,
-                zIndex: i,
-                background: "rgba(0 0 0/.5)",
-              }}
-              key={i}
-            >
-              {index * 13 + 21}+
-            </motion.span>
-          );
-        })}
-      </motion.div>
+      <NftFavorites
+        index={index}
+        displayButton={displayButton}
+        nftlist={false}
+      />
       <motion.div
         animate={{ x: displayButton ? 100 : 0 }}
         className="nft-post-actions"
