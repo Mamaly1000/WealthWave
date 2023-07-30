@@ -3,6 +3,7 @@ import { randomUserData } from "../../Data/dummy";
 import { motion } from "framer-motion";
 import { nftCardsMotion } from "../../motions/motions";
 import { nftPics } from "../../Data/nftPic";
+import { useNavigate } from "react-router-dom";
 type nftPostType = {
   name: string;
   price: string;
@@ -11,6 +12,7 @@ type nftPostType = {
 };
 
 const NFTpost = ({ name, price, index }: nftPostType) => {
+  const nav = useNavigate();
   const [nftOwner, _setNftOwner] = useState(
     randomUserData[Math.floor(Math.random() * randomUserData.length)]
   );
@@ -37,6 +39,9 @@ const NFTpost = ({ name, price, index }: nftPostType) => {
       viewport={{ once: true }}
       className="nft-post-component"
       onDoubleClick={() => displayLikeIcon()}
+      onClick={() => {
+        nav(`/nfts/${name}`);
+      }}
     >
       <img className="nft-post-pic" src={nftPic} alt="nft image" />
       <div className="nft-post-data">

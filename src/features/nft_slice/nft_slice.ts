@@ -81,7 +81,7 @@ export interface ISingleNFT {
 }
 interface Inft_slice {
   nft_list: INFT[];
-  single_nft: ISingleNFT | {};
+  single_nft: ISingleNFT;
   sort_type: {
     name: string;
     mode: string;
@@ -95,7 +95,74 @@ interface Inft_slice {
 }
 const InitialState: Inft_slice = {
   nft_list: [],
-  single_nft: {},
+  single_nft: {
+    id: "",
+    contract_address: "",
+    asset_platform_id: "",
+    name: "",
+    symbol: "",
+    image: {
+      small: "",
+    },
+    description: "",
+    native_currency: "",
+    native_currency_symbol: "",
+    floor_price: {
+      native_currency: 0,
+      usd: 0,
+    },
+    market_cap: {
+      native_currency: 0,
+      usd: 0,
+    },
+    volume_24h: {
+      native_currency: 0,
+      usd: 0,
+    },
+    floor_price_in_usd_24h_percentage_change: 0,
+    floor_price_24h_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    market_cap_24h_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    volume_24h_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    number_of_unique_addresses: 0,
+    number_of_unique_addresses_24h_percentage_change: 0,
+    volume_in_usd_24h_percentage_change: 0,
+    total_supply: 0,
+    links: {
+      homepage: "",
+      twitter: "",
+      discord: "",
+    },
+    floor_price_7d_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    floor_price_14d_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    floor_price_30d_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    floor_price_60d_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    floor_price_1y_percentage_change: {
+      usd: 0,
+      native_currency: 0,
+    },
+    explorers: [],
+  },
   sort_type: {
     name: "",
     mode: "ASC",

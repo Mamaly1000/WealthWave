@@ -13,7 +13,12 @@ const Nft_Single_Page = () => {
     false,
     5000
   );
-  return <div>{nftSelector.single_nft?.name}</div>;
+  return (
+    <div className="single-nft-page">
+      <img src={nftSelector.single_nft.image.small} />
+      {nftSelector.single_nft?.name}
+    </div>
+  );
 };
 
 export default Nft_Single_Page;

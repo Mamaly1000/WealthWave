@@ -43,7 +43,7 @@ const BestSellerNFTPost = ({ index, nft }: { index: number; nft: INFT }) => {
       whileInView="visible"
       viewport={{ once: true }}
       className="best-seller-nft-post"
-      onClick={() => nav(`/nftx/${nft.id}`)}
+      onClick={() => nav(`/nfts/${nft.id}`)}
     >
       <div
         className="nft-post-image-container"
