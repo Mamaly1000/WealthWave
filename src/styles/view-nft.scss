@@ -1,3 +1,136 @@
 .single-nft-page {
-  @apply w-full flex flex-col items-start justify-start gap-20 min-h-[600px] py-24 px-5 lg:px-10 text-white;
+  @apply w-full flex flex-col items-start justify-start gap-5 min-h-[600px] py-24 px-5 lg:px-10 text-white;
+  .overall-nft-data {
+    @apply h-fit text-[.9rem] md:text-[2rem] font-bold font-rail w-full flex items-center justify-start capitalize gap-5;
+    img {
+      @apply w-[50px] md:w-[100px] h-[50px] md:h-[100px] rounded-full;
+    }
+  }
+  .community-actions-container {
+    @apply w-full flex flex-col items-start justify-start gap-5;
+    .communities {
+      @apply w-full flex items-start md:items-center justify-start gap-5;
+      h3 {
+        @apply whitespace-nowrap capitalize text-[.9rem] font-bold;
+      }
+      div {
+        @apply flex items-start justify-start gap-2 flex-wrap;
+        span {
+          @apply cursor-pointer text-[.8rem] w-fit bg-blue-700 h-fit whitespace-nowrap flex gap-1 px-2 py-1 rounded-lg drop-shadow-2xl uppercase;
+          img {
+            @apply w-[20px] h-[20px];
+          }
+        }
+      }
+    }
+    .actions-container {
+      @apply w-full flex flex-wrap items-center justify-start gap-5 md:gap-2;
+      div {
+        @apply flex items-center gap-2;
+        button {
+          @apply w-[50px] h-[50px] p-4;
+        }
+      }
+      .wish-list {
+        @apply text-[.9rem] w-fit px-2 py-1 rounded-lg whitespace-nowrap bg-blue-700 flex items-center justify-center gap-2 capitalize drop-shadow-2xl;
+        img {
+          @apply w-[18px] h-[18px];
+        }
+      }
+    }
+  }
+  .nft-prices-containers {
+    @apply w-full flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between gap-3;
+    .detail-box {
+      @apply flex flex-col justify-between items-start gap-2 min-w-full md:min-w-[30%] min-h-[150px] p-3  bg-blue-950 rounded-lg drop-shadow-2xl;
+      .title-container {
+        @apply text-gray-300 capitalize;
+      }
+      .price-container {
+        @apply text-[2rem] font-semibold uppercase;
+      }
+      .percentage-container {
+        @apply flex items-center justify-between w-full;
+      }
+    }
+  }
+  .nft-bottom-section {
+    @apply w-full flex flex-col md:flex-row items-start justify-start md:justify-between;
+    .left-section {
+      @apply min-w-full max-w-[65%] md:min-w-[65%] min-h-[300px];
+      .top-desc {
+        @apply w-full flex items-start justify-start gap-2 flex-col;
+        .name {
+          @apply font-bold text-[2rem] capitalize;
+        }
+        .links-container {
+          @apply w-full flex flex-wrap items-start justify-start gap-2;
+          span {
+            background: rgba(0 0 0 /0.2);
+            @apply w-fit h-fit px-2 py-1 rounded-lg drop-shadow-2xl cursor-pointer hover:bg-blue-950 transition-all;
+            img {
+              @apply w-[20px] h-[20px];
+            }
+          }
+        }
+      }
+      .bottom-desc {
+        @apply min-w-full max-w-full flex items-start justify-start gap-2 pt-2 flex-col;
+        p {
+          @apply w-full text-[.9rem] md:text-[1.1rem] font-semibold text-left;
+          a {
+            @apply font-bold text-blue-300;
+          }
+        }
+        .contract-add {
+          background: rgba(0 0 0 /0.2);
+          @apply w-fit h-fit px-2  py-1 rounded-lg text-[.8rem] md:text-[.99rem] font-semibold;
+        }
+      }
+    }
+    .right-section {
+      @apply min-w-full  max-w-full   md:min-w-[30%] min-h-[300px] flex flex-col items-start justify-center gap-5;
+      .nft-statistic {
+        @apply p-3 min-w-full rounded-lg min-h-[200] max-h-fit bg-blue-950 drop-shadow-2xl flex flex-col gap-2 items-start justify-start;
+        .boxheader {
+          @apply text-[1.2rem] capitalize font-semibold w-full text-left;
+        }
+        .table-container {
+          @apply w-full flex flex-col items-start justify-start gap-2;
+          .item {
+            border-color: rgba(255 255 255 /0.2);
+            @apply w-full min-h-[40px] p-1 flex justify-between items-center border-b-[1px];
+            .item-title {
+              @apply whitespace-nowrap font-semibold text-[.8rem] capitalize text-gray-300;
+            }
+            .item-value {
+              @apply flex items-center gap-1 text-[.8rem] font-semibold;
+            }
+          }
+        }
+      }
+      .related-nfts {
+        @apply min-w-full rounded-lg min-h-[200] max-h-fit bg-blue-950 drop-shadow-2xl flex items-start justify-start flex-col gap-2 p-3;
+        .table-container {
+          @apply w-full flex items-start justify-start flex-col;
+          .related-nft {
+            border-color: rgba(255 255 255 /0.2);
+            @apply w-full min-h-[40px] p-1 hover:bg-blue-700 rounded-lg transition-all cursor-pointer flex items-center justify-between text-[.8rem] border-b-[1px];
+            .left-side {
+              @apply w-fit flex items-center justify-start gap-2;
+            }
+            img {
+              @apply w-[30px]  h-[30px] object-cover rounded-full;
+            }
+          }
+        }
+      }
+    }
+  }
+  .green {
+    @apply text-green-400;
+  }
+  .red {
+    @apply text-red-400;
+  }
 }

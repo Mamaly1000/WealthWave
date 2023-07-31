@@ -78,7 +78,7 @@ export const SideBar_links = [
   {
     title: "NFT",
     icon: "https://img.icons8.com/pastel-glyph/64/000000/nft.png",
-    route: "/nft",
+    route: "/nfts",
   },
   {
     title: "News",

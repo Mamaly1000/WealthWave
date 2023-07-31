@@ -222,6 +222,9 @@ const Nft_Reducer = createSlice({
     setNFTTotalPages: (state, action) => {
       state.pagination.total_pages = action.payload;
     },
+    emptySingleNFT: (state) => {
+      state.single_nft = InitialState.single_nft;
+    },
   },
 });
 export const {
@@ -233,6 +236,7 @@ export const {
   setNFTPageOffSet,
   setNFTsearch,
   setNFTTotalPages,
+  emptySingleNFT,
 } = Nft_Reducer.actions;
 export default Nft_Reducer.reducer;
 export const selectNFT = (state: RootState) => {
