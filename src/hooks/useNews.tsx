@@ -13,14 +13,14 @@ import {
 import axios from "axios";
 import { useQuery } from "react-query";
 export interface IAppleNews {
-  author: string | null;
-  content: string | null;
-  description: string | null;
-  publishedAt: string | null;
-  source: { id: string | null; name: string | null };
-  title: string | null;
-  url: string | null;
-  urlToImage: string | null;
+  author: string | null | undefined;
+  content: string | null | undefined;
+  description: string | null | undefined;
+  publishedAt: string | null | undefined;
+  source: { id: string | null | undefined; name: string | null | undefined };
+  title: string | null | undefined;
+  url: string | null | undefined;
+  urlToImage: string | null | undefined;
 }
 const useNews = () => {
   const ApiKey: string = "a1e647b111ec4f48bda9ed3617ad3251";

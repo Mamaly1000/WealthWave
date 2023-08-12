@@ -1,8 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IAppleNews } from "../../hooks/useNews";
 import { useMemo } from "react";
+import NewsSingleSlide from "./NewsSingleSlide";
+import { Autoplay } from "swiper";
 
-const NewsSlider = ({ category }: { category: IAppleNews[] }) => {
+const NewsSlider = ({
+  pattern,
+  category,
+}: {
+  category: IAppleNews[];
+  pattern: { item_1: number; item_2: number }[];
+}) => {
   const categoryLength = useMemo(() => {
     const slidesNumber = Math.ceil(category.length / 2);
     const array = [];
@@ -13,12 +21,19 @@ const NewsSlider = ({ category }: { category: IAppleNews[] }) => {
   }, [category]);
 
   return (
-    <Swiper>
-      {categoryLength.map((num) => {
+    <Swiper
+      spaceBetween={10}
+      slidesPerView={1.5}
+      autoplay={{ delay: 5000, disableOnInteraction: true }}
+      modules={[Autoplay]}
+    >
+      {pattern.map((item) => {
         return (
-          <SwiperSlide key={num}>
-            <span>{category[num * num + num]?.author}</span>/
-            <span>{category[num * num + (num + 1)]?.author}</span>
+          <SwiperSlide key={item.item_1}>
+            <NewsSingleSlide
+              news_1={category[item.item_1]}
+              news_2={category[item.item_2]}
+            />
           </SwiperSlide>
         );
       })}
