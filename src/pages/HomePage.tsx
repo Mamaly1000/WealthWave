@@ -1,6 +1,5 @@
 import CubeSlider from "../components/cubic-slider/CubeSlider";
 import HomePageIntro from "../components/HomePageIntro";
-import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import NFTslider from "../components/ntf-components/NFTslider";
 import NewsSection from "../components/news-post-component/NewsSection";
 import AboutUs from "../components/about_us/AboutUs";
@@ -8,12 +7,9 @@ import ContactUs from "../components/contact-us/ContactUs";
 import Comments from "../components/comments-section/Comments";
 import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
-import { FC } from "react"; 
-import useCrypto from "../hooks/useCrypto";
+import { FC } from "react";
+import TrendCryptoComponent from "../components/cryto-table/TrendCryptoComponent";
 const HomePage: FC<any> = () => {
-  const {
-    cryptoSelector: { coinlist },
-  } = useCrypto();
   return (
     <motion.div
       variants={removingPageMotion}
@@ -27,7 +23,7 @@ const HomePage: FC<any> = () => {
         <HomePageIntro />
         <CubeSlider />
       </motion.div>
-      <CryptoTableRow crypto_data={coinlist} header={true} />
+      <TrendCryptoComponent header={true} />
       <NFTslider />
       <NewsSection />
       <AboutUs />

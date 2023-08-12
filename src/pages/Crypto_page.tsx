@@ -9,7 +9,6 @@ import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import Crypto_Search from "../components/search-components/Crypto_Search";
 import TopCryptoCard from "../components/crypto-component/TopCryptoCard";
-import TrendCryptoCard from "../components/crypto-component/TrendCryptoCard";
 import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import CryptoTreeChart from "../components/crypto-component/CryptoTreeChart";
 import { useDispatch } from "react-redux";
@@ -17,13 +16,12 @@ import {
   setCryptoPageOffSet,
   setCurrentCryptoPage,
 } from "../features/crypto_slice/crypto_slice";
+import TrendCryptoComponent from "../components/cryto-table/TrendCryptoComponent";
 const Crypto_page = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
-  const { cryptoSelector, getTrendCoins } = useCrypto();
-  const [displayTrendCoins, setDisplayTrendCoins] = useState<boolean>(false);
+  const { cryptoSelector } = useCrypto();
   const [DisplayType, setDisplayType] = useState<"line" | "tree">("line");
-  const fetch_trend_coins = getTrendCoins();
 
   const cryptoData = useMemo(() => {
     return cryptoSelector.coinlist
@@ -43,11 +41,7 @@ const Crypto_page = () => {
             .toLowerCase()
             .includes(cryptoSelector.cryptoSearch.toLowerCase())
       );
-  }, [
-    cryptoSelector.cryptoSearch,
-    cryptoSelector.pagination.offset,
-    fetch_trend_coins,
-  ]);
+  }, [cryptoSelector.cryptoSearch, cryptoSelector.pagination.offset]);
 
   return (
     <motion.div
@@ -65,58 +59,7 @@ const Crypto_page = () => {
       >
         Cryptocurrency Prices by Market Cap
       </motion.h1>
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          delay: 0.5,
-          duration: 3,
-          type: "tween",
-          x: {
-            duration: 3,
-          },
-        }}
-        className="component-title"
-      >
-        Trend Cryptocurrencies
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 1,
-          delay: 1,
-          type: "tween",
-        }}
-        viewport={{ once: true }}
-        className="top-crypto"
-        onAnimationComplete={() => {
-          setDisplayTrendCoins(true);
-        }}
-      >
-        <Swiper
-          className="top-crypto"
-          spaceBetween={10}
-          slidesPerView="auto"
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          modules={[Pagination, Autoplay]}
-        >
-          {!fetch_trend_coins.isLoading &&
-            cryptoSelector.trend_coins.map((coin, index) => {
-              return (
-                <SwiperSlide
-                  key={index}
-                  onClick={() => nav(`/crypto/${coin!.item!.id}`)}
-                >
-                  {displayTrendCoins && (
-                    <TrendCryptoCard coin={coin} index={index} />
-                  )}
-                </SwiperSlide>
-              );
-            })}
-        </Swiper>
-      </motion.div>
+      <TrendCryptoComponent />
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}

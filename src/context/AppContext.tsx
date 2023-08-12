@@ -37,7 +37,7 @@ interface Icontext {
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
 
-const AppContextComponent = ({ children }: any) => {
+const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);

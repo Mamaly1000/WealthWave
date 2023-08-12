@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import useLocalStorage from "./useLocalStorage";
-import { AppleNewsALL } from "../api/NewsApi";
+import {
+  AppleNewsALL,
+  AppleNewsHeadLines,
+  TeslaNewsALL,
+  TeslaNewsHeadLines,
+  Top_business_headlines,
+  Top_business_headlines_tech_crunch_HeadLines,
+  Top_business_headlines_tech_crunch_everything,
+  WallStreetJournal_News,
+} from "../api/NewsApi";
 import axios from "axios";
+import { useQuery } from "react-query";
 export interface IAppleNews {
-  author: string;
-  content: string;
-  description: string;
-  publishedAt: string;
-  source: { id: string; name: string };
-  title: string;
-  url: string;
-  urlToImage: string;
+  author: string | null;
+  content: string | null;
+  description: string | null;
+  publishedAt: string | null;
+  source: { id: string | null; name: string | null };
+  title: string | null;
+  url: string | null;
+  urlToImage: string | null;
 }
 const useNews = () => {
   const ApiKey: string = "a1e647b111ec4f48bda9ed3617ad3251";
@@ -60,11 +70,197 @@ const useNews = () => {
       console.log(error);
     }
   };
-
+  const get_AppleNewsALL = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], AppleNewsALL, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_AppleNewsHeadLines = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], AppleNewsHeadLines, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_TeslaNewsALL = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], TeslaNewsALL, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_TeslaNewsHeadLines = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], TeslaNewsHeadLines, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_Top_business_headlines = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], Top_business_headlines, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_Top_business_headlines_tech_crunch_everything = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], Top_business_headlines_tech_crunch_everything, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_Top_business_headlines_tech_crunch_HeadLines = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], Top_business_headlines_tech_crunch_HeadLines, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
+  const get_WallStreetJournal_News = (
+    name: string,
+    cacheTime: number,
+    enabled: boolean,
+    onError: () => void,
+    onSuccess: (data: any) => void,
+    retry: boolean,
+    refetchOnMount: boolean,
+    refetchOnReconnect: boolean,
+    refetchOnWindowFocus: boolean
+  ) => {
+    return useQuery([name], WallStreetJournal_News, {
+      cacheTime,
+      enabled,
+      onError,
+      onSuccess,
+      retry,
+      refetchOnMount,
+      refetchOnReconnect,
+      refetchOnWindowFocus,
+    });
+  };
   return {
     getAppleNews,
     appleNewsList,
     getWallStreetNews,
+    get_Top_business_headlines,
+    get_Top_business_headlines_tech_crunch_everything,
+    get_Top_business_headlines_tech_crunch_HeadLines,
+    get_WallStreetJournal_News,
+    get_TeslaNewsHeadLines,
+    get_TeslaNewsALL,
+    get_AppleNewsHeadLines,
+    get_AppleNewsALL,
+    localWallStreetNews,
+    localAppleNews,
+    setLocalAppleNews,
   };
 };
 

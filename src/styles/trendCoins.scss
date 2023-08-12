@@ -1,0 +1,60 @@
+.trend-coins-container {
+  @apply w-full min-h-fit;
+  .trend-crypto-component {
+    background: rgba(0 0 0/0.2);
+    @apply hover:bg-blue-950 transition-all cursor-pointer;
+  }
+  .swiper-slide {
+    @apply max-w-fit;
+  }
+  .loading-animation,
+  .trend-crypto-component {
+    background: rgba(0 0 0 /0.2);
+    @apply min-w-[300px] max-w-[300px] w-[300px] min-h-[200px] max-h-[200px] h-[200px] rounded-lg drop-shadow-2xl text-white px-10 py-10 flex justify-between items-start flex-col hover:bg-blue-950 cursor-pointer transition-all;
+    img {
+      @apply min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] max-h-[50px] h-[50px]   rounded-full;
+    }
+    .trend-crypto-content {
+      @apply w-full flex justify-between items-center;
+      div {
+        @apply w-[70%] flex justify-start items-center gap-3;
+        div {
+          @apply flex justify-start items-start flex-col   gap-0;
+        }
+      }
+    }
+    .coin-percentage {
+      @apply text-[.8rem] text-white px-2 py-1 rounded-2xl;
+    }
+    .bold {
+      @apply text-[.9rem] text-gray-400 uppercase whitespace-nowrap;
+    }
+    .light {
+      @apply text-[.8rem] font-light text-white;
+    }
+  }
+  .crypto-table-header {
+    @apply text-[1rem] w-full flex items-center justify-center flex-col md:flex-row md:justify-between gap-5 my-10 md:my-5;
+    h2 {
+      @apply text-blue-400 text-[2rem];
+    }
+    button {
+      @apply w-fit h-fit font-normal p-3 whitespace-nowrap;
+    }
+  }
+  .top-crypto {
+    @apply min-h-[300px] w-full flex flex-col gap-10 items-center justify-center;
+  }
+  .green {
+    @apply bg-green-800;
+  }
+  .red {
+    @apply bg-red-800;
+  }
+  .green-text {
+    @apply text-green-300;
+  }
+  .red-text {
+    @apply text-red-300;
+  }
+}

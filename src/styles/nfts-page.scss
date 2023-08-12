@@ -410,3 +410,16 @@
     @apply w-[20px] bg-blue-400;
   }
 }
+.nft-divider {
+  background: linear-gradient(
+    0deg,
+    rgba(190, 241, 255, 0.1) 0%,
+    rgba(0, 228, 255, 1) 29%,
+    rgba(155, 249, 244, 1) 42%,
+    rgba(102, 247, 231, 1) 52%,
+    rgba(0, 228, 255, 1) 64%,
+    rgba(108, 244, 255, 0.1) 100%
+  );
+  position: relative;
+  z-index: 1;
+}

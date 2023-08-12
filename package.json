@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "npm run build:css && npm run dev",
+    "start": "npm run build_css && npm run dev",
     "build": "vite build",
     "build_css": "npm run build:css",
     "dev": "vite",
