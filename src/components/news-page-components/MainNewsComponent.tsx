@@ -1,10 +1,16 @@
 import React from "react";
 import { IAppleNews } from "../../hooks/useNews";
 import moment from "moment";
+import { motion } from "framer-motion";
+import { newsMotion } from "../../motions/newsMotions";
 
 const MainNewsComponent = ({ data }: { data: IAppleNews }) => {
   return (
-    <div
+    <motion.div
+      variants={newsMotion(0.3, 0.6, "tween")}
+      animate="visible"
+      initial="hidden"
+      exit="exit"
       className="main-news"
       onClick={() => window.open(data.url ? data.url : "", "_blank")}
       style={{ backgroundImage: `url(${data.urlToImage})` }}
@@ -20,7 +26,7 @@ const MainNewsComponent = ({ data }: { data: IAppleNews }) => {
         <span className="news-publish">{data.author}</span>{" "}
         <span className="news-publish">{data.source.name}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

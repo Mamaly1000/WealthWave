@@ -1,6 +1,8 @@
 import React from "react";
 import { IAppleNews } from "../../hooks/useNews";
 import moment from "moment";
+import { motion } from "framer-motion";
+import { newsMotion } from "../../motions/newsMotions";
 
 const PopularNewsComponent = ({
   news,
@@ -10,7 +12,11 @@ const PopularNewsComponent = ({
   index: number;
 }) => {
   return (
-    <div
+    <motion.div
+      variants={newsMotion(0.2, index / 2 + 0.1, "tween")}
+      animate="side_visible"
+      initial="side_hidden"
+      exit="exit"
       className="single-popular-news"
       onClick={() => window.open(news.url ? news.url : "", "_blank")}
     >
@@ -21,7 +27,7 @@ const PopularNewsComponent = ({
         </span>
         <span className="news-title">{news.title}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

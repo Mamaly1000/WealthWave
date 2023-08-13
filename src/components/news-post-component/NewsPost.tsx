@@ -16,14 +16,12 @@ type NewsPostProps = {
 const NewsPost = ({
   news,
   index,
-  setSelectedId,
-  selectedId,
+  setSelectedId, 
 }: NewsPostProps) => {
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [saved, setSaved] = useState<boolean>(false);
-  const [postPicUrl, setPostPicUrl] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [postPicUrl, setPostPicUrl] = useState<string>(""); 
   const [displayPost, setDisplayPost] = useState<boolean>(true);
   const displayLikeIcon = () => {
     setDoubledClick(true);
@@ -32,17 +30,6 @@ const NewsPost = ({
       setDoubledClick(false);
     }, 500);
   };
-  useEffect(() => {
-    if (news) {
-      setPostPicUrl(news!.urlToImage);
-    }
-  }, [news]);
-  useEffect(() => {
-    if (news) {
-      PosturlValidation(news.urlToImage, setLoading, setPostPicUrl);
-    }
-  }, [news]);
-
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -65,7 +52,7 @@ const NewsPost = ({
                 ? postPicUrl
                 : randomPics[Math.floor(Math.random() * randomPics.length)]
             }
-            alt={news!.title}
+            alt={news?.title || ""}
             onDoubleClick={() => displayLikeIcon()}
           />
         </div>

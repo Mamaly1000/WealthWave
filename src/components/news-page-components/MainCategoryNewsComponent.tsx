@@ -1,10 +1,15 @@
 import React from "react";
 import { IAppleNews } from "../../hooks/useNews";
 import moment from "moment";
+import { motion } from "framer-motion";
+import { newsMotion } from "../../motions/newsMotions";
 
 const MainCategoryNewsComponent = ({ data }: { data: IAppleNews }) => {
   return (
-    <div
+    <motion.div
+      variants={newsMotion(0.2, +0.1, "tween")}
+      initial="hidden"
+      whileInView="visible"
       className="main-category-news"
       onClick={() => window.open(data.url ? data.url : "", "_blank")}
     >
@@ -16,7 +21,7 @@ const MainCategoryNewsComponent = ({ data }: { data: IAppleNews }) => {
         <span>{data.source.name}</span>
         <span>{moment(data.publishedAt).fromNow()}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

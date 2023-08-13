@@ -1,6 +1,7 @@
-import React from "react";
 import { IAppleNews } from "../../hooks/useNews";
 import moment from "moment";
+import { motion } from "framer-motion";
+import { newsMotion } from "../../motions/newsMotions";
 
 const SmallMainNewsComponent = ({
   news,
@@ -10,7 +11,12 @@ const SmallMainNewsComponent = ({
   index: number;
 }) => {
   return (
-    <div
+    <motion.div
+      variants={newsMotion(0.3, index / 2 + 0.1, "tween")}
+      whileInView="visible"
+      initial="hidden"
+      exit="exit"
+      viewport={{ once: true }}
       className="single-small-news"
       style={{
         backgroundImage: news.urlToImage ? `url(${news?.urlToImage})` : "none",
@@ -37,7 +43,7 @@ const SmallMainNewsComponent = ({
           </h2>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

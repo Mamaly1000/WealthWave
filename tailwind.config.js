@@ -174,7 +174,8 @@ export default {
       pink: colors.pink,
       rose: colors.rose,
       light_dark: "rgba(0 0 0/.2)",
-      light_medium_dark: "rgba(0 0 0/.2)",
+      light_medium_dark: "rgba(0 0 0/.5)",
+      light_hard_dark: "rgba(0 0 0/.9)",
     }),
     columns: {
       auto: "auto",

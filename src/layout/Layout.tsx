@@ -16,6 +16,7 @@ const Layout = ({ children }: any) => {
         height: "100%",
         overflow: "hidden",
       }}
+      className="layout-container"
     >
       <NavBar showSideBar={displaySideBar} setShowSideBar={setDisplaySideBar} />
       {displaySideBar && <SideBar setShowSideBar={setDisplaySideBar} />}

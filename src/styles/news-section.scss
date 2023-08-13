@@ -20,4 +20,10 @@
       @apply bg-blue-800;
     }
   }
+  .swiper {
+    @apply w-full min-h-[200px];
+    .swiper-slide {
+      @apply max-w-fit max-h-fit cursor-pointer;
+    }
+  }
 }
