@@ -173,6 +173,8 @@ export default {
       fuchsia: colors.fuchsia,
       pink: colors.pink,
       rose: colors.rose,
+      light_dark: "rgba(0 0 0/.2)",
+      light_medium_dark: "rgba(0 0 0/.2)",
     }),
     columns: {
       auto: "auto",

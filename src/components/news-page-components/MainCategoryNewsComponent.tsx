@@ -4,7 +4,10 @@ import moment from "moment";
 
 const MainCategoryNewsComponent = ({ data }: { data: IAppleNews }) => {
   return (
-    <div className="main-category-news">
+    <div
+      className="main-category-news"
+      onClick={() => window.open(data.url ? data.url : "", "_blank")}
+    >
       <img src={data!.urlToImage as string} />
       <h3>{data.title}</h3>
       <p>{data.description}</p>

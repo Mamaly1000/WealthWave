@@ -13,6 +13,9 @@ import {
 import PopularNewsComponent from "../components/news-page-components/PopularNewsComponent";
 import Divider from "../components/ntf-components/Divider";
 import NewsCategorySection from "../components/news-page-components/NewsCategorySection";
+import NewsSearch from "../components/search-components/NewsSearch";
+import { useState } from "react";
+import NewsCardsSection from "../components/news-page-components/NewsCardsSection";
 const NewsPage = () => {
   const categories = [
     {
@@ -36,6 +39,8 @@ const NewsPage = () => {
       data: AppleNews,
     },
   ];
+  const [text, setText] = useState<string>("");
+
   return (
     <motion.div
       variants={removingPageMotion}
@@ -84,6 +89,23 @@ const NewsPage = () => {
             return <PopularNewsComponent news={n} index={index} key={index} />;
           })}
         </div>
+      </div>
+      <div className="news-cards-container">
+        <NewsSearch
+          value={text}
+          onchange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+        {categories.map((category, index) => {
+          return (
+            <NewsCardsSection
+              category={category}
+              key={index}
+              searchedText={text}
+            />
+          );
+        })}
       </div>
     </motion.div>
   );

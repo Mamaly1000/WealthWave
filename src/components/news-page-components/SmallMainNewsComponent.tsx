@@ -15,6 +15,7 @@ const SmallMainNewsComponent = ({
       style={{
         backgroundImage: news.urlToImage ? `url(${news?.urlToImage})` : "none",
       }}
+      onClick={() => window.open(news.url ? news.url : "", "_blank")}
     >
       <div className="news-data">
         <div className="extras">

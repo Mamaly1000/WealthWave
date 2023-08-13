@@ -11,20 +11,11 @@ const NewsSlider = ({
   category: IAppleNews[];
   pattern: { item_1: number; item_2: number }[];
 }) => {
-  const categoryLength = useMemo(() => {
-    const slidesNumber = Math.ceil(category.length / 2);
-    const array = [];
-    for (let i = slidesNumber; i >= 0; i--) {
-      array.push(i);
-    }
-    return array;
-  }, [category]);
-
   return (
     <Swiper
       spaceBetween={10}
-      slidesPerView={1.5}
-      autoplay={{ delay: 5000, disableOnInteraction: true }}
+      slidesPerView={"auto"}
+      autoplay={{ delay: 2000, disableOnInteraction: true }}
       modules={[Autoplay]}
     >
       {pattern.map((item) => {

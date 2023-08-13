@@ -6,6 +6,7 @@ const MainNewsComponent = ({ data }: { data: IAppleNews }) => {
   return (
     <div
       className="main-news"
+      onClick={() => window.open(data.url ? data.url : "", "_blank")}
       style={{ backgroundImage: `url(${data.urlToImage})` }}
     >
       <div className="overlay">

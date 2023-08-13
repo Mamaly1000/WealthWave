@@ -10,7 +10,10 @@ const PopularNewsComponent = ({
   index: number;
 }) => {
   return (
-    <div className="single-popular-news">
+    <div
+      className="single-popular-news"
+      onClick={() => window.open(news.url ? news.url : "", "_blank")}
+    >
       <div className="circle"></div>
       <div className="news-data">
         <span className="news-publish">

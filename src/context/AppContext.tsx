@@ -15,6 +15,21 @@ import {
 } from "../types/noteTypes";
 import { v4 as uuidV4 } from "uuid";
 import { IAppleNews } from "../hooks/useNews";
+import { useDispatch } from "react-redux";
+import {
+  fetchAppleNews,
+  fetchTeslaNews,
+  fetchTop_business_headlines,
+  fetchTop_business_headlines_tech_crunch_everything,
+  fetchWallStreetJournal_News,
+} from "../features/news_slice/news_slice";
+import {
+  AppleNews,
+  TechCrunchnews,
+  teslaNews,
+  wallstreetnews,
+  Top_business_headlines,
+} from "../Data/news";
 
 interface Icontext {
   tags: TAG[];
@@ -41,7 +56,7 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
-
+  const dispatch = useDispatch();
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
       return {
@@ -133,6 +148,15 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
       }
     });
   }, [scrollH]);
+  useEffect(() => {
+    dispatch(fetchAppleNews(AppleNews));
+    dispatch(fetchWallStreetJournal_News(wallstreetnews));
+    dispatch(
+      fetchTop_business_headlines_tech_crunch_everything(TechCrunchnews)
+    );
+    dispatch(fetchTeslaNews(teslaNews));
+    dispatch(fetchTop_business_headlines(Top_business_headlines));
+  }, []);
   return (
     <AppContext.Provider
       value={{
