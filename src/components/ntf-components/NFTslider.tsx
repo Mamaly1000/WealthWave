@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination, Autoplay } from "swiper";
 import useNFT from "../../hooks/useNFT";
