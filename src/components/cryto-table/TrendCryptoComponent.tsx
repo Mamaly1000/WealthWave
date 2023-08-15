@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import TrendCryptoCard from "../crypto-component/TrendCryptoCard";
 import { useNavigate } from "react-router-dom";
 import { Pagination, Autoplay } from "swiper";
+import Header from "../header-component/Header";
 
 const TrendCryptoComponent = ({ header = false }: { header?: boolean }) => {
   const [displayTrendCoins, setDisplayTrendCoins] = useState<boolean>(false);
@@ -13,30 +14,16 @@ const TrendCryptoComponent = ({ header = false }: { header?: boolean }) => {
   const nav = useNavigate();
   return (
     <div className="trend-coins-container">
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          delay: 0.5,
-          duration: 3,
-          type: "tween",
-          x: {
-            duration: 3,
-          },
+      <Header
+        btnText="track more coins"
+        header={header}
+        height={5}
+        onclick={() => {
+          nav("/crypto");
         }}
-        className="component-title crypto-table-header page-header"
-      >
-        <h2>Trend Cryptocurrencies</h2>
-        {header && (
-          <button
-            onClick={() => {
-              nav("/crypto");
-            }}
-          >
-            track more coins
-          </button>
-        )}
-      </motion.div>
+        text="Trend Cryptocurrencies"
+        width={250}
+      />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}

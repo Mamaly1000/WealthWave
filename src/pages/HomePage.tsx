@@ -18,7 +18,6 @@ const HomePage: FC<any> = () => {
       exit="exit"
       className="HomePage-container"
     >
-      {/* <VerticalSlider /> */}
       <motion.div className="HomePage-intro-section">
         <HomePageIntro />
         <CubeSlider />

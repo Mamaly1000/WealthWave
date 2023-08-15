@@ -1,30 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { SideBar_links } from "../../Data/dummy";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useContextFunction } from "../../context/AppContext";
-
-const SideBar = ({ setShowSideBar }) => {
+import { AnimatePresence, motion } from "framer-motion";
+import closeIcon from "./../../assets/blogs/cloaseImg.svg";
+const SideBar = ({
+  setShowSideBar,
+}: {
+  setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [hide, setHide] = useState<boolean>(false);
   const contextData = useContextFunction();
-  const hidingElement = () => {
-    setHide(true);
-    setTimeout(() => {
-      setHide(false);
-      setShowSideBar(false);
-    }, 500);
-  };
+
   return (
-    <div style={{ zIndex: 400 }} className="sideBar-container">
-      <div
+    <motion.div
+      style={{ zIndex: 400 }}
+      className="sideBar-container"
+      exit={{ transition: { delay: 0.1 } }}
+      transition={{ delay: 0.1 }}
+    >
+      <motion.div
         className="sideBar-overlay"
-        onClick={() => hidingElement()}
-        style={{ opacity: hide ? "0" : "1" }}
-      ></div>
-      <div
+        onClick={() => setShowSideBar(false)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{
+          opacity: 0,
+          transition: {
+            duration: 0.05,
+          },
+        }}
+        transition={{ duration: 0.13, type: "tween" }}
+      ></motion.div>
+      <motion.div
         className="sideBar-content"
         style={{
           transform: hide ? "translateX(-40vw)" : "translateX(0vw)",
           opacity: hide ? 0 : 1,
+        }}
+        initial={{ x: "-40vw", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{
+          opacity: 0,
+          x: "-40vw",
+          transition: {
+            duration: 0.05,
+            type: "tween",
+          },
+        }}
+        transition={{
+          duration: 0.1,
+          type: "tween",
         }}
       >
         <div className="sideBar-header">
@@ -32,21 +58,12 @@ const SideBar = ({ setShowSideBar }) => {
             <span>W</span>ealth<span>W</span>ave
           </div>
           {!contextData!.screenW && (
-            <button onClick={() => hidingElement()}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+            <button
+              onClick={() => {
+                setShowSideBar(false);
+              }}
+            >
+              <img src={closeIcon} />
             </button>
           )}
         </div>
@@ -61,18 +78,41 @@ const SideBar = ({ setShowSideBar }) => {
         <div className="sideBar-hamMenu">
           {SideBar_links.map((link, index) => {
             return (
-              <Link to={link.route} key={index} className="sideBar-ham-links">
+              <Link
+                onClick={() => {
+                  setShowSideBar(false);
+                }}
+                to={link.route}
+                key={index}
+                className="sideBar-ham-links"
+              >
                 <img src={link.icon} alt={link.title} />
                 {link.title}
+                <AnimatePresence>
+                  {window.location.pathname === link.route && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{
+                        duration: 0.1,
+                        type: "tween",
+                      }}
+                    ></motion.div>
+                  )}
+                </AnimatePresence>
               </Link>
             );
           })}
         </div>
         <div className="copyRight-section">
-          Copyright © 2023 By <span>Mamaly1000</span>
+          Copyright © 2023 By{" "}
+          <a href="https://github.com/Mamaly1000" target="_blank">
+            Mamaly1000
+          </a>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

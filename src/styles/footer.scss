@@ -4,7 +4,7 @@
   section {
     @apply my-5;
     .footer-headers {
-      @apply w-full text-left text-[1.3rem] font-bold;
+      @apply flex items-center justify-center gap-2 md:items-start md:justify-start flex-col w-full text-left text-[1.3rem] font-bold;
     }
     .footer-section {
       @apply flex flex-row justify-center items-center flex-wrap gap-2 mt-10 transition-all md:px-5;
@@ -15,7 +15,7 @@
   }
   .Copyright-section {
     @apply absolute bottom-0 left-0 w-full capitalize flex justify-center gap-1 items-center my-5;
-    span {
+    a {
       @apply text-blue-300 font-bold cursor-pointer;
     }
   }

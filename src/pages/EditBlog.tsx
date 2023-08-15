@@ -5,12 +5,13 @@ import { v4 as uuidV4 } from "uuid";
 import { EditNoteFormProps, TAG } from "../types/noteTypes";
 import { motion, AnimatePresence } from "framer-motion";
 import imgPreview from "./../assets/blogs/pewview.svg";
-import { removingPageMotion } from "../motions/motions";
+import { modalMotion, removingPageMotion } from "../motions/motions";
 import { toast } from "react-toastify";
 import tickImg from "./../assets/blogs/click.svg";
 import urlValidation from "../utils/imageChecker";
 import Loader from "../components/loader/Loader";
 import ImagePreview from "../components/image-preview-modal/ImagePreview";
+import Header from "../components/header-component/Header";
 const EditBlog = ({
   notes,
   onSubmit,
@@ -66,8 +67,14 @@ const EditBlog = ({
       exit="exit"
       className="create-blog-page"
     >
-      <h1 className="page-header">Edit Blog</h1>
-
+      <Header
+        btnText=""
+        header={false}
+        height={5}
+        onclick={() => {}}
+        text="Edit Blog"
+        width={250}
+      />
       <form className="create-blog-form" onSubmit={submitHnadler}>
         <div className="blog-detail-container">
           <motion.input
@@ -154,6 +161,21 @@ const EditBlog = ({
               )}
             </AnimatePresence>
           </motion.div>
+          {preview && (
+            <motion.div
+              variants={modalMotion}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="modal-content"
+              style={{ position: "relative", bottom: 60 }}
+            >
+              <div className="modal-header">
+                <h4>Image Preview</h4>
+              </div>
+              <img src={imageSRC} alt="image preview" />
+            </motion.div>
+          )}
         </div>
         <div className="blog-desc-container">
           <CreateableReactSelect
@@ -214,13 +236,6 @@ const EditBlog = ({
           </button>
         </div>
       </form>
-      <ImagePreview
-        setShow={setImagePreview}
-        show={preview}
-        src={imageSRC}
-        setSRC={setImageSRC}
-        setImageSRCurl={setImageSRCurl}
-      />
     </motion.div>
   );
 };

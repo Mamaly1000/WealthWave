@@ -19,6 +19,7 @@ import ArtistComponent from "../components/ntf-components/ArtistComponent";
 import NftSearchComponent from "../components/search-components/NftSearchComponent";
 import NftListComponent from "../components/ntf-components/NftListComponent";
 import NFTPagination from "../components/ntf-components/NFTPagination";
+import Header from "../components/header-component/Header";
 
 const Nft_Page = () => {
   const { getNftLst, nftSelector } = useNFT();
@@ -96,13 +97,14 @@ const Nft_Page = () => {
       </section>
       <section className="nft-page-content">
         <div className="best-sellers-nft">
-          <motion.h2
-            variants={viewFromLeft(5, 0.3)}
-            initial="hidden"
-            whileInView="visible"
-          >
-            Best Sellers NFTs
-          </motion.h2>
+          <Header
+            btnText="track more coins"
+            header={false}
+            height={5}
+            onclick={() => {}}
+            text="Best Sellers NFTs"
+            width={250}
+          />
           <motion.div
             variants={viewFromDown(1.2, 0.4)}
             initial="hidden"
@@ -246,13 +248,14 @@ const Nft_Page = () => {
           )}
         </motion.div>
         <div className="top-nft">
-          <motion.h2
-            variants={viewFromLeft(1, 0.3)}
-            initial="hidden"
-            whileInView="visible"
-          >
-            Top NFTs
-          </motion.h2>
+          <Header
+            btnText="track more coins"
+            header={false}
+            height={5}
+            onclick={() => {}}
+            text="Top NFTs"
+            width={250}
+          />
           <motion.div
             variants={viewFromDown(1.2, 0.4)}
             initial="hidden"

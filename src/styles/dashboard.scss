@@ -1,0 +1,9 @@
+.dashboard {
+  @apply w-full flex items-center justify-center flex-col gap-10 py-24 px-5 lg:px-10 min-h-[600px];
+  span {
+    @apply w-fit h-fit text-[2rem] font-bold capitalize px-3 py-2 rounded-lg bg-blue-900 drop-shadow-2xl mx-auto text-white;
+  }
+  button {
+    @apply w-fit h-fit text-white px-3 py-2 capitalize;
+  }
+}

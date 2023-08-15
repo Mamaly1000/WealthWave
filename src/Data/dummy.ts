@@ -10,6 +10,7 @@ import instagramIcon from "./../assets/social-medias/icons8-instagram.svg";
 import pinterestIcon from "./../assets/social-medias/icons8-pinterest.svg";
 import telegramIcon from "./../assets/social-medias/icons8-telegram-app.svg";
 import linkedInIcon from "./../assets/social-medias/icons8-linkedin.svg";
+import homepageIcon from "./../assets/sideBar_Icons/home.svg";
 import { CommentType } from "../types/noteTypes";
 import {
   btc_chart_data,
@@ -64,11 +65,16 @@ export const Footer_Links = [
     links: ["Sign In/Register", "My Wishlist", "My Cart"],
   },
 ];
-export const SideBar_links = [
+export const SideBar_links: {
+  title: string;
+  icon: string;
+  route: string;
+}[] = [
+  { title: "Home Page", icon: homepageIcon, route: "/" },
   {
     title: "Profile",
     icon: profile_Icon,
-    route: "/profile",
+    route: "/dashboard",
   },
   {
     title: "Crypto Currencies",

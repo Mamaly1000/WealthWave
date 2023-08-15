@@ -409,6 +409,15 @@
   .swiper-pagination-bullet-active {
     @apply w-[20px] bg-blue-400;
   }
+  .header-component {
+    @apply text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] capitalize text-start font-bold text-blue-400 w-full flex flex-col md:flex-row gap-5 justify-between items-center relative;
+    h2 {
+      @apply flex flex-col items-center text-center justify-center md:justify-start md:items-start gap-3;
+    }
+    button {
+      @apply w-fit h-fit px-3 py-2 text-[1rem];
+    }
+  }
 }
 .nft-divider {
   background: linear-gradient(
@@ -422,4 +431,21 @@
   );
   position: relative;
   z-index: 1;
+}
+.nft-divider::after {
+  content: "";
+
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(
+    0deg,
+    rgba(190, 241, 255, 1) 0%,
+    rgba(0, 228, 255, 1) 29%,
+    rgba(155, 249, 244, 1) 42%,
+    rgba(102, 247, 231, 1) 52%,
+    rgba(0, 228, 255, 1) 64%,
+    rgba(108, 244, 255, 1) 100%
+  );
+  filter: blur(2em);
+  z-index: -1;
 }

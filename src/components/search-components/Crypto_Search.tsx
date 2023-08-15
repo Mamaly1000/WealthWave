@@ -120,7 +120,7 @@ const Crypto_Search = ({
               type: "ASC",
             })
           );
-          toast.success("sorts has been cleared successfully !");
+          toast.success("sorts have been cleared successfully !");
         }}
       >
         <img src={filterIcon} alt="filter" />

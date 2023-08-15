@@ -9,6 +9,7 @@ import { componentViewMotion } from "../../motions/motions";
 import { useContextFunction } from "../../context/AppContext";
 import { AppleNews } from "../../Data/news";
 import SmallMainNewsComponent from "../news-page-components/SmallMainNewsComponent";
+import Header from "../header-component/Header";
 const NewsSection = () => {
   const nav = useNavigate();
   return (
@@ -19,10 +20,14 @@ const NewsSection = () => {
       viewport={{ once: true }}
       className="news-section"
     >
-      <div className="news-section-header">
-        <h2 className="page-header">Apple News Journal</h2>
-        <button onClick={() => nav("/news")}>check out all news</button>
-      </div>
+      <Header
+        btnText="check out all news"
+        header={true}
+        height={5}
+        width={250}
+        onclick={() => nav("/news")}
+        text="Apple News Journal"
+      />
       <div className="news-posts">
         <Swiper
           slidesPerView={"auto"}

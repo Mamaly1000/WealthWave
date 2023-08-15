@@ -5,6 +5,7 @@ import bgImage from "./../../assets/about-us/12322bd8-c76a-4b5a-989f-a562a91c53f
 import { values } from "../../utils/about-us-values";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
+import Divider from "../ntf-components/Divider";
 export default function AboutUs() {
   const sliderRef =
     useRef<
@@ -59,6 +60,7 @@ export default function AboutUs() {
               >
                 Our Story :
               </motion.div>
+              <Divider height={5} width={250} />
               <div className="text" data-swiper-parallax="-100">
                 <motion.p
                   initial={{ x: -40, opacity: 0 }}
@@ -102,6 +104,7 @@ export default function AboutUs() {
               >
                 Values & Unique Selling Proposition
               </motion.div>
+              <Divider height={5} width={250} />
               <motion.div
                 initial={{ x: -40, opacity: 0 }}
                 animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -40 }}

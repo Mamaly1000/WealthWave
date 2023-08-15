@@ -4,6 +4,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Pagination, Autoplay } from "swiper";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
+import Header from "../header-component/Header";
 
 const Comments = () => {
   return (
@@ -14,10 +15,14 @@ const Comments = () => {
       viewport={{ once: true }}
       className="comment-section"
     >
-      <div className="comment-section-header">
-        <h2 className="page-header">Wealth Wave impacts</h2>
-        <button>what is your idea ?</button>
-      </div>
+      <Header
+        btnText="what is your idea ?"
+        header={true}
+        height={5}
+        onclick={() => {}}
+        text="Wealth Wave impacts"
+        width={250}
+      />
       <Swiper
         slidesPerView="auto"
         spaceBetween={10}

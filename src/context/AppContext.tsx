@@ -48,6 +48,8 @@ interface Icontext {
   scrollH: boolean;
   selectedId: IAppleNews | null;
   setSelectedId: React.Dispatch<React.SetStateAction<IAppleNews | null>>;
+  showTagModal: boolean;
+  setShowTagsModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -55,6 +57,7 @@ export const AppContext = createContext<Icontext | null>({} as Icontext);
 const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
+  const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
   const dispatch = useDispatch();
   const notesWithTags = useMemo(() => {
@@ -176,6 +179,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         onFindTag,
         selectedId,
         setSelectedId,
+        showTagModal,
+        setShowTagsModal,
       }}
     >
       {children}

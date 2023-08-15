@@ -4,13 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { NoteFormProps, TAG } from "../types/noteTypes";
 import { AnimatePresence, motion } from "framer-motion";
-import { removingPageMotion } from "../motions/motions";
+import {
+  BlogTagsOverlay,
+  modalMotion,
+  removingPageMotion,
+} from "../motions/motions";
 import urlValidation from "../utils/imageChecker";
 import tickImg from "./../assets/blogs/click.svg";
 import Loader from "../components/loader/Loader";
 import imgPreview from "./../assets/blogs/pewview.svg";
 import ImagePreview from "../components/image-preview-modal/ImagePreview";
 import { toast } from "react-toastify";
+import Header from "../components/header-component/Header";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [imageSRC, setImageSRC] = useState<string>("");
@@ -61,8 +66,14 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
       exit="exit"
       className="create-blog-page"
     >
-      <h1 className="page-header">new Blog</h1>
-
+      <Header
+        btnText=""
+        header={false}
+        height={5}
+        onclick={() => {}}
+        text="new Blog"
+        width={250}
+      />
       <form className="create-blog-form" onSubmit={submitHnadler}>
         <div className="blog-detail-container">
           <motion.input
@@ -143,6 +154,21 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
               )}
             </AnimatePresence>
           </motion.div>
+          {preview && (
+            <motion.div
+              variants={modalMotion}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="modal-content"
+              style={{ position: "relative", bottom: 60 }}
+            >
+              <div className="modal-header">
+                <h4>Image Preview</h4>
+              </div>
+              <img src={imageSRC} alt="image preview" />
+            </motion.div>
+          )}
         </div>
         <div className="blog-desc-container">
           <CreateableReactSelect
@@ -200,13 +226,6 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
           </Link>
         </div>
       </form>
-      <ImagePreview
-        setShow={setImagePreview}
-        show={preview}
-        src={imageSRC}
-        setSRC={setImageSRC}
-        setImageSRCurl={setImageSRCurl}
-      />
     </motion.div>
   );
 };

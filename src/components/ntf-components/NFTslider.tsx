@@ -7,6 +7,7 @@ import NFTpost from "./NFTpost";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
 import { useNavigate } from "react-router-dom";
+import Header from "../header-component/Header";
 
 const NFTslider = () => {
   const nav = useNavigate();
@@ -22,10 +23,14 @@ const NFTslider = () => {
       className="nft-list-slider"
     >
       <div className="nft-slider-container">
-        <div className="nft-slider-header">
-          <h2 className="page-header">Discover our NFT world</h2>
-          <button onClick={() => nav("/nfts")}>whatch more</button>
-        </div>
+        <Header
+          btnText="whatch more"
+          header={true}
+          height={5}
+          width={250}
+          onclick={() => nav("/nfts")}
+          text="Discover our NFT world"
+        />
         <div className="nft-slider">
           <Swiper
             slidesPerView={"auto"}

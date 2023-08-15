@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { memo, useEffect, useMemo, useState, useTransition } from "react";
 import useNFT from "../../hooks/useNFT";
 import { useDispatch } from "react-redux";
 import { setNFTsearch } from "../../features/nft_slice/nft_slice";
@@ -79,4 +79,4 @@ const NftSearchComponent = () => {
   );
 };
 
-export default NftSearchComponent;
+export default memo(NftSearchComponent);

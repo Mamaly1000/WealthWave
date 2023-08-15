@@ -82,4 +82,7 @@
       }
     }
   }
+  .modal-content {
+    @apply w-full min-h-[500px] relative top-0;
+  }
 }

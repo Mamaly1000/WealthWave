@@ -11,11 +11,11 @@
       h1 {
         @apply font-extrabold italic w-full lg:w-[80%] text-white text-center font-rail transition-all;
         span {
-          @apply text-blue-400;
+          @apply text-blue-400 w-full h-fit flex flex-col relative justify-center items-center gap-1;
         }
       }
       .txt-rotate {
-        @apply font-rail   text-[1.5rem] w-[100%] lg:w-[50%] text-white -tracking-normal;
+        @apply capitalize font-rail   text-[1.5rem] w-[100%] lg:w-[50%] text-white -tracking-normal;
         .word-animation {
           transition-property: color, background, transform, font-weight;
           transition-duration: 2s;
@@ -83,7 +83,7 @@
             @apply py-0 px-3 overflow-hidden;
           }
         }
-        td { 
+        td {
           @apply py-2 px-3 h-[60px] max-h-[60px] text-[.9rem] flex items-center transition-all;
         }
         .rank-td {
@@ -169,6 +169,15 @@
   }
   .swiper-pagination-bullet-active {
     @apply w-[20px] bg-blue-400;
+  }
+  .header-component {
+    @apply text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] capitalize text-start font-bold text-blue-400 w-full flex flex-col md:flex-row gap-5 justify-between items-center relative;
+    h2 {
+      @apply flex flex-col items-center text-center justify-center md:justify-start md:items-start gap-3;
+    }
+    button {
+      @apply w-fit h-fit px-3 py-2 text-[1rem];
+    }
   }
 }
 

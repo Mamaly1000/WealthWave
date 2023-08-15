@@ -1,5 +1,5 @@
 .comment-section {
-  @apply w-full h-[500px] flex flex-col justify-center items-center overflow-hidden;
+  @apply w-full h-[500px] flex flex-col justify-center items-center;
   .comment-section-header {
     @apply w-full flex flex-col sm:flex-row items-center justify-between text-[1rem] whitespace-nowrap gap-5 my-10 md:my-5;
     h2 {

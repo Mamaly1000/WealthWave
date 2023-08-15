@@ -1,16 +1,38 @@
 .navBar-container {
   box-shadow: 0px 5px 10px 0 rgba(0 0 0 /0.2);
-  @apply text-white w-full flex items-center justify-between h-[56px] sm:h-[60px] backdrop-blur-sm fixed  top-0 left-0 px-10 py-5 md:py-10 md:px-20 z-50 transition-all;
+  @apply text-white w-full flex items-center justify-between h-[56px] sm:h-[60px] backdrop-blur-sm fixed  top-0 left-0 px-5 py-5 md:py-10 md:px-20 z-50 transition-all;
   div {
     @apply w-[90%] flex flex-row-reverse gap-5 md:gap-[30px];
   }
-  .main-navbar-btn {
-    @apply hidden sm:flex w-[30px] md:w-[40px] h-[30px] md:h-[40px]  p-1 text-white cursor-pointer rounded-[5px] bg-blue-600 shadow-blue-500 shadow border-none hover:shadow-none scale-100 active:scale-95 transition-BlogCard justify-center items-center text-[.8rem] sm:text-[1rem];
+  .sidebar-btn {
+    @apply shadow-none hover:scale-105 w-fit h-fit p-1 rounded-full bg-blue-900;
+    img {
+      @apply w-[30px] h-[30px];
+    }
   }
+  .main-navbar-btn {
+    all: unset;
+    @apply hidden md:block cursor-pointer hover:scale-105 bg-blue-900 rounded-full p-1 w-fit h-fit text-[.9rem] md:text-[1rem];
+    img {
+      @apply min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] rounded-full;
+    }
+  }
+  .nav-links {
+    @apply h-fit flex flex-wrap items-center justify-start gap-2;
+    a {
+      @apply hidden hover:scale-105   transition-all cursor-pointer min-h-full md:flex flex-col gap-1 items-center justify-center capitalize text-[.9rem];
+      img {
+        @apply min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full;
+      }
+    }
+    .dashboard-btn {
+      @apply block;
+    }
+  }
+
   .navbar-logo {
-    font-family: "Raleway", sans-serif;
     text-shadow: 0 0 10px rgba(255 255 255 /0.2);
-    @apply font-semibold italic whitespace-nowrap absolute mx-auto text-[1.5rem] sm:text-[1.7rem] md:text-[2rem] w-[50%] sm:w-[30%] md:w-[20%] left-[25%] sm:left-[35%] md:left-[40%];
+    @apply font-rail font-semibold italic whitespace-nowrap absolute mx-auto text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] w-[50%] sm:w-[30%] md:w-[20%] left-[25%] sm:left-[35%] md:left-[40%];
     span {
       @apply text-blue-400 font-extrabold;
     }

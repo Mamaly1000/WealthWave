@@ -11,6 +11,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import defailtImage from "./../assets/blogs/online-message-blog-chat-communication-envelop-graphic-icon-concept_53876-139717.avif";
 import moment from "moment";
+import Header from "../components/header-component/Header";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   const nav = useNavigate();
   const { id } = useParams();
@@ -40,13 +41,14 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
       {show && (
         <div className="blogPage-header">
           <div className="blogPage-title">
-            <motion.h1
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.8, type: "tween" }}
-            >
-              {blog?.title}
-            </motion.h1>
+            <Header
+              btnText=""
+              header={false}
+              height={5}
+              onclick={() => {}}
+              text={blog!.title}
+              width={300}
+            />
             <div>
               {blog?.tags.map((t, index) => {
                 return (

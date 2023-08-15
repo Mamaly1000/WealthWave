@@ -3,14 +3,15 @@ import ReactSelect from "react-select";
 import { BlogListProps, TAG } from "../types/noteTypes";
 import BlogCard from "../components/blog-car-component/BlogCard";
 import { useNavigate } from "react-router-dom";
-import EditTagModal from "../components/edit-tags-modal/EditTagModal";
 import { motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
+import { useContextFunction } from "../context/AppContext";
+import Header from "../components/header-component/Header";
 const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
   const nav = useNavigate();
   const [selectedTags, setselectedTags] = useState<TAG[]>([]);
   const [title, setTitle] = useState<string>("");
-  const [showTagModal, setShowTagsModal] = useState<boolean>(false);
+  const contextData = useContextFunction();
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       return (
@@ -32,7 +33,14 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
       className="blog-list-container"
     >
       <div className="blog-list-header">
-        <h1 className="page-header">My Blogs</h1>
+        <Header
+          btnText=""
+          header={false}
+          height={5}
+          onclick={() => {}}
+          text="My Blogs"
+          width={250}
+        />
         <div>
           <button
             className="create-blog-btn"
@@ -43,7 +51,7 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
           <button
             className="edit-tags-btn"
             onClick={() => {
-              setShowTagsModal(true);
+              contextData!.setShowTagsModal(true);
             }}
           >
             Edit Tags
@@ -96,11 +104,6 @@ const BlogPage = ({ AllAvailableTags, notes }: BlogListProps) => {
             );
           })}
       </div>
-      <EditTagModal
-        show={showTagModal}
-        setShow={setShowTagsModal}
-        tags={AllAvailableTags}
-      />
     </motion.div>
   );
 };

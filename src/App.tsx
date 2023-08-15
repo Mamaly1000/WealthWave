@@ -18,6 +18,7 @@ import ScrollToTop from "./components/scroll-component/ScrollToTop";
 import Nft_Page from "./pages/Nft_Page";
 import Nft_Single_Page from "./pages/Nft_Single_Page";
 import NewsPage from "./pages/NewsPage";
+import Dashboard from "./pages/Dashboard";
 function App() {
   const location = useLocation();
   const contextData = useContextFunction();
@@ -74,10 +75,11 @@ function App() {
             />
 
             <Route path="/news" element={<NewsPage />} />
-            <Route path="/news/:id" element={"news single page"} />
 
             <Route path="/nfts" element={<Nft_Page />} />
             <Route path="/nfts/:id" element={<Nft_Single_Page />} />
+
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </QueryClientProvider>

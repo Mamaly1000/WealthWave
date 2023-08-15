@@ -17,6 +17,7 @@ import {
   setCurrentCryptoPage,
 } from "../features/crypto_slice/crypto_slice";
 import TrendCryptoComponent from "../components/cryto-table/TrendCryptoComponent";
+import Header from "../components/header-component/Header";
 const Crypto_page = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -41,7 +42,11 @@ const Crypto_page = () => {
             .toLowerCase()
             .includes(cryptoSelector.cryptoSearch.toLowerCase())
       );
-  }, [cryptoSelector.cryptoSearch, cryptoSelector.pagination.offset]);
+  }, [
+    cryptoSelector.cryptoSearch,
+    cryptoSelector.pagination.offset,
+    cryptoSelector.coinlist,
+  ]);
 
   return (
     <motion.div
@@ -60,14 +65,16 @@ const Crypto_page = () => {
         Cryptocurrency Prices by Market Cap
       </motion.h1>
       <TrendCryptoComponent />
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.3, duration: 0.5, type: "tween" }}
-        className="component-title"
-      >
-        Top Cryptocurrencies
-      </motion.div>
+      <Header
+        btnText="track more coins"
+        header={false}
+        height={5}
+        onclick={() => {
+          nav("/crypto");
+        }}
+        text="Top Cryptocurrencies"
+        width={250}
+      />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}

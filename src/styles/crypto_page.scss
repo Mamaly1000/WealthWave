@@ -208,4 +208,13 @@
   .red-text {
     @apply text-red-300;
   }
+  .header-component {
+    @apply text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] capitalize text-start font-bold text-blue-400 w-full flex flex-col md:flex-row gap-5 justify-between items-center relative;
+    h2 {
+      @apply flex flex-col items-center text-center justify-center md:justify-start md:items-start gap-3;
+    }
+    button {
+      @apply w-fit h-fit px-3 py-2 text-[1rem];
+    }
+  }
 }

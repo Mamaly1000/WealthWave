@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Divider from "./ntf-components/Divider";
 export const wordDetecter = (word: string): boolean => {
   const WordsArray: string[] = [
     "wealth",
@@ -114,7 +115,10 @@ const HomePageIntro = () => {
         animate={{ fontSize: "3rem" }}
         transition={{ delay: 1.2, duration: 0.5, type: "tween" }}
       >
-        Hello Wellcome to The <span>WealthWave</span>
+        Hello Wellcome to The{" "}
+        <span>
+          WealthWave <Divider width={250} height={5} />
+        </span>
       </motion.h1>
       <motion.span
         initial={{ scale: 0 }}

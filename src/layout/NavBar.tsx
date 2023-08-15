@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { useContextFunction } from "../context/AppContext";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import searchIcon from "./../assets/navbar/search.svg";
+import hamIcon from "./../assets/navbar/ham.svg";
+import Divider from "../components/ntf-components/Divider";
+import settingIcon from "./../assets/navbar/setting.svg";
+import { toast } from "react-toastify";
+import NavBarDivider from "../components/divider-component/NavBarDivider";
 type navBarPropsType = {
   showSideBar: boolean;
   setShowSideBar: Dispatch<SetStateAction<boolean>>;
@@ -14,6 +20,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
     damping: 30,
     restDelta: 0.001,
   });
+  const [hovered, setHoveredLink] = useState<string>("");
   return (
     <>
       <motion.div
@@ -43,30 +50,12 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
         }}
       >
         <motion.button
-          whileHover={{ rotateZ: "360deg" }}
+          whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.13, type: "tween" }}
-          style={{
-            scale: contextData!.scrollH ? "1" : "1.2",
-            transition: "scale .13s linear",
-            display: "flex",
-          }}
-          className="main-navbar-btn"
+          className="sidebar-btn"
           onClick={() => setShowSideBar(true)}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
+          <img src={hamIcon} />
         </motion.button>
         <Link
           to="/"
@@ -78,78 +67,72 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
         >
           <span>W</span>ealth<span>W</span>ave
         </Link>
-        <div>
+        <div className="nav-links">
           <button
-            className="main-navbar-btn"
-            style={{
-              scale: contextData!.scrollH ? "1" : "1.2",
-              transition: "scale .13s linear",
-              display: "flex",
+            onClick={() => {
+              toast.info("comming soon !");
             }}
+            className="main-navbar-btn"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </button>
+            <img src={searchIcon} />
+          </button>{" "}
           <button
-            className="main-navbar-btn"
-            style={{
-              scale: contextData!.scrollH ? "0" : "1.2",
-              transition: "scale .13s linear",
+            onClick={() => {
+              toast.info("comming soon !");
             }}
+            className="main-navbar-btn"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-              />
-            </svg>
+            <img src={settingIcon} />
           </button>
-          <button
-            style={{
-              width: "fit-content",
-              paddingInline: 10,
-              scale: contextData!.scrollH ? "0" : "1.2",
-              transition: "scale .13s linear",
+          <Link className="dashboard-btn" to="/dashboard">
+            <img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
+          </Link>
+          <Link
+            onMouseEnter={() => {
+              setHoveredLink("/sign-in");
             }}
-            className="main-navbar-btn"
+            onMouseLeave={() => {
+              setHoveredLink("");
+            }}
+            to="/sign-in"
           >
             sign in
-          </button>
-          <button
-            style={{
-              width: "fit-content",
-              paddingInline: 10,
-              color: "rgb(37 99 235)",
-              background: "white",
-              border: "1px solid rgb(37 99 235)",
-              display: "flex",
-              scale: contextData!.scrollH ? "0" : "1.2",
-              transition: "scale .13s linear",
+            <NavBarDivider
+              hover={hovered}
+              path="/sign-in"
+              height={5}
+              width={100}
+            />
+          </Link>
+          <Link
+            onMouseEnter={() => {
+              setHoveredLink("/sign-up");
             }}
-            className="main-navbar-btn"
+            onMouseLeave={() => {
+              setHoveredLink("");
+            }}
+            to="/sign-up"
           >
             sign up
-          </button>
+            <NavBarDivider
+              hover={hovered}
+              path="/sign-up"
+              height={5}
+              width={100}
+            />
+          </Link>{" "}
+          <Link
+            onMouseEnter={() => {
+              setHoveredLink("/");
+            }}
+            onMouseLeave={() => {
+              setHoveredLink("");
+            }}
+            to="/"
+          >
+            home page
+            <NavBarDivider hover={hovered} path="/" height={5} width={100} />
+          </Link>
         </div>
       </motion.div>
     </>
