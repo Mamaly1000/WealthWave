@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BlogTagsInputs } from "../../motions/motions";
 import { TAG } from "../../types/noteTypes";

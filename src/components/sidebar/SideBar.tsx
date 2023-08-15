@@ -1,4 +1,4 @@
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SideBar_links } from "../../Data/dummy";
 import React, { useState } from "react";
 import { useContextFunction } from "../../context/AppContext";
@@ -9,7 +9,7 @@ const SideBar = ({
 }: {
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [hide, setHide] = useState<boolean>(false);
+  const [hide, _setHide] = useState<boolean>(false);
   const contextData = useContextFunction();
 
   return (

@@ -1,5 +1,4 @@
 import { nftPics } from "../../Data/nftPic";
-import { AvatarPics } from "../../Data/profilePics";
 import { INFT } from "../../features/nft_slice/nft_slice";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";

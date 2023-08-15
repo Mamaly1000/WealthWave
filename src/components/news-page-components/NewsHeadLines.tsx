@@ -1,4 +1,3 @@
-import React from "react";
 import Divider from "../ntf-components/Divider";
 
 const NewsHeadLines = ({ title }: { title: string }) => {

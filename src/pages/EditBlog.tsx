@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import tickImg from "./../assets/blogs/click.svg";
 import urlValidation from "../utils/imageChecker";
 import Loader from "../components/loader/Loader";
-import ImagePreview from "../components/image-preview-modal/ImagePreview";
 import Header from "../components/header-component/Header";
 const EditBlog = ({
   notes,

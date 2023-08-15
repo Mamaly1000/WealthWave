@@ -184,8 +184,8 @@ const Nft_Reducer = createSlice({
     fetchSingleNFT: (state, action) => {
       state.single_nft = action.payload;
     },
-    sortNFTTable: (state, action) => {
-      let sortedArray = [...state.nft_list];
+    sortNFTTable: (_state, action) => {
+      // let sortedArray = [...state.nft_list];
       switch (action.payload.type_name) {
         case "RANK":
           break;

@@ -55,7 +55,7 @@ const HomePageIntro = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
+  const [_index, setIndex] = useState(1);
   const toRotate = [
     "Building wealth is not about money , it's about mindset and the right wave to ride.",
     "True wealth is not about money, but mindset and habits.",

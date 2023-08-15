@@ -1,4 +1,3 @@
-import React from "react";
 import { IAppleNews } from "../../hooks/useNews";
 import SmallMainNewsComponent from "./SmallMainNewsComponent";
 

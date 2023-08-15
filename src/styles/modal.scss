@@ -1,5 +1,5 @@
 .modal-container {
-  @apply z-10 fixed min-w-[100vw] min-h-[100vh]  bg-transparent top-0 left-0 flex items-center justify-center z-[10000000002034723857098572];
+  @apply fixed min-w-[100vw] min-h-[100vh]  bg-transparent top-0 left-0 flex items-center justify-center z-[10000000002034723857098572];
 }
 .modal-overlay {
   background: rgba(0 0 0 /0.4);

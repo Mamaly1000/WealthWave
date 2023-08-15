@@ -2,5 +2,7 @@ declare module "swiper" {
   const FreeMode: any;
   const Pagination: any;
   const Autoplay: any;
-  export { FreeMode, Pagination, Autoplay };
+  const Parallax: any;
+  const EffectCube:any
+  export { FreeMode, Pagination, Autoplay, Parallax,EffectCube };
 }

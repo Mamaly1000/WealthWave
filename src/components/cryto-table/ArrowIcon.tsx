@@ -1,4 +1,3 @@
-import React from "react";
 import arrowDownIcon from "../../assets/crypto/arrow-down.svg";
 import { motion } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";

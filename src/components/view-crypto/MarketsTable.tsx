@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import useCrypto from "../../hooks/useCrypto";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContextFunction } from "../../context/AppContext";

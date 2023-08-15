@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useCrypto from "../../hooks/useCrypto";
 import Chart from "react-apexcharts";
 import moment from "moment";
@@ -86,6 +86,7 @@ const Chart_Container = () => {
       setDatasets(datas as never[]);
     }
   }, [cryptoSelector.cryptoChartDisplayType, cryptoSelector.cryptoCharts]);
+  useEffect(() => {}, [fetchcharts]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}

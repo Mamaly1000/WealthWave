@@ -1,10 +1,4 @@
-import React, {
-  FunctionComponent,
-  RefAttributes,
-  RefObject,
-  useRef,
-} from "react";
-import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Parallax, Pagination } from "swiper";
 import bgImage from "./../../assets/about-us/12322bd8-c76a-4b5a-989f-a562a91c53f7.png";
 import { values } from "../../utils/about-us-values";
@@ -12,10 +6,6 @@ import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
 import Divider from "../ntf-components/Divider";
 export default function AboutUs() {
-  const sliderRef =
-    useRef<
-      RefObject<FunctionComponent<RefAttributes<SwiperRef> & SwiperProps>>
-    >(null);
   return (
     <motion.div
       variants={componentViewMotion}
@@ -34,7 +24,6 @@ export default function AboutUs() {
         className="mySwiper"
         spaceBetween={100}
         autoHeight={true}
-        ref={sliderRef}
       >
         <div
           slot="container-start"
@@ -60,7 +49,6 @@ export default function AboutUs() {
               <motion.div
                 initial={{ x: -40, opacity: 0 }}
                 animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -40 }}
-                transition={{ duration: 0.5, delay: 0.2, type: "just" }}
                 className="subtitle"
               >
                 Our Story :
@@ -150,29 +138,6 @@ export default function AboutUs() {
           )}
         </SwiperSlide>
       </Swiper>
-      <button
-        className="next-slide-btn"
-        onClick={() => {
-          if (sliderRef) {
-            sliderRef.current.swiper.slideNext();
-          }
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-          />
-        </svg>
-      </button>
     </motion.div>
   );
 }

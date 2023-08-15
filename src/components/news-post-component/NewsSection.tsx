@@ -1,12 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useNews from "../../hooks/useNews";
-import NewsPost from "./NewsPost";
-import { Autoplay, FreeMode, Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
-import { useContextFunction } from "../../context/AppContext";
 import { AppleNews } from "../../Data/news";
 import SmallMainNewsComponent from "../news-page-components/SmallMainNewsComponent";
 import Header from "../header-component/Header";

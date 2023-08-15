@@ -44,7 +44,12 @@ const InfoRow = ({
             })
           : ""}
         {typeof row.data === "object" && row.name === "community"
-          ? row.data.map((d, index) => {
+          ? (
+              row.data as {
+                name: string;
+                pic: string;
+              }[]
+            ).map((d, index) => {
               return (
                 <motion.span
                   variants={tagsMotion(index + 40, 0.5)}
@@ -52,14 +57,14 @@ const InfoRow = ({
                   initial="hidden"
                   key={index}
                 >
-                  <img src={d.pic} /> {d.name}
+                  <img src={d?.pic} /> {d.name}
                 </motion.span>
               );
             })
           : ""}
         {typeof row.data === "object" &&
         row.name === "sentiment votes percentage"
-          ? row.data.map((d, index) => {
+          ? (row.data as { name: string; data: number }[]).map((d, index) => {
               return (
                 <motion.span
                   variants={tagsMotion(index + 40, 0.5)}
@@ -73,7 +78,7 @@ const InfoRow = ({
             })
           : ""}
         {typeof row.data === "object" && row.name === "scores"
-          ? row.data.map((d, index) => {
+          ? (row.data as { name: string; data: number }[]).map((d, index) => {
               return (
                 <motion.span
                   variants={tagsMotion(index + 40, 0.5)}

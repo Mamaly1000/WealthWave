@@ -48,7 +48,7 @@ const SelectedNewsPost = () => {
                 transition={{
                   duration: 0.1,
                   delay: 0.1,
-                  type: "just",
+                  type: "tween",
                   delayChildren: 1,
                   when: "beforeChidren",
                   staggerChildren: 1,
@@ -71,10 +71,13 @@ const SelectedNewsPost = () => {
                       transition={{
                         duration: 1,
                         delay: 1,
-                        type: "spring",
-                        ease: "linear",
+                        type: "tween",
                       }}
-                      src={contextData!.selectedId.urlToImage}
+                      src={
+                        contextData!.selectedId.urlToImage
+                          ? contextData!.selectedId.urlToImage
+                          : ""
+                      }
                     />
                   </div>
                 )}
@@ -100,7 +103,12 @@ const SelectedNewsPost = () => {
                     <div className="selected-post-actions">
                       <motion.button
                         onClick={() =>
-                          window.open(contextData!.selectedId!.url, "_blank")
+                          window.open(
+                            contextData!.selectedId!.url
+                              ? contextData!.selectedId!.url
+                              : "",
+                            "_blank"
+                          )
                         }
                         initial={{ x: 20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
@@ -126,9 +134,15 @@ const SelectedNewsPost = () => {
                       <motion.button
                         onClick={() =>
                           navigator.share({
-                            title: contextData!.selectedId!.title,
-                            text: contextData!.selectedId!.content,
-                            url: contextData!.selectedId!.url,
+                            title: contextData!.selectedId!.title
+                              ? contextData!.selectedId!.title
+                              : "",
+                            text: contextData!.selectedId!.content
+                              ? contextData!.selectedId!.content
+                              : "",
+                            url: contextData!.selectedId!.url
+                              ? contextData!.selectedId!.url
+                              : "",
                           })
                         }
                         initial={{ x: 20, opacity: 0 }}
@@ -188,19 +202,20 @@ const SelectedNewsPost = () => {
                             {contextData!.selectedId!.source!.id}
                           </motion.span>
                         )}
-                      {contextData.selectedId.source.name.length > 0 && (
-                        <motion.span
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{
-                            duration: 0.2,
-                            delay: 1.6,
-                            type: "tween",
-                          }}
-                        >
-                          {contextData.selectedId.source.name}
-                        </motion.span>
-                      )}
+                      {contextData!.selectedId?.source?.name &&
+                        contextData!.selectedId?.source?.name.length > 0 && (
+                          <motion.span
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{
+                              duration: 0.2,
+                              delay: 1.6,
+                              type: "tween",
+                            }}
+                          >
+                            {contextData.selectedId.source.name}
+                          </motion.span>
+                        )}
                     </div>
                   </div>
                 )}
@@ -244,10 +259,13 @@ const SelectedNewsPost = () => {
                       transition={{
                         duration: 1,
                         delay: 1,
-                        type: "spring",
-                        ease: "linear",
+                        type: "tween",
                       }}
-                      src={contextData!.selectedId.urlToImage}
+                      src={
+                        contextData!.selectedId.urlToImage
+                          ? contextData!.selectedId.urlToImage
+                          : ""
+                      }
                     />
                   </div>
                 )}
@@ -273,7 +291,12 @@ const SelectedNewsPost = () => {
                     <div className="selected-post-actions">
                       <motion.button
                         onClick={() =>
-                          window.open(contextData!.selectedId!.url, "_blank")
+                          window.open(
+                            contextData!.selectedId!.url
+                              ? contextData!.selectedId!.url
+                              : "",
+                            "_blank"
+                          )
                         }
                         initial={{ x: 20, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
@@ -299,9 +322,15 @@ const SelectedNewsPost = () => {
                       <motion.button
                         onClick={() =>
                           navigator.share({
-                            title: contextData!.selectedId!.title,
-                            text: contextData!.selectedId!.content,
-                            url: contextData!.selectedId!.url,
+                            title: contextData!.selectedId!.title
+                              ? contextData!.selectedId!.title
+                              : "",
+                            text: contextData!.selectedId!.content
+                              ? contextData!.selectedId!.content
+                              : "",
+                            url: contextData!.selectedId!.url
+                              ? contextData!.selectedId!.url
+                              : "",
                           })
                         }
                         initial={{ x: 20, opacity: 0 }}
@@ -361,19 +390,20 @@ const SelectedNewsPost = () => {
                             {contextData!.selectedId!.source!.id}
                           </motion.span>
                         )}
-                      {contextData!.selectedId.source.name.length > 0 && (
-                        <motion.span
-                          initial={{ scale: 0, opacity: 0 }}
-                          whileInView={{ scale: 1, opacity: 1 }}
-                          transition={{
-                            duration: 0.2,
-                            delay: 1.6,
-                            type: "tween",
-                          }}
-                        >
-                          {contextData!.selectedId.source.name}
-                        </motion.span>
-                      )}
+                      {contextData!.selectedId.source.name &&
+                        contextData!.selectedId.source.name.length > 0 && (
+                          <motion.span
+                            initial={{ scale: 0, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{
+                              duration: 0.2,
+                              delay: 1.6,
+                              type: "tween",
+                            }}
+                          >
+                            {contextData!.selectedId.source.name}
+                          </motion.span>
+                        )}
                     </div>
                   </div>
                 )}

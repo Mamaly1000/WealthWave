@@ -8,8 +8,7 @@ import {
   tagsMotions,
   viewBlogActionButtons,
 } from "../motions/view_blog_motions";
-import { useEffect, useRef, useState } from "react";
-import defailtImage from "./../assets/blogs/online-message-blog-chat-communication-envelop-graphic-icon-concept_53876-139717.avif";
+import { Ref, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import Header from "../components/header-component/Header";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
@@ -23,7 +22,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
   }
   const [imageLoading, setImageLoading] = useState<boolean>(true);
   const [show, setShow] = useState<boolean>(false);
-  const blogImageRef = useRef<HTMLElement>(null);
+  const blogImageRef = useRef<HTMLImageElement | undefined>(null);
   useEffect(() => {
     blogImageRef.current?.addEventListener("load", () => {
       setImageLoading(true);
@@ -152,7 +151,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
                 scale: imageLoading ? 1 : 0,
               }}
               transition={{ duration: 0.5, delay: 1, type: "tween" }}
-              ref={blogImageRef}
+              ref={blogImageRef as Ref<HTMLImageElement> | undefined}
               src={blog?.img}
               alt="blog-image"
             />

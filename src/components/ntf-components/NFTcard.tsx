@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { INFT } from "../../features/nft_slice/nft_slice";
 import { nftPics } from "../../Data/nftPic";
 import ethIMG from "./../../assets/nft/icons8-ethereum-logo.svg";
@@ -6,7 +6,7 @@ import DefImg from "./../../assets/nft/icons8-avalanche-64.png";
 import NftFavorites from "./NftFavorites";
 import saveIcon from "./../../assets/crypto/save.svg";
 import { motion } from "framer-motion";
-import { viewFromDown, viewFromLeft } from "../../motions/viewCryptoMotions";
+import { viewFromDown } from "../../motions/viewCryptoMotions";
 import { useNavigate } from "react-router-dom";
 const NFTcard = ({ nft, index }: { nft: INFT; index: number }) => {
   const nav = useNavigate();

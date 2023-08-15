@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IAppleNews } from "../../hooks/useNews";
-import { useMemo } from "react";
 import NewsSingleSlide from "./NewsSingleSlide";
 import { Autoplay } from "swiper";
 

@@ -1,4 +1,3 @@
-import pic1 from "./../assets/avatars/pic-1.avif";
 import pic2 from "./../assets/avatars/pic-3.jpg";
 import pic3 from "./../assets/avatars/pic-4.jpg";
 import pic4 from "./../assets/avatars/pic-5.jpeg";

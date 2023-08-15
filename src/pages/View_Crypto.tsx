@@ -20,7 +20,6 @@ import moment from "moment";
 import { socialMedia } from "../Data/dummy";
 import { useState } from "react";
 import CryptoDataTable from "../components/view-crypto/CryptoDataTable";
-import InfoRow from "../components/view-crypto/InfoRow";
 import backIcon from "./../assets/crypto/back.svg";
 import {
   tagsMotion,
@@ -34,6 +33,7 @@ import MarketsTable from "../components/view-crypto/MarketsTable";
 import CoinConvertor from "../components/view-crypto/CoinConvertor";
 import CoinDataTable from "../components/view-crypto/CoinDataTable";
 import RelatedCoins from "../components/view-crypto/RelatedCoins";
+import InfoRow from "../components/view-crypto/InfoRow";
 
 const View_Crypto = () => {
   const { id } = useParams();
@@ -51,7 +51,7 @@ const View_Crypto = () => {
   const fetchSingleCoin = getSingleCoinData(
     id as string,
     (data) => {
-      dispatch(setSelectedCoin(data?.data as unknown));
+      dispatch(setSelectedCoin(data!.data as any));
       toast.success("fetch data successfully");
     },
     () => {
@@ -133,7 +133,21 @@ const View_Crypto = () => {
       data: [],
     },
   ];
-  const info_table_data = [
+  const info_table_data: {
+    name: string;
+    data:
+      | number
+      | string
+      | {
+          name: string;
+          data: number;
+        }[]
+      | string[]
+      | {
+          name: string;
+          pic: string;
+        }[];
+  }[] = [
     {
       name: "wealthwave rank",
       data: seletedCoin.coingecko_rank,
@@ -190,7 +204,7 @@ const View_Crypto = () => {
       data: socialMedia.slice(communityLength.start, communityLength.end),
     },
   ];
-  const fetchChart = chartLists(
+  const { isLoading: _chartLoading } = chartLists(
     id as string,
     cryptoSelector.cryptoDay,
     (data) => {
@@ -210,7 +224,11 @@ const View_Crypto = () => {
     true,
     5000
   );
-  const fetchCoins = cryptosList("fetch-related-coins", true, true);
+  const { isLoading: _CoinsLoading } = cryptosList(
+    "fetch-related-coins",
+    true,
+    true
+  );
 
   return (
     <motion.div
@@ -389,8 +407,6 @@ const View_Crypto = () => {
           <RelatedCoins />
         </div>
       </div>
-
-      {/* <Crypto_Chart_Data /> */}
     </motion.div>
   );
 };

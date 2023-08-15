@@ -4,7 +4,6 @@ import { BlogTagsOverlay, modalMotion } from "../../motions/motions";
 import closeIcon from "./../../assets/crypto/close.svg";
 import priceIcon from "./../../assets/crypto/price.svg";
 import nameIcon from "./../../assets/crypto/name.svg";
-import { data } from "./CryptoChart";
 type filterPropsTypes = {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;

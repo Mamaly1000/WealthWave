@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import {
   setCurrentNFTPage,
   setNFTPageOffSet,
-  setNFTPagination,
 } from "../../features/nft_slice/nft_slice";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";

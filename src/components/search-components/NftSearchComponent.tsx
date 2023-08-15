@@ -36,7 +36,7 @@ const NftSearchComponent = () => {
     } else {
       controls.stop();
     }
-  }, [refreshNft.isLoading]);
+  }, [refreshNft.isLoading, fetchSearch]);
   return (
     <motion.section className="nft-search-container">
       <input

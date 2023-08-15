@@ -1,4 +1,4 @@
-import { Swiper } from "swiper/react";
+ 
 import { IAppleNews } from "../../hooks/useNews";
 import MainCategoryNewsComponent from "./MainCategoryNewsComponent";
 import NewsSlider from "./NewsSlider";

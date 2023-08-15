@@ -45,6 +45,7 @@ const Crypto_Search = ({
   const setSearchTextCallBack = useMemo(() => {
     dispatch(setCryptoSearch(searchText));
   }, [searchText]);
+  useEffect(() => {}, [setSearchTextCallBack]);
   useEffect(() => {
     if (isLoading) {
       controls.start({

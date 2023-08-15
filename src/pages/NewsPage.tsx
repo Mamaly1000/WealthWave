@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { removingPageMotion, newsCardMotion } from "../motions/motions";
+import { removingPageMotion } from "../motions/motions";
 import MainNewsComponent from "../components/news-page-components/MainNewsComponent";
 import LatestNewsComponent from "../components/news-page-components/LatestNewsComponent";
 import SmallMainNewsComponent from "../components/news-page-components/SmallMainNewsComponent";

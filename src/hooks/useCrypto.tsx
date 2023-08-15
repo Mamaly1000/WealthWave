@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import useLocalStorage from "./useLocalStorage";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ItrendCoin,
@@ -53,7 +53,6 @@ export const fetchChart = async (name: string, day: number) => {
 };
 const useCrypto = () => {
   const cryptoSelector = useSelector(selectCrypto);
-  const QueryClient = useQueryClient();
   const dispatch = useDispatch();
   const [LocalCryptoList, setLoacalCryptoList] = useLocalStorage<IcryptoData[]>(
     "cryptoList",
@@ -125,9 +124,9 @@ const useCrypto = () => {
     );
   };
   const chartValidation = (
-    id: string,
+    _id: string,
     setDataSets: React.Dispatch<React.SetStateAction<IchartDataSet[]>>,
-    data: IchartDataSet[],
+    _data: IchartDataSet[],
     borderColor: string,
     sparkline?: number[]
   ) => {
@@ -165,7 +164,7 @@ const useCrypto = () => {
   };
   const getSingleCoinData = (
     name: string,
-    onSuccess?: (data: unknown) => void,
+    onSuccess?: (data: any) => void,
     onError?: () => void,
     enabled?: boolean,
     refetchOnWindowFocus?: boolean,
@@ -187,16 +186,6 @@ const useCrypto = () => {
         enabled: enabled,
         onSuccess,
         onError,
-        initialData: () => {
-          const coinData = QueryClient.getQueryData(
-            "single-crypto-detail"
-          )?.data?.find((name: string) => (name.id as string) === name);
-          if (coinData) {
-            return { data: coinData };
-          } else {
-            return undefined;
-          }
-        },
       }
     );
   };

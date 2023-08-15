@@ -4,7 +4,6 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import searchIcon from "./../assets/navbar/search.svg";
 import hamIcon from "./../assets/navbar/ham.svg";
-import Divider from "../components/ntf-components/Divider";
 import settingIcon from "./../assets/navbar/setting.svg";
 import { toast } from "react-toastify";
 import NavBarDivider from "../components/divider-component/NavBarDivider";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import { useDispatch } from "react-redux";
 import {

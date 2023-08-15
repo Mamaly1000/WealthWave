@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 import {
   AppleNewsALL,
@@ -29,11 +29,11 @@ const useNews = () => {
     "appleNews",
     []
   );
-  const [wallStreetNews, setWallStreetNews] = useState<unknown[]>([]);
+  const [_wallStreetNews, setWallStreetNews] = useState<unknown[]>([]);
   const [localWallStreetNews, setLocalWallStreetNews] = useLocalStorage<
     IAppleNews[]
   >("wallstreetNews", []);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [_loading, setLoading] = useState<boolean>(false);
   const getAppleNews = async () => {
     try {
       setLoading(true);

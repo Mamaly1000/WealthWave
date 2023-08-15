@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import { motion } from "framer-motion";
@@ -27,6 +27,7 @@ const CryptoTreeChart = ({
     }
     setChartData(newArray);
   }, [data, cryptoSelector.cryptoSearch]);
+  useEffect(() => {}, [result]);
   return (
     <motion.div
       style={{
@@ -55,7 +56,7 @@ const CryptoTreeChart = ({
               },
             },
             events: {
-              click: (e, chart, opt) => {
+              click: (_e, _chart, opt) => {
                 const link = opt.config.series[0].data[opt.dataPointIndex].x;
                 nav(`/crypto/${link}`);
               },
@@ -77,8 +78,8 @@ const CryptoTreeChart = ({
             style: {
               fontSize: "20rem",
             },
-            formatter: (text, opt) => {
-              return [text as string, opt.value + "%"];
+            formatter: (_text, opt) => {
+              return opt.value + "%";
             },
 
             background: { borderWidth: 1 },

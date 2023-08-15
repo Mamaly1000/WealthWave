@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import type { ChartArea } from "chart.js";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import faker from "faker";
 import { motion } from "framer-motion";
-import ReactApexChart from "react-apexcharts";
 
 ChartJS.register(
   CategoryScale,
@@ -22,50 +19,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-const colors = [
-  "red",
-  "orange",
-  "yellow",
-  "lime",
-  "green",
-  "teal",
-  "blue",
-  "purple",
-];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-    },
-  ],
-};
-
-function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
-  const colorStart = faker.random.arrayElement(colors);
-  const colorMid = faker.random.arrayElement(
-    colors.filter((color) => color !== colorStart)
-  );
-  const colorEnd = faker.random.arrayElement(
-    colors.filter((color) => color !== colorStart && color !== colorMid)
-  );
-
-  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
-
-  gradient.addColorStop(0, colorStart);
-  gradient.addColorStop(0.5, colorMid);
-  gradient.addColorStop(1, colorEnd);
-
-  return gradient;
-}
 
 type sizeprops = {
   width: number | string;
@@ -192,9 +145,9 @@ export function CryptoTable({
                 pointStyle: "triangle",
                 drawActiveElementsOnTop: false,
               },
-              line:{
-                borderWidth:2
-              }
+              line: {
+                borderWidth: 2,
+              },
             },
             scales: {
               x: {

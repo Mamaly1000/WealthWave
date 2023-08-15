@@ -1,6 +1,5 @@
 import { useState, useTransition } from "react";
-import arrowIcon from "./../../assets/crypto/arrow-down.svg";
-import Loader from "../loader/Loader";
+import arrowIcon from "./../../assets/crypto/arrow-down.svg"; 
 import deleteIcon from "./../../assets/crypto/delete.svg";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import ComparisonButtons from "./ComparisonButtons";
@@ -12,7 +11,7 @@ import { useDispatch } from "react-redux";
 const CoinComparison = () => {
   const dispatch = useDispatch();
   const { cryptoSelector, cryptosList } = useCrypto();
-  const [isPending, startTransition] = useTransition();
+  const [_isPending, startTransition] = useTransition();
   const fetchAllCoins = cryptosList("fetch-coin", false, false);
   const [selectedCoins, setSelectedCoins] = useState<IcryptoData[]>([]);
   const [displayCoins, setDisplayCoins] = useState<boolean>(false);

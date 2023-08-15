@@ -1,4 +1,3 @@
-import React from "react";
 import Divider from "../ntf-components/Divider";
 import { motion } from "framer-motion";
 

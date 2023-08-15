@@ -1,11 +1,9 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { tagsMotion, viewFromLeft } from "../../motions/viewCryptoMotions";
+import { tagsMotion } from "../../motions/viewCryptoMotions";
 import chartIcon from "./../../assets/crypto/chart.svg";
 import textIcon from "./../../assets/crypto/text.svg";
 import marketIcon from "./../../assets/crypto/market.svg";
-import { useContextFunction } from "../../context/AppContext";
-import useCrypto from "../../hooks/useCrypto";
 const TabsSection = ({
   selectedTab,
   setSelectedTab,
@@ -13,8 +11,6 @@ const TabsSection = ({
   selectedTab: string;
   setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { cryptoSelector } = useCrypto();
-  const contextdata = useContextFunction();
   const tabs = [
     { tab: "overview", pic: chartIcon },
     { tab: "description", pic: textIcon },

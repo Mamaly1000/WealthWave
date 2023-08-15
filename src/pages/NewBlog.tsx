@@ -4,16 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 import { NoteFormProps, TAG } from "../types/noteTypes";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  BlogTagsOverlay,
-  modalMotion,
-  removingPageMotion,
-} from "../motions/motions";
+import { modalMotion, removingPageMotion } from "../motions/motions";
 import urlValidation from "../utils/imageChecker";
 import tickImg from "./../assets/blogs/click.svg";
 import Loader from "../components/loader/Loader";
 import imgPreview from "./../assets/blogs/pewview.svg";
-import ImagePreview from "../components/image-preview-modal/ImagePreview";
 import { toast } from "react-toastify";
 import Header from "../components/header-component/Header";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
