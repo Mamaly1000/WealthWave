@@ -1,6 +1,11 @@
-import React, { useRef } from "react";
+import React, {
+  FunctionComponent,
+  RefAttributes,
+  RefObject,
+  useRef,
+} from "react";
 import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from "swiper/react";
-import { Parallax, Pagination, Autoplay } from "swiper";
+import { Parallax, Pagination } from "swiper";
 import bgImage from "./../../assets/about-us/12322bd8-c76a-4b5a-989f-a562a91c53f7.png";
 import { values } from "../../utils/about-us-values";
 import { motion } from "framer-motion";
@@ -9,7 +14,7 @@ import Divider from "../ntf-components/Divider";
 export default function AboutUs() {
   const sliderRef =
     useRef<
-      React.FunctionComponent<React.RefAttributes<SwiperRef> & SwiperProps>
+      RefObject<FunctionComponent<RefAttributes<SwiperRef> & SwiperProps>>
     >(null);
   return (
     <motion.div

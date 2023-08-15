@@ -100,7 +100,7 @@ const useCrypto = () => {
   const chartLists = (
     name: string,
     day: number,
-    onSuccess?: (data: unknown) => void,
+    onSuccess?: (data: any) => void,
     onError?: () => void,
     enabled?: boolean,
     refetchOnWindowFocus?: boolean,

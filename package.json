@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run build_css && npm run dev",
-    "build": "vite build",
+    "build": "tsc && vite build --mode production --outDir dist",
     "build_css": "npm run build:css",
     "dev": "vite",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
