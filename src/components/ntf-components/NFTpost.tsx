@@ -9,9 +9,10 @@ type nftPostType = {
   price: string;
   symbol: string;
   index: number;
+  id: string;
 };
 
-const NFTpost = ({ name, price, index }: nftPostType) => {
+const NFTpost = ({ name, price, index, id }: nftPostType) => {
   const nav = useNavigate();
   const [nftOwner, _setNftOwner] = useState(
     randomUserData[Math.floor(Math.random() * randomUserData.length)]
@@ -40,7 +41,7 @@ const NFTpost = ({ name, price, index }: nftPostType) => {
       className="nft-post-component"
       onDoubleClick={() => displayLikeIcon()}
       onClick={() => {
-        nav(`/nfts/${name}`);
+        nav(`/nfts/${id}`);
       }}
     >
       <img className="nft-post-pic" src={nftPic} alt="nft image" />

@@ -54,6 +54,7 @@ const NFTslider = () => {
                       price={nft.asset_platform_id}
                       symbol={nft.symbol}
                       index={index}
+                      id={nft.id}
                     />
                   </SwiperSlide>
                 );
