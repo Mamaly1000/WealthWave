@@ -11,10 +11,13 @@
     .sideBar-header {
       @apply w-full h-fit text-left font-bold italic text-[2rem] flex justify-between items-center;
       div {
-        @apply text-[1.4rem] md:text-[2rem];
+        @apply flex items-center text-[1.4rem] md:text-[2rem];
         span {
           @apply text-blue-400;
         }
+      }
+      img {
+        @apply w-[50px] h-[50px];
       }
       button {
         @apply w-[40px] h-[40px] flex justify-center items-center p-1 bg-blue-600 rounded-[10px] shadow shadow-blue-600;

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useContextFunction } from "../../context/AppContext";
 import { AnimatePresence, motion } from "framer-motion";
 import closeIcon from "./../../assets/blogs/cloaseImg.svg";
+import logo from "./../../assets/logo/small-logo.png";
 const SideBar = ({
   setShowSideBar,
 }: {
@@ -55,6 +56,7 @@ const SideBar = ({
       >
         <div className="sideBar-header">
           <div>
+            <img src={logo} />
             <span>W</span>ealth<span>W</span>ave
           </div>
           {!contextData!.screenW && (

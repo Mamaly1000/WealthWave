@@ -32,9 +32,9 @@
 
   .navbar-logo {
     text-shadow: 0 0 10px rgba(255 255 255 /0.2);
-    @apply font-rail font-semibold italic whitespace-nowrap absolute mx-auto text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] w-[50%] sm:w-[30%] md:w-[20%] left-[25%] sm:left-[35%] md:left-[40%];
-    span {
-      @apply text-blue-400 font-extrabold;
+    @apply flex justify-center items-center font-rail font-semibold italic whitespace-nowrap absolute mx-auto text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] w-[50%] sm:w-[30%] md:w-[20%] left-[25%] sm:left-[35%] md:left-[40%];
+    img {
+      @apply w-[40px] h-[40px] md:w-[50px] md:h-[50px];
     }
   }
 }

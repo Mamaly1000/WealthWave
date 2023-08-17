@@ -17,6 +17,7 @@ const CryptoTreeChart = ({
   const { cryptoSelector } = useCrypto();
   const nav = useNavigate();
   const [chartData, setChartData] = useState<{ x: string; y: number }[]>([]);
+  const [SelectedCoin, setSelectedCoin] = useState<string>("");
   const result = useMemo(() => {
     const newArray = [];
     for (const coin of data) {
@@ -27,7 +28,9 @@ const CryptoTreeChart = ({
     }
     setChartData(newArray);
   }, [data, cryptoSelector.cryptoSearch]);
-  useEffect(() => {}, [result]);
+  useEffect(() => {
+    console.log(SelectedCoin);
+  }, [result, SelectedCoin]);
   return (
     <motion.div
       style={{
@@ -55,12 +58,6 @@ const CryptoTreeChart = ({
                 selection: true,
               },
             },
-            events: {
-              click: (_e, _chart, opt) => {
-                const link = opt.config.series[0].data[opt.dataPointIndex].x;
-                nav(`/crypto/${link}`);
-              },
-            },
           },
           title: {
             text: "Crypto Percentage Tree Map",
@@ -79,7 +76,7 @@ const CryptoTreeChart = ({
               fontSize: "20rem",
             },
             formatter: (_text, opt) => {
-              return opt.value + "%";
+              return _text + " " + (opt.value as number).toFixed(2) + "%";
             },
 
             background: { borderWidth: 1 },

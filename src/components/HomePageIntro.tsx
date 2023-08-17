@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Divider from "./ntf-components/Divider";
+import logo from "./../assets/logo/main-logo.png";
 export const wordDetecter = (word: string): boolean => {
   const WordsArray: string[] = [
     "wealth",
@@ -110,16 +111,27 @@ const HomePageIntro = () => {
       transition={{ duration: 0.5, delay: 1, type: "tween" }}
       className="home-page-intro-section"
     >
-      <motion.h1
+      {/* <motion.h1
         initial={{ fontSize: "2rem" }}
         animate={{ fontSize: "3rem" }}
         transition={{ delay: 1.2, duration: 0.5, type: "tween" }}
       >
         Hello Wellcome to The{" "}
         <span>
-          WealthWave <Divider width={250} height={5} />
+          WealthWave 
         </span>
-      </motion.h1>
+      </motion.h1> */}
+      <motion.img
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          duration: 1,
+          delay: 0.5,
+          type: "tween",
+        }}
+        src={logo}
+      />
+      <Divider width={250} height={5} />
       <motion.span
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

@@ -7,6 +7,7 @@ import hamIcon from "./../assets/navbar/ham.svg";
 import settingIcon from "./../assets/navbar/setting.svg";
 import { toast } from "react-toastify";
 import NavBarDivider from "../components/divider-component/NavBarDivider";
+import logo from "./../assets/logo/small-logo.png";
 type navBarPropsType = {
   showSideBar: boolean;
   setShowSideBar: Dispatch<SetStateAction<boolean>>;
@@ -56,15 +57,19 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
         >
           <img src={hamIcon} />
         </motion.button>
-        <Link
-          to="/"
-          className="navbar-logo"
-          style={{
-            scale: contextData!.scrollH ? "1.2" : "0",
-            transition: "scale .13s linear",
-          }}
-        >
-          <span>W</span>ealth<span>W</span>ave
+        <Link to="/" className="navbar-logo">
+          <motion.img
+            initial={{ rotate: 270, scale: 0 }}
+            animate={{
+              rotate: contextData!.scrollH ? 0 : 270,
+              scale: contextData!.scrollH ? 1 : 0,
+            }}
+            transition={{
+              duration: 1,
+              type: "spring",
+            }}
+            src={logo}
+          />
         </Link>
         <div className="nav-links">
           <button
