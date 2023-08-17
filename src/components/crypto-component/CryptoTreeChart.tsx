@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
-import { useNavigate } from "react-router-dom";
 
 const CryptoTreeChart = ({
   data,
@@ -15,10 +14,8 @@ const CryptoTreeChart = ({
   width: number | string;
 }) => {
   const { cryptoSelector } = useCrypto();
-  const nav = useNavigate();
   const [chartData, setChartData] = useState<{ x: string; y: number }[]>([]);
-  const [SelectedCoin, setSelectedCoin] = useState<string>("");
-  const result = useMemo(() => {
+  useMemo(() => {
     const newArray = [];
     for (const coin of data) {
       newArray.push({
@@ -28,9 +25,7 @@ const CryptoTreeChart = ({
     }
     setChartData(newArray);
   }, [data, cryptoSelector.cryptoSearch]);
-  useEffect(() => {
-    console.log(SelectedCoin);
-  }, [result, SelectedCoin]);
+
   return (
     <motion.div
       style={{
