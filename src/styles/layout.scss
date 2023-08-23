@@ -11,4 +11,57 @@
       @apply w-fit h-fit px-3 py-2 text-[1rem];
     }
   }
+  .dashboard-sidebar {
+    overflow: auto;
+    @apply bg-light_dark   font-rail z-10 drop-shadow-2xl backdrop-filter fixed top-[56px] sm:top-[60px] md:top-[80px] lg:top-[80px] start-0 w-[250px]  h-[93%] py-20 max-h-fit flex items-start justify-start gap-2 flex-col p-2;
+    .link-group {
+      @apply relative overflow-visible text-white w-full flex items-start justify-start gap-3 flex-col;
+      .header {
+        @apply ps-1 flex justify-start items-start flex-col text-blue-300 capitalize text-[1.1rem] font-bold;
+      }
+      .links {
+        @apply overflow-visible relative w-full flex ps-5 flex-col justify-start text-[1rem] items-start gap-2;
+        .link {
+          background: linear-gradient(
+            90deg,
+            rgba(2, 0, 36, 0) 0%,
+            rgba(255, 255, 255, 0.21060924369747902) 100%
+          );
+          @apply overflow-visible relative z-10 cursor-pointer  p-2 rounded-2xl flex items-center gap-5 capitalize font-light;
+          img {
+            @apply w-[25px] h-[25px] drop-shadow-2xl;
+          }
+          span {
+            @apply w-fit text-inherit;
+          }
+        }
+        .tool-tip {
+          @apply text-[.7rem] font-bold z-20;
+        }
+      }
+    }
+    .profile-section {
+      @apply min-w-[100px] text-center text-white w-full flex flex-col justify-start items-start gap-3 p-3;
+      img {
+        @apply mx-auto w-[100px] h-[100px] rounded-full;
+      }
+      .profile-name {
+        @apply w-full text-[.9rem] font-bold;
+      }
+      .profile-email {
+        @apply w-full opacity-70 italic text-[.7rem] font-semibold;
+      }
+    }
+  }
+  .dashboard-sidebar {
+    box-shadow: 10px 0px 22px 3px rgba(0, 0, 0, 0.77);
+    -webkit-box-shadow: 10px 0px 22px 3px rgba(0, 0, 0, 0.77);
+    -moz-box-shadow: 10px 0px 22px 3px rgba(0, 0, 0, 0.77);
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .display-dashboard-btn {
+    @apply w-[50px] h-[50px] rounded-full fixed top-24 right-4;
+  }
 }

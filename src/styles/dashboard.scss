@@ -1,9 +1,65 @@
 .dashboard {
-  @apply w-full flex items-center justify-center flex-col gap-10 py-24 px-5 lg:px-10 min-h-[600px];
-  span {
-    @apply w-fit h-fit text-[2rem] font-bold capitalize px-3 py-2 rounded-lg bg-blue-900 drop-shadow-2xl mx-auto text-white;
+  @apply text-white relative w-full flex items-start justify-start flex-col gap-10 py-24 px-5 lg:px-10 min-h-[1500px];
+
+  .dashboard-content {
+    @apply w-full min-h-[500px] flex justify-start items-start;
+    .dashboard-section {
+      @apply flex flex-wrap items-start justify-center md:justify-start gap-5 w-full   min-h-[500px];
+    }
+    .sm-box {
+      @apply w-[48%] h-[150px] rounded-lg drop-shadow-2xl;
+    }
+    .md-box {
+      @apply w-[600px] h-[300px] rounded-lg drop-shadow-2xl bg-light_dark;
+    }
+    .lg-box {
+      @apply w-full h-[400px] rounded-lg drop-shadow-2xl bg-light_dark;
+    }
   }
-  button {
-    @apply w-fit h-fit text-white px-3 py-2 capitalize;
+  .dashboard-home-section {
+    @apply w-full flex flex-wrap gap-5 justify-between items-start;
+    .header {
+      @apply font-bold w-full text-start text-[1.5rem] capitalize;
+    }
+    .left-side {
+      @apply w-full md:w-[25%] flex flex-col justify-start items-start gap-5;
+
+      .deal-container {
+        @apply drop-shadow-2xl w-full flex flex-col gap-2 justify-start items-start p-2 rounded-lg bg-blue-950;
+        .data-table {
+          @apply w-full flex flex-col gap-2 justify-start items-start;
+        }
+        .single-deal {
+          @apply hover:bg-blue-800 cursor-default transition-all text-[.8rem] text-white w-full h-[50px] rounded-lg bg-light_dark flex justify-between items-center gap-2 px-2;
+          .main-sec {
+            @apply w-fit flex justify-start items-center gap-2;
+            img {
+              @apply w-[35px] text-inherit h-[35px] rounded-full;
+            }
+            .deal-info {
+              @apply text-start w-fit justify-start items-center flex flex-col gap-1;
+              .name {
+                @apply w-full;
+              }
+              .email {
+                @apply text-[.7rem];
+              }
+            }
+          }
+        }
+      }
+      .total-visited-container {
+        @apply w-full h-fit p-2 bg-blue-950 rounded-lg drop-shadow-2xl;
+      }
+    }
+    .mid-side {
+      @apply w-full md:w-[40%];
+      .overall-container {
+        @apply w-full h-fit rounded-lg flex flex-wrap justify-start items-start gap-5 p-2 bg-blue-950 drop-shadow-2xl;
+      }
+    }
+    .right-side {
+      @apply w-full md:w-[25%] bg-green-600;
+    }
   }
 }

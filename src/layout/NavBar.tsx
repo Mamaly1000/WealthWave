@@ -55,7 +55,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
           className="sidebar-btn"
           onClick={() => setShowSideBar(true)}
         >
-          <img src={hamIcon} />
+          <motion.img src={hamIcon} />
         </motion.button>
         <Link to="/" className="navbar-logo">
           <motion.img
@@ -78,7 +78,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
             }}
             className="main-navbar-btn"
           >
-            <img src={searchIcon} />
+            <motion.img src={searchIcon} />
           </button>{" "}
           <button
             onClick={() => {
@@ -86,10 +86,10 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
             }}
             className="main-navbar-btn"
           >
-            <img src={settingIcon} />
+            <motion.img src={settingIcon} />
           </button>
           <Link className="dashboard-btn" to="/dashboard">
-            <img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
+            <motion.img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
           </Link>
           <Link
             onMouseEnter={() => {

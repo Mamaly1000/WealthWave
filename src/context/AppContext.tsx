@@ -30,6 +30,8 @@ import {
   wallstreetnews,
   Top_business_headlines,
 } from "../Data/news";
+import { setProfileSlice } from "../features/profile_slice/profile_slice";
+import useProfile, { Iprofile } from "../hooks/useProfile";
 
 interface Icontext {
   tags: TAG[];
@@ -59,6 +61,7 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
+  const { localProfile } = useProfile();
   const dispatch = useDispatch();
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -160,6 +163,18 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
     dispatch(fetchTeslaNews(teslaNews));
     dispatch(fetchTop_business_headlines(Top_business_headlines));
   }, []);
+  useEffect(() => {
+    if (localProfile.description !== "" && localProfile.name !== "") {
+      dispatch(
+        setProfileSlice({
+          description: localProfile.description,
+          email: localProfile.email,
+          name: localProfile.name,
+          profile_pic: localProfile.profile_pic,
+        } as Iprofile)
+      );
+    }
+  }, [localProfile]);
   return (
     <AppContext.Provider
       value={{
