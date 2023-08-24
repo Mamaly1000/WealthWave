@@ -23,6 +23,7 @@ type initialStateType = {
   dashboard_Section: dashboardSectionTypes;
   shrinkDasboard: boolean;
   Displaydashboard: boolean;
+  displayMainDashboard: boolean;
 };
 
 const initialState: initialStateType = {
@@ -33,6 +34,7 @@ const initialState: initialStateType = {
   dashboard_Section: "dashboard/home",
   Displaydashboard: true,
   shrinkDasboard: false,
+  displayMainDashboard: false,
 };
 
 const DashboardReducer = createSlice({
@@ -48,10 +50,17 @@ const DashboardReducer = createSlice({
     setDisplayDashboard: (state, action) => {
       state.Displaydashboard = action.payload;
     },
+    setDisplayMainDasboard: (state, action) => {
+      state.displayMainDashboard = action.payload;
+    },
   },
 });
-export const { setDashboardSection, setShrinkDashboard, setDisplayDashboard } =
-  DashboardReducer.actions;
+export const {
+  setDashboardSection,
+  setShrinkDashboard,
+  setDisplayDashboard,
+  setDisplayMainDasboard,
+} = DashboardReducer.actions;
 export default DashboardReducer.reducer;
 export const selectDashboard = (state: RootState) => {
   return state.dashboard;

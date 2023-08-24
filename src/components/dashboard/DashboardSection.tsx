@@ -11,7 +11,7 @@ const DashboardSection = ({
   const dashboard = useSelector(selectDashboard);
   return (
     <motion.div
-      animate={{ paddingInlineStart: !dashboard.Displaydashboard ? 0 : "80px" }}
+      // animate={{ paddingInlineStart: !dashboard.Displaydashboard ? 0 : "80px" }}
       className={`dashboard-section ${classname}`}
     >
       {children}

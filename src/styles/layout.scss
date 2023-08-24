@@ -62,6 +62,6 @@
     }
   }
   .display-dashboard-btn {
-    @apply w-[50px] h-[50px] rounded-full fixed top-24 right-4;
+    @apply w-[50px] h-[50px] p-3 flex items-center justify-center rounded-full fixed top-24 right-4;
   }
 }

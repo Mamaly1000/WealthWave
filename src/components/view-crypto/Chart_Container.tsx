@@ -100,6 +100,9 @@ const Chart_Container = () => {
             chart: {
               id: "basic-bar",
               zoom: { type: "x" },
+              animations: {
+                enabled: false,
+              },
             },
             xaxis: {
               categories: label,

@@ -1,28 +1,32 @@
 import { Link } from "react-router-dom";
 import { SideBar_links } from "../../Data/dummy";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useContextFunction } from "../../context/AppContext";
 import { AnimatePresence, motion } from "framer-motion";
 import closeIcon from "./../../assets/blogs/cloaseImg.svg";
 import logo from "./../../assets/logo/small-logo.png";
-const SideBar = ({
-  setShowSideBar,
-}: {
-  setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDashboard,
+  setDisplayMainDasboard,
+} from "../../features/dashboard_slice/dashboard_slice";
+import { selectProfile } from "../../features/profile_slice/profile_slice";
+const SideBar = () => {
   const [hide, _setHide] = useState<boolean>(false);
   const contextData = useContextFunction();
-
+  const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
+  const { displayMainDashboard } = useSelector(selectDashboard);
   return (
     <motion.div
-      style={{ zIndex: 400 }}
+      animate={{ zIndex: displayMainDashboard ? 200 : -200 }}
       className="sideBar-container"
       exit={{ transition: { delay: 0.1 } }}
       transition={{ delay: 0.1 }}
     >
       <motion.div
         className="sideBar-overlay"
-        onClick={() => setShowSideBar(false)}
+        onClick={() => dispatch(setDisplayMainDasboard(false))}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{
@@ -62,7 +66,7 @@ const SideBar = ({
           {!contextData!.screenW && (
             <button
               onClick={() => {
-                setShowSideBar(false);
+                dispatch(setDisplayMainDasboard(false));
               }}
             >
               <img src={closeIcon} />
@@ -70,19 +74,16 @@ const SideBar = ({
           )}
         </div>
         <div className="sideBar-profile-section">
-          <img
-            src="https://avatars.githubusercontent.com/u/105161078?v=4"
-            alt=""
-          />
-          <h5>Mamaly100</h5>
-          <p>mamadmehdi.aziz.10@gmail.com</p>
+          <img src={profile.profile_pic} alt="profile pic" />
+          <h5>{profile.name}</h5>
+          <p>{profile.email}</p>
         </div>
         <div className="sideBar-hamMenu">
           {SideBar_links.map((link, index) => {
             return (
               <Link
                 onClick={() => {
-                  setShowSideBar(false);
+                  dispatch(setDisplayMainDasboard(false));
                 }}
                 to={link.route}
                 key={index}

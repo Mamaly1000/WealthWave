@@ -105,22 +105,7 @@ const HomePageIntro = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -200 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: 1, type: "tween" }}
-      className="home-page-intro-section"
-    >
-      {/* <motion.h1
-        initial={{ fontSize: "2rem" }}
-        animate={{ fontSize: "3rem" }}
-        transition={{ delay: 1.2, duration: 0.5, type: "tween" }}
-      >
-        Hello Wellcome to The{" "}
-        <span>
-          WealthWave 
-        </span>
-      </motion.h1> */}
+    <motion.div className="home-page-intro-section">
       <motion.img
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}

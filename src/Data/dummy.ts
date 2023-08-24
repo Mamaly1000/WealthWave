@@ -1,4 +1,3 @@
-import profile_Icon from "./../assets/sideBar_Icons/profile.svg";
 import crypto_Icon from "./../assets/sideBar_Icons/crypto.svg";
 import news_Icon from "./../assets/sideBar_Icons/news.svg";
 import blog_Icon from "./../assets/sideBar_Icons/blog.svg";
@@ -23,6 +22,7 @@ import {
   staked_ether,
   usd_coin,
 } from "./charts";
+import { darkdashboardIcon } from "../assets/dashboard/dashboardIcons";
 export const Footer_Links = [
   {
     header: "Customer Care",
@@ -72,8 +72,8 @@ export const SideBar_links: {
 }[] = [
   { title: "Home Page", icon: homepageIcon, route: "/" },
   {
-    title: "Profile",
-    icon: profile_Icon,
+    title: "dashboard",
+    icon: darkdashboardIcon,
     route: "/dashboard",
   },
   {

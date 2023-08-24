@@ -1,31 +1,28 @@
 import ReactApexChart from "react-apexcharts";
 
-const SparkLineChart = ({ chart }: { chart: (string | number)[][] }) => {
+const SparkLineChart = () => {
   return (
     <ReactApexChart
       options={{
         chart: {
           type: "area",
           stacked: false,
-          height: 350,
-          zoom: {
-            type: "x",
-            enabled: true,
-            autoScaleYaxis: true,
+          animations: {
+            enabled: false,
           },
           toolbar: {
-            autoSelected: "zoom",
+            show: false,
+          },
+          sparkline: {
+            enabled: true,
           },
         },
         dataLabels: {
           enabled: false,
         },
         markers: {
-          size: 0,
-        },
-        title: {
-          text: "Stock Price Movement",
-          align: "left",
+          size: 1,
+          colors: "rgba(255 255 255/.3)",
         },
         fill: {
           type: "gradient",
@@ -38,48 +35,39 @@ const SparkLineChart = ({ chart }: { chart: (string | number)[][] }) => {
           },
         },
         yaxis: {
-          title: {
-            text: "Price",
-          },
+          labels: { show: false },
         },
         xaxis: {
-          type: "datetime",
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
+          type: "numeric",
+          categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         },
         tooltip: {
           shared: false,
-          y: {
-            formatter: function (val) {
-              return (val / 1000000).toFixed(0);
+          theme: "dark",
+        },
+        grid: {
+          yaxis: {
+            lines: {
+              show: false,
             },
           },
+        },
+        stroke: {
+          colors: ["rgba(255 255 255/.3)"],
         },
       }}
       series={[
         {
-          name: "Registered Users",
-          data: [40, 31, 40, 101, 40, 36, 32, 23, 14, 80, 50, 45],
-        },
-        {
-          name: "Unregistered Users",
-          data: [23, 3, 4, 10, 4, 3, 3, 2, 1, 8, 5, 2],
+          name: "data",
+          data: [
+            1343, 223, 333, 3334, 2235, 6433, 7234, 8332, 2339, 3210, 2311,
+            4412,
+          ],
         },
       ]}
       type="area"
-      height={350}
+      height={100}
+      width={150}
     />
   );
 };

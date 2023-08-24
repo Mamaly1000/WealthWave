@@ -1,7 +1,7 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
-import { EffectCube, Pagination, Autoplay } from "swiper";
+import { EffectCreative, Pagination, Autoplay } from "swiper";
 import SingleSlide from "./SingleSlide";
 
 const sliderData: { title: string; pathName: string }[] = [
@@ -23,7 +23,7 @@ const sliderData: { title: string; pathName: string }[] = [
   {
     title:
       "create your profile today and gain access to a wealth of financial resources , including expert advice and market insights .",
-    pathName: "/profile",
+    pathName: "/dashboard",
   },
 ];
 
@@ -36,20 +36,23 @@ export default function CubeSlider() {
       className="home-page-intro-slider"
     >
       <Swiper
-        effect={"cube"}
         grabCursor={true}
-        cubeEffect={{
-          shadow: true,
-          slideShadows: true,
-          shadowOffset: 20,
-          shadowScale: 0.94,
-        }}
         pagination={true}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
         }}
-        modules={[EffectCube, Pagination, Autoplay]}
+        modules={[EffectCreative, Pagination, Autoplay]}
+        effect={"creative"}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: ["-20%", 0, -1],
+          },
+          next: {
+            translate: ["100%", 0, 0],
+          },
+        }}
         className="mySwiper"
       >
         {sliderData.map((data, index) => (

@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import { useContextFunction } from "../context/AppContext";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import searchIcon from "./../assets/navbar/search.svg";
 import hamIcon from "./../assets/navbar/ham.svg";
 import settingIcon from "./../assets/navbar/setting.svg";
 import { toast } from "react-toastify";
 import NavBarDivider from "../components/divider-component/NavBarDivider";
 import logo from "./../assets/logo/small-logo.png";
-type navBarPropsType = {
-  showSideBar: boolean;
-  setShowSideBar: Dispatch<SetStateAction<boolean>>;
-};
-const NavBar = ({ setShowSideBar }: navBarPropsType) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setDisplayMainDasboard } from "../features/dashboard_slice/dashboard_slice";
+import { selectProfile } from "../features/profile_slice/profile_slice";
+
+const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
+  const dispatch = useDispatch();
   const contextData = useContextFunction();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -21,6 +22,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
     restDelta: 0.001,
   });
   const [hovered, setHoveredLink] = useState<string>("");
+  const { profile_pic } = useSelector(selectProfile);
   return (
     <>
       <motion.div
@@ -53,7 +55,9 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.13, type: "tween" }}
           className="sidebar-btn"
-          onClick={() => setShowSideBar(true)}
+          onClick={() =>
+            dispatch(setDisplayMainDasboard(showSideBar ? false : true))
+          }
         >
           <motion.img src={hamIcon} />
         </motion.button>
@@ -79,7 +83,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
             className="main-navbar-btn"
           >
             <motion.img src={searchIcon} />
-          </button>{" "}
+          </button>
           <button
             onClick={() => {
               toast.info("comming soon !");
@@ -89,7 +93,7 @@ const NavBar = ({ setShowSideBar }: navBarPropsType) => {
             <motion.img src={settingIcon} />
           </button>
           <Link className="dashboard-btn" to="/dashboard">
-            <motion.img src="https://avatars.githubusercontent.com/u/105161078?v=4" />
+            <motion.img src={profile_pic} />
           </Link>
           <Link
             onMouseEnter={() => {

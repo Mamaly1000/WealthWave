@@ -23,12 +23,9 @@ const OverAllDataBox = ({
         <button className="overall-btn">view all</button>
       </div>
       <div className="right-section">
-        <SparkLineChart chart={data.chartData} />
-        <div className="percentage">
-          <span className={`bold ${+data.percentage > 0 ? "green" : "red"}`}>
-            {data.percentage}%
-          </span>
-          <span className="light">this year</span>
+        <SparkLineChart />
+        <div className={`percentage ${+data.percentage > 0 ? "green" : "red"}`}>
+          {data.percentage}%<span className="light">this year</span>
         </div>
       </div>
     </div>

@@ -47,7 +47,7 @@ export const overallData: {
     title: "total products",
     value: "238",
     percentage: "21",
-    main_color: "#B4FF9F",
+    main_color: "#35155D",
     chartData: [
       ["june", 11394],
       ["july", 19033],
@@ -66,7 +66,7 @@ export const overallData: {
     title: "total ratio",
     value: "2.6",
     percentage: "12",
-    main_color: "#FFE400",
+    main_color: "#313866",
     chartData: [
       ["june", 42490],
       ["july", 53022],
@@ -85,7 +85,7 @@ export const overallData: {
     title: "total revenue",
     value: "56.432",
     percentage: "-12",
-    main_color: "#01C5C4",
+    main_color: "#009FBD",
     chartData: [
       ["june", 12490],
       ["july", 23022],
@@ -153,5 +153,48 @@ export const topDeals: {
     name: "Byron Hogan",
     email: "overbom@live.com",
     price: 78900,
+  },
+];
+export const transactions: {
+  from: string;
+  to: string;
+  date: number;
+  value: string;
+}[] = [
+  {
+    from: "Douglas costa",
+    to: "me",
+    date: new Date(Date.now() - 100000).getTime(),
+    value: "32320",
+  },
+  {
+    from: "me",
+    to: "reza Madden",
+    date: new Date(Date.now() - 200000).getTime(),
+    value: "43233",
+  },
+  {
+    from: "Adolfo Schmidt",
+    to: "me",
+    date: new Date(Date.now() - 300000).getTime(),
+    value: "334432",
+  },
+  {
+    from: "me",
+    to: "Efren Hendricks",
+    date: new Date(Date.now() - 400000).getTime(),
+    value: "234343",
+  },
+  {
+    from: "Dannie Larson",
+    to: "me",
+    date: new Date(Date.now() - 500000).getTime(),
+    value: "765646",
+  },
+  {
+    from: "me",
+    to: "Darrin Salazar",
+    date: new Date(Date.now() - 600000).getTime(),
+    value: "445343",
   },
 ];

@@ -1,20 +1,25 @@
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SideBar from "../components/sidebar/SideBar";
-import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContextFunction } from "../context/AppContext.tsx";
 import EditTagModal from "../components/edit-tags-modal/EditTagModal.tsx";
 import { useLocation } from "react-router-dom";
 import DashBoardSideBar from "../components/dashboard/DashBoardSideBar.tsx";
-import { useSelector } from "react-redux";
-import { selectDashboard } from "../features/dashboard_slice/dashboard_slice.ts";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDashboard,
+  setDisplayDashboard,
+} from "../features/dashboard_slice/dashboard_slice.ts";
+import ToolTipBtn from "../components/dashboard/ToolTipBtn.tsx";
+import { dashboardIcon } from "../assets/dashboard/dashboardIcons.ts";
 
 const Layout = ({ children }: any) => {
+  const dasboard = useSelector(selectDashboard);
   const location = useLocation();
   const dashboard = useSelector(selectDashboard);
-  const [displaySideBar, setDisplaySideBar] = useState<boolean>(false);
   const contextData = useContextFunction();
+  const dispatch = useDispatch();
   return (
     <motion.div
       style={{
@@ -25,9 +30,9 @@ const Layout = ({ children }: any) => {
       }}
       className="layout-container"
     >
-      <NavBar showSideBar={displaySideBar} setShowSideBar={setDisplaySideBar} />
+      <NavBar showSideBar={dasboard.displayMainDashboard} />
       <AnimatePresence>
-        {displaySideBar && <SideBar setShowSideBar={setDisplaySideBar} />}
+        {dasboard.displayMainDashboard && <SideBar />}
       </AnimatePresence>
       {children}
       {location.pathname !== "/dashboard" && <Footer />}
@@ -41,6 +46,21 @@ const Layout = ({ children }: any) => {
           <DashBoardSideBar />
         )}
       </AnimatePresence>
+      {location.pathname === "/dashboard" && (
+        <ToolTipBtn
+          content="display dashboard"
+          place="left"
+          tooltip_id="display-dashboard"
+          onclick={() => {
+            dispatch(
+              setDisplayDashboard(dashboard.Displaydashboard ? false : true)
+            );
+          }}
+          classname="display-dashboard-btn"
+        >
+          <motion.img src={dashboardIcon} />
+        </ToolTipBtn>
+      )}
     </motion.div>
   );
 };
