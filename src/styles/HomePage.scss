@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
     background-position: 0% 55%;
     background-size: 500px 500px;
-    @apply flex flex-col lg:flex-row  justify-center lg:justify-between items-center w-full lg:min-h-[100vh] px-0 sm:pb-[150px] cursor-default;
+    @apply flex flex-col lg:flex-row  justify-between lg:justify-between items-center w-full lg:min-h-[100vh] px-0 sm:pb-[150px] cursor-default sm:h-[1100px] md:h-fit;
     .home-page-intro-section {
       @apply w-full text-center lg:w-[50%] h-[500px] md:h-[300px] lg:h-[100%] flex justify-between items-center gap-10 flex-col pt-10 pb-10 lg:pb-20 px-0 lg:px-10;
       h1 {
@@ -25,17 +25,33 @@
       }
     }
     .home-page-intro-slider {
-      @apply w-[350px] h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900 shadow-2xl rounded-[10px];
+      @apply w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900   shadow-2xl rounded-[10px];
       .mySwiper {
         @apply w-full h-full capitalize;
 
         .swiper-slide {
-          @apply shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
+          @apply w-full h-full  relative bg-blue-950 shadow-lg   transition-all;
           div {
-            @apply w-full h-full shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
+            @apply relative min-w-full min-h-full shadow-lg flex items-center justify-center flex-col gap-10 transition-all;
 
             h3 {
-              @apply w-[70%];
+              @apply min-h-[80%] max-h-[90%] md:min-h-fit md:max-h-fit w-[90%] font-semibold font-rail absolute start-[5%] text-[1rem] md:text-[1.2rem] z-10 bg-light_medium_dark px-1 rounded-lg py-10 bottom-[10%]  md:bottom-20 md:bg-transparent;
+              .selected-word {
+                @apply text-blue-300;
+              }
+            }
+            img {
+              @apply w-[200px] object-contain absolute top-10 end-10;
+            }
+            .slider-btn {
+              all: unset;
+              @apply z-20 top-[70%] md:top-32 start-[20%] md:start-10 w-[50%] md:w-fit h-fit text-[.9rem] md:text-[1.3rem]  px-3 flex items-center justify-center flex-row gap-2  py-2 rounded-lg transition-all cursor-pointer absolute font-semibold font-rail capitalize bg-light_medium_dark  hover:bg-blue-800;
+              &:hover {
+                box-shadow: none !important;
+              }
+              img {
+                @apply -end-[15px] top-[-15px] w-[30px] rounded-full object-contain;
+              }
             }
           }
         }

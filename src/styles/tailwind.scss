@@ -37,7 +37,7 @@
 
 * {
   box-sizing: border-box;
-  @apply p-0 m-0;
+  @apply p-0 m-0 transition-all;
 }
 #root {
   max-width: 100% !important;

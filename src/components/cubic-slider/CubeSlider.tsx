@@ -1,31 +1,9 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { motion } from "framer-motion";
+import {   motion } from "framer-motion";
 import { EffectCreative, Pagination, Autoplay } from "swiper";
 import SingleSlide from "./SingleSlide";
-
-const sliderData: { title: string; pathName: string }[] = [
-  {
-    title:
-      "discover the secrets of the cryptocurrency world with just one click !",
-    pathName: "/crypto",
-  },
-  {
-    title:
-      "share your thoughts and insights on the world of cryptocurrency and news by contributing to our blog section .",
-    pathName: "/myBlogs",
-  },
-  {
-    title:
-      "keep your finger on the pulse of the financial world and reading the latest news from wallstreet journal .",
-    pathName: "/news",
-  },
-  {
-    title:
-      "create your profile today and gain access to a wealth of financial resources , including expert advice and market insights .",
-    pathName: "/dashboard",
-  },
-];
+import { sliderData } from "../../Data/dummy";
 
 export default function CubeSlider() {
   return (
@@ -56,7 +34,7 @@ export default function CubeSlider() {
         className="mySwiper"
       >
         {sliderData.map((data, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} style={{ background: data.bg_color }}>
             {({ isActive }) => (
               <SingleSlide
                 active={isActive}

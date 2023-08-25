@@ -1,0 +1,10 @@
+export { default as blogVector } from "./blogs.png";
+export { default as cryptoVector } from "./crypto-vector.png";
+export { default as newsVector } from "./news-vector.png";
+export { default as nftVector } from "./nft-vector-2.png";
+export { default as dashboardVector } from "./../dashboard/vector.png";
+export { default as blogGif } from "./blog-gif.gif";
+export { default as cryptoGif } from "./crypto-git.gif";
+export { default as newsGif } from "./news-gif.gif";
+export { default as nftGif } from "./nftgif.gif";
+export { default as profileGif } from "./profile-gif.gif";
