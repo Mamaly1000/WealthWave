@@ -5,6 +5,7 @@ import logger from "redux-logger";
 import NewsReducer from "../news_slice/news_slice";
 import ProfileReducer from "../profile_slice/profile_slice";
 import DashboardReducer from "../dashboard_slice/dashboard_slice";
+import themeReducer from "../theme_slice/theme_slice";
 const store = configureStore({
   reducer: {
     crypto: cryptoReducer,
@@ -12,6 +13,7 @@ const store = configureStore({
     news: NewsReducer,
     profile: ProfileReducer,
     dashboard: DashboardReducer,
+    theme: themeReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
