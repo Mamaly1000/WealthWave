@@ -33,7 +33,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
           right: 0,
           maxHeight: "1.5px",
           minHeight: "1.5px",
-          background: "#0079FF",
+          background: contextData!.localTheme.hoverColor,
           boxShadow: "0 0 5px white",
           transformOrigin: "0%",
           zIndex: 100,
@@ -47,8 +47,8 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
         className="navBar-container"
         style={{
           background: contextData!.scrollH
-            ? "rgba(30 64 175/0.4)"
-            : "rgba(30 64 175/0.2)",
+            ? "rgba(0 0 0/0.4)"
+            : "rgba(0 0 0/0.3)",
         }}
       >
         <motion.button
@@ -58,6 +58,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
           onClick={() =>
             dispatch(setDisplayMainDasboard(showSideBar ? false : true))
           }
+          animate={{ background: contextData!.localTheme.btnColor }}
         >
           <motion.img src={hamIcon} />
         </motion.button>
@@ -80,6 +81,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             onClick={() => {
               toast.info("comming soon !");
             }}
+            style={{ background: contextData!.localTheme.btnColor }}
             className="main-navbar-btn"
           >
             <motion.img src={searchIcon} />
@@ -88,6 +90,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             onClick={() => {
               toast.info("comming soon !");
             }}
+            style={{ background: contextData!.localTheme.btnColor }}
             className="main-navbar-btn"
           >
             <motion.img src={settingIcon} />
@@ -102,6 +105,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             onMouseLeave={() => {
               setHoveredLink("");
             }}
+            style={{ color: contextData!.localTheme.plainTextColor }}
             to="/sign-in"
           >
             sign in
@@ -119,6 +123,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             onMouseLeave={() => {
               setHoveredLink("");
             }}
+            style={{ color: contextData!.localTheme.plainTextColor }}
             to="/sign-up"
           >
             sign up
@@ -137,6 +142,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
               setHoveredLink("");
             }}
             to="/"
+            style={{ color: contextData!.localTheme.plainTextColor }}
           >
             home page
             <NavBarDivider hover={hovered} path="/" height={5} width={100} />

@@ -1,5 +1,8 @@
 import React from "react";
 import { PlacesType, Tooltip } from "react-tooltip";
+import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const ToolTipBtn = ({
   children,
@@ -16,15 +19,27 @@ const ToolTipBtn = ({
   content: string;
   place: PlacesType | undefined;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   return (
-    <button
+    <motion.button
+      style={{
+        background: themeSelector.btnColor,
+        boxShadow: `0px 9px 10px ${themeSelector.hoverColor}`,
+      }}
+      whileHover={{
+        background: themeSelector.hoverColor,
+        boxShadow: "none",
+      }}
+      transition={{
+        duration: 0.1,
+      }}
       data-tooltip-id={tooltip_id}
       onClick={onclick}
       className={classname}
     >
       {children}
       <Tooltip place={place} content={content} id={tooltip_id} />
-    </button>
+    </motion.button>
   );
 };
 

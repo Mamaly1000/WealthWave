@@ -2,10 +2,14 @@ import moment from "moment";
 import ReactApexChart from "react-apexcharts";
 import React from "react";
 import { candleseries } from "../../Data/dummy";
+import { ThemeInterface } from "../../hooks/useTheme";
 
-const CandleChart = () => {
+const CandleChart = ({ themeSelector }: { themeSelector: ThemeInterface }) => {
   return (
-    <div className="candle-stcik-chart-container">
+    <div
+      style={{ background: themeSelector.containerColor }}
+      className="candle-stcik-chart-container"
+    >
       <ReactApexChart
         options={{
           chart: {

@@ -1,0 +1,95 @@
+.nft-divider {
+  background: linear-gradient(
+    0deg,
+    rgba(190, 241, 255, 0.1) 0%,
+    rgba(0, 228, 255, 1) 29%,
+    rgba(155, 249, 244, 1) 42%,
+    rgba(102, 247, 231, 1) 52%,
+    rgba(0, 228, 255, 1) 64%,
+    rgba(108, 244, 255, 0.1) 100%
+  );
+  position: relative;
+  z-index: 1;
+}
+.nft-divider::after {
+  content: "";
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(6, 6, 90, 0.5551470588235294) 24%,
+    rgba(9, 9, 121, 1) 38%,
+    rgba(7, 56, 152, 0) 47%,
+    rgba(5, 91, 175, 1) 54%,
+    rgba(2, 162, 222, 0.6307773109243697) 81%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  filter: blur(2em);
+  z-index: -1;
+}
+.divider-2 {
+  background: linear-gradient(to right, #e9d362, #333333);
+  position: relative;
+  z-index: 1;
+}
+.divider-2::after {
+  content: "";
+  filter: blur(2em);
+  z-index: -1;
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(to right, #e9d362, #686868);
+}
+.divider-3 {
+  background: linear-gradient(to right, #9437e6, #5512dc);
+  position: relative;
+  z-index: 1;
+}
+.divider-3::after {
+  content: "";
+  filter: blur(2em);
+  z-index: -1;
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(to right, #9437e6, #5512dc);
+}
+.divider-4 {
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+  position: relative;
+  z-index: 1;
+}
+.divider-4::after {
+  content: "";
+  filter: blur(2em);
+  z-index: -1;
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+}
+.divider-5 {
+  background: linear-gradient(to right, #8e0e00, #1f1c18);
+  position: relative;
+  z-index: 1;
+}
+.divider-5::after {
+  content: "";
+  filter: blur(2em);
+  z-index: -1;
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(to right, #8e0e00, #cf1212);
+}
+.divider-6 {
+  background: linear-gradient(to right, #06400b, #0f9b0f);
+  position: relative;
+  z-index: 1;
+}
+.divider-6::after {
+  content: "";
+  filter: blur(2em);
+  z-index: -1;
+  position: absolute;
+  inset: -0.625em;
+  background: linear-gradient(to right, #04cf5c, #0f9b0f);
+}

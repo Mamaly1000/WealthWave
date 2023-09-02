@@ -25,12 +25,12 @@
       @apply font-bold w-full text-start text-[1.5rem] capitalize;
     }
     .deal-container {
-      @apply sm:order-1 lg:order-4 w-full sm:w-[48%] lg:w-[23%] flex flex-col gap-2 justify-start items-start p-2 rounded-lg bg-blue-950  drop-shadow-2xl;
+      @apply sm:order-1 lg:order-4 w-full sm:w-[48%] lg:w-[24%] flex flex-col gap-2 justify-start items-start p-2 rounded-lg bg-blue-950  drop-shadow-2xl;
       .data-table {
         @apply w-full flex flex-col gap-2 justify-start items-start;
       }
       .single-deal {
-        @apply hover:bg-blue-800 cursor-default transition-all text-[.8rem] text-white w-full h-[50px] rounded-lg bg-light_dark flex justify-between items-center gap-2 px-2;
+        @apply hover:bg-light_medium_dark cursor-default transition-all text-[.8rem] text-white w-full h-[50px] rounded-lg bg-light_dark flex justify-between items-center gap-2 px-2;
         .main-sec {
           @apply w-fit flex justify-start items-center gap-2;
           img {
@@ -67,7 +67,7 @@
             @apply w-fit font-bold text-[1.2rem];
           }
           button {
-            @apply w-fit h-fit px-2 py-1 text-[.8rem] capitalize font-semibold bg-light_dark  shadow-none hover:bg-black;
+            @apply w-fit h-fit px-2 py-1 text-[.8rem] capitalize font-semibold  shadow-none;
           }
         }
         .right-section {
@@ -91,13 +91,13 @@
       @apply sm:order-4 lg:order-2 lg:w-[48%] w-full h-fit pb-[13px]   rounded-lg bg-blue-950 drop-shadow-2xl p-2;
     }
     .transactions-container {
-      @apply sm:order-2 lg:order-5 lg:w-[23%] w-full sm:w-[48%] min-h-[200px] flex flex-col gap-3 p-2 justify-start items-start bg-blue-950 drop-shadow-2xl rounded-lg;
+      @apply sm:order-2 lg:order-5 lg:w-[24%] w-full sm:w-[48%] min-h-[200px] flex flex-col gap-3 p-2 justify-start items-start bg-blue-950 drop-shadow-2xl rounded-lg;
 
       .data-table {
         @apply w-full flex gap-2 flex-col justify-center items-start;
       }
       .single-transaction {
-        @apply w-full hover:bg-blue-800 cursor-default flex gap-2 items-center justify-between py-2 px-3 rounded-lg min-h-[55px] max-h-[55px] bg-light_dark;
+        @apply w-full hover:bg-light_medium_dark cursor-default flex gap-2 items-center justify-between py-2 px-3 rounded-lg min-h-[55px] max-h-[55px] bg-light_dark;
         .left-section {
           @apply w-1/3 whitespace-nowrap h-full flex flex-col   items-start capitalize justify-evenly;
           .sender {
@@ -123,15 +123,15 @@
     }
   }
   .Dashboard-Theme-Section {
-    @apply w-full flex justify-between flex-wrap items-start gap-5 md:ps-32;
+    @apply w-full flex justify-between flex-wrap items-start gap-5;
     .theme-right-side-container {
-      @apply w-full md:min-w-[49%] md:max-w-[49%] h-fit flex justify-center items-center;
+      @apply w-full md:min-w-[40%] md:max-w-[40%] h-fit flex justify-center items-center;
     }
     .theme-left-side-container {
-      @apply w-full md:min-w-[49%] md:max-w-[49%]   flex justify-start items-start gap-5 flex-wrap;
+      @apply w-full md:min-w-[55%] md:max-w-[55%]   flex justify-center md:justify-start items-start gap-5 flex-wrap;
     }
     .themes-container {
-      @apply w-fit h-fit flex flex-col items-start justify-start gap-3;
+      @apply min-w-[40%] h-fit flex flex-col items-start justify-start gap-3;
       .data-container {
         @apply ps-10 w-full h-fit flex flex-wrap justify-start items-center gap-3;
         .item {
@@ -146,15 +146,15 @@
     }
   }
   .preview-container {
-    @apply w-[90%] rounded-lg p-3 md:p-5 flex flex-col items-start justify-start gap-3;
+    @apply backdrop-blur-sm w-full sm:w-[60%]  md:w-[500px] md:h-[500px] rounded-lg p-3 md:p-5 flex flex-col items-start drop-shadow-2xl justify-between gap-3;
     .img {
-      @apply min-w-full min-h-[120px] md:min-h-[300px] rounded-lg   flex items-center justify-center text-[1.2rem] md:text-[2rem] capitalize text-white;
+      @apply min-w-full min-h-[150px] md:min-h-[250px] rounded-lg   flex items-center justify-center text-[1.2rem] md:text-[2rem] capitalize text-white;
     }
     h1 {
-      @apply w-full text-start text-[1rem] md:text-[2rem] capitalize font-bold;
+      @apply w-full text-start text-[1rem] md:text-[1.5rem] capitalize font-bold;
     }
     p {
-      @apply w-full text-left line-clamp-5  text-[.6rem] md:text-[1rem] capitalize font-semibold;
+      @apply w-full text-left line-clamp-3  text-[.6rem] md:text-[.8rem] capitalize font-semibold;
     }
     button {
       @apply w-full shadow-none;
@@ -162,5 +162,21 @@
   }
 }
 .theme-header {
-  @apply w-fit h-fit text-[.9rem] md:text-[1.2rem]  capitalize font-semibold     flex justify-center md:justify-start items-center gap-3;
+  @apply w-fit h-fit text-[.9rem] md:text-[1.1rem]  capitalize font-semibold     flex justify-center md:justify-start items-center gap-3;
+  .theme-actions-container {
+    @apply w-fit max-h-fit h-fit px-1 flex justify-start gap-x-1 items-center  drop-shadow-2xl   rounded-lg;
+    button {
+      all: unset;
+      @apply cursor-pointer rounded-lg w-fit h-fit p-3 flex items-center justify-center;
+      img {
+        @apply min-w-[20px] max-w-[20px] max-h-[20px] min-h-[20px];
+      }
+    }
+    .selected-color {
+      @apply rounded-lg w-fit h-fit p-3 flex items-center justify-center;
+      div {
+        @apply border-[.1px] border-white drop-shadow-2xl min-w-[20px] p-3 min-h-[20px] rounded-full;
+      }
+    }
+  }
 }

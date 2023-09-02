@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { overallData, topDeals, transactions } from "../../Data/overallData";
 import DashboardSection from "../dashboard/DashboardSection";
 import Divider from "../ntf-components/Divider";
@@ -7,38 +8,49 @@ import Donautchart from "./Donautchart";
 import OverAllDataBox from "./OverAllDataBox";
 import Transaction from "./Transaction";
 import VisitChart from "./VisitChart";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const Dashboard_Home = () => {
+  const themeSelector = useSelector(selecttheme);
   return (
     <DashboardSection classname="dashboard-home-section">
-      <div className="deal-container">
+      <div
+        style={{ background: themeSelector.containerColor }}
+        className="deal-container"
+      >
         <div className="header">top deals</div>
         <Divider height={3} width={150} />
         <div className="data-table">
           {topDeals.map((deal) => {
-            return <DealComponent deal={deal} key={deal.price} />;
+            return <DealComponent deal={deal} key={deal.name} />;
           })}
         </div>
       </div>
-      <div className="overall-container">
+      <div
+        style={{ background: themeSelector.containerColor }}
+        className="overall-container"
+      >
         {overallData.map((data) => {
-          return <OverAllDataBox data={data} key={data.title} />;
+          return <OverAllDataBox data={data} key={data.main_color} />;
         })}
       </div>
-      <div className="transactions-container">
+      <div
+        style={{ background: themeSelector.containerColor }}
+        className="transactions-container"
+      >
         <h2 className="header">
           recent transactions
           <Divider height={3} width={150} />
         </h2>
         <div className="data-table">
-          {transactions.map((t) => {
-            return <Transaction data={t} key={t.date} />;
+          {transactions.map((t, index) => {
+            return <Transaction data={t} key={index} />;
           })}
         </div>
       </div>
-      <VisitChart />
-      <CandleChart />
-      <Donautchart />
+      <VisitChart themeSelector={themeSelector} />
+      <CandleChart themeSelector={themeSelector} />
+      <Donautchart themeSelector={themeSelector} />
     </DashboardSection>
   );
 };

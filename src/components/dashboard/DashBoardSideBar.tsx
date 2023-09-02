@@ -12,10 +12,15 @@ import Dashboard_Divider from "../divider-component/Dashboard_Divider";
 import Divider from "../ntf-components/Divider";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { useMemo } from "react";
+import ToolTipBtn from "./ToolTipBtn";
+import { arrowIcon } from "../../assets/dashboard/icons/icons";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+
 const DashBoardSideBar = () => {
   const dispatch = useDispatch();
   const dashboard = useSelector(selectDashboard);
   const profile = useSelector(selectProfile);
+  const themeSelector = useSelector(selecttheme);
   useMemo(() => {
     const sizeChecker = () => {
       if (window.innerWidth < 600) {
@@ -31,43 +36,53 @@ const DashBoardSideBar = () => {
   }, [window.innerWidth]);
   return (
     <motion.div
-      drag="x"
-      dragConstraints={{ left: 0, right: -250 }}
-      dragSnapToOrigin
       exit={{ opacity: 0 }}
-      dragElastic={1}
-      onDragEnd={(_event, info) => {
-        if (info.offset.x < 0) {
-          dispatch(setShrinkDashboard(true));
-        } else if (info.offset.x > 100) {
-          dispatch(setShrinkDashboard(false));
-        }
-      }}
       className="dashboard-sidebar"
-      onClick={() =>
-        dashboard.shrinkDasboard && dispatch(setShrinkDashboard(false))
-      }
       animate={{ maxWidth: dashboard.shrinkDasboard ? 75 : 250, opacity: 1 }}
     >
-      <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2, delay: 1, type: "tween" }}
+        className="profile-section"
+      >
+        <motion.img
+          src={profile.profile_pic}
+          animate={{
+            width: dashboard.shrinkDasboard ? 50 : 100,
+            border: `1px solid ${themeSelector.btnColor}`,
+          }}
+          onClick={() => dispatch(setShrinkDashboard(false))}
+        />
         {!dashboard.shrinkDasboard && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, delay: 1, type: "tween" }}
-            className="profile-section"
-          >
-            <motion.img src={profile.profile_pic} />
-            <motion.span className="profile-name">{profile.name}</motion.span>
-            <motion.span className="profile-email">{profile.email}</motion.span>
-          </motion.div>
+          <motion.span className="profile-name">{profile.name}</motion.span>
         )}
-      </AnimatePresence>
-      {dashboardLinks.map((link_section, index) => {
+        {!dashboard.shrinkDasboard && (
+          <motion.span className="profile-email">{profile.email}</motion.span>
+        )}
+      </motion.div>
+      <ToolTipBtn
+        classname="dashboard-shrink-btn"
+        content=""
+        onclick={() => {
+          dispatch(setShrinkDashboard(dashboard.shrinkDasboard ? false : true));
+        }}
+        place="right"
+        tooltip_id=""
+      >
+        <motion.img
+          animate={{ rotate: !dashboard.shrinkDasboard ? 180 : 0 }}
+          src={arrowIcon}
+        />
+      </ToolTipBtn>
+      {dashboardLinks.map((link_section) => {
         return (
-          <div key={index} className="link-group">
+          <div key={link_section.header} className="link-group">
             {!dashboard.shrinkDasboard && (
-              <motion.h2 className="header">
+              <motion.h2
+                className="header"
+                style={{ color: themeSelector.headerColor }}
+              >
                 {link_section.header}
                 <Divider height={3} width={100} />
               </motion.h2>
@@ -88,8 +103,9 @@ const DashBoardSideBar = () => {
                           ? "row-reverse"
                           : "row",
                         gap: dashboard.shrinkDasboard ? 1 : 2,
+                        color: themeSelector.headerColor,
                       }}
-                      key={link.route}
+                      key={link.name}
                       className="link"
                       data-tooltip-id={`my-tooltip-${link.route.replaceAll(
                         "/",

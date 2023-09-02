@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SideBar_links } from "../../Data/dummy";
 import { useState } from "react";
 import { useContextFunction } from "../../context/AppContext";
@@ -12,6 +12,7 @@ import {
 } from "../../features/dashboard_slice/dashboard_slice";
 import { selectProfile } from "../../features/profile_slice/profile_slice";
 const SideBar = () => {
+  const nav = useNavigate();
   const [hide, _setHide] = useState<boolean>(false);
   const contextData = useContextFunction();
   const dispatch = useDispatch();
@@ -59,35 +60,51 @@ const SideBar = () => {
         }}
       >
         <div className="sideBar-header">
-          <div>
+          <div style={{ color: contextData!.localTheme.headerColor }}>
             <img src={logo} />
-            <span>W</span>ealth<span>W</span>ave
+            <span style={{ color: contextData!.localTheme.btnColor }}>W</span>
+            ealth
+            <span style={{ color: contextData!.localTheme.btnColor }}>W</span>
+            ave
           </div>
           {!contextData!.screenW && (
-            <button
+            <motion.button
               onClick={() => {
                 dispatch(setDisplayMainDasboard(false));
               }}
+              animate={{ background: contextData!.localTheme.btnColor }}
+              whileHover={{ background: contextData!.localTheme.hoverColor }}
             >
               <img src={closeIcon} />
-            </button>
+            </motion.button>
           )}
         </div>
-        <div className="sideBar-profile-section">
+        <div
+          style={{ color: contextData!.localTheme.headerColor }}
+          className="sideBar-profile-section"
+        >
           <img src={profile.profile_pic} alt="profile pic" />
           <h5>{profile.name}</h5>
-          <p>{profile.email}</p>
+          <p style={{ color: contextData!.localTheme.plainTextColor }}>
+            {profile.email}
+          </p>
         </div>
         <div className="sideBar-hamMenu">
           {SideBar_links.map((link, index) => {
             return (
-              <Link
+              <motion.button
                 onClick={() => {
                   dispatch(setDisplayMainDasboard(false));
+                  nav(link.route);
                 }}
-                to={link.route}
                 key={index}
                 className="sideBar-ham-links"
+                style={{
+                  color: contextData!.localTheme.headerColor,
+                  background: "rgba(0 0 0 /.3)",
+                }}
+                whileHover={{ background: contextData!.localTheme.btnColor }}
+                transition={{ duration: 0.1 }}
               >
                 <img src={link.icon} alt={link.title} />
                 {link.title}
@@ -104,13 +121,20 @@ const SideBar = () => {
                     ></motion.div>
                   )}
                 </AnimatePresence>
-              </Link>
+              </motion.button>
             );
           })}
         </div>
-        <div className="copyRight-section">
+        <div
+          className="copyRight-section"
+          style={{ color: contextData!.localTheme.plainTextColor }}
+        >
           Copyright © 2023 By{" "}
-          <a href="https://github.com/Mamaly1000" target="_blank">
+          <a
+            href="https://github.com/Mamaly1000"
+            target="_blank"
+            style={{ color: contextData!.localTheme.btnColor }}
+          >
             Mamaly1000
           </a>
         </div>

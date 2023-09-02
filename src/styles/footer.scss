@@ -1,22 +1,49 @@
 .footer-container {
   box-shadow: 0px -5px 10px 0 rgba(0 0 0 /0.2);
-  @apply z-20 relative text-white w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-fit backdrop-blur-sm  px-10 pt-5 pb-20 md:py-10 md:px-20  transition-all;
-  section {
-    @apply my-5;
-    .footer-headers {
-      @apply flex items-center justify-center gap-2 md:items-start md:justify-start flex-col w-full text-left text-[1.3rem] font-bold;
+  @apply z-20 relative   w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 h-fit backdrop-blur-sm  px-2 pt-5 pb-20 md:py-10 md:px-20  transition-all;
+  .desc-container {
+    @apply md:col-span-4 w-fit flex flex-col items-start justify-start gap-5 p-2;
+    div {
+      @apply flex gap-2 flex-wrap justify-start items-center;
+      img {
+        @apply w-[66px] h-[70px];
+      }
+      .logo-text {
+        @apply min-w-[50%] flex text-[2rem] font-bold font-rail justify-start items-start gap-0;
+      }
     }
-    .footer-section {
-      @apply flex flex-row justify-center items-center flex-wrap gap-2 mt-10 transition-all md:px-5;
-      .links-btn {
-        @apply w-fit h-fit p-2 bg-blue-600 rounded-[10px] shadow-blue-600 shadow-sm hover:shadow-none transition-all;
+    p {
+      @apply w-full text-start font-semibold capitalize;
+    }
+    .contacts {
+      @apply w-full flex flex-wrap gap-2 justify-start items-center;
+      a {
+        @apply rounded-full hover:scale-110 w-fit h-fit flex items-center justify-center p-1;
+        img {
+          @apply max-w-[40px] max-h-[40px] rounded-full object-contain;
+        }
+      }
+    }
+  }
+  .links-container {
+    @apply md:col-span-8 min-w-[100%] flex items-start justify-start gap-5 flex-wrap;
+    section {
+      @apply my-2 w-fit md:max-w-[23%];
+      .footer-headers {
+        @apply flex items-start justify-center gap-2   flex-col w-full text-left text-[1rem] font-bold;
+      }
+      .footer-section {
+        @apply flex flex-row justify-start items-center flex-wrap gap-2 mt-2 transition-all md:px-5;
+        .links-btn {
+          @apply whitespace-nowrap w-fit text-[.8rem] h-fit p-2   rounded-[10px]  shadow-sm hover:shadow-none transition-all;
+        }
       }
     }
   }
   .Copyright-section {
     @apply absolute bottom-0 left-0 w-full capitalize flex justify-center gap-1 items-center my-5;
     a {
-      @apply text-blue-300 font-bold cursor-pointer;
+      @apply font-bold cursor-pointer;
     }
   }
 }

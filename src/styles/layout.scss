@@ -15,9 +15,9 @@
     overflow: auto;
     @apply bg-light_medium_dark   font-rail z-10 drop-shadow-2xl backdrop-blur-sm fixed top-[56px] sm:top-[60px] md:top-[80px] lg:top-[80px] start-0 w-[250px]  h-[93%] py-20 max-h-fit flex items-start justify-start gap-2 flex-col p-2;
     .link-group {
-      @apply relative overflow-visible text-white w-full flex items-start justify-start gap-3 flex-col;
+      @apply relative overflow-visible   w-full flex items-start justify-start gap-3 flex-col;
       .header {
-        @apply ps-1 flex justify-start items-start flex-col text-blue-300 capitalize text-[1.1rem] font-bold;
+        @apply ps-1 flex justify-start items-start flex-col   capitalize text-[1.1rem] font-bold;
       }
       .links {
         @apply overflow-visible relative w-full flex ps-5 flex-col justify-start text-[1rem] items-start gap-2;
@@ -41,15 +41,21 @@
       }
     }
     .profile-section {
-      @apply min-w-[100px] text-center text-white w-full flex flex-col justify-start items-start gap-3 p-3;
+      @apply w-full flex flex-col justify-center items-center gap-3 p-3 text-center text-white;
       img {
-        @apply mx-auto w-[100px] h-[100px] rounded-full;
+        @apply cursor-pointer object-contain rounded-full;
       }
       .profile-name {
         @apply w-full text-[.9rem] font-bold;
       }
       .profile-email {
         @apply w-full opacity-70 italic text-[.7rem] font-semibold;
+      }
+    }
+    .dashboard-shrink-btn {
+      @apply absolute end-2 top-10 w-[40px] h-[40px] drop-shadow-2xl  flex justify-center items-center p-2 rounded-full;
+      img {
+        @apply max-w-full max-h-full;
       }
     }
   }

@@ -1,7 +1,8 @@
 import ReactApexChart from "react-apexcharts";
 import Divider from "../ntf-components/Divider";
+import { ThemeInterface } from "../../hooks/useTheme";
 
-const VisitChart = () => {
+const VisitChart = ({ themeSelector }: { themeSelector: ThemeInterface }) => {
   const series = [
     {
       name: "Registered Users",
@@ -13,7 +14,10 @@ const VisitChart = () => {
     },
   ];
   return (
-    <div className="total-visited-container">
+    <div
+      style={{ background: themeSelector.containerColor }}
+      className="total-visited-container"
+    >
       <h2 className="header">total visits</h2>
       <Divider height={3} width={150} />
       <ReactApexChart
@@ -22,6 +26,9 @@ const VisitChart = () => {
             type: "bar",
             toolbar: {
               show: false,
+            },
+            animations: {
+              enabled: false,
             },
           },
           plotOptions: {

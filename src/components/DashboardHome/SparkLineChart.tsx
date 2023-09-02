@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 
-const SparkLineChart = () => {
+const SparkLineChart = ({ color }: { color: string }) => {
   return (
     <ReactApexChart
       options={{
@@ -63,6 +63,7 @@ const SparkLineChart = () => {
             1343, 223, 333, 3334, 2235, 6433, 7234, 8332, 2339, 3210, 2311,
             4412,
           ],
+          color: color,
         },
       ]}
       type="area"

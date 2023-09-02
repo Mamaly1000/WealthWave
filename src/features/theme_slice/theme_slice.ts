@@ -3,12 +3,13 @@ import { RootState } from "../store/store";
 import { ThemeInterface } from "../../hooks/useTheme";
 
 const initialState: ThemeInterface = {
-  bgColor: "linear-gradient(to top, #30cfd0 0%, #330867 100%)",
-  btnColor: "blue",
-  containerColor: "#fff",
-  headerColor: "#fff",
+  bgColor: "linear-gradient(to right, #200122, #6f0000)",
+  btnColor: "#a79632",
+  containerColor: "linear-gradient(to right, #636363, #a2ab58)",
+  divider: "divider-2",
+  headerColor: "#ffffff",
   hoverColor: "rgba(0 0 0/.2)",
-  plainTextColor: "#fff",
+  plainTextColor: "#FFEEF4",
 };
 
 const themeReducer = createSlice({
@@ -31,7 +32,10 @@ const themeReducer = createSlice({
       state.containerColor = action.payload;
     },
     setHoverColorTheme: (state, action) => {
-      state.headerColor = action.payload;
+      state.hoverColor = action.payload;
+    },
+    setDividerColorTheme: (state, action) => {
+      state.divider = action.payload;
     },
     setAppTheme: (state, action) => {
       state.bgColor = action.payload.bgColor;
@@ -40,6 +44,7 @@ const themeReducer = createSlice({
       state.headerColor = action.payload.headerColor;
       state.plainTextColor = action.payload.plainTextColor;
       state.headerColor = action.payload.headerColor;
+      state.divider = action.payload.divider;
     },
   },
 });
@@ -49,7 +54,9 @@ export const {
   setHeaderColorTheme,
   setBtnColorTheme,
   setContainerColorTheme,
+  setHoverColorTheme,
   setAppTheme,
+  setDividerColorTheme,
 } = themeReducer.actions;
 export default themeReducer.reducer;
 export const selecttheme = (state: RootState) => {

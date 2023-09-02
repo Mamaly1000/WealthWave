@@ -7,8 +7,9 @@ import {
   Legend,
 } from "chart.js";
 import { PolarArea } from "react-chartjs-2";
+import { ThemeInterface } from "../../hooks/useTheme";
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
-const Donautchart = () => {
+const Donautchart = ({ themeSelector }: { themeSelector: ThemeInterface }) => {
   const data = {
     labels: [
       "sunday",
@@ -36,7 +37,10 @@ const Donautchart = () => {
     ],
   };
   return (
-    <div className="donaut-chart-container">
+    <div
+      style={{ background: themeSelector.containerColor }}
+      className="donaut-chart-container"
+    >
       <h2 className="header">
         recent week profits
         <Divider height={3} width={150} />

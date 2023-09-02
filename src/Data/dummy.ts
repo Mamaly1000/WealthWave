@@ -35,6 +35,11 @@ import {
   nftVector,
   profileGif,
 } from "../assets/main-slider/main_slider_pics";
+import {
+  emailIcon,
+  githubIcon,
+  whatsappIcon,
+} from "../assets/social-medias/social";
 export const Footer_Links = [
   {
     header: "Customer Care",
@@ -573,5 +578,27 @@ export const candleseries = [
         y: [6587.6, 6598.21, 6587.6, 6594.27],
       },
     ],
+  },
+];
+export const contacts_links: { route: string; icon: string }[] = [
+  {
+    route: "https://github.com/Mamaly1000",
+    icon: githubIcon,
+  },
+  {
+    route: "https://wa.me/989214508479",
+    icon: whatsappIcon,
+  },
+  {
+    route: "mailto:mamadmehdi.aziz.10@gmail.com",
+    icon: emailIcon,
+  },
+  {
+    route: "https://t.me/Mamaly1000",
+    icon: telegramIcon,
+  },
+  {
+    route: "https://twitter.com/mamaly100",
+    icon: twitterIcon,
   },
 ];

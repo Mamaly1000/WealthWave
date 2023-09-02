@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
 import SparkLineChart from "./SparkLineChart";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { motion } from "framer-motion";
 
 const OverAllDataBox = ({
   data,
@@ -12,6 +15,7 @@ const OverAllDataBox = ({
     chartData: (string | number)[][];
   };
 }) => {
+  const themeSelector = useSelector(selecttheme);
   return (
     <div className="sm-box" style={{ background: data.main_color }}>
       <div className="left-section">
@@ -20,10 +24,17 @@ const OverAllDataBox = ({
           {data.title}
         </div>
         <span className="bold">{data.value}</span>
-        <button className="overall-btn">view all</button>
+        <motion.button
+          initial={{ background: "#000000" }}
+          whileHover={{ background: themeSelector.btnColor }}
+          transition={{ duration: 0.1 }}
+          className="overall-btn"
+        >
+          view all
+        </motion.button>
       </div>
       <div className="right-section">
-        <SparkLineChart />
+        <SparkLineChart color={data.main_color} />
         <div className={`percentage ${+data.percentage > 0 ? "green" : "red"}`}>
           {data.percentage}%<span className="light">this year</span>
         </div>

@@ -188,6 +188,7 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         containerColor: localTheme.containerColor,
         headerColor: localTheme.headerColor,
         plainTextColor: localTheme.plainTextColor,
+        divider: localTheme.divider,
         hoverColor: localTheme.headerColor,
       } as ThemeInterface)
     );

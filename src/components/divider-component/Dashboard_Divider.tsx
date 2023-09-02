@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const Dashboard_Divider = ({
   width,
@@ -7,6 +9,7 @@ const Dashboard_Divider = ({
   width: number;
   height: number;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div
       initial={{ scaleY: 0 }}
@@ -20,7 +23,7 @@ const Dashboard_Divider = ({
       exit={{
         opacity: 0,
       }}
-      className="nft-divider"
+      className={`${themeSelector.divider}`}
       style={{
         maxWidth: `${width}px`,
         maxHeight: `${height}px`,

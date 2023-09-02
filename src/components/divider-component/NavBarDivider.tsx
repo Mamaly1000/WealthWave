@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const NavBarDivider = ({
   width,
   height,
@@ -10,6 +12,7 @@ const NavBarDivider = ({
   path: string;
   hover: string;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div
       initial={{ scaleX: 0 }}
@@ -21,7 +24,7 @@ const NavBarDivider = ({
         duration: 0.13,
         type: "tween",
       }}
-      className="nft-divider"
+      className={`${themeSelector.divider}`}
       style={{
         maxWidth: `${width}px`,
         maxHeight: `${height}px`,
