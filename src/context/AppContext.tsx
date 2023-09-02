@@ -54,13 +54,15 @@ interface Icontext {
   setSelectedId: React.Dispatch<React.SetStateAction<IAppleNews | null>>;
   showTagModal: boolean;
   setShowTagsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  localTheme: ThemeInterface;
+  setLocalTheme: React.Dispatch<React.SetStateAction<ThemeInterface>>;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
 
 const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
-  const { localTheme } = useTheme();
+  const { localTheme, setLocalTheme } = useTheme();
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
@@ -165,17 +167,6 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
     );
     dispatch(fetchTeslaNews(teslaNews));
     dispatch(fetchTop_business_headlines(Top_business_headlines));
-    if (localTheme) {
-      dispatch(
-        setAppTheme({
-          bgColor: localTheme.bgColor,
-          btnColor: localTheme.btnColor,
-          containerColor: localTheme.containerColor,
-          headerColor: localTheme.headerColor,
-          plainTextColor: localTheme.plainTextColor,
-        } as ThemeInterface)
-      );
-    }
   }, []);
   useEffect(() => {
     if (localProfile.description !== "" && localProfile.name !== "") {
@@ -188,6 +179,18 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         } as Iprofile)
       );
     }
+  }, []);
+  useEffect(() => {
+    dispatch(
+      setAppTheme({
+        bgColor: localTheme.bgColor,
+        btnColor: localTheme.btnColor,
+        containerColor: localTheme.containerColor,
+        headerColor: localTheme.headerColor,
+        plainTextColor: localTheme.plainTextColor,
+        hoverColor: localTheme.headerColor,
+      } as ThemeInterface)
+    );
   }, []);
   return (
     <AppContext.Provider
@@ -210,6 +213,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         setSelectedId,
         showTagModal,
         setShowTagsModal,
+        localTheme,
+        setLocalTheme,
       }}
     >
       {children}

@@ -3,11 +3,12 @@ import { RootState } from "../store/store";
 import { ThemeInterface } from "../../hooks/useTheme";
 
 const initialState: ThemeInterface = {
-  bgColor: "",
-  btnColor: "",
-  containerColor: "",
-  headerColor: "",
-  plainTextColor: "",
+  bgColor: "linear-gradient(to top, #30cfd0 0%, #330867 100%)",
+  btnColor: "blue",
+  containerColor: "#fff",
+  headerColor: "#fff",
+  hoverColor: "rgba(0 0 0/.2)",
+  plainTextColor: "#fff",
 };
 
 const themeReducer = createSlice({
@@ -29,8 +30,16 @@ const themeReducer = createSlice({
     setContainerColorTheme: (state, action) => {
       state.containerColor = action.payload;
     },
+    setHoverColorTheme: (state, action) => {
+      state.headerColor = action.payload;
+    },
     setAppTheme: (state, action) => {
-      state = action.payload;
+      state.bgColor = action.payload.bgColor;
+      state.btnColor = action.payload.btnColor;
+      state.containerColor = action.payload.containerColor;
+      state.headerColor = action.payload.headerColor;
+      state.plainTextColor = action.payload.plainTextColor;
+      state.headerColor = action.payload.headerColor;
     },
   },
 });

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { bgColors, btnColors, headerColors } from "../../Data/themes";
+import { bgColors, btnColors } from "../../Data/themes";
 import DashboardSection from "../dashboard/DashboardSection";
 import Header from "../header-component/Header";
 import ThemeContainer from "./ThemeContainer";
@@ -12,10 +12,10 @@ import {
   setPlainTextColorTheme,
   setbgColorTheme,
 } from "../../features/theme_slice/theme_slice";
-import useTheme from "../../hooks/useTheme";
 import { tickIcon } from "../../assets/dashboard/icons/icons";
+import { useContextFunction } from "../../context/AppContext";
 const DashboardThemeSection = () => {
-  const { localTheme, setLocalTheme } = useTheme();
+  const contextData = useContextFunction(); 
   const dispatch = useDispatch();
   return (
     <DashboardSection classname="Dashboard-Theme-Section">
@@ -36,11 +36,16 @@ const DashboardThemeSection = () => {
                 key={color}
                 style={{ background: color }}
                 onClick={() => {
-                  setLocalTheme({ ...localTheme, bgColor: color });
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    bgColor: color,
+                  });
                   dispatch(setbgColorTheme(color));
                 }}
               >
-                {localTheme.bgColor === color && <img src={tickIcon} />}
+                {contextData!.localTheme.bgColor === color && (
+                  <img src={tickIcon} />
+                )}
               </div>
             );
           })}
@@ -52,12 +57,17 @@ const DashboardThemeSection = () => {
                 className="color-item"
                 key={color}
                 onClick={() => {
-                  setLocalTheme({ ...localTheme, btnColor: "#" + color });
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    btnColor: "#" + color,
+                  });
                   dispatch(setBtnColorTheme("#" + color));
                 }}
                 style={{ background: "#" + color }}
               >
-                {localTheme.btnColor === "#" + color && <img src={tickIcon} />}
+                {contextData!.localTheme.btnColor === "#" + color && (
+                  <img src={tickIcon} />
+                )}
               </div>
             );
           })}
@@ -67,12 +77,17 @@ const DashboardThemeSection = () => {
                 className="color-item"
                 key={color}
                 onClick={() => {
-                  setLocalTheme({ ...localTheme, btnColor: color });
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    btnColor: color,
+                  });
                   dispatch(setBtnColorTheme(color));
                 }}
                 style={{ background: color }}
               >
-                {localTheme.btnColor === color && <img src={tickIcon} />}
+                {contextData!.localTheme.btnColor === color && (
+                  <img src={tickIcon} />
+                )}
               </div>
             );
           })}
@@ -80,18 +95,19 @@ const DashboardThemeSection = () => {
         <ThemeContainer height={40} title="Header color" width={3}>
           <ChromePicker
             className="picker"
-            color={localTheme.headerColor}
-            onChangeComplete={(color) =>
-              setLocalTheme({
-                ...localTheme,
+            color={contextData!.localTheme.headerColor}
+            onChangeComplete={(color) => {
+              dispatch(setHeaderColorTheme(color.hex));
+              contextData!.setLocalTheme({
+                ...contextData!.localTheme,
                 headerColor: color.hex,
-              })
-            }
+              });
+            }}
             disableAlpha={true}
             styles={{
               default: {
                 body: {
-                  background: localTheme.containerColor,
+                  background: contextData!.localTheme.containerColor,
                 },
               },
             }}
@@ -100,10 +116,11 @@ const DashboardThemeSection = () => {
         <ThemeContainer height={40} title="plain text color" width={3}>
           <ChromePicker
             className="picker"
-            color={localTheme.plainTextColor}
+            color={contextData!.localTheme.plainTextColor}
             onChangeComplete={(color) => {
-              setLocalTheme({
-                ...localTheme,
+              dispatch(setPlainTextColorTheme(color.hex));
+              contextData!.setLocalTheme({
+                ...contextData!.localTheme,
                 plainTextColor: color.hex,
               });
             }}
@@ -111,7 +128,7 @@ const DashboardThemeSection = () => {
             styles={{
               default: {
                 body: {
-                  background: localTheme.containerColor,
+                  background: contextData!.localTheme.containerColor,
                 },
               },
             }}
@@ -129,11 +146,14 @@ const DashboardThemeSection = () => {
                 key={color}
                 style={{ background: "#" + color }}
                 onClick={() => {
-                  setLocalTheme({ ...localTheme, containerColor: "#" + color });
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    containerColor: "#" + color,
+                  });
                   dispatch(setContainerColorTheme("#" + color));
                 }}
               >
-                {localTheme.containerColor === "#" + color && (
+                {contextData!.localTheme.containerColor === "#" + color && (
                   <img src={tickIcon} />
                 )}
               </div>
@@ -146,18 +166,23 @@ const DashboardThemeSection = () => {
                 key={color}
                 style={{ background: color }}
                 onClick={() => {
-                  setLocalTheme({ ...localTheme, containerColor: color });
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    containerColor: color,
+                  });
                   dispatch(setContainerColorTheme(color));
                 }}
               >
-                {localTheme.containerColor === color && <img src={tickIcon} />}
+                {contextData!.localTheme.containerColor === color && (
+                  <img src={tickIcon} />
+                )}
               </div>
             );
           })}
         </ThemeContainer>{" "}
       </div>
       <div className="theme-right-side-container">
-        <ThemePreview localTheme={localTheme} />
+        <ThemePreview localTheme={contextData!.localTheme} />
       </div>
     </DashboardSection>
   );
