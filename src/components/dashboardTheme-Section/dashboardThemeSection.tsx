@@ -20,6 +20,7 @@ import {
 } from "../../features/theme_slice/theme_slice";
 import { tickIcon } from "../../assets/dashboard/icons/icons";
 import { useContextFunction } from "../../context/AppContext";
+import ToastTheme from "./ToastTheme";
 const DashboardThemeSection = () => {
   const contextData = useContextFunction();
   const dispatch = useDispatch();
@@ -373,6 +374,7 @@ const DashboardThemeSection = () => {
             );
           })}
         </ThemeContainer>{" "}
+        <ToastTheme />
       </div>
       <div className="theme-right-side-container">
         <ThemePreview localTheme={contextData!.localTheme} />

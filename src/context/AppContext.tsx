@@ -34,6 +34,7 @@ import { setProfileSlice } from "../features/profile_slice/profile_slice";
 import useProfile, { Iprofile } from "../hooks/useProfile";
 import useTheme, { ThemeInterface } from "../hooks/useTheme";
 import { setAppTheme } from "../features/theme_slice/theme_slice";
+import useToast, { ToastInterface } from "../hooks/useToast";
 
 interface Icontext {
   tags: TAG[];
@@ -56,6 +57,8 @@ interface Icontext {
   setShowTagsModal: React.Dispatch<React.SetStateAction<boolean>>;
   localTheme: ThemeInterface;
   setLocalTheme: React.Dispatch<React.SetStateAction<ThemeInterface>>;
+  localToast: ToastInterface;
+  setLocalToast: React.Dispatch<React.SetStateAction<ToastInterface>>;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -76,6 +79,13 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
       };
     });
   }, [notes, tags]);
+  const [screenW, setScreenW] = useState<boolean>(
+    window.innerWidth > 450 ? true : false
+  );
+  const [scrollH, setScrollH] = useState<boolean>(
+    window.scrollY > 300 ? true : false
+  );
+  const { localToast, setLocalToast } = useToast();
   const onCreateNote = ({ tags, ...data }: noteData) => {
     setNotes((prevNotes) => {
       return [
@@ -135,12 +145,6 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
       });
     });
   };
-  const [screenW, setScreenW] = useState<boolean>(
-    window.innerWidth > 450 ? true : false
-  );
-  const [scrollH, setScrollH] = useState<boolean>(
-    window.scrollY > 300 ? true : false
-  );
   useEffect(() => {
     window.addEventListener("resize", () => {
       if (window.innerWidth > 640) {
@@ -216,6 +220,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         setShowTagsModal,
         localTheme,
         setLocalTheme,
+        localToast,
+        setLocalToast,
       }}
     >
       {children}

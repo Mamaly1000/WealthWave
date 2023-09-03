@@ -144,6 +144,24 @@
         }
       }
     }
+    .toast-theme-container {
+      @apply w-fit flex flex-col items-center justify-between gap-3;
+      .header {
+        @apply w-full text-start text-[.9rem] md:text-[1.1rem]  flex items-center justify-start gap-3 capitalize font-semibold;
+      }
+      .item {
+        @apply text-[.8rem] md:text-[.9rem] capitalize max-w-[400px] w-full min-h-[40px] p-1 flex items-start justify-between;
+        .title {
+          @apply h-full flex justify-center items-center w-fit;
+        }
+        .options-container {
+          @apply w-fit max-w-[55%] flex items-start justify-start gap-2 flex-wrap;
+          .option {
+            @apply whitespace-nowrap;
+          }
+        }
+      }
+    }
   }
   .preview-container {
     @apply backdrop-blur-sm w-full sm:w-[60%]  md:w-[500px] md:h-[500px] rounded-lg p-3 md:p-5 flex flex-col items-start drop-shadow-2xl justify-between gap-3;

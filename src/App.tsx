@@ -85,18 +85,18 @@ function App() {
         </QueryClientProvider>
       </AnimatePresence>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        draggableDirection="x"
-        draggablePercent={20}
-        theme="dark"
+        position={contextData!.localToast.position}
+        autoClose={contextData!.localToast.autoClose}
+        hideProgressBar={contextData!.localToast.hideProgressBar}
+        newestOnTop={contextData!.localToast.newestOnTop}
+        closeOnClick={contextData!.localToast.closeOnClick}
+        rtl={contextData!.localToast.rtl}
+        pauseOnFocusLoss={contextData!.localToast.pauseOnFocusLoss}
+        draggable={contextData!.localToast.draggable}
+        pauseOnHover={contextData!.localToast.pauseOnHover}
+        draggableDirection={contextData!.localToast.draggableDirection}
+        draggablePercent={contextData!.localToast.draggablePercent}
+        theme={contextData!.localToast.theme}
       />
     </Layout>
   );
