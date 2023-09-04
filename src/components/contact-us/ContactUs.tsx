@@ -70,29 +70,7 @@ const ContactUs = () => {
             reset
           </motion.button>
         </form>
-        <div className="links-container">
-          <span>Contact Me : </span>
-          {socialLinks.map((link, index) => {
-            return (
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.13,
-                  type: "tween",
-                  delay: index / 10 + 0.1,
-                }}
-                viewport={{ once: true }}
-                className="social-link"
-                key={index}
-              >
-                <a href={link.link}>
-                  <img src={link.icon} />
-                </a>
-              </motion.div>
-            );
-          })}
-        </div>
+      
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: 50 }}

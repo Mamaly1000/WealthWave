@@ -7,27 +7,24 @@
   }
   .contact-us-form {
     background: rgba(0 0 0 /0.1);
-    @apply w-full md:w-[50%] h-[80%] flex items-center justify-center flex-col gap-10 rounded-lg p-10;
+    @apply w-full md:w-[50%] h-[80%] flex items-center justify-center flex-col gap-5 md:gap-10 rounded-lg p-3 md:p-10;
     h3 {
-      @apply font-bold text-[2.5rem] text-white text-left w-full h-[10%];
+      @apply w-full text-start font-bold text-[1.2rem] md:text-[2.5rem] text-white h-[10%] whitespace-nowrap;
     }
     form {
-      @apply flex justify-center items-center flex-row flex-wrap w-full gap-2 h-[80%];
+      @apply flex justify-center items-center  flex-wrap w-full gap-2 md:gap-2 h-[80%];
       input {
         background: rgba(0 0 0/0.3);
         box-shadow: 0 0 10px 1px rgba(0 0 0/0.3) inset;
-        @apply w-[80%] rounded-md px-10 py-3 text-white outline-none;
+        @apply w-full md:w-[80%] rounded-md px-10 py-3 text-white outline-none;
       }
       textarea {
         background: rgba(0 0 0/0.3);
         box-shadow: 0 0 10px 1px rgba(0 0 0/0.3) inset;
-        @apply w-[80%] rounded-md px-10 py-3 text-white outline-none max-h-[150px];
+        @apply w-full md:w-[80%] rounded-md px-10 py-3 text-white outline-none max-h-[150px];
       }
       button {
-        @apply bg-blue-600 w-[30%] mt-5;
-      }
-      .reset-btn {
-        @apply bg-gray-600 shadow-gray-500;
+        @apply w-full md:w-fit m-0;
       }
     }
     .links-container {

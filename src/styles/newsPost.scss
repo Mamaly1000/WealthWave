@@ -1,5 +1,5 @@
 .news-posts {
-  @apply w-full flex flex-row flex-wrap justify-center items-center gap-10 mt-10;
+  @apply w-full   flex flex-row flex-wrap justify-center items-center gap-10 mt-10;
   .news-post-container {
     background: rgba(0 0 0/0.3);
     @apply w-[350px] opacity-0 font-yol h-[400px] drop-shadow-2xl text-white rounded-xl overflow-hidden;
@@ -44,4 +44,8 @@
       }
     }
   }
+  .swiper-slide{
+    @apply max-w-fit w-fit min-w-fit h-fit
+  }
+ 
 }

@@ -2,10 +2,10 @@
   @apply w-full min-h-fit;
   .trend-crypto-component {
     background: rgba(0 0 0/0.2);
-    @apply hover:bg-blue-950 transition-all cursor-pointer;
+    @apply   transition-all cursor-pointer;
   }
   .swiper-slide {
-    @apply max-w-fit;
+    @apply w-fit min-w-fit h-fit max-w-fit;
   }
   .loading-animation,
   .trend-crypto-component {
