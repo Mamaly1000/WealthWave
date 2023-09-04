@@ -24,7 +24,7 @@
         @apply w-full md:w-[80%] rounded-md px-10 py-3 text-white outline-none max-h-[150px];
       }
       button {
-        @apply w-full md:w-fit m-0;
+        @apply w-full md:w-fit md:min-w-[30%] m-0;
       }
     }
     .links-container {

@@ -1,5 +1,63 @@
 .crypto-main-page {
   @apply w-full min-h-[600px] h-fit  py-24 px-5 lg:px-10 flex items-center justify-center flex-col gap-10;
+  .crypto-landing-intro {
+    background-size: 100% 100%;
+    @apply w-full min-h-[500px] max-h-fit bg-center bg-no-repeat flex items-center justify-center gap-5 flex-col;
+    .context {
+      @apply w-full md:w-[60%] text-center flex flex-wrap items-center justify-center;
+      .radial-text {
+        @apply w-fit h-fit px-2 text-[1.5rem] md:text-[4rem] capitalize font-bold drop-shadow-2xl;
+      }
+    }
+    p {
+      @apply w-full  md:w-[40%] text-center capitalize font-rail font-semibold text-[1rem] md:text-[1rem];
+    }
+  }
+  .crypto-second-intro {
+    @apply min-h-[500px] w-full flex flex-wrap justify-center items-start gap-5;
+    .context {
+      @apply w-full flex items-start justify-start gap-5 flex-col md:w-[48%];
+      h2 {
+        @apply text-center md:text-start;
+      }
+    }
+    img {
+      @apply w-full object-contain md:w-[48%];
+    }
+    p {
+      @apply font-rail w-full text-start capitalize text-[1rem] md:text-[1.2rem];
+    }
+  }
+  .learn-crypto-section {
+    @apply w-full min-h-fit drop-shadow-2xl flex flex-col justify-center items-start gap-5 p-2 md:p-5 rounded-lg border-[1px];
+    .context {
+      @apply w-full flex items-center justify-center md:justify-between flex-col md:flex-row gap-3;
+      .q-a-section {
+        @apply w-fit flex flex-col justify-center md:justify-start items-start gap-2 text-start capitalize font-rail;
+        h3 {
+          @apply text-[1.5rem] font-bold;
+        }
+        p {
+          @apply text-[1rem] font-semibold;
+        }
+      }
+    }
+    .coins {
+      @apply py-5 w-full overflow-hidden   gap-2 flex items-center justify-center flex-col min-h-[150px] max-h-fit;
+      .row {
+        @apply p-1 min-w-fit h-fit flex flex-row gap-2 items-center justify-center;
+      }
+      .single-coin {
+        @apply cursor-default whitespace-nowrap bg-light_medium_dark  flex items-center justify-center min-w-fit min-h-fit text-[.9rem] capitalize gap-[5px] px-3 py-2 rounded-xl    border-[1px];
+        img {
+          @apply rounded-full w-[30px] h-[30px];
+        }
+        span {
+          @apply text-[.8rem] uppercase;
+        }
+      }
+    }
+  }
   .page-header {
     @apply text-[1.5rem] md:text-[3rem] text-left;
   }
@@ -10,16 +68,12 @@
     @apply w-full min-h-[250px] py-2 flex flex-col items-center justify-between;
     .swiper-wrapper {
       @apply min-h-[300xp] h-fit p-0;
-      .top-crypto-component {
-        background: rgba(0 0 0/0.2);
-        @apply hover:bg-blue-950 transition-all cursor-pointer;
-      }
+
       .swiper-slide {
         @apply w-fit h-fit p-0;
       }
-      .top-crypto-component,
-      .loading-animation {
-        @apply min-w-[300px] max-w-[300px] w-[300px] min-h-[200px] max-h-[200px] h-[200px] rounded-lg drop-shadow-2xl text-white px-10 py-10 flex justify-between items-start flex-col;
+      .top-crypto-component {
+        @apply bg-light_dark min-w-[300px] transition-all cursor-pointer max-w-[300px] w-[300px] min-h-[200px] max-h-[200px] h-[200px] rounded-lg drop-shadow-2xl p-5 py-10 flex justify-between items-start flex-col;
 
         .component-row {
           @apply flex flex-row justify-start items-center gap-2;
@@ -28,70 +82,37 @@
           @apply font-bold capitalize;
         }
         .coin-img {
-          @apply min-w-[30px] max-w-[30px] w-[30px] min-h-[30px] max-h-[30px] h-[30px]   rounded-full;
+          @apply min-w-[45px] max-w-[45px] w-[45px] min-h-[45px] max-h-[45px] h-[45px]   rounded-full;
         }
         .blur-text {
-          @apply uppercase text-gray-400;
+          @apply uppercase;
         }
         .current-price {
           @apply flex flex-row justify-start font-extrabold text-[1.5rem] uppercase;
         }
 
         .percentage-container {
-          @apply px-2 py-1  rounded-2xl;
+          @apply px-2 py-1 bg-light_medium_dark  rounded-2xl;
         }
       }
     }
     .swiper-pagination-bullet {
-      @apply w-[10px] h-[10px] rounded-[2px] bg-blue-400 transition-all;
+      @apply w-[10px] h-[10px] rounded-[2px]   transition-all;
     }
     .swiper-pagination-bullet-active {
-      @apply w-[20px] bg-blue-400;
-    }
-    .trend-crypto-component {
-      background: rgba(0 0 0/0.2);
-      @apply hover:bg-blue-950 transition-all cursor-pointer;
-    }
-    .loading-animation,
-    .trend-crypto-component {
-      background: rgba(0 0 0 /0.2);
-      @apply min-w-[300px] max-w-[300px] w-[300px] min-h-[200px] max-h-[200px] h-[200px] rounded-lg drop-shadow-2xl text-white px-10 py-10 flex justify-between items-start flex-col hover:bg-blue-950 cursor-pointer transition-all;
-      img {
-        @apply min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] max-h-[50px] h-[50px]   rounded-full;
-      }
-      .trend-crypto-content {
-        @apply w-full flex justify-between items-center;
-        div {
-          @apply w-[70%] flex justify-start items-center gap-3;
-          div {
-            @apply flex justify-start items-start flex-col   gap-0;
-          }
-        }
-      }
-      .coin-percentage {
-        @apply text-[.8rem] text-white px-2 py-1 rounded-2xl;
-      }
-      .bold {
-        @apply text-[.9rem] text-gray-400 uppercase whitespace-nowrap;
-      }
-      .light {
-        @apply text-[.8rem] font-light text-white;
-      }
+      @apply w-[20px];
     }
   }
   .search-crypto-container {
-    @apply w-full flex justify-between items-center overflow-hidden border-blue-800 border-[1px] rounded-lg;
+    @apply w-full flex justify-between items-center overflow-hidden   border-[1px] rounded-lg;
     input {
-      @apply w-[80%]  md:w-[90%] rounded-e-none rounded-s-lg focus:shadow-blue-200;
+      @apply w-[80%]  md:w-[90%] rounded-e-none rounded-s-lg;
     }
     button {
-      @apply shadow-none hover:bg-blue-800 w-[50px] h-[50px] border border-blue-950 rounded-none p-2 flex justify-center items-center;
+      @apply shadow-none   w-[50px] h-[50px] border   rounded-none p-2 flex justify-center items-center;
       img {
         @apply text-red-50;
       }
-    }
-    .selected {
-      @apply bg-blue-800 shadow-blue-100;
     }
   }
 
@@ -116,7 +137,7 @@
         tr {
           border-top: 0.1px solid rgba(255 255 255/0.1);
           @apply flex items-center
-            gap-2 hover:bg-blue-950 transition-all cursor-pointer min-w-full min-h-[60px];
+            gap-2   transition-all cursor-pointer min-w-full min-h-[60px];
         }
         .chart-td {
           @apply py-0 px-3 overflow-hidden;
@@ -129,7 +150,7 @@
       .rank-td {
         @apply min-w-[100px] w-[100px] max-w-[100px] text-right flex items-center justify-between gap-3;
         button {
-          @apply w-[30px] h-[30px] p-2 rounded-md shadow-blue-400 shadow-md hover:shadow-none;
+          @apply w-[30px] h-[30px] p-2 rounded-md;
         }
       }
       .coin-td {
@@ -163,7 +184,7 @@
         @apply min-w-[150px] w-[150px] max-w-[150px];
       }
       .selected-td {
-        @apply bg-blue-950;
+        @apply bg-light_medium_dark;
       }
     }
   }
@@ -173,8 +194,8 @@
       @apply flex flex-row flex-wrap justify-center items-center gap-5 py-3;
       li,
       .selected {
-        background: rgba(0 0 0 /0.2);
-        @apply min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] p-0 overflow-hidden flex items-center justify-center  rounded-md text-white hover:bg-blue-900 hover:scale-110 transition-all;
+      
+        @apply bg-light_dark min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] p-0 overflow-hidden flex items-center justify-center  rounded-md text-white hover:bg-light_medium_dark hover:scale-110 transition-all;
         a {
           @apply p-3;
         }
@@ -193,20 +214,20 @@
       }
     }
     .activeClassName {
-      @apply w-full h-full bg-blue-900;
+      @apply w-full h-full bg-light_medium_dark;
     }
   }
   .green {
-    @apply bg-green-800;
+    background: #00f5ff;
   }
   .red {
-    @apply bg-red-800;
+    background: #fe0000;
   }
   .green-text {
-    @apply text-green-300;
+    color: #00f5ff;
   }
   .red-text {
-    @apply text-red-300;
+    color: #fe0000;
   }
   .header-component {
     @apply text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] capitalize text-start font-bold   w-full flex flex-col md:flex-row gap-5 justify-between items-center relative;

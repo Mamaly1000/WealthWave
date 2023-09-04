@@ -1,6 +1,5 @@
 import { useState } from "react";
-import bgImage from "./../../assets/about-us/ce44c9d4-dc5c-418c-94c3-4299cb642ac0.png";
-import { socialLinks } from "../../utils/about-us-values";
+import bgImage from "./../../assets/contact-main-page.png";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
 import { useSelector } from "react-redux";
@@ -70,10 +69,9 @@ const ContactUs = () => {
             reset
           </motion.button>
         </form>
-      
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, x: 50 }}
+        initial={{ opacity: 0, x: 50, backgroundImage: `url(${bgImage})` }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{
           delay: 1,
@@ -82,7 +80,6 @@ const ContactUs = () => {
           when: "beforeChildren",
         }}
         className="bg-container"
-        style={{ backgroundImage: `url(${bgImage})` }}
         drag
         dragConstraints={{ top: 10, left: 10, right: 10, bottom: 10 }}
         dragSnapToOrigin

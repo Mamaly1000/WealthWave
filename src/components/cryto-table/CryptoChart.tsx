@@ -114,6 +114,7 @@ export function CryptoTable({
       }}
       transition={{ duration: 2, delay: 1, type: "tween" }}
       style={{ width: width, height: height }}
+      className="small-chart"
     >
       {datasets.length > 0 && sparkLine.length === 0 && defChart.length > 0 && (
         <Line

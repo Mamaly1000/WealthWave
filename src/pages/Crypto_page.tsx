@@ -1,14 +1,10 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper";
 import useCrypto from "../hooks/useCrypto";
-import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import Crypto_Search from "../components/search-components/Crypto_Search";
-import TopCryptoCard from "../components/crypto-component/TopCryptoCard";
 import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import CryptoTreeChart from "../components/crypto-component/CryptoTreeChart";
 import { useDispatch } from "react-redux";
@@ -16,10 +12,11 @@ import {
   setCryptoPageOffSet,
   setCurrentCryptoPage,
 } from "../features/crypto_slice/crypto_slice";
-import TrendCryptoComponent from "../components/cryto-table/TrendCryptoComponent";
-import Header from "../components/header-component/Header";
+import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
+import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
+import LearnCrypto from "../components/crypto-component/LearnCrypto";
+
 const Crypto_page = () => {
-  const nav = useNavigate();
   const dispatch = useDispatch();
   const { cryptoSelector } = useCrypto();
   const [DisplayType, setDisplayType] = useState<"line" | "tree">("line");
@@ -56,56 +53,9 @@ const Crypto_page = () => {
       exit="exit"
       className="crypto-main-page"
     >
-      <motion.h1
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1, duration: 3, type: "tween" }}
-        className="page-header"
-      >
-        Cryptocurrency Prices by Market Cap
-      </motion.h1>
-      <TrendCryptoComponent />
-      <Header
-        btnText="track more coins"
-        header={false}
-        height={5}
-        onclick={() => {
-          nav("/crypto");
-        }}
-        text="Top Cryptocurrencies"
-        width={250}
-      />
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 1,
-          delay: 1,
-          type: "tween",
-        }}
-        viewport={{ once: true }}
-        className="top-crypto"
-      >
-        <Swiper
-          className="top-crypto"
-          spaceBetween={10}
-          slidesPerView="auto"
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          modules={[Pagination, Autoplay]}
-        >
-          {cryptoSelector.coinlist.slice(0, 10).map((coin, index) => {
-            return (
-              <SwiperSlide
-                key={index}
-                onClick={() => nav(`/crypto/${coin.id}`)}
-              >
-                <TopCryptoCard coin={coin} index={index} key={index} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </motion.div>
+      <CryptoPageIntro />
+      <CryptoSecondIntro />
+      <LearnCrypto />
       <Crypto_Search
         DisplayType={DisplayType}
         setDisplayType={setDisplayType}
@@ -164,6 +114,7 @@ const Crypto_page = () => {
           nextClassName="crypto-pagination-nav"
           previousClassName="crypto-pagination-nav"
           breakClassName="crypto-pagination-breaks"
+          
         />
       </motion.div>
     </motion.div>

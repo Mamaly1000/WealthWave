@@ -8,7 +8,7 @@ import React, {
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCryptoSearch,
   sortCryptoTable,
@@ -17,6 +17,7 @@ import filterIcon from "../../assets/crypto/filter.svg";
 import refreshIcon from "../../assets/crypto/refresh.svg";
 import TreeChart from "../../assets/crypto/TreeChart.svg";
 import lineChart from "../../assets/crypto/lineChart.svg";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 export type FilterType =
   | "RANK"
@@ -42,10 +43,10 @@ const Crypto_Search = ({
   const { refetch, isLoading } = cryptosList("refresh-data", false, false);
   const controls = useAnimationControls();
   const [_pending, setTransition] = useTransition();
-  const setSearchTextCallBack = useMemo(() => {
+  const themeSelector = useSelector(selecttheme);
+  useMemo(() => {
     dispatch(setCryptoSearch(searchText));
   }, [searchText]);
-  useEffect(() => {}, [setSearchTextCallBack]);
   useEffect(() => {
     if (isLoading) {
       controls.start({
@@ -60,7 +61,10 @@ const Crypto_Search = ({
   }, [isLoading]);
 
   return (
-    <motion.div className="search-crypto-container">
+    <motion.div
+      style={{ borderColor: themeSelector.btnColor }}
+      className="search-crypto-container"
+    >
       <motion.input
         value={searchText}
         onChange={(e) => {
@@ -76,7 +80,14 @@ const Crypto_Search = ({
             setDisplayType("line");
           });
         }}
-        className={`${DisplayType === "line" ? "selected" : ""}`}
+        animate={{
+          background: !(DisplayType === "tree")
+            ? themeSelector.btnColor
+            : themeSelector.hoverColor,
+        }}
+        style={{ background: themeSelector.hoverColor }}
+        whileHover={{ background: themeSelector.btnColor }}
+        transition={{ duration: 0.1 }}
       >
         <img src={lineChart} />
       </motion.button>
@@ -86,7 +97,14 @@ const Crypto_Search = ({
             setDisplayType("tree");
           });
         }}
-        className={`${DisplayType === "tree" ? "selected" : ""}`}
+        animate={{
+          background:
+            DisplayType === "tree"
+              ? themeSelector.btnColor
+              : themeSelector.hoverColor,
+        }}
+        whileHover={{ background: themeSelector.btnColor }}
+        transition={{ duration: 0.1 }}
       >
         <img src={TreeChart} />
       </motion.button>
@@ -100,6 +118,9 @@ const Crypto_Search = ({
             });
           });
         }}
+        style={{ background: themeSelector.hoverColor }}
+        whileHover={{ background: themeSelector.btnColor }}
+        transition={{ duration: 0.1 }}
       >
         <motion.img
           initial={{ rotate: 0 }}
@@ -123,6 +144,9 @@ const Crypto_Search = ({
           );
           toast.success("sorts have been cleared successfully !");
         }}
+        style={{ background: themeSelector.hoverColor }}
+        whileHover={{ background: themeSelector.btnColor }}
+        transition={{ duration: 0.1 }}
       >
         <img src={filterIcon} alt="filter" />
       </motion.button>

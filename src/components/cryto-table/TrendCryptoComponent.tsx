@@ -9,7 +9,13 @@ import Header from "../header-component/Header";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 
-const TrendCryptoComponent = ({ header = false }: { header?: boolean }) => {
+const TrendCryptoComponent = ({
+  header = false,
+  removeHeader = false,
+}: {
+  header?: boolean;
+  removeHeader?: boolean;
+}) => {
   const [displayTrendCoins, setDisplayTrendCoins] = useState<boolean>(false);
   const { getTrendCoins, cryptoSelector } = useCrypto();
   const fetch_trend_coins = getTrendCoins();
@@ -17,16 +23,18 @@ const TrendCryptoComponent = ({ header = false }: { header?: boolean }) => {
   const nav = useNavigate();
   return (
     <div className="trend-coins-container">
-      <Header
-        btnText="track more coins"
-        header={header}
-        height={5}
-        onclick={() => {
-          nav("/crypto");
-        }}
-        text="Trend Cryptocurrencies"
-        width={250}
-      />
+      {!removeHeader && (
+        <Header
+          btnText="track more coins"
+          header={header}
+          height={5}
+          onclick={() => {
+            nav("/crypto");
+          }}
+          text="Trend Cryptocurrencies"
+          width={250}
+        />
+      )}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}

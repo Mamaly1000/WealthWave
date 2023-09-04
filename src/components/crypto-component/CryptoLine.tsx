@@ -6,6 +6,8 @@ import { IcryptoData } from "../../hooks/useCrypto";
 import { CryptoTable } from "../cryto-table/CryptoChart";
 import useCrypto from "../../hooks/useCrypto";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
@@ -14,12 +16,14 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
   const nav = useNavigate();
   const { cryptoSelector } = useCrypto();
   const [displayChart, setDisplayChart] = useState<boolean>(false);
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.tr
       variants={cryptoRowMotion(index)}
       initial="hidden"
       animate="visible"
       exit="exit"
+      whileHover={{ background: themeSelector.containerColor }}
       key={index}
       onAnimationComplete={() => {
         setDisplayChart(true);
@@ -30,9 +34,13 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
           cryptoSelector.filterType.type_name === "RANK" ? "selected-td" : ""
         } rank-td`}
       >
-        <button>
+        <motion.button
+          animate={{ background: themeSelector.btnColor }}
+          whileHover={{ background: themeSelector.hoverColor }}
+          transition={{ duration: 0.1 }}
+        >
           <img src={saveIcon} alt="save" />
-        </button>
+        </motion.button>
         {coin.market_cap_rank}
       </td>
       <td

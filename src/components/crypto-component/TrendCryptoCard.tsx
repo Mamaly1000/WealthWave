@@ -7,6 +7,7 @@ import { CryptoTable } from "../cryto-table/CryptoChart";
 import { default_charts_data } from "../../Data/dummy";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { TrendArrow } from "../../assets/crypto/cryptoImages";
 type trendCryptoCardPropsType = {
   coin: ItrendCoin;
   index: number;
@@ -41,40 +42,63 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
       }}
       whileHover={{ background: themeSelector.containerColor }}
     >
-      <motion.div className="trend-crypto-content">
-        <motion.div>
+      <div className="top" style={{ borderColor: themeSelector.btnColor }}>
+        <motion.div className="top-left">
           <motion.img src={coin!.item!.small} />
-          <motion.div>
-            <span
-              className="bold"
-              style={{
-                fontSize: coin.item.id.length > 10 ? ".6rem" : "1rem",
-                color: themeSelector.headerColor,
-              }}
-            >
-              {coin!.item!.id}
-            </span>
-            <span className="light">
-              ${(+coin!.item!.price_btc * 1000).toFixed(8)}
-            </span>
-          </motion.div>
+          <span
+            className="bold"
+            style={{
+              fontSize: coin.item.symbol.length > 10 ? ".6rem" : "1.5rem",
+              color: themeSelector.headerColor,
+            }}
+          >
+            {coin!.item!.symbol}
+          </span>
+          <span
+            style={{
+              color: themeSelector.headerColor,
+              background: themeSelector.btnColor,
+            }}
+            className="light"
+          >
+            {coin.item.name}
+          </span>
         </motion.div>
-        <span
-          className={`coin-percentage ${coinPercentage > 0 ? "green" : "red"}`}
+        <button style={{ background: themeSelector.btnColor }}>
+          <img src={TrendArrow} />
+        </button>
+      </div>
+      <div className="bottom">
+        <div
+          className="bottom-left"
+          style={{ color: themeSelector.plainTextColor }}
         >
-          {coinPercentage}%
-        </span>
-      </motion.div>
-      {displayChart && (
-        <CryptoTable
-          height={"150px"}
-          id={coin.item.id}
-          width={"200px"}
-          percent={coinPercentage}
-          defChart={default_charts_data[index]!.prices}
-          sparkLine={[]}
-        />
-      )}
+          <span
+            className="bold"
+            style={{ color: themeSelector.plainTextColor }}
+          >
+            {" "}
+            ${coin.item.price_btc.toFixed(8)}
+          </span>
+          <span
+            className={`coin-percentage ${
+              coinPercentage > 0 ? "green-text" : "red-text"
+            }`}
+          >
+            {coinPercentage}%
+          </span>
+        </div>
+        {displayChart && (
+          <CryptoTable
+            height={"120"}
+            id={coin.item.id}
+            width={"150px"}
+            percent={coinPercentage}
+            defChart={default_charts_data[index]!.prices}
+            sparkLine={[]}
+          />
+        )}
+      </div>
     </motion.div>
   );
 };
