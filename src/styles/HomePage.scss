@@ -25,7 +25,7 @@
       }
     }
     .home-page-intro-slider {
-      @apply w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden shadow-blue-900   shadow-2xl rounded-[10px];
+      @apply w-[300px] h-[300px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] text-white text-[1rem] md:text-[1.4rem] font-bold lg:mr-32 overflow-hidden   rounded-[10px];
       .mySwiper {
         @apply w-full h-full capitalize;
 
@@ -37,7 +37,7 @@
             h3 {
               @apply min-h-[80%] max-h-[90%] md:min-h-fit md:max-h-fit w-[90%] font-semibold font-rail absolute start-[5%] text-[1rem] md:text-[1.2rem] z-10 bg-light_medium_dark px-1 rounded-lg py-10 bottom-[10%]  md:bottom-20 md:bg-transparent;
               .selected-word {
-                @apply text-blue-300;
+                @apply font-bold;
               }
             }
             img {
@@ -58,7 +58,7 @@
       }
     }
     .selected-word {
-      @apply text-blue-400 scale-110;
+      @apply scale-110;
     }
   }
   .crypto-table-container {
@@ -181,10 +181,10 @@
     }
   }
   .swiper-pagination-bullet {
-    @apply w-[10px] h-[10px] rounded-[2px] bg-blue-400 transition-all;
+    @apply w-[10px] h-[10px] rounded-[2px]   transition-all;
   }
   .swiper-pagination-bullet-active {
-    @apply w-[20px] bg-blue-400;
+    @apply w-[20px]   ;
   }
   .header-component {
     @apply text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] capitalize text-start font-bold   w-full flex flex-col md:flex-row gap-5 justify-between items-center relative;

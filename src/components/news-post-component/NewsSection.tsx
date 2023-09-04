@@ -6,8 +6,12 @@ import { componentViewMotion } from "../../motions/motions";
 import { AppleNews } from "../../Data/news";
 import SmallMainNewsComponent from "../news-page-components/SmallMainNewsComponent";
 import Header from "../header-component/Header";
+import { CSSProperties } from "react";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const NewsSection = () => {
   const nav = useNavigate();
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div
       variants={componentViewMotion}
@@ -31,6 +35,14 @@ const NewsSection = () => {
           pagination={{ enabled: true, clickable: true }}
           autoplay={{ delay: 2000, disableOnInteraction: true }}
           modules={[Autoplay, Pagination]}
+          style={
+            {
+              "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+              "--swiper-pagination-color": themeSelector.btnColor,
+              "--swiper-pagination-bullet-size": "16px",
+              "--swiper-pagination-bullet-horizontal-gap": "6px",
+            } as CSSProperties
+          }
         >
           {AppleNews.slice(0, 9).map((news, index) => {
             return (

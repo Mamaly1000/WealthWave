@@ -56,7 +56,7 @@ export function CryptoTable({
           {
             data: sparkLine.map((coin) => coin),
             label: `Price ( Past 7 Days ) in USD`,
-            borderColor: "#379237",
+            borderColor: "#00F5FF",
             borderWidth: 2,
             tension: 0.1,
           },
@@ -66,7 +66,7 @@ export function CryptoTable({
           {
             data: sparkLine.map((coin) => coin),
             label: `Price ( Past 7 Days ) in USD`,
-            borderColor: "#FF6666",
+            borderColor: "#FE0000",
             borderWidth: 2,
             tension: 0.1,
           },
@@ -86,7 +86,7 @@ export function CryptoTable({
           {
             data: defChart.slice(0, 50).map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
-            borderColor: "#379237",
+            borderColor: "#00F5FF",
             borderWidth: 1,
             tension: 0.1,
           },
@@ -96,7 +96,7 @@ export function CryptoTable({
           {
             data: defChart.slice(0, 50).map((coin) => coin[1]),
             label: `Price ( Past 7 Days ) in USD`,
-            borderColor: "#FF6666",
+            borderColor: "#FE0000",
             borderWidth: 1,
             tension: 0.1,
           },
@@ -203,7 +203,7 @@ export function CryptoTable({
                 hitRadius: 0,
               },
               line: {
-                borderWidth: 5,
+                borderWidth: 10,
               },
             },
             scales: {

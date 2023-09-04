@@ -7,11 +7,15 @@ import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
 import { useNavigate } from "react-router-dom";
 import Header from "../header-component/Header";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { CSSProperties } from "react";
 
 const NFTslider = () => {
   const nav = useNavigate();
   const { getNftLst, nftSelector } = useNFT();
   const fetchNfts = getNftLst("get-all-nfts", true, true, true, false, 5000);
+  const themeSelector = useSelector(selecttheme);
 
   return (
     <motion.div
@@ -44,6 +48,14 @@ const NFTslider = () => {
             }}
             modules={[FreeMode, Pagination, Autoplay]}
             className="mySwiper"
+            style={
+              {
+                "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+                "--swiper-pagination-color": themeSelector.btnColor,
+                "--swiper-pagination-bullet-size": "16px",
+                "--swiper-pagination-bullet-horizontal-gap": "6px",
+              } as CSSProperties
+            }
           >
             {!fetchNfts.isLoading ? (
               nftSelector.nft_list?.slice(0, 10).map((nft, index) => {

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Divider from "./ntf-components/Divider";
 import logo from "./../assets/logo/main-logo.png";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 export const wordDetecter = (word: string): boolean => {
   const WordsArray: string[] = [
     "wealth",
@@ -33,13 +35,13 @@ export const wordDetecter = (word: string): boolean => {
   return result;
 };
 
-export const wordSeprator = (text: string) => {
+export const wordSeprator = (text: string, color: string) => {
   const WordsArray: string[] = text.split(" ");
   return WordsArray.map((word, index) => {
     return (
       <motion.span
         initial={{ x: 20 }}
-        animate={{ x: 30 }}
+        animate={{ x: 30, color: wordDetecter(word) ? color : "#fff" }}
         key={index}
         className={`word-animation ${
           wordDetecter(word) ? "selected-word" : ""
@@ -52,6 +54,7 @@ export const wordSeprator = (text: string) => {
 };
 
 const HomePageIntro = () => {
+  const themeSelector = useSelector(selecttheme);
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
@@ -126,7 +129,11 @@ const HomePageIntro = () => {
         whileDrag={{ scale: 1.01 }}
         className="txt-rotate"
       >
-        " <span className="wrap">{wordSeprator(text)}</span> "
+        "{" "}
+        <span className="wrap">
+          {wordSeprator(text, themeSelector.btnColor)}
+        </span>{" "}
+        "
       </motion.span>
     </motion.div>
   );

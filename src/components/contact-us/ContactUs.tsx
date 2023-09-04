@@ -3,11 +3,15 @@ import bgImage from "./../../assets/about-us/ce44c9d4-dc5c-418c-94c3-4299cb642ac
 import { socialLinks } from "../../utils/about-us-values";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const ContactUs = () => {
   const [email, setEmail] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const themeSelector = useSelector(selecttheme);
+
   return (
     <motion.div
       variants={componentViewMotion}
@@ -50,10 +54,21 @@ const ContactUs = () => {
             placeholder="message"
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button type="submit">submit</button>
-          <button className="reset-btn" type="reset">
+          <motion.button
+            animate={{ background: themeSelector.btnColor }}
+            whileHover={{ background: themeSelector.hoverColor }}
+            transition={{ duration: 0.1 }}
+            type="submit"
+          >
+            submit
+          </motion.button>
+          <motion.button
+            animate={{ background: themeSelector.hoverColor }}
+            className="reset-btn"
+            type="reset"
+          >
             reset
-          </button>
+          </motion.button>
         </form>
         <div className="links-container">
           <span>Contact Me : </span>

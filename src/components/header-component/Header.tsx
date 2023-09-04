@@ -18,7 +18,7 @@ const Header = ({
   height: number;
   onclick: () => void;
 }) => {
-  const { headerColor } = useSelector(selecttheme);
+  const { headerColor, btnColor, hoverColor } = useSelector(selecttheme);
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -37,7 +37,16 @@ const Header = ({
         {text}
         <Divider width={width} height={height} />
       </h2>
-      {header && <button onClick={onclick}>{btnText}</button>}
+      {header && (
+        <motion.button
+          animate={{ background: btnColor }}
+          whileHover={{ background: hoverColor }}
+          transition={{ duration: 0.1 }}
+          onClick={onclick}
+        >
+          {btnText}
+        </motion.button>
+      )}
     </motion.div>
   );
 };

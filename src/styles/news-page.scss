@@ -177,7 +177,7 @@
     }
   }
   .news-data {
-    @apply transition-all cursor-pointer;
+    @apply min-h-full transition-all cursor-pointer;
   }
   .pagination-container {
     @apply w-full   h-fit;

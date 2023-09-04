@@ -5,11 +5,14 @@ import { ItrendCoin } from "../../features/crypto_slice/crypto_slice";
 import useCrypto from "../../hooks/useCrypto";
 import { CryptoTable } from "../cryto-table/CryptoChart";
 import { default_charts_data } from "../../Data/dummy";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 type trendCryptoCardPropsType = {
   coin: ItrendCoin;
   index: number;
 };
 const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
+  const themeSelector = useSelector(selecttheme);
   const { getCryptoPercentage } = useCrypto();
   const [coinPercentage, setCoinPercentage] = useState<number>(0);
   const [displayChart, setDisplayChart] = useState<boolean>(false);
@@ -36,6 +39,7 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
       onAnimationComplete={() => {
         setDisplayChart(true);
       }}
+      whileHover={{ background: themeSelector.containerColor }}
     >
       <motion.div className="trend-crypto-content">
         <motion.div>
@@ -45,6 +49,7 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
               className="bold"
               style={{
                 fontSize: coin.item.id.length > 10 ? ".6rem" : "1rem",
+                color: themeSelector.headerColor,
               }}
             >
               {coin!.item!.id}

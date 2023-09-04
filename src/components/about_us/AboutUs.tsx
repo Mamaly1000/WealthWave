@@ -5,7 +5,12 @@ import { values } from "../../utils/about-us-values";
 import { motion } from "framer-motion";
 import { componentViewMotion } from "../../motions/motions";
 import Divider from "../ntf-components/Divider";
+import { CSSProperties } from "react";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { useSelector } from "react-redux";
 export default function AboutUs() {
+  const themeSelector = useSelector(selecttheme);
+
   return (
     <motion.div
       variants={componentViewMotion}
@@ -24,6 +29,14 @@ export default function AboutUs() {
         className="mySwiper"
         spaceBetween={100}
         autoHeight={true}
+        style={
+          {
+            "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+            "--swiper-pagination-color": themeSelector.btnColor,
+            "--swiper-pagination-bullet-size": "16px",
+            "--swiper-pagination-bullet-horizontal-gap": "6px",
+          } as CSSProperties
+        }
       >
         <div
           slot="container-start"
@@ -43,8 +56,23 @@ export default function AboutUs() {
                 className="title"
                 data-swiper-parallax="-300"
               >
-                About <span className="bold"> W</span>ealth
-                <span className="bold"> W</span>ave
+                About{" "}
+                <motion.span
+                  animate={{ color: themeSelector.btnColor }}
+                  className="bold"
+                >
+                  {" "}
+                  W
+                </motion.span>
+                ealth
+                <motion.span
+                  animate={{ color: themeSelector.btnColor }}
+                  className="bold"
+                >
+                  {" "}
+                  W
+                </motion.span>
+                ave
               </motion.div>
               <motion.div
                 initial={{ x: -40, opacity: 0 }}
@@ -57,7 +85,11 @@ export default function AboutUs() {
               <div className="text" data-swiper-parallax="-100">
                 <motion.p
                   initial={{ x: -40, opacity: 0 }}
-                  animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -40 }}
+                  animate={{
+                    opacity: isActive ? 1 : 0,
+                    x: isActive ? 0 : -40,
+                    color: themeSelector.plainTextColor,
+                  }}
                   transition={{ duration: 0.5, delay: 0.5, type: "tween" }}
                 >
                   Once upon a time, there was a group of friends who were
@@ -117,6 +149,7 @@ export default function AboutUs() {
                       animate={{
                         opacity: isActive ? 1 : 0,
                         x: isActive ? 0 : 40,
+                        background: themeSelector.containerColor,
                       }}
                       transition={{
                         duration: 0.5,
@@ -128,8 +161,19 @@ export default function AboutUs() {
                       style={{ animationDelay: `${index / 10 + 0.1}` }}
                     >
                       <img src={v.icon} className="card-icon" />
-                      <span className="card-topic">{v.title}</span>
-                      <span className="card-desc"> {v.description}</span>
+                      <motion.span
+                        animate={{ color: themeSelector.headerColor }}
+                        className="card-topic"
+                      >
+                        {v.title}
+                      </motion.span>
+                      <motion.span
+                        animate={{ color: themeSelector.plainTextColor }}
+                        className="card-desc"
+                      >
+                        {" "}
+                        {v.description}
+                      </motion.span>
                     </motion.div>
                   );
                 })}

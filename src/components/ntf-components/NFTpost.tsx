@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { nftCardsMotion } from "../../motions/motions";
 import { nftPics } from "../../Data/nftPic";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 type nftPostType = {
   name: string;
   price: string;
@@ -17,11 +19,9 @@ const NFTpost = ({ name, price, index, id }: nftPostType) => {
   const [nftOwner, _setNftOwner] = useState(
     randomUserData[Math.floor(Math.random() * randomUserData.length)]
   );
+  const themeSelector = useSelector(selecttheme);
   const [liked, setLiking] = useState<boolean>(false);
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
-  const [nftPic] = useState<string>(
-    nftPics[Math.floor(Math.random() * nftPics.length)]
-  );
   const [nftPrice] = useState<number>(
     Math.floor((Math.random() * 123423400) / 1000000) / 100
   );
@@ -40,11 +40,8 @@ const NFTpost = ({ name, price, index, id }: nftPostType) => {
       viewport={{ once: true }}
       className="nft-post-component"
       onDoubleClick={() => displayLikeIcon()}
-      onClick={() => {
-        nav(`/nfts/${id}`);
-      }}
     >
-      <img className="nft-post-pic" src={nftPic} alt="nft image" />
+      <img className="nft-post-pic" src={nftPics[index+1]} alt="nft image" />
       <div className="nft-post-data">
         <div className="ntf-owner-data">
           <h5
@@ -97,7 +94,17 @@ const NFTpost = ({ name, price, index, id }: nftPostType) => {
               </svg>
             </button>
           </div>
-          <button className="read-more-btn">read more</button>
+          <motion.button
+            animate={{ background: themeSelector.btnColor }}
+            whileHover={{ background: themeSelector.hoverColor }}
+            transition={{ duration: 0.1 }}
+            onClick={() => {
+              nav(`/nfts/${id}`);
+            }}
+            className="read-more-btn"
+          >
+            read more
+          </motion.button>
         </div>
       </div>
       {doubleClicked && (

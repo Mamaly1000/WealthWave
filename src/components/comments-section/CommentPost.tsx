@@ -5,11 +5,15 @@ import dislike from "../../assets/comments/dislike.svg";
 import { CommentType } from "../../types/noteTypes";
 import { motion } from "framer-motion";
 import { commentsMotion } from "../../motions/motions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 type commentPostType = {
   data: CommentType;
   index: number;
 };
 const CommentPost = ({ data, index }: commentPostType) => {
+  const themeSelector = useSelector(selecttheme);
+
   return (
     <motion.div
       variants={commentsMotion(index)}
@@ -17,18 +21,42 @@ const CommentPost = ({ data, index }: commentPostType) => {
       whileInView="view"
       className="comment"
       viewport={{ once: true }}
+      whileHover={{
+        background: themeSelector.containerColor,
+        cursor: "default",
+      }}
     >
       <div className="comment-user-data">
         <div className="comment-user-image">
           <img src={data.profilePicUrl} alt="" />
         </div>
         <div className="comment-user-name">
-          <span className="name">{data.name}</span>
-          <div className="comment-date">{data.date}</div>
-          <span className="email">{data.email}</span>
+          <motion.span
+            animate={{ color: themeSelector.headerColor }}
+            className="name"
+          >
+            {data.name}
+          </motion.span>
+          <motion.div
+            animate={{ color: themeSelector.headerColor, fontWeight: "700" }}
+            className="comment-date"
+          >
+            {data.date}
+          </motion.div>
+          <motion.span
+            animate={{ color: themeSelector.plainTextColor }}
+            className="email"
+          >
+            {data.email}
+          </motion.span>
         </div>
       </div>
-      <div className="comment-user-text">{data.comment}</div>
+      <motion.div
+        animate={{ color: themeSelector.plainTextColor }}
+        className="comment-user-text"
+      >
+        {data.comment}
+      </motion.div>
       <div className="bottom-comment-side">
         <div className="comment-actions">
           <span className="comment-like">

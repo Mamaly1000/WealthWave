@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { wordSeprator } from "../HomePageIntro";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 type singleSlidesType = {
   data: {
     title: string;
@@ -15,6 +17,7 @@ type singleSlidesType = {
 };
 const SingleSlide = ({ data, active }: singleSlidesType) => {
   const nav = useNavigate();
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div>
       <motion.img
@@ -22,7 +25,9 @@ const SingleSlide = ({ data, active }: singleSlidesType) => {
         transition={{ delay: 0.2, type: "tween" }}
         src={data.bg_pic}
       />
-      <motion.h3>{wordSeprator(data.title)}</motion.h3>
+      <motion.h3>
+        {wordSeprator(data.title, themeSelector.headerColor)}
+      </motion.h3>
       <motion.button
         className="slider-btn"
         style={{ boxShadow: `0 0 10px ${data.bg_color.padStart(1, "#")[0]}` }}
