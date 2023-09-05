@@ -15,6 +15,7 @@ import {
 import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
 import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
 import LearnCrypto from "../components/crypto-component/LearnCrypto";
+import CryptoBlogs from "../components/crypto-component/CryptoBlogs";
 
 const Crypto_page = () => {
   const dispatch = useDispatch();
@@ -117,6 +118,7 @@ const Crypto_page = () => {
           
         />
       </motion.div>
+      <CryptoBlogs />
     </motion.div>
   );
 };

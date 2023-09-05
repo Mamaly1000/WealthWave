@@ -58,6 +58,45 @@
       }
     }
   }
+  .crypto-blogs-section {
+    @apply w-full min-h-[500px] flex flex-wrap items-start justify-center gap-5;
+    .main-blog {
+      @apply cursor-default w-full h-[300px] md:min-w-[50%] lg:min-w-[500px] lg:max-w-[500px]   rounded-lg drop-shadow-2xl overflow-hidden flex justify-center items-center relative;
+      img {
+        @apply z-10 relative w-full h-full object-cover;
+      }
+      .content-section {
+        @apply z-20 absolute start-0 top-0 min-w-full min-h-full  p-3 flex flex-col items-end justify-end gap-3;
+        h3 {
+          @apply text-[1.5rem] capitalize font-bold text-start w-full font-rail;
+        }
+        .blog-extras {
+          @apply w-full flex flex-wrap items-center justify-start gap-3;
+          span {
+            @apply font-bold w-fit h-fit px-2 py-1 rounded-lg text-[1rem] drop-shadow-2xl;
+          }
+        }
+      }
+    }
+    .single-blog {
+      @apply cursor-default w-full sm:min-w-[220px] sm:max-w-[220px] min-h-[300px] max-h-[300px] rounded-lg drop-shadow-2xl   flex flex-col justify-between items-center gap-2 overflow-hidden;
+      img {
+        @apply min-w-full min-h-[150px] max-h-[150px] object-cover rounded-t-lg drop-shadow-2xl;
+      }
+      h3 {
+        @apply px-3 w-full text-start capitalize font-bold text-[.9rem] sm:text-[.8rem] line-clamp-2 sm:line-clamp-2;
+      }
+      p {
+        @apply p-3 w-full text-[.9rem] sm:text-[.7rem] capitalize text-start font-semibold line-clamp-2 sm:line-clamp-2;
+      }
+      .blog-extras {
+        @apply px-3  w-full max-h-fit flex flex-wrap items-center justify-start gap-3;
+        span {
+          @apply font-bold w-fit h-fit px-[6px] py-[3px] rounded-sm text-[.7rem] sm:text-[.6rem] drop-shadow-2xl;
+        }
+      }
+    }
+  }
   .page-header {
     @apply text-[1.5rem] md:text-[3rem] text-left;
   }
@@ -92,7 +131,7 @@
         }
 
         .percentage-container {
-          @apply px-2 py-1 bg-light_medium_dark  rounded-2xl;
+          @apply px-2 py-1  rounded-2xl;
         }
       }
     }
@@ -115,7 +154,6 @@
       }
     }
   }
-
   .crypto-table-container {
     @apply w-full h-fit min-h-[400px]  overflow-hidden flex items-start justify-start flex-col;
     table {
@@ -194,7 +232,6 @@
       @apply flex flex-row flex-wrap justify-center items-center gap-5 py-3;
       li,
       .selected {
-      
         @apply bg-light_dark min-w-[50px] max-w-[50px] w-[50px] min-h-[50px] p-0 overflow-hidden flex items-center justify-center  rounded-md text-white hover:bg-light_medium_dark hover:scale-110 transition-all;
         a {
           @apply p-3;
@@ -218,10 +255,10 @@
     }
   }
   .green {
-    background: #00f5ff;
+    @apply bg-green-700;
   }
   .red {
-    background: #fe0000;
+    @apply bg-red-700;
   }
   .green-text {
     color: #00f5ff;

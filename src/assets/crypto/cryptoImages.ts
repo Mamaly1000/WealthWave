@@ -1,4 +1,14 @@
 export { default as mainLanding } from "./landingpage/main.svg";
 export { default as stringsLanding } from "./landingpage/strings.svg";
 export { default as mapLanding } from "./landingpage/mapLanding.svg";
-export {default as TrendArrow} from "./bentArrow.svg"
+export { default as TrendArrow } from "./bentArrow.svg";
+export { default as cryptonews1 } from "./landingpage/cryptoNews1.svg";
+export { default as cryptonews2 } from "./landingpage/cryptonews2.svg";
+export { default as cryptonews3 } from "./landingpage/cryptonews3.jpg";
+export { default as cryptonews4 } from "./landingpage/cryptonews4.svg";
+export { default as cryptonews5 } from "./landingpage/cryptonews5.svg";
+export { default as cryptonews6 } from "./landingpage/cryptonews6.jpg";
+export { default as cryptonews7 } from "./landingpage/cryptonews7.jpg";
+export { default as cryptonews8 } from "./landingpage/cryptonews8.jpg";
+export { default as cryptonews9 } from "./landingpage/cryptonews9.jpeg";
+export { default as cryptonews10 } from "./landingpage/cryptonews10.jpg";

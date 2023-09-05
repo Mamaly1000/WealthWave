@@ -82,8 +82,9 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
           </span>
           <span
             className={`coin-percentage ${
-              coinPercentage > 0 ? "green-text" : "red-text"
+              coinPercentage > 0 ? "green" : "red"
             }`}
+            style={{ color: themeSelector.plainTextColor }}
           >
             {coinPercentage}%
           </span>

@@ -53,8 +53,9 @@ const TopCryptoCard = ({ index, coin }: topCryptoCardPropType) => {
         </span>
         <span
           className={`percentage-container ${
-            +coin!.price_change_percentage_24h > 0 ? "green-text" : "red-text"
+            +coin!.price_change_percentage_24h > 0 ? "green" : "red"
           }`}
+          style={{ color: themeSelector.plainTextColor }}
         >
           {coin!.price_change_percentage_24h}%
         </span>

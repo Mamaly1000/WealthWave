@@ -48,7 +48,7 @@ const Footer = () => {
                 className="footer-headers"
               >
                 {section.header}
-                <Divider height={5} width={100} />
+                <Divider height={3} width={100} />
               </span>
               <div className="footer-section">
                 {section.links.map((link, index) => {

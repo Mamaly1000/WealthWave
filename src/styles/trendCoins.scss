@@ -39,7 +39,7 @@
           @apply font-bold;
         }
         .coin-percentage {
-          @apply bg-light_dark py-1 px-2 rounded-lg;
+          @apply py-1 px-2 rounded-lg;
         }
       }
       .small-chart {
@@ -60,15 +60,15 @@
     @apply min-h-[300px] w-full flex flex-col gap-10 items-center justify-center;
   }
   .green {
-    background: #00f5ff;
+    @apply bg-green-700;
   }
   .red {
-    background: #fe0000;
+    @apply bg-red-700;
   }
   .green-text {
-    color: #00f5ff;
+    color: #fff;
   }
   .red-text {
-    color: #fe0000;
+    color: #fff;
   }
 }
