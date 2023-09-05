@@ -4,6 +4,8 @@ import { tagsMotion } from "../../motions/viewCryptoMotions";
 import chartIcon from "./../../assets/crypto/chart.svg";
 import textIcon from "./../../assets/crypto/text.svg";
 import marketIcon from "./../../assets/crypto/market.svg";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const TabsSection = ({
   selectedTab,
   setSelectedTab,
@@ -11,6 +13,7 @@ const TabsSection = ({
   selectedTab: string;
   setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   const tabs = [
     { tab: "overview", pic: chartIcon },
     { tab: "description", pic: textIcon },
@@ -18,17 +21,25 @@ const TabsSection = ({
   ];
 
   return (
-    <motion.div className="view-crypto-tabs-container">
+    <motion.div
+      className="view-crypto-tabs-container"
+      style={{
+        borderColor: themeSelector.btnColor,
+      }}
+    >
       {tabs.map((tab, index) => {
         return (
           <motion.span
-            variants={tagsMotion(index, 0.3)}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
             key={index}
             onClick={() => setSelectedTab(tab.tab)}
             className={`${selectedTab === tab.tab ? "selected-tab" : ""}`}
+            animate={{
+              background:
+                selectedTab === tab.tab
+                  ? themeSelector.btnColor
+                  : themeSelector.hoverColor,
+              color: themeSelector.headerColor,
+            }}
           >
             {tab.tab}{" "}
             <AnimatePresence>

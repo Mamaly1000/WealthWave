@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
 import { useContextFunction } from "../../context/AppContext";
 import useCrypto from "../../hooks/useCrypto";
 import { motion } from "framer-motion";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const PercentageTable = () => {
   const { cryptoSelector } = useCrypto();
   const selectedCoin = cryptoSelector.selectedCoin;
   const contextData = useContextFunction();
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div className="selected-crypto-percentage-table-container">
       <motion.table
@@ -15,7 +18,17 @@ const PercentageTable = () => {
         <thead>
           {["1h", "24h", "7d", "14d", "30d", "60d", "200d", "1y"].map(
             (d, index) => {
-              return <th key={index}>{d}</th>;
+              return (
+                <th
+                  style={{
+                    background: themeSelector.btnColor,
+                    color: themeSelector.headerColor,
+                  }}
+                  key={index}
+                >
+                  {d}
+                </th>
+              );
             }
           )}
         </thead>

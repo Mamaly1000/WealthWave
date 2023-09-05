@@ -1,6 +1,6 @@
 import React from "react";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   IviewPageChartData,
   setCryptoChart,
@@ -8,6 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import { viewFromLeft } from "../../motions/viewCryptoMotions";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const ComparisonButtons = ({
   index,
@@ -23,6 +24,7 @@ const ComparisonButtons = ({
   setDisplayCoins: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const dispatch = useDispatch();
+  const themeSelector = useSelector(selecttheme);
   const { chartLists, cryptoSelector } = useCrypto();
   const fetch_Selected_Chart = chartLists(
     coin?.id as string,
@@ -56,6 +58,12 @@ const ComparisonButtons = ({
       exit="exit"
       key={index}
       className="coin-row"
+      style={{
+        background: themeSelector.hoverColor,
+        color: themeSelector.headerColor,
+      }}
+      whileHover={{ background: themeSelector.btnColor }}
+      transition={{ duration: 0.1 }}
     >
       <img src={coin.image} />
       <span

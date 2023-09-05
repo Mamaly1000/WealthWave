@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
 import useCrypto from "../../hooks/useCrypto";
 import moment from "moment";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const CoinDataTable = () => {
   const {
     cryptoSelector: { selectedCoin },
   } = useCrypto();
+  const themeSelector = useSelector(selecttheme);
   const tableData = [
     {
       title: `${selectedCoin.name} Price`,
@@ -63,12 +66,31 @@ const CoinDataTable = () => {
     },
   ];
   return (
-    <div className="Price-Statistics-container">
-      <h4>{selectedCoin.name} Price Statistics</h4>
+    <div
+      style={{
+        background: themeSelector.containerColor,
+        color: themeSelector.headerColor,
+      }}
+      className="Price-Statistics-container"
+    >
+      <h4
+        style={{
+          color: themeSelector.headerColor,
+        }}
+      >
+        {selectedCoin.name} Price Statistics
+      </h4>
       <div className="data-table">
         {tableData.map((d, index) => {
           return (
-            <div className="table-row" key={index}>
+            <div
+              style={{
+                borderColor: themeSelector.btnColor,
+                color: themeSelector.plainTextColor,
+              }}
+              className="table-row"
+              key={index}
+            >
               <span className="row-title">{d.title}</span>
               <div className="row-data">
                 {d.values.length > 1 ? (

@@ -4,11 +4,14 @@ import Chart from "react-apexcharts";
 import moment from "moment";
 import { useContextFunction } from "../../context/AppContext";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const Chart_Container = () => {
   const { cryptoSelector } = useCrypto();
   const contextData = useContextFunction();
   const [datasets, setDatasets] = useState([]);
   const [label, setLabel] = useState<string[]>([]);
+  const themeSelector = useSelector(selecttheme);
   const fetchcharts = useMemo(() => {
     if (
       cryptoSelector.cryptoCharts.length > 0 &&
@@ -163,7 +166,7 @@ const Chart_Container = () => {
                 colors: ["white"],
               },
             },
-            colors: ["#00B4D8", "#FF1818", "#1C7947"],
+            colors: [themeSelector.btnColor, "#FF1818", "#1C7947"],
           }}
           series={datasets}
           type="area"

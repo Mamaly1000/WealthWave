@@ -1,5 +1,5 @@
 import { useState, useTransition } from "react";
-import arrowIcon from "./../../assets/crypto/arrow-down.svg"; 
+import arrowIcon from "./../../assets/crypto/arrow-down.svg";
 import deleteIcon from "./../../assets/crypto/delete.svg";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import ComparisonButtons from "./ComparisonButtons";
@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { AnimatePresence, motion } from "framer-motion";
 import { tagsMotion, viewFromTop } from "../../motions/viewCryptoMotions";
 import { removeCryptoChart } from "../../features/crypto_slice/crypto_slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const CoinComparison = () => {
   const dispatch = useDispatch();
   const { cryptoSelector, cryptosList } = useCrypto();
@@ -15,7 +16,7 @@ const CoinComparison = () => {
   const fetchAllCoins = cryptosList("fetch-coin", false, false);
   const [selectedCoins, setSelectedCoins] = useState<IcryptoData[]>([]);
   const [displayCoins, setDisplayCoins] = useState<boolean>(false);
-
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div
       variants={viewFromTop(1, 0.5)}
@@ -42,6 +43,10 @@ const CoinComparison = () => {
             }
           });
         }}
+        style={{
+          background: themeSelector.btnColor,
+          color: themeSelector.headerColor,
+        }}
       >
         <span>Select Coin</span>
         <img
@@ -51,7 +56,13 @@ const CoinComparison = () => {
         />
       </div>
       <div className="selected-coin-container">
-        <div className="selected-coins">
+        <div
+          style={{
+            borderColor: themeSelector.btnColor,
+            color: themeSelector.headerColor,
+          }}
+          className="selected-coins"
+        >
           <AnimatePresence>
             {selectedCoins.map((coin, index) => {
               return (
@@ -68,6 +79,9 @@ const CoinComparison = () => {
                     );
                     setSelectedCoins(newArray);
                   }}
+                  whileHover={{ background: "rgb(153 27 27)" }}
+                  style={{ background: themeSelector.btnColor }}
+                  transition={{ duration: 0.1 }}
                 >
                   <img src={coin.image} />
                   {coin.id}
@@ -95,7 +109,7 @@ const CoinComparison = () => {
                 {cryptoSelector.coinlist.slice(0, 20).map((coin, index) => {
                   return (
                     <ComparisonButtons
-                      coin={coin} 
+                      coin={coin}
                       index={index}
                       key={index}
                       setSelectedCoins={setSelectedCoins}

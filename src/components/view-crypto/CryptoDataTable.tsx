@@ -2,6 +2,8 @@ import { useState } from "react";
 import arrowDownIcon from "./../../assets/crypto/arrow-down.svg";
 import Qicon from "./../../assets/crypto/question.svg";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const CryptoDataTable = ({
   data,
   index,
@@ -15,6 +17,7 @@ const CryptoDataTable = ({
   };
   index: number;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   const [display, setDisplay] = useState<boolean>(false);
   return (
     <>
@@ -36,10 +39,20 @@ const CryptoDataTable = ({
           setDisplay((prev) => !prev);
         }}
       >
-        <span className="title">
+        <span
+          style={{
+            color: themeSelector.headerColor,
+          }}
+          className="title"
+        >
           {data.title} <img src={Qicon} alt="question" />
         </span>
-        <span className="value">
+        <span
+          style={{
+            color: themeSelector.plainTextColor,
+          }}
+          className="value"
+        >
           {data.data.length > 0 && (
             <img
               src={arrowDownIcon}
@@ -68,8 +81,20 @@ const CryptoDataTable = ({
                   type: "tween",
                 }}
               >
-                <span className="title">{d.name}</span>
-                <span className="value">
+                <span
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
+                  className="title"
+                >
+                  {d.name}
+                </span>
+                <span
+                  style={{
+                    color: themeSelector.plainTextColor,
+                  }}
+                  className="value"
+                >
                   {data.value === undefined || data.data === null
                     ? "N/A"
                     : data.value

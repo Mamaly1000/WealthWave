@@ -112,7 +112,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             <NavBarDivider
               hover={hovered}
               path="/sign-in"
-              height={5}
+              height={3}
               width={100}
             />
           </Link>
@@ -130,7 +130,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             <NavBarDivider
               hover={hovered}
               path="/sign-up"
-              height={5}
+              height={3}
               width={100}
             />
           </Link>{" "}
@@ -145,7 +145,7 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
             style={{ color: contextData!.localTheme.plainTextColor }}
           >
             home page
-            <NavBarDivider hover={hovered} path="/" height={5} width={100} />
+            <NavBarDivider hover={hovered} path="/" height={3} width={100} />
           </Link>
         </div>
       </motion.div>

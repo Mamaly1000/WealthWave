@@ -1,5 +1,5 @@
 import { useEffect, useTransition } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setChartType,
   setCryptoDay,
@@ -10,8 +10,11 @@ import { useQueries } from "react-query";
 import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { motion } from "framer-motion";
 
 const ChartSetting = () => {
+  const themeSelector = useSelector(selecttheme);
   const dispatch = useDispatch();
   const { cryptoSelector } = useCrypto();
   const [_pending, setTransition] = useTransition();
@@ -54,7 +57,7 @@ const ChartSetting = () => {
       <div className="chart-data-titles">
         {["prices", "market-cap", "total-volumes"].map((value, index) => {
           return (
-            <span
+            <motion.span
               key={index}
               className={`${
                 cryptoSelector.cryptoChartDisplayType === value
@@ -66,16 +69,25 @@ const ChartSetting = () => {
                   dispatch(setChartType(value));
                 });
               }}
+              animate={{
+                background:
+                  cryptoSelector.cryptoChartDisplayType === value
+                    ? themeSelector.btnColor
+                    : themeSelector.hoverColor,
+                color: themeSelector.headerColor,
+              }}
+              transition={{ duration: 0.1 }}
+              whileHover={{ background: themeSelector.hoverColor }}
             >
               {value}
-            </span>
+            </motion.span>
           );
         })}
       </div>
       <div className="chart-days">
         <Swiper
-          slidesPerView={3}
-          spaceBetween={10}
+          slidesPerView={"auto"}
+          spaceBetween={5}
           modules={[Autoplay]}
           autoplay={{ delay: 5000, disableOnInteraction: true }}
         >
@@ -91,8 +103,21 @@ const ChartSetting = () => {
                     dispatch(setCryptoDay(d));
                   });
                 }}
+                style={{ borderRadius: "8px" }}
               >
-                {d === 1 ? d + " day" : d + " days"}
+                <motion.span
+                  animate={{
+                    background:
+                      cryptoSelector.cryptoDay === d
+                        ? themeSelector.btnColor
+                        : themeSelector.hoverColor,
+                    color: themeSelector.headerColor,
+                  }}
+                  transition={{ duration: 0.1 }}
+                  whileHover={{ background: themeSelector.hoverColor }}
+                >
+                  {d === 1 ? d + " day" : d + " days"}
+                </motion.span>
               </SwiperSlide>
             );
           })}

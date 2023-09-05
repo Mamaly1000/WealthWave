@@ -4,11 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContextFunction } from "../../context/AppContext";
 import moment from "moment";
 import { viewFromLeft } from "../../motions/viewCryptoMotions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const MarketsTable = () => {
   const { cryptoSelector } = useCrypto();
   const contextData = useContextFunction();
   const { selectedCoin } = cryptoSelector;
+  const themeSelector = useSelector(selecttheme);
   const [tickers, _setTickers] = useState<
     {
       base: string;
@@ -73,13 +76,20 @@ const MarketsTable = () => {
       className="selected-coin-market-container"
     >
       <div className="market-header">
-        <h2>{selectedCoin.name} Markets</h2>
+        <h2
+          style={{
+            color: themeSelector.headerColor,
+          }}
+        >
+          {selectedCoin.name} Markets
+        </h2>
         <input
           value={marketSearchText}
           onChange={(e) => {
             setMarketSearchText(e.target.value);
           }}
           placeholder="search ..."
+          style={{ border: `1px solid ${themeSelector.btnColor}` }}
         />
       </div>
       <motion.div
@@ -93,6 +103,7 @@ const MarketsTable = () => {
           dragConstraints={{ left: -1000, right: 0 }}
           dragMomentum={false}
           dragSnapToOrigin={contextData!.screenW}
+          style={{ borderColor: themeSelector.btnColor }}
         >
           <thead>
             {[
@@ -108,7 +119,14 @@ const MarketsTable = () => {
               "trust_score",
             ].map((d, index) => {
               return (
-                <th key={index} className={d === "#" ? "rank" : d}>
+                <th
+                  style={{
+                    background: themeSelector.btnColor,
+                    color: themeSelector.headerColor,
+                  }}
+                  key={index}
+                  className={d === "#" ? "rank" : d}
+                >
                   {d}
                 </th>
               );
@@ -123,6 +141,12 @@ const MarketsTable = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
+                    style={{
+                      background: themeSelector.hoverColor,
+                      borderColor: themeSelector.btnColor,
+                    }}
+                    whileHover={{ background: themeSelector.btnColor }}
+                    transition={{ duration: 0.1 }}
                   >
                     <td className="rank">{index + 1}</td>
                     <td

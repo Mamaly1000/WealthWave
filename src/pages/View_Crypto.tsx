@@ -9,7 +9,7 @@ import {
   setEmptyCryptoCharts,
   setSelectedCoin,
 } from "../features/crypto_slice/crypto_slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import infoIcon from "./../assets/crypto/info.svg";
 import arrowIcon from "./../assets/crypto/arrow.svg";
 import arrowPerIcon from "./../assets/crypto/arrowPerIcon.svg";
@@ -34,6 +34,7 @@ import CoinConvertor from "../components/view-crypto/CoinConvertor";
 import CoinDataTable from "../components/view-crypto/CoinDataTable";
 import RelatedCoins from "../components/view-crypto/RelatedCoins";
 import InfoRow from "../components/view-crypto/InfoRow";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 
 const View_Crypto = () => {
   const { id } = useParams();
@@ -43,6 +44,7 @@ const View_Crypto = () => {
     start: Math.floor(Math.random() * (socialMedia.length - 3)),
     end: socialMedia.length,
   });
+  const themeSelector = useSelector(selecttheme);
   const [selectedTab, setSelectedTab] = useState<string>("overview");
   const [displayChildren, setDisplayChildren] = useState<boolean>(false);
   const { getSingleCoinData, cryptoSelector, chartLists, cryptosList } =
@@ -240,6 +242,9 @@ const View_Crypto = () => {
       onAnimationComplete={() => {
         setDisplayChildren(true);
       }}
+      style={{
+        color: themeSelector.headerColor,
+      }}
     >
       <div className="top-section">
         <div className="crypto-overAll">
@@ -247,42 +252,49 @@ const View_Crypto = () => {
             <div className="top-overall-container">
               <div className="rank-container">
                 <motion.span
-                  variants={tagsMotion(20, 0.5)}
-                  initial="hidden"
-                  whileInView="visible"
+                  animate={{ background: themeSelector.btnColor }}
                   className="rank"
                 >
                   Rank #{seletedCoin.market_data.market_cap_rank}
                 </motion.span>
               </div>
-              <motion.div
-                variants={viewFromLeft(25, 0.5)}
-                initial="hidden"
-                animate="visible"
-                className="crypto-name"
-              >
+              <motion.div className="crypto-name">
                 <img src={seletedCoin.image.thumb} alt="" />
-                <span className="bold">{seletedCoin.id}</span>
-                <span className="light">{seletedCoin.symbol}</span>
+                <span
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
+                  className="bold"
+                >
+                  {seletedCoin.id}
+                </span>
+                <span
+                  style={{
+                    color: themeSelector.plainTextColor,
+                  }}
+                  className="light"
+                >
+                  {seletedCoin.symbol}
+                </span>
               </motion.div>
               <div className="crypto-price-percentage">
                 <motion.span
-                  variants={viewFromLeft(10, 0.2)}
-                  initial="hidden"
-                  animate="visible"
                   className="bold"
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
                 >
                   ${seletedCoin.market_data.current_price.usd.toLocaleString()}
                 </motion.span>
                 <motion.span
-                  variants={viewFromLeft(32, 0.2)}
-                  initial="hidden"
-                  animate="visible"
                   className={`percentage ${
                     +seletedCoin.market_data.price_change_percentage_24h > 0
                       ? "green"
                       : "red"
                   }`}
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
                 >
                   <motion.img
                     src={arrowPerIcon}
@@ -306,7 +318,12 @@ const View_Crypto = () => {
                 />
               </div>
               <div className="crypto-price-per-btc">
-                <motion.span className="crypto-price-btc">
+                <motion.span
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
+                  className="crypto-price-btc"
+                >
                   {seletedCoin.market_data.current_price.btc} BTC
                 </motion.span>
                 <motion.span
@@ -315,6 +332,9 @@ const View_Crypto = () => {
                       ? "green-text"
                       : "red-text"
                   }`}
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
                 >
                   {seletedCoin.market_data.ath_change_percentage.btc}%{" "}
                   <img
@@ -336,25 +356,48 @@ const View_Crypto = () => {
               </div>
               <div className="crypto-actions-container">
                 <div className="btn-container">
-                  <button
+                  <motion.button
+                    whileHover={{ background: themeSelector.hoverColor }}
+                    transition={{ duration: 0.1 }}
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
                     onClick={() => {
                       dispatch(setEmptyCryptoCharts());
                       nav(-1);
                     }}
                   >
                     <img src={backIcon} alt="back" />
-                  </button>
-                  <motion.button className="share">
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ background: themeSelector.hoverColor }}
+                    transition={{ duration: 0.1 }}
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
+                    className="share"
+                  >
                     <img src={shareIcon} alt="share" />
                   </motion.button>
-                  <motion.button className="save">
+                  <motion.button
+                    whileHover={{ background: themeSelector.hoverColor }}
+                    transition={{ duration: 0.1 }}
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
+                    className="save"
+                  >
                     <img src={saveIcon} alt="save" />
                   </motion.button>
                 </div>
                 <motion.span
-                  variants={viewFromRight(30, 1)}
-                  initial="hidden"
-                  animate="visible"
+                  style={{
+                    background: themeSelector.btnColor,
+                    color: themeSelector.headerColor,
+                  }}
                   className="wish-List"
                 >
                   <img src={starIcon} alt="star" />
@@ -365,7 +408,12 @@ const View_Crypto = () => {
             </div>
           )}
           {displayChildren && (
-            <div className="crypto-data-list">
+            <div
+              style={{
+                color: themeSelector.headerColor,
+              }}
+              className="crypto-data-list"
+            >
               {!fetchSingleCoin.isFetching &&
                 detail_table_data.map((data, index) => (
                   <CryptoDataTable data={data} key={index} index={index} />
