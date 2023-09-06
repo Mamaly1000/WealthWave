@@ -9,9 +9,12 @@ import rightIcon from "./../../assets/nft/rightArrow.svg";
 import { useNavigate } from "react-router-dom";
 import { useContextFunction } from "../../context/AppContext";
 import NftFavorites from "./NftFavorites";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
   const nav = useNavigate();
   const contextData = useContextFunction();
+  const themeSelector = useSelector(selecttheme);
   const [liked, setLiking] = useState<boolean>(false);
   const [displayButton, setDisplayButton] = useState<boolean>(false);
   const [doubleClicked, setDoubledClick] = useState<boolean>(false);
@@ -61,7 +64,12 @@ const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
         animate={{ x: displayButton ? 100 : 0 }}
         className="nft-post-actions"
       >
-        <button>
+        <button
+          style={{
+            color: themeSelector.headerColor,
+            background: themeSelector.btnColor,
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -77,7 +85,13 @@ const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
             />
           </svg>
         </button>
-        <button onClick={() => setLiking((prev) => !prev)}>
+        <button
+          style={{
+            color: themeSelector.headerColor,
+            background: themeSelector.btnColor,
+          }}
+          onClick={() => setLiking((prev) => !prev)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill={liked ? "rgba(255 0 0 /.6)" : "none"}
@@ -116,7 +130,12 @@ const TopNFTPost = ({ nft, index }: { nft: INFT; index: number }) => {
         </span>
       </motion.div>
       <motion.button
-        animate={{ x: displayButton ? 0 : -200 }}
+        animate={{
+          background: themeSelector.btnColor,
+          color: themeSelector.headerColor,
+          x: displayButton ? 0 : -200,
+        }}
+        whileHover={{ background: themeSelector.hoverColor }}
         transition={{ type: "spring", duration: 0.2 }}
         className="nft-post-readmore-btn"
         onClick={() => nav(`/nfts/${nft.id}`)}

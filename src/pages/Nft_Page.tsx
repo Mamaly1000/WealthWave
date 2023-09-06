@@ -13,19 +13,22 @@ import TopNFTPost from "../components/ntf-components/TopNFTPost";
 import useNFT from "../hooks/useNFT";
 import BestSellerNFTPost from "../components/ntf-components/BestSellerNFTPost";
 import CountUp from "react-countup";
-import { useMemo, useState } from "react";
+import { CSSProperties, useMemo, useState } from "react";
 import { Artists } from "../Data/Artists";
 import ArtistComponent from "../components/ntf-components/ArtistComponent";
 import NftSearchComponent from "../components/search-components/NftSearchComponent";
 import NftListComponent from "../components/ntf-components/NftListComponent";
 import NFTPagination from "../components/ntf-components/NFTPagination";
 import Header from "../components/header-component/Header";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 
 const Nft_Page = () => {
   const { getNftLst, nftSelector } = useNFT();
   const [displayExploreImage, setDisplayExploreImage] =
     useState<boolean>(false);
   const fetchNfts = getNftLst("get-all-nfts", true, true, true, false, 5000);
+  const themeSelector = useSelector(selecttheme);
   const nftData = useMemo(() => {
     return nftSelector.nft_list
       .slice(nftSelector.pagination.offset, nftSelector.pagination.offset + 10)
@@ -60,17 +63,33 @@ const Nft_Page = () => {
           className="intro-context"
         >
           <div className="part">
-            <motion.p variants={viewFromTop(3, 0.5)}>
+            <motion.p
+              style={{ color: themeSelector.headerColor }}
+              variants={viewFromTop(3, 0.5)}
+            >
               Discover the world of unique digital assets with our NFT tracker
             </motion.p>
 
             <Divider width={5} height={30} />
-            <motion.h1 variants={viewFromRight(3, 0.5)}>WealthWave</motion.h1>
+            <motion.h1
+              style={{ color: themeSelector.btnColor }}
+              variants={viewFromRight(3, 0.5)}
+            >
+              WealthWave
+            </motion.h1>
           </div>
           <div className="part">
-            <motion.h1 variants={viewFromLeft(3, 0.5)}>Track nfts</motion.h1>
+            <motion.h1
+              style={{ color: themeSelector.btnColor }}
+              variants={viewFromLeft(3, 0.5)}
+            >
+              Track nfts
+            </motion.h1>
             <Divider width={5} height={30} />
-            <motion.p variants={viewFromDown(3, 0.5)}>
+            <motion.p
+              style={{ color: themeSelector.headerColor }}
+              variants={viewFromDown(3, 0.5)}
+            >
               Experience the power of blockchain technology with our NFT
               platform
             </motion.p>
@@ -100,10 +119,10 @@ const Nft_Page = () => {
           <Header
             btnText="track more coins"
             header={false}
-            height={5}
+            height={3}
             onclick={() => {}}
             text="Best Sellers NFTs"
-            width={250}
+            width={150}
           />
           <motion.div
             variants={viewFromDown(1.2, 0.4)}
@@ -118,6 +137,14 @@ const Nft_Page = () => {
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               modules={[Pagination, Autoplay]}
               className="mySwiper"
+              style={
+                {
+                  "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+                  "--swiper-pagination-color": themeSelector.btnColor,
+                  "--swiper-pagination-bullet-size": "16px",
+                  "--swiper-pagination-bullet-horizontal-gap": "6px",
+                } as CSSProperties
+              }
             >
               {!fetchNfts.isLoading &&
                 nftSelector.nft_list.slice(10, 20).map((nft, index) => {
@@ -203,11 +230,11 @@ const Nft_Page = () => {
               className="explre-data-container"
             >
               <div className="explore-top-section">
-                <h3>
+                <h3 style={{ color: themeSelector.headerColor }}>
                   Discover the Beauty and Rarity of Digital Art with Our NFT
                   Tracker
                 </h3>
-                <p>
+                <p style={{ color: themeSelector.plainTextColor }}>
                   Digital art is beautiful and rare, and our NFT tracker allows
                   you to discover it fully. With our platform, you can explore a
                   world of unique digital art that is authenticated through
@@ -216,32 +243,64 @@ const Nft_Page = () => {
               </div>
               <div className="explre-bottom-section">
                 <div className="benefit">
-                  <span className="light">Active Artists</span>
-                  <span className="bold">
+                  <span
+                    className="light"
+                    style={{ color: themeSelector.plainTextColor }}
+                  >
+                    Active Artists
+                  </span>
+                  <span
+                    className="bold"
+                    style={{ color: themeSelector.btnColor }}
+                  >
                     <CountUp delay={1} end={100} />K
                   </span>
-                  <Divider height={1} width={40} />
+                  <Divider height={1} width={100} />
                 </div>
                 <div className="benefit">
-                  <span className="light">Collectors</span>
-                  <span className="bold">
+                  <span
+                    className="light"
+                    style={{ color: themeSelector.plainTextColor }}
+                  >
+                    Collectors
+                  </span>
+                  <span
+                    className="bold"
+                    style={{ color: themeSelector.btnColor }}
+                  >
                     <CountUp delay={1} end={100} />K
                   </span>
-                  <Divider height={1} width={40} />
+                  <Divider height={1} width={100} />
                 </div>
                 <div className="benefit">
-                  <span className="light">Investors</span>
-                  <span className="bold">
+                  <span
+                    className="light"
+                    style={{ color: themeSelector.plainTextColor }}
+                  >
+                    Investors
+                  </span>
+                  <span
+                    className="bold"
+                    style={{ color: themeSelector.btnColor }}
+                  >
                     <CountUp delay={1} end={100} />K
                   </span>
-                  <Divider height={1} width={40} />
+                  <Divider height={1} width={100} />
                 </div>
                 <div className="benefit">
-                  <span className="light">Gamers</span>
-                  <span className="bold">
+                  <span
+                    className="light"
+                    style={{ color: themeSelector.plainTextColor }}
+                  >
+                    Gamers
+                  </span>
+                  <span
+                    className="bold"
+                    style={{ color: themeSelector.btnColor }}
+                  >
                     <CountUp delay={1} end={100} />K
                   </span>
-                  <Divider height={1} width={40} />
+                  <Divider height={1} width={100} />
                 </div>
               </div>
             </motion.div>
@@ -251,10 +310,10 @@ const Nft_Page = () => {
           <Header
             btnText="track more coins"
             header={false}
-            height={5}
+            height={3}
             onclick={() => {}}
             text="Top NFTs"
-            width={250}
+            width={150}
           />
           <motion.div
             variants={viewFromDown(1.2, 0.4)}
@@ -269,6 +328,14 @@ const Nft_Page = () => {
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               modules={[Pagination, Autoplay]}
               className="mySwiper"
+              style={
+                {
+                  "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+                  "--swiper-pagination-color": themeSelector.btnColor,
+                  "--swiper-pagination-bullet-size": "16px",
+                  "--swiper-pagination-bullet-horizontal-gap": "6px",
+                } as CSSProperties
+              }
             >
               {!fetchNfts.isLoading &&
                 nftSelector.nft_list.slice(0, 10).map((nft, index) => {
@@ -284,9 +351,9 @@ const Nft_Page = () => {
       </section>
       <section className="nft-page-artists">
         <div className="artists-left-container">
-          <h2>our top artists</h2>
-          <Divider height={1} width={10} />
-          <p>
+          <h2 style={{ color: themeSelector.headerColor }}>our top artists</h2>
+          <Divider height={3} width={150} />
+          <p style={{ color: themeSelector.plainTextColor }}>
             Elevate your collection with our high-quality and authenticated NFT
             designs. Our talented artists create pieces that are not only
             visually stunning but also backed by the security and transparency
@@ -305,6 +372,14 @@ const Nft_Page = () => {
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             modules={[Autoplay]}
             className="mySwiper"
+            style={
+              {
+                "--swiper-pagination-bullet-inactive-color": "rgba(0 0 0/.9)",
+                "--swiper-pagination-color": themeSelector.btnColor,
+                "--swiper-pagination-bullet-size": "16px",
+                "--swiper-pagination-bullet-horizontal-gap": "6px",
+              } as CSSProperties
+            }
           >
             {Artists.map((artist, index) => {
               return (

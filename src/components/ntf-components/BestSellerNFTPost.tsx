@@ -9,10 +9,13 @@ import { useNavigate } from "react-router-dom";
 import vipIcon from "./../../assets/nft/icons8-vip-48.png";
 import PremiumIcon from "./../../assets/nft/icons8-premium-64.png";
 import { nftCardsMotion } from "../../motions/motions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const iconValue = [tickIcon, vipIcon, PremiumIcon];
 
 const BestSellerNFTPost = ({ index, nft }: { index: number; nft: INFT }) => {
   const nav = useNavigate();
+  const themeSelector = useSelector(selecttheme);
   const [priceIMG, setPirceIMG] = useState<string>("");
   const [nftPrice] = useState<number>(
     Math.floor((Math.random() * 123423400) / 1000000) / 100
@@ -33,6 +36,8 @@ const BestSellerNFTPost = ({ index, nft }: { index: number; nft: INFT }) => {
       viewport={{ once: true }}
       className="best-seller-nft-post"
       onClick={() => nav(`/nfts/${nft.id}`)}
+      style={{ color: themeSelector.plainTextColor }}
+      whileHover={{ background: themeSelector.containerColor }}
     >
       <div
         className="nft-post-image-container"

@@ -8,8 +8,11 @@ import saveIcon from "./../../assets/crypto/save.svg";
 import { motion } from "framer-motion";
 import { viewFromDown } from "../../motions/viewCryptoMotions";
 import { useNavigate } from "react-router-dom";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { useSelector } from "react-redux";
 const NFTcard = ({ nft, index }: { nft: INFT; index: number }) => {
   const nav = useNavigate();
+  const themeSelector = useSelector(selecttheme);
   const [priceIMG, setPirceIMG] = useState<string>("");
   const [nftPrice] = useState<number>(
     Math.floor((Math.random() * 123423400) / 1000000) / 100
@@ -29,6 +32,8 @@ const NFTcard = ({ nft, index }: { nft: INFT; index: number }) => {
       viewport={{ once: true }}
       className="nft-card"
       onClick={() => nav(`/nfts/${nft.id}`)}
+      style={{ color: themeSelector.headerColor }}
+      whileHover={{ background: themeSelector.containerColor }}
     >
       <div className="image-container">
         <img src={nftPics[Math.floor(Math.random() * nftPics.length)]} />
@@ -51,9 +56,17 @@ const NFTcard = ({ nft, index }: { nft: INFT; index: number }) => {
           {nftPrice} <img src={priceIMG} />
         </span>
         <NftFavorites index={index} displayButton={false} nftlist={true} />
-        <button className="save-nft-btn">
+        <motion.button
+          animate={{
+            background: themeSelector.btnColor,
+            color: themeSelector.headerColor,
+          }}
+          whileHover={{ background: themeSelector.hoverColor }}
+          transition={{ duration: 0.1 }}
+          className="save-nft-btn"
+        >
           <img src={saveIcon} />
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );

@@ -5,6 +5,8 @@ import { ArtistType } from "../../Data/Artists";
 import starIcon from "./../../assets/crypto/star.svg";
 import badge from "./../../assets/nft/badge.svg";
 import { tagsMotion } from "../../motions/viewCryptoMotions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const ArtistComponent = ({
   artist,
   index,
@@ -12,6 +14,7 @@ const ArtistComponent = ({
   artist: ArtistType;
   index: number;
 }) => {
+  const themeSelector = useSelector(selecttheme);
   const [followed, setFollow] = useState<boolean>(false);
   return (
     <motion.div
@@ -40,11 +43,13 @@ const ArtistComponent = ({
           <img src={starIcon} alt="starIcon" />
         </span>
         <span className={`nft-artist-description `}>{artist.description}</span>{" "}
-        <button
+        <motion.button
+          whileHover={{ background: themeSelector.btnColor }}
           className={`  ${followed ? "followed" : ""}`}
           onClick={() => {
             setFollow((prev) => !prev);
           }}
+          transition={{ duration: 0.1 }}
         >
           {followed ? (
             <span>
@@ -59,7 +64,7 @@ const ArtistComponent = ({
           ) : (
             "follow"
           )}
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );
