@@ -1,10 +1,11 @@
- 
 import { IAppleNews } from "../../hooks/useNews";
 import MainCategoryNewsComponent from "./MainCategoryNewsComponent";
 import NewsSlider from "./NewsSlider";
 import NewsHeadLines from "./NewsHeadLines";
 import { motion } from "framer-motion";
 import { newsMotion } from "../../motions/newsMotions";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 
 const NewsCategorySection = ({
   category,
@@ -15,6 +16,8 @@ const NewsCategorySection = ({
   title: string;
   index: number;
 }) => {
+  const themeSelector = useSelector(selecttheme);
+
   const categoryPattern = [
     {
       item_1: 0,
@@ -41,6 +44,10 @@ const NewsCategorySection = ({
       exit="exit"
       viewport={{ once: true }}
       className="single-news-section"
+      style={{
+        background: themeSelector.containerColor,
+        color: themeSelector.plainTextColor,
+      }}
     >
       <NewsHeadLines title={title} />
       <MainCategoryNewsComponent data={category[9]} />

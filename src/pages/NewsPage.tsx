@@ -16,6 +16,8 @@ import NewsCategorySection from "../components/news-page-components/NewsCategory
 import NewsSearch from "../components/search-components/NewsSearch";
 import { useState } from "react";
 import NewsCardsSection from "../components/news-page-components/NewsCardsSection";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 const NewsPage = () => {
   const categories = [
     {
@@ -40,7 +42,7 @@ const NewsPage = () => {
     },
   ];
   const [text, setText] = useState<string>("");
-
+  const themeSelector = useSelector(selecttheme);
   return (
     <motion.div
       variants={removingPageMotion}
@@ -58,7 +60,13 @@ const NewsPage = () => {
           })}
         </div>
         <MainNewsComponent data={wallstreetnews[50]} />
-        <div className="latest-news">
+        <div
+          style={{
+            background: themeSelector.containerColor,
+            color: themeSelector.plainTextColor,
+          }}
+          className="latest-news"
+        >
           <span className="title">
             live updates<div></div>
           </span>
@@ -80,7 +88,13 @@ const NewsPage = () => {
             );
           })}
         </div>
-        <div className="popular-news">
+        <div
+          style={{
+            background: themeSelector.containerColor,
+            color: themeSelector.plainTextColor,
+          }}
+          className="popular-news"
+        >
           <span className="title">
             popular news
             <Divider height={2} width={250} />
