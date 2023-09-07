@@ -5,7 +5,7 @@ import backIcon from "./../assets/crypto/back.svg";
 import saveIcon from "./../assets/crypto/save.svg";
 import shareIcon from "./../assets/crypto/share.svg";
 import { socialMedia } from "../Data/dummy";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import starIcon from "./../assets/crypto/star.svg";
 import { emptySingleNFT } from "../features/nft_slice/nft_slice";
 import { motion } from "framer-motion";
@@ -16,9 +16,11 @@ import { viewFromLeft, viewFromTop } from "../motions/viewCryptoMotions";
 import RelatedNFT from "../components/ntf-components/RelatedNFT";
 import { removingPageMotion } from "../motions/motions";
 import Loader from "../components/loader/Loader";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 const Nft_Single_Page = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const themeSelector = useSelector(selecttheme);
   const [randomNum] = useState(Math.floor(Math.random() * socialMedia.length));
   const { id } = useParams();
   const {
@@ -104,6 +106,7 @@ const Nft_Single_Page = () => {
       initial="hidden"
       animate="visible"
       exit="exit"
+      style={{ color: themeSelector.headerColor }}
       className="single-nft-page"
     >
       <motion.div
@@ -113,16 +116,23 @@ const Nft_Single_Page = () => {
         className="overall-nft-data"
       >
         <img src={single_nft.image.small} />
-        <h1 className="nft-name">{single_nft.name}</h1>
-        <span className="nft-symbol">{single_nft.symbol}</span>
+        <h1 style={{ color: themeSelector.headerColor }} className="nft-name">
+          {single_nft.name}
+        </h1>
+        <span style={{ color: themeSelector.btnColor }} className="nft-symbol">
+          {single_nft.symbol}
+        </span>
       </motion.div>
       <div className="community-actions-container">
         <div className="communities">
-          <h3>communities :</h3>
+          <h3 style={{ color: themeSelector.headerColor }}>communities :</h3>
           <div>
             {socialMedia.map((social, index) => {
               return (
-                <span key={index}>
+                <span
+                  style={{ background: themeSelector.btnColor }}
+                  key={index}
+                >
                   <img src={social.pic} /> {social.name}{" "}
                 </span>
               );
@@ -131,18 +141,37 @@ const Nft_Single_Page = () => {
         </div>
         <div className="actions-container">
           <div>
-            <button
+            <motion.button
+              animate={{
+                background: themeSelector.btnColor,
+                color: themeSelector.headerColor,
+              }}
+              whileHover={{ background: themeSelector.hoverColor }}
+              transition={{ duration: 0.1 }}
               onClick={() => {
                 nav(-1);
                 dispatch(emptySingleNFT());
               }}
             >
               <img src={backIcon} />
-            </button>
-            <button>
+            </motion.button>
+            <motion.button
+              animate={{
+                background: themeSelector.btnColor,
+                color: themeSelector.headerColor,
+              }}
+              whileHover={{ background: themeSelector.hoverColor }}
+              transition={{ duration: 0.1 }}
+            >
               <img src={saveIcon} />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              animate={{
+                background: themeSelector.btnColor,
+                color: themeSelector.headerColor,
+              }}
+              whileHover={{ background: themeSelector.hoverColor }}
+              transition={{ duration: 0.1 }}
               onClick={() => {
                 navigator.share({
                   url: window.location.href,
@@ -152,9 +181,15 @@ const Nft_Single_Page = () => {
               }}
             >
               <img src={shareIcon} />
-            </button>
+            </motion.button>
           </div>
-          <span className="wish-list">
+          <span
+            style={{
+              background: themeSelector.btnColor,
+              color: themeSelector.headerColor,
+            }}
+            className="wish-list"
+          >
             <img src={starIcon} />
             on {randomNum * 213 + 23 - 213} watchlist
           </span>
@@ -169,12 +204,20 @@ const Nft_Single_Page = () => {
               whileInView="visible"
               className="detail-box"
               key={index}
+              style={{
+                background: themeSelector.containerColor,
+                color: themeSelector.plainTextColor,
+              }}
             >
               <span className="title-container">{data.title}</span>
               <div className="price-container">{data.nativePrice} ETH</div>
               <div className="percentage-container">
                 ${data.price}
-                <span className={`${data.percentage > 0 ? "green" : "red"}`}>
+                <span
+                  className={`${
+                    data.percentage > 0 ? "green-text" : "red-text"
+                  }`}
+                >
                   {data.percentage}%
                 </span>
               </div>
@@ -185,11 +228,17 @@ const Nft_Single_Page = () => {
       <div className="nft-bottom-section">
         <div className="left-section">
           <div className="top-desc">
-            <h2 className="name">{single_nft.name}</h2>
+            <h2 style={{ color: themeSelector.headerColor }} className="name">
+              {single_nft.name}
+            </h2>
             <div className="links-container">
               {single_nft.links.discord &&
                 single_nft.links.discord.length > 0 && (
                   <span
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
                     onClick={() =>
                       window.open(single_nft.links.discord, "_blank")
                     }
@@ -200,6 +249,10 @@ const Nft_Single_Page = () => {
               {single_nft.links.homepage &&
                 single_nft.links.homepage.length > 0 && (
                   <span
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
                     onClick={() =>
                       window.open(single_nft.links.homepage, "_blank")
                     }
@@ -210,6 +263,10 @@ const Nft_Single_Page = () => {
               {single_nft.links.twitter &&
                 single_nft.links.twitter.length > 0 && (
                   <span
+                    style={{
+                      background: themeSelector.btnColor,
+                      color: themeSelector.headerColor,
+                    }}
                     onClick={() =>
                       window.open(single_nft.links.twitter, "_blank")
                     }
@@ -220,22 +277,47 @@ const Nft_Single_Page = () => {
             </div>
           </div>
           <div className="bottom-desc">
-            <p dangerouslySetInnerHTML={{ __html: single_nft.description }}></p>
+            <p
+              style={{ color: themeSelector.plainTextColor }}
+              dangerouslySetInnerHTML={{
+                __html: single_nft.description.replaceAll(
+                  "<a",
+                  `<a style="color:${themeSelector.btnColor}"`
+                ),
+              }}
+            ></p>
             {single_nft.contract_address &&
               single_nft.contract_address.length > 0 && (
-                <span className="contract-add">
+                <span
+                  style={{
+                    background: themeSelector.btnColor,
+                    color: themeSelector.headerColor,
+                  }}
+                  className="contract-add"
+                >
                   contract-address : {single_nft.contract_address}
                 </span>
               )}
           </div>
         </div>
         <div className="right-section">
-          <div className="nft-statistic">
-            <h4 className="boxheader">{single_nft.name} Market Statistics</h4>
+          <div
+            className="nft-statistic"
+            style={{
+              background: themeSelector.containerColor,
+              color: themeSelector.plainTextColor,
+            }}
+          >
+            <h4
+              style={{ color: themeSelector.headerColor }}
+              className="boxheader"
+            >
+              {single_nft.name} Market Statistics
+            </h4>
             <div className="table-container">
               {statistisData.map((data, index) => {
                 return (
-                  <div className="item" key={index}>
+                  <div style={{borderColor:themeSelector.btnColor}} className="item" key={index}>
                     <span className="item-title">{data.title}</span>
                     <span className="item-value">
                       {data.value[0]}{" "}
@@ -254,8 +336,14 @@ const Nft_Single_Page = () => {
               })}
             </div>
           </div>
-          <div className="related-nfts">
-            <h4>related nfts</h4>
+          <div
+            className="related-nfts"
+            style={{
+              background: themeSelector.containerColor,
+              color: themeSelector.plainTextColor,
+            }}
+          >
+            <h4 style={{ color: themeSelector.headerColor }}>related nfts</h4>
             <div className="table-container">
               {nft_list
                 .slice(randomnftNum - 7, randomnftNum)
