@@ -11,7 +11,10 @@ import {
 import { Ref, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import Header from "../components/header-component/Header";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
+  const themeSelector = useSelector(selecttheme);
   const nav = useNavigate();
   const { id } = useParams();
   const blog = notes.find((note) => {
@@ -57,6 +60,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
                     animate="visible"
                     className="tag-badge"
                     key={t.id}
+                    style={{ background: themeSelector.btnColor }}
                   >
                     {t.label}
                   </motion.span>
@@ -116,6 +120,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
               initial="hidden"
               animate="visible"
               className="author-email"
+              style={{ color: themeSelector.plainTextColor }}
             >
               {blog?.email} <img src={authorIcon} alt="author" />
             </motion.span>
@@ -124,6 +129,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
               initial="hidden"
               animate="visible"
               className="blog-published-date"
+              style={{ color: themeSelector.plainTextColor }}
             >
               {moment(blog?.published_date).format("YYYY-MM-DD HH:MM")}{" "}
               <img src={dateIcon} alt="date icon" />
@@ -138,6 +144,7 @@ const BlogViewPage = ({ notes, onDelete }: BlogViewPageProps) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1, type: "spring" }}
             className="blogpage-body"
+            style={{ color: themeSelector.plainTextColor }}
           >
             {blog?.body}
           </motion.div>

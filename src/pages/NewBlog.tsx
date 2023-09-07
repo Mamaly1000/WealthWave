@@ -11,6 +11,10 @@ import Loader from "../components/loader/Loader";
 import imgPreview from "./../assets/blogs/pewview.svg";
 import { toast } from "react-toastify";
 import Header from "../components/header-component/Header";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
+import Divider from "../components/ntf-components/Divider";
+import themeReducer from "../features/theme_slice/theme_slice";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [imageSRC, setImageSRC] = useState<string>("");
@@ -20,6 +24,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const [imageSRCurl, setImageSRCurl] = useState<string>("");
   const [selectedTags, setselectedTags] = useState<TAG[]>([]);
+  const themeSelector = useSelector(selecttheme);
   const nav = useNavigate();
   const submitHnadler = (e: FormEvent) => {
     e.preventDefault();
@@ -72,6 +77,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
       <form className="create-blog-form" onSubmit={submitHnadler}>
         <div className="blog-detail-container">
           <motion.input
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5, type: "tween" }}
@@ -82,6 +88,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
             ref={titleRef}
           />
           <motion.input
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.63, duration: 0.5, type: "tween" }}
@@ -98,6 +105,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
             className="blog-image-container"
           >
             <input
+              style={{ border: `1px solid ${themeSelector.btnColor}` }}
               type="text"
               name="floating_title"
               id="floating_title"
@@ -125,6 +133,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
                       toast.error("input is empty");
                     }
                   }}
+                  style={{ background: themeSelector.btnColor }}
                 />
               )}
             </AnimatePresence>
@@ -145,6 +154,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
                   onClick={() => {
                     setImagePreview(true);
                   }}
+                  style={{ background: themeSelector.btnColor }}
                 />
               )}
             </AnimatePresence>
@@ -156,10 +166,23 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
               animate="visible"
               exit="exit"
               className="modal-content"
-              style={{ position: "relative", bottom: 60 }}
+              style={{
+                position: "relative",
+                bottom: 60,
+                background: themeSelector.containerColor,
+                color: themeSelector.headerColor,
+              }}
             >
               <div className="modal-header">
-                <h4>Image Preview</h4>
+                <h4
+                  style={{
+                    color: themeSelector.headerColor,
+                  }}
+                  className="modal-title"
+                >
+                  Image Preview
+                  <Divider height={3} width={150} />
+                </h4>
               </div>
               <img src={imageSRC} alt="image preview" />
             </motion.div>
@@ -202,6 +225,7 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
             })}
           />
           <motion.textarea
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 0.5, type: "tween" }}
@@ -211,13 +235,31 @@ const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
           ></motion.textarea>
         </div>
         <div className="form-action-group">
-          <button type="submit" className="form-submit-btn">
+          <motion.button
+            animate={{
+              background: themeSelector.btnColor,
+              color: themeSelector.headerColor,
+            }}
+            whileHover={{ background: themeSelector.hoverColor }}
+            transition={{ duration: 0.1 }}
+            type="submit"
+            className="form-submit-btn"
+          >
             Submit
-          </button>
+          </motion.button>
           <Link to="/myBlogs">
-            <button type="button" className="form-cancel-btn">
+            <motion.button
+              animate={{
+                background: themeSelector.hoverColor,
+                color: themeSelector.plainTextColor,
+              }}
+              whileHover={{ background: themeSelector.btnColor }}
+              transition={{ duration: 0.1 }}
+              type="button"
+              className="form-cancel-btn"
+            >
               cancel
-            </button>
+            </motion.button>
           </Link>
         </div>
       </form>

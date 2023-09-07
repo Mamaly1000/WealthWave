@@ -11,6 +11,8 @@ import tickImg from "./../assets/blogs/click.svg";
 import urlValidation from "../utils/imageChecker";
 import Loader from "../components/loader/Loader";
 import Header from "../components/header-component/Header";
+import { useSelector } from "react-redux";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 const EditBlog = ({
   notes,
   onSubmit,
@@ -27,6 +29,7 @@ const EditBlog = ({
   const imageRef = useRef<HTMLInputElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const themeSelector = useSelector(selecttheme);
   const [selectedTags, setselectedTags] = useState<TAG[]>(blog!.tags);
   const nav = useNavigate();
   const submitHnadler = (e: FormEvent) => {
@@ -77,6 +80,7 @@ const EditBlog = ({
       <form className="create-blog-form" onSubmit={submitHnadler}>
         <div className="blog-detail-container">
           <motion.input
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5, type: "tween" }}
@@ -88,6 +92,7 @@ const EditBlog = ({
             defaultValue={blog?.title}
           />
           <motion.input
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.63, duration: 0.5, type: "tween" }}
@@ -105,6 +110,7 @@ const EditBlog = ({
             className="blog-image-container"
           >
             <input
+              style={{ border: `1px solid ${themeSelector.btnColor}` }}
               type="text"
               name="floating_title"
               id="floating_title"
@@ -220,13 +226,25 @@ const EditBlog = ({
             placeholder="your blog description"
             ref={textAreaRef}
             defaultValue={blog?.body}
+            style={{ border: `1px solid ${themeSelector.btnColor}` }}
           ></motion.textarea>
         </div>
         <div className="form-action-group">
-          <button type="submit" className="form-submit-btn">
+          <button
+            style={{
+              background: themeSelector.btnColor,
+              color: themeSelector.plainTextColor,
+            }}
+            type="submit"
+            className="form-submit-btn"
+          >
             Submit
           </button>
           <button
+            style={{
+              background: themeSelector.hoverColor,
+              color: themeSelector.plainTextColor,
+            }}
             type="button"
             className="form-cancel-btn"
             onClick={() => nav(-1)}

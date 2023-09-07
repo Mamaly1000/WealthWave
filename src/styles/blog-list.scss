@@ -14,26 +14,28 @@
   }
   .create-blog-form {
     @apply w-full flex flex-col md:flex-row justify-center md:justify-between items-center my-4;
+    .form-select {
+      border: none !important;
+    }
     input,
     .form-select {
-      background: rgba(0 0 0 /0.1);
-      @apply w-full md:w-[45%] rounded-md;
+      @apply focus:border-none w-full bg-light_dark md:w-[45%] rounded-md;
       .css-1jqq78o-placeholder {
         @apply text-white;
       }
       .css-13cymwt-control,
       .css-t3ipsp-control {
-        background: rgba(0 0 0/0.2);
+        @apply bg-light_dark;
       }
       .css-1nmdiq5-menu {
         background: rgba(0 0 0/0.6) !important;
         @apply text-white animate-hover-animate z-[1000000000];
       }
       .css-1nmdiq5-menu > div > div {
-        @apply hover:text-blue-500 bg-transparent cursor-pointer transition-all;
+        @apply hover:bg-light_hard_dark bg-transparent cursor-pointer transition-all;
       }
       .css-1nmdiq5-menu > div > div:hover {
-        background: rgba(0 0 0/0.1);
+        @apply bg-light_medium_dark;
       }
     }
   }
@@ -51,7 +53,7 @@
     @apply w-[90%] flex flex-row flex-wrap justify-center items-center gap-5 text-[.8rem];
   }
   .tag-badge {
-    @apply bg-blue-800 text-white w-fit px-4 py-2 rounded-[10px] flex justify-center items-center shadow-2xl;
+    @apply w-fit px-4 py-2 rounded-[10px] flex justify-center items-center shadow-2xl;
   }
 }
 @keyframes hoverAnimation {
@@ -63,4 +65,10 @@
     opacity: 1;
     transform: translateY(0px);
   }
+}
+
+.css-t3ipsp-control:hover,
+.css-t3ipsp-control {
+  border-color: rgba(255 255 255 /0.5) !important;
+  box-shadow: unset !important;
 }

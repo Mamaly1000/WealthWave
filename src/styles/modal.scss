@@ -27,7 +27,7 @@
       @apply w-[40px] h-[40px] border-[1px] m-0 shadow-none border-red-500 text-red-500 text-lg hover:scale-105 transition-transform rounded-[50%] p-2 flex justify-center items-center;
     }
     .tag-label-input {
-      @apply w-[90%] h-[100%] bg-gray-200 border-[1px] border-blue-300 outline-none rounded-[4px] px-2 focus:border-blue-700 transition-colors;
+      @apply w-[90%] h-[100%] bg-gray-200 border-[1px] border-blue-300 outline-none rounded-[4px] px-2   transition-colors;
     }
   }
 }
