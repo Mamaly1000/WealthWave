@@ -48,7 +48,7 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
           <span
             className="bold"
             style={{
-              fontSize: coin.item.symbol.length > 10 ? ".6rem" : "1.5rem",
+              fontSize: coin.item.symbol.length >= 10 ? ".6rem" : "1.5rem",
               color: themeSelector.headerColor,
             }}
           >

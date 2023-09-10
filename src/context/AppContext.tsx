@@ -34,7 +34,7 @@ import { setProfileSlice } from "../features/profile_slice/profile_slice";
 import useProfile, { Iprofile } from "../hooks/useProfile";
 import useTheme, { ThemeInterface } from "../hooks/useTheme";
 import { setAppTheme } from "../features/theme_slice/theme_slice";
-import useToast, { ToastInterface } from "../hooks/useToast";
+import useToast, { ToastInterface } from "../hooks/useToast"; 
 
 interface Icontext {
   tags: TAG[];
@@ -59,6 +59,8 @@ interface Icontext {
   setLocalTheme: React.Dispatch<React.SetStateAction<ThemeInterface>>;
   localToast: ToastInterface;
   setLocalToast: React.Dispatch<React.SetStateAction<ToastInterface>>;
+  localProfile: Iprofile;
+  setLocalProfile: React.Dispatch<React.SetStateAction<Iprofile>>;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -69,7 +71,7 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
-  const { localProfile } = useProfile();
+  const { localProfile, setLocalProfile } = useProfile();
   const dispatch = useDispatch();
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -180,6 +182,12 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
           email: localProfile.email,
           name: localProfile.name,
           profile_pic: localProfile.profile_pic,
+          Address: localProfile.Address,
+          Birth: localProfile.Birth,
+          Experience: localProfile.Experience,
+          profession: localProfile.profession,
+          socials: localProfile.socials,
+          works: localProfile.works,
         } as Iprofile)
       );
     }
@@ -197,6 +205,22 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
       } as ThemeInterface)
     );
   }, []);
+  useEffect(() => {
+    dispatch(
+      setProfileSlice({
+        description: localProfile.description,
+        email: localProfile.email,
+        name: localProfile.name,
+        profile_pic: localProfile.profile_pic,
+        Address: localProfile.Address,
+        Birth: localProfile.Birth,
+        Experience: localProfile.Experience,
+        profession: localProfile.profession,
+        socials: localProfile.socials,
+        works: localProfile.works,
+      } as Iprofile)
+    );
+  }, [localProfile]);
   return (
     <AppContext.Provider
       value={{
@@ -222,6 +246,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         setLocalTheme,
         localToast,
         setLocalToast,
+        setLocalProfile,
+        localProfile,
       }}
     >
       {children}

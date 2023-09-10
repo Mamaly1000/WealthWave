@@ -8,6 +8,12 @@ const initialState: Iprofile = {
   email: "MamadMehdi.Aziz.10@Gmail.com",
   name: "Mohammad Mehdi Azizi",
   profile_pic: "https://avatars.githubusercontent.com/u/105161078?v=4",
+  profession: "senior front end developer",
+  Birth: "September,13,2002",
+  Address: "Pasadena, California",
+  Experience: 1,
+  works: [],
+  socials: [],
 };
 
 const ProfileReducer = createSlice({
@@ -15,7 +21,16 @@ const ProfileReducer = createSlice({
   initialState: initialState,
   reducers: {
     setProfileSlice: (state, action) => {
-      state = action.payload;
+      state.Address = action.payload.Address;
+      state.Birth = action.payload.Birth;
+      state.Experience = action.payload.Experience;
+      state.description = action.payload.description;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.profession = action.payload.profession;
+      state.profile_pic = action.payload.profile_pic;
+      state.socials = action.payload.socials;
+      state.works = action.payload.works;
     },
   },
 });

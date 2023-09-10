@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { BrowserRouter } from "react-router-dom";
 import AppContextComponent from "./context/AppContext.js";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 import { registerSW } from "virtual:pwa-register";
 import { Provider } from "react-redux";
 import store from "./features/store/store.js";

@@ -162,38 +162,159 @@
         }
       }
     }
-  }
-  .preview-container {
-    @apply backdrop-blur-sm w-full sm:w-[60%]  md:w-[500px] md:h-[500px] rounded-lg p-3 md:p-5 flex flex-col items-start drop-shadow-2xl justify-between gap-3;
-    .img {
-      @apply min-w-full min-h-[150px] md:min-h-[250px] rounded-lg   flex items-center justify-center text-[1.2rem] md:text-[2rem] capitalize text-white;
-    }
-    h1 {
-      @apply w-full text-start text-[1rem] md:text-[1.5rem] capitalize font-bold;
-    }
-    p {
-      @apply w-full text-left line-clamp-3  text-[.6rem] md:text-[.8rem] capitalize font-semibold;
-    }
-    button {
-      @apply w-full shadow-none;
-    }
-  }
-}
-.theme-header {
-  @apply w-fit h-fit text-[.9rem] md:text-[1.1rem]  capitalize font-semibold     flex justify-center md:justify-start items-center gap-3;
-  .theme-actions-container {
-    @apply w-fit max-h-fit h-fit px-1 flex justify-start gap-x-1 items-center  drop-shadow-2xl   rounded-lg;
-    button {
-      all: unset;
-      @apply cursor-pointer rounded-lg w-fit h-fit p-3 flex items-center justify-center;
-      img {
-        @apply min-w-[20px] max-w-[20px] max-h-[20px] min-h-[20px];
+    .theme-header {
+      @apply w-fit h-fit text-[.9rem] md:text-[1.1rem]  capitalize font-semibold     flex justify-center md:justify-start items-center gap-3;
+      .theme-actions-container {
+        @apply w-fit max-h-fit h-fit px-1 flex justify-start gap-x-1 items-center  drop-shadow-2xl   rounded-lg;
+        button {
+          all: unset;
+          @apply cursor-pointer rounded-lg w-fit h-fit p-3 flex items-center justify-center;
+          img {
+            @apply min-w-[20px] max-w-[20px] max-h-[20px] min-h-[20px];
+          }
+        }
+        .selected-color {
+          @apply rounded-lg w-fit h-fit p-3 flex items-center justify-center;
+          div {
+            @apply border-[.1px] border-white drop-shadow-2xl min-w-[20px] p-3 min-h-[20px] rounded-full;
+          }
+        }
       }
     }
-    .selected-color {
-      @apply rounded-lg w-fit h-fit p-3 flex items-center justify-center;
-      div {
-        @apply border-[.1px] border-white drop-shadow-2xl min-w-[20px] p-3 min-h-[20px] rounded-full;
+    .preview-container {
+      @apply backdrop-blur-sm w-full sm:w-[60%]  md:w-[500px] md:h-[500px] rounded-lg p-3 md:p-5 flex flex-col items-start drop-shadow-2xl justify-between gap-3;
+      .img {
+        @apply min-w-full min-h-[150px] md:min-h-[250px] rounded-lg   flex items-center justify-center text-[1.2rem] md:text-[2rem] capitalize text-white;
+      }
+      h1 {
+        @apply w-full text-start text-[1rem] md:text-[1.5rem] capitalize font-bold;
+      }
+      p {
+        @apply w-full text-left line-clamp-3  text-[.6rem] md:text-[.8rem] capitalize font-semibold;
+      }
+      button {
+        @apply w-full shadow-none;
+      }
+    }
+  }
+  .dashboard-profile-section {
+    @apply font-rail  flex items-center justify-center gap-10 flex-col;
+    .profile-card-preview-section {
+      @apply w-full flex items-start flex-col md:flex-row justify-center md:justify-between gap-5;
+    }
+    .edit-profile-section {
+      @apply min-h-[500px] max-w-[45%]  min-w-[45%] flex flex-wrap items-start justify-start gap-5;
+      .input-group {
+        @apply w-fit min-h-[40px] capitalize flex flex-col sm:flex-row justify-start items-start   gap-5;
+        .header-component {
+          @apply w-fit;
+          h2 {
+            @apply whitespace-nowrap w-fit   items-center flex-row-reverse text-[1.2rem];
+          }
+        }
+        input {
+          @apply capitalize min-w-full sm:min-w-[300px] w-fit px-3 rounded-lg border-[1px];
+        }
+        .textarea {
+          @apply min-h-[100px] min-w-full sm:min-w-[300px] w-fit border-[1px] max-h-fit p-2 capitalize text-start;
+        }
+      }
+      .react-date-picker {
+        border-radius: 10px !important;
+        .react-date-picker__wrapper {
+          border: 1px solid rgba(255 255 255 /0.3) !important;
+          border-radius: 5px !important;
+          padding: 5px !important;
+        }
+        .react-date-picker__inputGroup__input {
+          all: unset !important;
+          max-width: fit-content !important;
+          width: fit-content !important;
+          font-family: "rail";
+        }
+        .tile-class {
+          color: #fff !important;
+          background: rgba(0 0 0 /0.5);
+          &:hover {
+            color: rgba(0 0 0 /1) !important;
+            background: #fff !important;
+          }
+        }
+        .react-date-picker__button {
+          svg {
+            stroke: #fff !important;
+          }
+        }
+        .react-calendar__tile--active {
+          color: rgba(0 0 0 /1) !important;
+          background: #fff !important;
+        }
+      }
+      .calendar-container {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.01);
+      }
+    }
+    .profile-card-preview {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 35px 35px 68px 0px rgba(0, 0, 0, 0.5),
+        inset -12px -12px 16px 0px rgba(0, 0, 0, 0.6),
+        inset 0px 11px 28px 0px rgb(255, 255, 255);
+      @apply cursor-default w-full sm:w-[400px] md:w-[450px] rounded-lg  p-5 flex items-center justify-center flex-wrap gap-2;
+      h2 {
+        @apply text-[1rem];
+      }
+      .image-section {
+        @apply min-w-[150px] max-w-fit min-h-[150px] max-h-fit rounded-full flex items-center justify-center relative overflow-hidden drop-shadow-2xl border-[3px];
+        img {
+          @apply min-w-full min-h-full absolute object-contain top-0 start-0;
+        }
+        .badge {
+          @apply w-[30px] h-[30px] absolute -bottom-[15px] -end-[15px];
+        }
+      }
+      .context-data {
+        @apply p-5 rounded-lg drop-shadow-2xl w-full flex flex-wrap items-start justify-between gap-2 text-start;
+        .context {
+          @apply h-fit text-[.7rem] w-full md:w-[45%] md:max-w-[45%] capitalize flex flex-col items-start justify-start gap-1 border-b-[1px] pb-1;
+          .title {
+            @apply opacity-60;
+          }
+          .value {
+            @apply whitespace-pre-wrap;
+          }
+        }
+      }
+      .bio {
+        @apply w-full flex flex-col items-start justify-start gap-2 rounded-lg p-2;
+        p {
+          @apply p-5 rounded-lg drop-shadow-2xl w-full text-start capitalize;
+        }
+      }
+      .extras {
+        @apply w-full flex flex-wrap items-start justify-start gap-2 p-1;
+        .extra {
+          @apply drop-shadow-2xl cursor-default w-full h-fit md:w-[110px]  md:h-[110px]  rounded-lg p-2 flex flex-col-reverse items-center justify-center gap-1 capitalize font-bold;
+          .value {
+            @apply font-bold text-[1.1rem];
+          }
+          .title {
+            @apply text-[.9rem] font-semibold;
+          }
+        }
+      }
+      .contact {
+        @apply w-full flex flex-wrap items-center justify-center gap-2 p-2;
+        .contact-link {
+          @apply hover:scale-110 cursor-pointer max-w-[50px] max-h-[50px] rounded-full overflow-hidden;
+          img {
+            @apply min-w-full min-h-full object-contain;
+          }
+        }
       }
     }
   }
