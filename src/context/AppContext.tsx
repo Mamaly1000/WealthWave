@@ -34,7 +34,7 @@ import { setProfileSlice } from "../features/profile_slice/profile_slice";
 import useProfile, { Iprofile } from "../hooks/useProfile";
 import useTheme, { ThemeInterface } from "../hooks/useTheme";
 import { setAppTheme } from "../features/theme_slice/theme_slice";
-import useToast, { ToastInterface } from "../hooks/useToast"; 
+import useToast, { ToastInterface } from "../hooks/useToast";
 
 interface Icontext {
   tags: TAG[];
@@ -61,6 +61,12 @@ interface Icontext {
   setLocalToast: React.Dispatch<React.SetStateAction<ToastInterface>>;
   localProfile: Iprofile;
   setLocalProfile: React.Dispatch<React.SetStateAction<Iprofile>>;
+  addWork: (work: { title: string; value: string }) => void;
+  editWork: (work: { title: string; value: string; id: string }) => void;
+  deleteWork: (work: { title: string; value: string; id: string }) => void;
+  addSocial: (social: { title: string; href: string }) => void;
+  editSocial: (social: { title: string; href: string; id: string }) => void;
+  deleteSocial: (social: { title: string; href: string; id: string }) => void;
 }
 
 export const AppContext = createContext<Icontext | null>({} as Icontext);
@@ -71,7 +77,16 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
-  const { localProfile, setLocalProfile } = useProfile();
+  const {
+    localProfile,
+    setLocalProfile,
+    addWork,
+    editWork,
+    deleteWork,
+    addSocial,
+    editSocial,
+    deleteSocial,
+  } = useProfile();
   const dispatch = useDispatch();
   const notesWithTags = useMemo(() => {
     return notes.map((note) => {
@@ -248,6 +263,12 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         setLocalToast,
         setLocalProfile,
         localProfile,
+        addWork,
+        editWork,
+        deleteWork,
+        addSocial,
+        editSocial,
+        deleteSocial,
       }}
     >
       {children}

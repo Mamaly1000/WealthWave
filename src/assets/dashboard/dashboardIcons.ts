@@ -12,3 +12,5 @@ export { default as themeIcon } from "./theme.png";
 export { default as cashVectorIcon } from "./vector.png";
 export { default as dashboardIcon } from "./dashboard.png";
 export { default as darkdashboardIcon } from "./dark-dashboard.png";
+export { default as deleteIcon } from "./icons/delete.svg";
+export { default as addIcon } from "./icons/add.svg";

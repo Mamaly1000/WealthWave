@@ -8,10 +8,11 @@ import {
   avatar5,
   avatar6,
   avatar7,
-  avatar8,
   avatar9,
 } from "../../assets/dashboard/3d-avatars/avatars";
-import Header from "../header-component/Header";
+import InputComponent from "./InputComponent";
+import { useContextFunction } from "../../context/AppContext";
+import { motion } from "framer-motion";
 
 const avatars = [
   avatar1,
@@ -21,23 +22,45 @@ const avatars = [
   avatar5,
   avatar6,
   avatar7,
-  avatar8,
   avatar9,
   avatar10,
   avatar11,
 ];
 const SelectProfileComponent = () => {
+  const contextData = useContextFunction();
   return (
     <div className="avatar-section">
-      <Header
-        width={3}
-        header={false}
-        height={35}
-        btnText=""
-        onclick={() => {}}
-        text="select your profile picture"
+      <InputComponent
+        inputType="text"
+        onchange={(e) => {
+          contextData!.setLocalProfile({
+            ...contextData!.localProfile,
+            profile_pic: e.target.value,
+          });
+        }}
+        placeholder="place your image URL here"
+        title="select your profile picture"
+        value={contextData!.localProfile.profile_pic}
       />
-      <input value={value} onChange={onchange} />
+      <div className="avatars">
+        {avatars.map((avatar) => {
+          return (
+            <motion.div
+              initial={{
+                backgroundImage: `url(${avatar})`,
+              }}
+              className="avatar"
+              key={avatar}
+              onClick={() =>
+                contextData!.setLocalProfile({
+                  ...contextData!.localProfile,
+                  profile_pic: avatar,
+                })
+              }
+            ></motion.div>
+          );
+        })}
+      </div>
     </div>
   );
 };

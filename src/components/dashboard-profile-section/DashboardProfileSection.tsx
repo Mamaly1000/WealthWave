@@ -1,6 +1,5 @@
 import DashboardSection from "../dashboard/DashboardSection";
 import Header from "../header-component/Header";
-import { avatar1 } from "../../assets/dashboard/3d-avatars/avatars";
 import {
   emailIcon,
   githubIcon,
@@ -16,6 +15,9 @@ import { useContextFunction } from "../../context/AppContext";
 import TextAreaComponent from "./TextAreaComponent";
 import DateComponent from "./DateComponent";
 import moment from "moment";
+import SelectProfileComponent from "./SelectProfileComponent";
+import WorkEditor from "./WorkEditor";
+import SocialEditor from "./SocialEditor";
 
 const socialImages = [
   telegramIcon,
@@ -24,7 +26,12 @@ const socialImages = [
   githubIcon,
   emailIcon,
 ];
-
+export const imageTraker = (type: string) => {
+  const image = socialImages.find((img) => {
+    return img.includes(type);
+  });
+  return image;
+};
 const DashboardProfileSection = () => {
   const themeSelector = useSelector(selecttheme);
   const profileSelector = useSelector(selectProfile);
@@ -55,12 +62,7 @@ const DashboardProfileSection = () => {
       value: profileSelector.Address,
     },
   ];
-  const imageTraker = (type: string) => {
-    const image = socialImages.find((img) => {
-      return img.includes(type);
-    });
-    return image;
-  };
+
   return (
     <DashboardSection classname="dashboard-profile-section">
       <Header
@@ -73,6 +75,7 @@ const DashboardProfileSection = () => {
       />
       <div className="profile-card-preview-section">
         <div className="edit-profile-section">
+          <SelectProfileComponent />
           <InputComponent
             inputType="text"
             onchange={(e) => {
@@ -156,13 +159,15 @@ const DashboardProfileSection = () => {
             title="date of birth"
             value={contextDatafn!.localProfile.Birth}
           />
+          <WorkEditor />
+          <SocialEditor />
         </div>
         <div className="profile-card-preview">
           <div
             style={{ borderColor: themeSelector.btnColor }}
             className="image-section"
           >
-            <img src={avatar1} />
+            <img src={contextDatafn!.localProfile.profile_pic} />
           </div>
           <Header
             btnText=""
@@ -216,7 +221,7 @@ const DashboardProfileSection = () => {
               header={false}
               height={2}
               onclick={() => {}}
-              text="works"
+              text="skills"
               width={100}
             />
             {profileSelector.works.map((work) => {

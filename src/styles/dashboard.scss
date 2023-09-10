@@ -317,5 +317,42 @@
         }
       }
     }
+    .avatar-section {
+      @apply w-full flex flex-col items-start justify-start gap-3;
+      .avatars {
+        @apply min-w-[230px] w-full flex flex-wrap justify-start items-start gap-5;
+        .avatar {
+          background-size: contain;
+          @apply hover:scale-110 cursor-pointer min-w-[100px] min-h-[100px] rounded-full bg-center bg-no-repeat content-center;
+        }
+      }
+    }
+    .work-editor {
+      @apply pb-20 w-fit   flex flex-col items-start justify-start gap-5;
+      .works {
+        @apply min-w-full flex flex-wrap justify-start items-start gap-5;
+        .work {
+          @apply relative border-[1px] min-h-fit cursor-pointer hover:scale-110 drop-shadow-2xl w-full  md:w-[110px]  rounded-lg p-2 flex flex-col items-center justify-center gap-1 capitalize font-bold;
+          .value {
+            @apply font-bold text-[1.1rem];
+          }
+          .title {
+            @apply text-[.9rem] font-semibold;
+          }
+          .delete-btn {
+            @apply z-10 absolute top-0 end-0 w-fit bg-red-500 h-fit p-1 rounded-lg;
+            img {
+              @apply w-[20px] h-[20px];
+            }
+          }
+          input {
+            @apply p-1 w-full capitalize   border-b-[1px];
+          }
+          button {
+            @apply w-full flex items-center justify-center;
+          }
+        }
+      }
+    }
   }
 }
