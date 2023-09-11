@@ -66,22 +66,18 @@ const useProfile = () => {
       socials.push({ id: uuidV4(), title: social.title, href: social.href });
       setLocalProfile({ ...localProfile, socials });
     } else {
-      toast.error(`you already add ${social.title} `);
+      toast.error(`you already added ${social.title} `);
     }
   };
   const editSocial = (social: { title: string; href: string; id: string }) => {
     const data = [...localProfile.socials];
     const selectedWork = data.findIndex((s) => s.id === social.id);
-    if (data.some((s) => s.title === social.title)) {
-      toast.error(`you already added ${social.title}`);
-    } else {
-      data[selectedWork] = {
-        id: social.id,
-        title: social.title,
-        href: social.href,
-      };
-      setLocalProfile({ ...localProfile, socials: data });
-    }
+    data[selectedWork] = {
+      id: social.id,
+      title: social.title,
+      href: social.href,
+    };
+    setLocalProfile({ ...localProfile, socials: data });
   };
   const deleteSocial = (social: {
     title: string;

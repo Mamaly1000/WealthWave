@@ -602,3 +602,35 @@ export const contacts_links: { route: string; icon: string }[] = [
     icon: twitterIcon,
   },
 ];
+export const socialPics = [
+  {
+    title: "telegram",
+    icon: telegramIcon,
+    href: "https://t.me/",
+    placeholder: "your telegram id",
+  },
+  {
+    title: "twitter",
+    href: "https://twitter.com/",
+    placeholder: "your twitter id",
+    icon: twitterIcon,
+  },
+  {
+    title: "whatsapp",
+    href: "https://wa.me/",
+    placeholder: "your phone number with your country id",
+    icon: whatsappIcon,
+  },
+  {
+    title: "github",
+    href: "https://github.com/",
+    placeholder: "your github id",
+    icon: githubIcon,
+  },
+  {
+    title: "email",
+    href: "mailto:",
+    placeholder: "your email",
+    icon: emailIcon,
+  },
+];
