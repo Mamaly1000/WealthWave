@@ -12,3 +12,6 @@ export { default as cryptonews7 } from "./landingpage/cryptonews7.jpg";
 export { default as cryptonews8 } from "./landingpage/cryptonews8.jpg";
 export { default as cryptonews9 } from "./landingpage/cryptonews9.jpeg";
 export { default as cryptonews10 } from "./landingpage/cryptonews10.jpg";
+export { default as starIcon } from "./star.svg";
+export { default as uparrow } from "./uparrow.svg";
+export { default as downarrow } from "./downarrow.svg";

@@ -1,13 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { cryptoRowMotion } from "../../motions/motions";
 import { useNavigate } from "react-router-dom";
-import saveIcon from "../../assets/crypto/save.svg";
 import { IcryptoData } from "../../hooks/useCrypto";
 import { CryptoTable } from "../cryto-table/CryptoChart";
 import useCrypto from "../../hooks/useCrypto";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { downarrow, starIcon, uparrow } from "../../assets/crypto/cryptoImages";
+import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
+import { GiHamburgerMenu } from "react-icons/gi";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
@@ -23,8 +25,9 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      whileHover={{ background: themeSelector.containerColor }}
+      whileHover={{ borderInlineColor: themeSelector.btnColor }}
       key={index}
+      style={{ borderBlockColor: themeSelector.btnColor }}
       onAnimationComplete={() => {
         setDisplayChart(true);
       }}
@@ -34,13 +37,7 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
           cryptoSelector.filterType.type_name === "RANK" ? "selected-td" : ""
         } rank-td`}
       >
-        <motion.button
-          animate={{ background: themeSelector.btnColor }}
-          whileHover={{ background: themeSelector.hoverColor }}
-          transition={{ duration: 0.1 }}
-        >
-          <img src={saveIcon} alt="save" />
-        </motion.button>
+        <img src={starIcon} />
         {coin.market_cap_rank}
       </td>
       <td
@@ -63,6 +60,7 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         className={`${
           cryptoSelector.filterType.type_name === "PRICE" ? "selected-td" : ""
         } price-td`}
+        style={{ color: themeSelector.btnColor }}
       >
         {coin.current_price ? "$" + coin.current_price.toLocaleString() : "N/A"}
       </td>
@@ -93,8 +91,14 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         }`}
         onClick={() => nav(`/crypto/${coin!.id}`)}
       >
+        {coin.price_change_percentage_24h &&
+        +coin.price_change_percentage_24h > 0 ? (
+          <img src={uparrow} />
+        ) : (
+          <img src={downarrow} />
+        )}
         {coin.price_change_percentage_24h
-          ? "%" + coin.price_change_percentage_24h.toLocaleString()
+          ? coin.price_change_percentage_24h.toLocaleString()
           : "N/A"}
       </td>
       <td
@@ -109,9 +113,7 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       <td
         className={`${
           cryptoSelector.filterType.type_name === "MKT_CAP" ? "selected-td" : ""
-        } market-cap-td  ${
-          +coin.market_cap_change_24h > 0 ? "green-text" : "red-text"
-        }`}
+        } market-cap-td`}
       >
         {coin.market_cap ? "$" + coin.market_cap.toLocaleString() : "N/A"}
       </td>
@@ -119,8 +121,8 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         <AnimatePresence mode="wait">
           {displayChart && (
             <CryptoTable
-              width={"130px"}
-              height={"100%"}
+              width={"150px"}
+              height={"100px"}
               id={coin.id}
               percent={coin.price_change_percentage_24h}
               sparkLine={coin!.sparkline_in_7d!.price}
@@ -128,6 +130,24 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
             />
           )}
         </AnimatePresence>
+      </td>
+      <td className="td-actions">
+        <button
+          style={{
+            border: `1px solid ${themeSelector.btnColor}`,
+            color: themeSelector.headerColor,
+          }}
+        >
+          <PiDotsThreeOutlineVerticalLight />
+        </button>
+        <button
+          style={{
+            border: `1px solid ${themeSelector.btnColor}`,
+            color: themeSelector.headerColor,
+          }}
+        >
+          <GiHamburgerMenu />
+        </button>
       </td>
     </motion.tr>
   );

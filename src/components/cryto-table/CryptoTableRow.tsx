@@ -53,12 +53,12 @@ const CryptoTableRow = ({
           className="crypto-table-container"
         >
           <motion.table
-            drag="x"
-            dragConstraints={{
-              right: 10,
-              left: -1080,
-            }}
-            dragSnapToOrigin={contextData!.screenW}
+          // drag="x"
+          // dragConstraints={{
+          //   right: 10,
+          //   left: -1080,
+          // }}
+          // dragSnapToOrigin={contextData!.screenW}
           >
             <thead>
               <th>
@@ -247,6 +247,7 @@ const CryptoTableRow = ({
                   <ArrowIcon type="MKT_CAP" typeMode={filterTypeMode} />
                 </td>
                 <td className="chart-td">last 7 days</td>
+                <td className="td-actions">actions</td>
               </th>
             </thead>
             <motion.tbody

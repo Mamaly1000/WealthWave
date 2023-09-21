@@ -9,11 +9,16 @@ import { toast } from "react-toastify";
 import NavBarDivider from "../components/divider-component/NavBarDivider";
 import logo from "./../assets/logo/small-logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setDisplayMainDasboard } from "../features/dashboard_slice/dashboard_slice";
+import {
+  selectDashboard,
+  setDisplayMainDasboard,
+  setDisplayProfileCard,
+} from "../features/dashboard_slice/dashboard_slice";
 import { selectProfile } from "../features/profile_slice/profile_slice";
 
 const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
   const dispatch = useDispatch();
+  const dashborad = useSelector(selectDashboard);
   const contextData = useContextFunction();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -95,9 +100,18 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
           >
             <motion.img src={settingIcon} />
           </button>
-          <Link className="dashboard-btn" to="/dashboard">
+          <button
+            className="dashboard-btn"
+            onClick={() =>
+              dispatch(
+                setDisplayProfileCard(
+                  dashborad.displayProfileCard ? false : true
+                )
+              )
+            }
+          >
             <motion.img src={profile_pic} />
-          </Link>
+          </button>
           <Link
             onMouseEnter={() => {
               setHoveredLink("/sign-in");

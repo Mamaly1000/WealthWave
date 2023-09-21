@@ -70,4 +70,32 @@
   .display-dashboard-btn {
     @apply w-[50px] h-[50px] p-3 flex items-center justify-center rounded-full fixed top-24 right-4;
   }
+  .profile-card {
+    @apply bg-light_dark fixed top-[100px] end-[100px] w-fit h-fit rounded-lg drop-shadow-2xl backdrop-blur-2xl border-[1px] p-5 flex flex-col items-start justify-start gap-2;
+    & > div {
+      @apply border-b-[1px] py-2;
+    }
+    .top-section {
+      @apply w-full flex items-center justify-start gap-3;
+      img {
+        @apply max-w-[50px] max-h-[50px] object-contain rounded-full border-[1px];
+      }
+      .context {
+        @apply w-auto flex flex-col gap-2 items-start justify-start;
+      }
+      .bold {
+        @apply font-semibold capitalize w-full text-start text-[.9rem];
+      }
+      .light {
+        @apply w-full text-start capitalize text-[.8rem];
+      }
+    }
+    .bottom-section {
+      @apply w-full flex flex-col items-start justify-start gap-3;
+
+      button {
+        @apply font-semibold w-full text-start rounded-lg border-[1px] border-transparent capitalize    ;
+      }
+    }
+  }
 }

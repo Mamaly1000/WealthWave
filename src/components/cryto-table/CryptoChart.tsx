@@ -113,7 +113,7 @@ export function CryptoTable({
         y: 0,
       }}
       transition={{ duration: 2, delay: 1, type: "tween" }}
-      style={{ width: width, height: height }}
+      style={{ maxWidth: width, maxHeight: height }}
       className="small-chart"
     >
       {datasets.length > 0 && sparkLine.length === 0 && defChart.length > 0 && (
@@ -214,8 +214,6 @@ export function CryptoTable({
                 },
                 ticks: {
                   display: false,
-                  color: "rgba(0 0 0/.0)",
-                  backdropColor: "rgba(0 0 0/0)",
                 },
                 border: {
                   width: 0,

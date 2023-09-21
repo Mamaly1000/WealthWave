@@ -13,6 +13,7 @@ import {
 } from "../features/dashboard_slice/dashboard_slice.ts";
 import ToolTipBtn from "../components/dashboard/ToolTipBtn.tsx";
 import { dashboardIcon } from "../assets/dashboard/dashboardIcons.ts";
+import ProfileCard from "../components/header-component/ProfileCard.tsx";
 
 const Layout = ({ children }: any) => {
   const dasboard = useSelector(selectDashboard);
@@ -61,6 +62,9 @@ const Layout = ({ children }: any) => {
           <motion.img src={dashboardIcon} />
         </ToolTipBtn>
       )}
+      <AnimatePresence>
+        {dasboard.displayProfileCard && <ProfileCard />}
+      </AnimatePresence>
     </motion.div>
   );
 };
