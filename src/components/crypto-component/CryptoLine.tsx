@@ -8,8 +8,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { downarrow, starIcon, uparrow } from "../../assets/crypto/cryptoImages";
-import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
+import { IoMdAdd } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { toast } from "react-toastify";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
@@ -25,9 +26,16 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      whileHover={{ borderInlineColor: themeSelector.btnColor }}
+      whileHover={{
+        borderInlineColor: themeSelector.btnColor,
+        background: themeSelector.modalColor,
+        color: themeSelector.headerColor,
+      }}
       key={index}
-      style={{ borderBlockColor: themeSelector.btnColor }}
+      style={{
+        borderTopColor: themeSelector.btnColor,
+        background: "rgba(0 0 0/.0)",
+      }}
       onAnimationComplete={() => {
         setDisplayChart(true);
       }}
@@ -60,7 +68,6 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         className={`${
           cryptoSelector.filterType.type_name === "PRICE" ? "selected-td" : ""
         } price-td`}
-        style={{ color: themeSelector.btnColor }}
       >
         {coin.current_price ? "$" + coin.current_price.toLocaleString() : "N/A"}
       </td>
@@ -132,22 +139,37 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
         </AnimatePresence>
       </td>
       <td className="td-actions">
-        <button
+        <motion.button
+          whileHover={{
+            background: themeSelector.hoverColor,
+            border: `1px solid ${themeSelector.headerColor}`,
+          }}
           style={{
             border: `1px solid ${themeSelector.btnColor}`,
+            background: "transparent",
             color: themeSelector.headerColor,
           }}
+          transition={{ duration: 0.1 }}
+          onClick={() => {
+            toast.success(`${coin.name} added to your crypto dashboard`);
+          }}
         >
-          <PiDotsThreeOutlineVerticalLight />
-        </button>
-        <button
+          <IoMdAdd />
+        </motion.button>
+        <motion.button
+          whileHover={{
+            border: `1px solid ${themeSelector.headerColor}`,
+            background: themeSelector.hoverColor,
+          }}
+          transition={{ duration: 0.1 }}
           style={{
             border: `1px solid ${themeSelector.btnColor}`,
             color: themeSelector.headerColor,
+            background: "transparent",
           }}
         >
           <GiHamburgerMenu />
-        </button>
+        </motion.button>
       </td>
     </motion.tr>
   );

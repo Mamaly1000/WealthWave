@@ -5,20 +5,13 @@ import React, {
   useState,
   useTransition,
 } from "react";
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCryptoSearch,
-  sortCryptoTable,
-} from "../../features/crypto_slice/crypto_slice";
-import filterIcon from "../../assets/crypto/filter.svg";
-import refreshIcon from "../../assets/crypto/refresh.svg";
-import TreeChart from "../../assets/crypto/TreeChart.svg";
-import lineChart from "../../assets/crypto/lineChart.svg";
+import { setCryptoSearch } from "../../features/crypto_slice/crypto_slice";
+import { CiSearch } from "react-icons/ci";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
-
+import { BsChevronDown } from "react-icons/bs";
 export type FilterType =
   | "RANK"
   | "NAME"
@@ -34,13 +27,16 @@ const Crypto_Search = ({
   setDisplayType,
 }: {
   DisplayType: string;
-  setDisplayType: React.Dispatch<React.SetStateAction<"line" | "tree">>;
+  setDisplayType: React.Dispatch<
+    React.SetStateAction<"line" | "tree" | "stack">
+  >;
 }) => {
   const dispatch = useDispatch();
   const { cryptosList } = useCrypto();
   const [searchText, setSearchText] = useState<string>("");
-  const [displayFilterModal, _setDisplayFilterModal] = useState<boolean>(false);
-  const { refetch, isLoading } = cryptosList("refresh-data", false, false);
+  const [_displayFilterModal, _setDisplayFilterModal] =
+    useState<boolean>(false);
+  const { isLoading } = cryptosList("refresh-data", false, false);
   const controls = useAnimationControls();
   const [_pending, setTransition] = useTransition();
   const themeSelector = useSelector(selecttheme);
@@ -62,95 +58,111 @@ const Crypto_Search = ({
 
   return (
     <motion.div
-      style={{ borderColor: themeSelector.btnColor }}
+      style={{ color: themeSelector.headerColor }}
       className="search-crypto-container"
     >
-      <motion.input
-        value={searchText}
-        onChange={(e) => {
-          setTransition(() => {
-            setSearchText(e.target.value);
-          });
-        }}
-        placeholder="Search ... "
-      />
-      <motion.button
-        onClick={() => {
-          setTransition(() => {
-            setDisplayType("line");
-          });
-        }}
-        animate={{
-          background: !(DisplayType === "tree")
-            ? themeSelector.btnColor
-            : themeSelector.hoverColor,
-        }}
-        style={{ background: themeSelector.hoverColor }}
-        whileHover={{ background: themeSelector.btnColor }}
-        transition={{ duration: 0.1 }}
-      >
-        <img src={lineChart} />
-      </motion.button>
-      <motion.button
-        onClick={() => {
-          setTransition(() => {
-            setDisplayType("tree");
-          });
-        }}
-        animate={{
-          background:
-            DisplayType === "tree"
-              ? themeSelector.btnColor
-              : themeSelector.hoverColor,
-        }}
-        whileHover={{ background: themeSelector.btnColor }}
-        transition={{ duration: 0.1 }}
-      >
-        <img src={TreeChart} />
-      </motion.button>
-      <motion.button
-        onClick={() => {
-          setTransition(() => {
-            toast.promise(refetch(), {
-              pending: "Refreshing Data !",
-              success: "Data Refreshed Successfully !",
-              error: "Unable To Refresh Data !",
+      <div className="input-search">
+        <motion.input
+          value={searchText}
+          onChange={(e) => {
+            setTransition(() => {
+              setSearchText(e.target.value);
             });
-          });
-        }}
-        style={{ background: themeSelector.hoverColor }}
-        whileHover={{ background: themeSelector.btnColor }}
-        transition={{ duration: 0.1 }}
-      >
-        <motion.img
-          initial={{ rotate: 0 }}
-          animate={controls}
-          transition={{
-            duration: 0.1,
-            type: "tween",
-            ease: "linear",
           }}
-          src={refreshIcon}
-          alt="refresh"
+          animate={{
+            background: themeSelector.modalColor,
+            borderColor: themeSelector.btnColor,
+            color: themeSelector.headerColor,
+          }}
+          placeholder="Search ... "
         />
-      </motion.button>
-      <motion.button
-        onClick={() => {
-          dispatch(
-            sortCryptoTable({
-              type_name: "RANK",
-              type: "ASC",
-            })
-          );
-          toast.success("sorts have been cleared successfully !");
-        }}
-        style={{ background: themeSelector.hoverColor }}
-        whileHover={{ background: themeSelector.btnColor }}
-        transition={{ duration: 0.1 }}
-      >
-        <img src={filterIcon} alt="filter" />
-      </motion.button>
-      <AnimatePresence>{displayFilterModal && <div></div>}</AnimatePresence>
+        <CiSearch />
+      </div>
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        currency:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          usd
+          <BsChevronDown />
+        </span>
+      </div>{" "}
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        show:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          10
+          <BsChevronDown />
+        </span>
+        <span className="text">entries</span>
+      </div>
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        sort:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          price
+          <BsChevronDown />
+        </span>
+      </div>{" "}
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        filter:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          market-cap
+          <BsChevronDown />
+        </span>
+      </div>{" "}
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        display:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          table
+          <BsChevronDown />
+        </span>
+      </div>{" "}
+      <hr style={{ background: themeSelector.btnColor }} />
+      <div className="input-btn">
+        favorites:{" "}
+        <span
+          style={{
+            borderColor: themeSelector.btnColor,
+            background: themeSelector.modalColor,
+          }}
+          className="entry"
+        >
+          off
+          <BsChevronDown />
+        </span>
+      </div>{" "}
     </motion.div>
   );
 };

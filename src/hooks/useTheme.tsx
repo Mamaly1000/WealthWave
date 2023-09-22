@@ -7,6 +7,7 @@ export interface ThemeInterface {
   plainTextColor: string;
   hoverColor: string;
   divider: string;
+  modalColor: string;
 }
 const useTheme = () => {
   const [localTheme, setLocalTheme] = useLocalStorage<ThemeInterface>(
@@ -19,6 +20,7 @@ const useTheme = () => {
       headerColor: "#ffffff",
       hoverColor: "rgba(0 0 0/.2)",
       plainTextColor: "#FFEEF4",
+      modalColor: "#1D1D16",
     }
   );
   return { localTheme, setLocalTheme };

@@ -1,0 +1,31 @@
+.crypto-stack-table {
+  @apply w-full grid grid-cols-1    content-start md:grid-cols-2 lg:grid-cols-3  min-h-[500px];
+  .single-stack-component {
+    @apply max-h-fit h-fit cursor-pointer text-[.8rem] md:text-[1rem]  w-full min-h-[50px] border-[1px] p-2 flex items-center justify-between gap-2 bg-light_medium_dark    drop-shadow-2xl;
+    img {
+      @apply max-w-[30px] max-h-[30px] min-w-[30px] min-h-[30px];
+    }
+    & > div {
+      @apply w-fit min-w-[20%] flex flex-col items-center justify-between gap-2;
+      .light {
+        @apply w-full text-start text-[.7rem] md:text-[.8rem] opacity-80;
+      }
+      .bold {
+        @apply uppercase w-full text-start font-bold;
+      }
+    }
+    .percentage {
+      @apply min-w-[100px] text-center font-bold w-fit h-fit px-2 py-1 rounded-sm drop-shadow-2xl;
+    }
+  }
+
+  .green-text {
+    color: #00f5ff;
+  }
+  .red {
+    background: #fe0000;
+  }
+  .bg-red {
+    @apply bg-red-300;
+  }
+}

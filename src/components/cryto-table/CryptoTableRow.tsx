@@ -52,14 +52,7 @@ const CryptoTableRow = ({
           }}
           className="crypto-table-container"
         >
-          <motion.table
-          // drag="x"
-          // dragConstraints={{
-          //   right: 10,
-          //   left: -1080,
-          // }}
-          // dragSnapToOrigin={contextData!.screenW}
-          >
+          <motion.table>
             <thead>
               <th>
                 <td

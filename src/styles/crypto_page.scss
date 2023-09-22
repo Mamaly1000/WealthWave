@@ -143,21 +143,36 @@
     }
   }
   .search-crypto-container {
-    @apply w-full flex justify-between items-center overflow-hidden   border-[1px] rounded-lg;
-    input {
-      @apply w-[80%]  md:w-[90%] rounded-e-none rounded-s-lg;
+    @apply w-full flex justify-start items-center  flex-wrap gap-3;
+    .input-search {
+      @apply w-full sm:w-fit flex items-center justify-center relative;
+      input {
+        @apply min-w-full pe-[35px] px-2 sm:min-w-[300px] rounded-lg border-[1px];
+      }
+      svg {
+        @apply w-[25px] h-[25px] z-10 bg-light_dark absolute end-2;
+      }
     }
-    button {
-      @apply shadow-none   w-[50px] h-[50px] border   rounded-none p-2 flex justify-center items-center;
-      img {
-        @apply text-red-50;
+    hr {
+      @apply min-w-[1px] min-h-[20px];
+    }
+    .input-btn {
+      @apply capitalize w-fit h-fit flex items-center justify-center gap-2 text-[.9rem];
+      .entry {
+        @apply hover:scale-105 cursor-pointer hover:drop-shadow-2xl uppercase font-semibold w-fit h-fit px-3 py-2 flex items-center justify-center gap-1 rounded-lg border-[1px];
+      }
+      .text {
+        @apply lowercase font-normal;
+      }
+      svg {
+        @apply w-[10px] h-[10px];
       }
     }
   }
   .crypto-table-container {
-    @apply w-full h-fit min-h-[400px]  overflow-hidden flex items-start justify-start flex-col;
+    @apply max-w-full w-full h-fit min-h-[400px]  overflow-auto lg:overflow-hidden lg:overflow-x-auto flex items-start justify-start flex-col;
     table {
-      @apply bg-light_medium_dark text-white w-fit min-w-full h-fit pb-3 flex justify-center items-center flex-col  overflow-hidden rounded-lg;
+      @apply bg-light_medium_dark text-white w-fit min-w-full h-fit   flex justify-center items-center flex-col  overflow-hidden rounded-lg;
       thead {
         @apply w-full flex justify-start items-start;
         th {
@@ -170,11 +185,11 @@
         }
       }
       tbody {
-        @apply w-full;
+        @apply min-w-full flex-col flex items-start justify-between;
         tr {
           border-width: 0.01px !important;
           @apply flex items-center
-            gap-2 hover:rounded-sm  border-transparent  transition-all cursor-pointer min-w-full min-h-[60px];
+            gap-2 overflow-hidden hover:rounded-sm  border-transparent  transition-all cursor-pointer min-w-full min-h-[60px];
         }
         .chart-td {
           @apply overflow-hidden;
@@ -221,9 +236,9 @@
         @apply min-w-[165px] w-[165px] max-w-[165px] flex items-center justify-end;
       }
       .chart-td {
-        @apply relative py-2 min-w-[150px] w-[150px] max-w-[150px] flex items-center justify-center;
+        @apply relative p-2 overflow-hidden min-w-[150px] w-[150px] max-w-[150px] flex items-center justify-center;
         .small-chart {
-          @apply absolute flex items-end justify-center h-full  w-full;
+          @apply absolute flex items-center justify-end min-h-fit  w-full;
         }
       }
       .td-actions {
@@ -235,6 +250,9 @@
       .selected-td {
         @apply bg-light_dark;
       }
+    }
+    &::-webkit-scrollbar {
+      display: block !important;
     }
   }
   .pagination-container {

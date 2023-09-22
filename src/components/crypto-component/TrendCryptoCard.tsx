@@ -40,7 +40,15 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
       onAnimationComplete={() => {
         setDisplayChart(true);
       }}
-      whileHover={{ background: themeSelector.containerColor }}
+      style={{ background: "rgba(0 0 0/.2)" }}
+      whileHover={{
+        background: themeSelector.modalColor,
+        transition: {
+          duration: 0.1,
+          type: "tween",
+          delay: 0,
+        },
+      }}
     >
       <div className="top" style={{ borderColor: themeSelector.btnColor }}>
         <motion.div className="top-left">

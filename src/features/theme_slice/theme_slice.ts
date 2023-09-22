@@ -10,6 +10,7 @@ const initialState: ThemeInterface = {
   headerColor: "#ffffff",
   hoverColor: "rgba(0 0 0/.2)",
   plainTextColor: "#FFEEF4",
+  modalColor: "#1D1D16",
 };
 
 const themeReducer = createSlice({
@@ -37,6 +38,9 @@ const themeReducer = createSlice({
     setDividerColorTheme: (state, action) => {
       state.divider = action.payload;
     },
+    setModalColorTheme: (state, action) => {
+      state.modalColor = action.payload;
+    },
     setAppTheme: (state, action) => {
       state.bgColor = action.payload.bgColor;
       state.btnColor = action.payload.btnColor;
@@ -45,6 +49,7 @@ const themeReducer = createSlice({
       state.plainTextColor = action.payload.plainTextColor;
       state.headerColor = action.payload.headerColor;
       state.divider = action.payload.divider;
+      state.modalColor = action.payload.modalColor;
     },
   },
 });
@@ -57,6 +62,7 @@ export const {
   setHoverColorTheme,
   setAppTheme,
   setDividerColorTheme,
+  setModalColorTheme,
 } = themeReducer.actions;
 export default themeReducer.reducer;
 export const selecttheme = (state: RootState) => {

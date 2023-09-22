@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ThemeInterface } from "../../hooks/useTheme";
 import Divider from "../ntf-components/Divider";
+import { useState } from "react";
 
 const ThemePreview = ({ localTheme }: { localTheme: ThemeInterface }) => {
   const {
@@ -11,6 +12,7 @@ const ThemePreview = ({ localTheme }: { localTheme: ThemeInterface }) => {
     plainTextColor,
     hoverColor,
   } = localTheme;
+  const [displayModal, setDisplayModal] = useState<boolean>(false);
   return (
     <motion.div style={{ background: bgColor }} className="preview-container">
       <motion.div style={{ background: containerColor }} className="img">
@@ -27,9 +29,43 @@ const ThemePreview = ({ localTheme }: { localTheme: ThemeInterface }) => {
       <motion.button
         whileHover={{ background: hoverColor }}
         animate={{ background: btnColor }}
+        onClick={() => {
+          setDisplayModal(true);
+        }}
       >
-        read more
+        display modal
       </motion.button>
+      <AnimatePresence>
+        {displayModal && (
+          <div className="preview-modal-container">
+            <div
+              className="preview-modal-overlay"
+              onClick={() => setDisplayModal(false)}
+            ></div>
+            <motion.div
+              initial={{
+                scale: 0,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+                borderColor: localTheme.btnColor,
+              }}
+              exit={{ scale: 0, opacity: 0 }}
+              transition={{ duration: 0.1 }}
+              style={{
+                background: localTheme.modalColor,
+                color: localTheme.headerColor,
+              }}
+              onClick={() => setDisplayModal(false)}
+              className="preview-modal-content"
+            >
+              this is a modal container
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

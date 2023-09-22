@@ -16,11 +16,14 @@ import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
 import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
 import LearnCrypto from "../components/crypto-component/LearnCrypto";
 import CryptoBlogs from "../components/crypto-component/CryptoBlogs";
+import CryptoStackTable from "../components/crypto-stack-table/CryptoStackTable";
 
 const Crypto_page = () => {
   const dispatch = useDispatch();
   const { cryptoSelector } = useCrypto();
-  const [DisplayType, setDisplayType] = useState<"line" | "tree">("line");
+  const [DisplayType, setDisplayType] = useState<"line" | "tree" | "stack">(
+    "line"
+  );
 
   const cryptoData = useMemo(() => {
     return cryptoSelector.coinlist
@@ -78,6 +81,11 @@ const Crypto_page = () => {
             <CryptoTreeChart width={"100%"} height={800} data={cryptoData} />
           )}
         </AnimatePresence>
+        <AnimatePresence>
+          {DisplayType === "stack" && (
+            <CryptoStackTable cryptoData={cryptoData} />
+          )}
+        </AnimatePresence>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -115,7 +123,6 @@ const Crypto_page = () => {
           nextClassName="crypto-pagination-nav"
           previousClassName="crypto-pagination-nav"
           breakClassName="crypto-pagination-breaks"
-          
         />
       </motion.div>
       <CryptoBlogs />

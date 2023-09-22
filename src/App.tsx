@@ -12,8 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Crypto_page from "./pages/Crypto_page";
 import View_Crypto from "./pages/View_Crypto";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "react-query"; 
 import ScrollToTop from "./components/scroll-component/ScrollToTop";
 import Nft_Page from "./pages/Nft_Page";
 import Nft_Single_Page from "./pages/Nft_Single_Page";
@@ -80,8 +79,7 @@ function App() {
             <Route path="/nfts/:id" element={<Nft_Single_Page />} />
 
             <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+          </Routes> 
         </QueryClientProvider>
       </AnimatePresence>
       <ToastContainer

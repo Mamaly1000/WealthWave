@@ -15,6 +15,7 @@ import {
   setDividerColorTheme,
   setHeaderColorTheme,
   setHoverColorTheme,
+  setModalColorTheme,
   setPlainTextColorTheme,
   setbgColorTheme,
 } from "../../features/theme_slice/theme_slice";
@@ -117,6 +118,60 @@ const DashboardThemeSection = () => {
                 style={{ background: "#" + color }}
               >
                 {contextData!.localTheme.btnColor === "#" + color && (
+                  <img src={tickIcon} />
+                )}
+              </div>
+            );
+          })}
+        </ThemeContainer>{" "}
+        <ThemeContainer
+          styleColor={contextData!.localTheme.modalColor}
+          height={40}
+          title="modals background color"
+          width={3}
+          onChangeComplete={(color) => {
+            dispatch(setModalColorTheme(color.hex));
+            contextData!.setLocalTheme({
+              ...contextData!.localTheme,
+              modalColor: color.hex,
+            });
+          }}
+        >
+          {btnColors.map((color) => {
+            return (
+              <div
+                className="color-item"
+                key={color}
+                onClick={() => {
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    modalColor: "#" + color,
+                  });
+                  dispatch(setModalColorTheme("#" + color));
+                }}
+                style={{ background: "#" + color }}
+              >
+                {contextData!.localTheme.modalColor === "#" + color && (
+                  <img src={tickIcon} />
+                )}
+              </div>
+            );
+          })}
+          {headerColors.map((color) => {
+            return (
+              <div
+                className="color-item"
+                key={color}
+                onClick={() => {
+                  contextData!.setLocalTheme({
+                    ...contextData!.localTheme,
+                    modalColor: "#" + color,
+                  });
+                  dispatch(setModalColorTheme("#" + color));
+                }}
+                style={{ background: "#" + color }}
+              >
+                {contextData!.localTheme.modalColor === "#" + color && (
                   <img src={tickIcon} />
                 )}
               </div>
