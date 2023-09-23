@@ -21,11 +21,7 @@ import { socialMedia } from "../Data/dummy";
 import { useState } from "react";
 import CryptoDataTable from "../components/view-crypto/CryptoDataTable";
 import backIcon from "./../assets/crypto/back.svg";
-import {
-  tagsMotion,
-  viewFromLeft,
-  viewFromRight,
-} from "../motions/viewCryptoMotions";
+import { viewFromLeft } from "../motions/viewCryptoMotions";
 import TabsSection from "../components/view-crypto/TabsSection";
 import CoinChart from "../components/view-crypto/CoinChart";
 import CryptoDescription from "../components/view-crypto/CryptoDescription";
@@ -229,7 +225,8 @@ const View_Crypto = () => {
   const { isLoading: _CoinsLoading } = cryptosList(
     "fetch-related-coins",
     true,
-    true
+    true,
+    cryptoSelector.currentCurrency.name
   );
 
   return (

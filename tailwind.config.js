@@ -882,6 +882,7 @@ export default {
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",
+      dropdown: { min: "320px", max: "640px" },
     },
     scrollMargin: ({ theme }) => ({
       ...theme("spacing"),

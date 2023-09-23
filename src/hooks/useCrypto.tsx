@@ -45,9 +45,13 @@ export interface IcryptoChart {
   id: string | number;
   data: [number, number][];
 }
-export const fetchChart = async (name: string, day: number) => {
+export const fetchChart = async (
+  name: string,
+  day: number,
+  currency: string
+) => {
   const res = await axios.get(
-    `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=usd&days=${day}`
+    `https://api.coingecko.com/api/v3/coins/${name}/market_chart?vs_currency=${currency}&days=${day}`
   );
   return res?.data;
 };
@@ -71,13 +75,14 @@ const useCrypto = () => {
   const cryptosList = (
     cache_name: string,
     enable: boolean,
-    refetchOnMount: boolean
+    refetchOnMount: boolean,
+    currency: string
   ) => {
     return useQuery(
-      `${cache_name}`,
+      [`${cache_name}`, `${currency}`],
       () => {
         return axios.get(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=400&page=1&sparkline=true&locale=en`
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=400&page=1&sparkline=true&locale=en`
         );
       },
       {
@@ -87,11 +92,27 @@ const useCrypto = () => {
         onSuccess: (data) => {
           dispatch(fetchCoins(data.data));
           setLoacalCryptoList(data.data);
-          dispatch(setCryptoPagination(data.data));
+          dispatch(
+            setCryptoPagination({
+              total_pages: Math.ceil(
+                data.data / cryptoSelector.pagination.offset
+              ),
+              offset: cryptoSelector.pagination.offset,
+              current_page: 1,
+            } as typeof cryptoSelector.pagination)
+          );
         },
         onError: () => {
           dispatch(fetchCoins(LocalCryptoList));
-          dispatch(setCryptoPagination(LocalCryptoList));
+          dispatch(
+            setCryptoPagination({
+              current_page: 1,
+              offset: cryptoSelector.pagination.offset,
+              total_pages: Math.ceil(
+                LocalCryptoList.length / cryptoSelector.pagination.offset
+              ),
+            } as typeof cryptoSelector.pagination)
+          );
         },
       }
     );

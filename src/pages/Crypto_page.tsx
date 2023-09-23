@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import useCrypto from "../hooks/useCrypto";
@@ -8,45 +8,33 @@ import Crypto_Search from "../components/search-components/Crypto_Search";
 import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import CryptoTreeChart from "../components/crypto-component/CryptoTreeChart";
 import { useDispatch } from "react-redux";
-import {
-  setCryptoPageOffSet,
-  setCurrentCryptoPage,
-} from "../features/crypto_slice/crypto_slice";
-import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
-import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
-import LearnCrypto from "../components/crypto-component/LearnCrypto";
+import { setCryptoPagination } from "../features/crypto_slice/crypto_slice";
+// import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
+// import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
+// import LearnCrypto from "../components/crypto-component/LearnCrypto";
 import CryptoBlogs from "../components/crypto-component/CryptoBlogs";
 import CryptoStackTable from "../components/crypto-stack-table/CryptoStackTable";
 
 const Crypto_page = () => {
   const dispatch = useDispatch();
-  const { cryptoSelector } = useCrypto();
-  const [DisplayType, setDisplayType] = useState<"line" | "tree" | "stack">(
-    "line"
-  );
+  const { cryptoSelector, LocalCryptoList } = useCrypto();
 
   const cryptoData = useMemo(() => {
-    return cryptoSelector.coinlist
-      .slice(
-        cryptoSelector.pagination.offset,
-        cryptoSelector.pagination.offset + 10
-      )
-      .filter(
-        (c) =>
-          c.id
-            .toLowerCase()
-            .includes(cryptoSelector.cryptoSearch.toLowerCase()) ||
-          c.symbol
-            .toLowerCase()
-            .includes(cryptoSelector.cryptoSearch.toLowerCase()) ||
-          c.name
-            .toLowerCase()
-            .includes(cryptoSelector.cryptoSearch.toLowerCase())
-      );
+    return cryptoSelector.coinlist.filter(
+      (c) =>
+        c.id
+          .toLowerCase()
+          .includes(cryptoSelector.cryptoSearch.toLowerCase()) ||
+        c.symbol
+          .toLowerCase()
+          .includes(cryptoSelector.cryptoSearch.toLowerCase()) ||
+        c.name.toLowerCase().includes(cryptoSelector.cryptoSearch.toLowerCase())
+    );
   }, [
     cryptoSelector.cryptoSearch,
-    cryptoSelector.pagination.offset,
+    cryptoSelector.pagination,
     cryptoSelector.coinlist,
+    LocalCryptoList,
   ]);
 
   return (
@@ -57,13 +45,10 @@ const Crypto_page = () => {
       exit="exit"
       className="crypto-main-page"
     >
-      <CryptoPageIntro />
-      <CryptoSecondIntro />
-      <LearnCrypto />
-      <Crypto_Search
-        DisplayType={DisplayType}
-        setDisplayType={setDisplayType}
-      />
+      {/* <CryptoPageIntro /> */}
+      {/* <CryptoSecondIntro /> */}
+      {/* <LearnCrypto /> */}
+      <Crypto_Search />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -72,60 +57,87 @@ const Crypto_page = () => {
         className="crypto-table-container"
       >
         <AnimatePresence>
-          {DisplayType === "line" && (
-            <CryptoTableRow crypto_data={cryptoData} header={false} />
+          {cryptoSelector.displayType === "line" && (
+            <CryptoTableRow
+              crypto_data={cryptoData.slice(
+                (cryptoSelector.pagination.current_page - 1) *
+                  cryptoSelector.pagination.offset,
+                cryptoSelector.pagination.offset *
+                  cryptoSelector.pagination.current_page
+              )}
+              header={false}
+            />
+          )}
+        </AnimatePresence>
+        {/* <AnimatePresence>
+          {cryptoSelector.displayType === "tree" && (
+            <CryptoTreeChart
+              width={"100%"}
+              height={800}
+              data={cryptoData.slice(
+                (cryptoSelector.pagination.current_page - 1) *
+                  cryptoSelector.pagination.offset,
+                cryptoSelector.pagination.offset *
+                  cryptoSelector.pagination.current_page
+              )}
+            />
           )}
         </AnimatePresence>
         <AnimatePresence>
-          {DisplayType === "tree" && (
-            <CryptoTreeChart width={"100%"} height={800} data={cryptoData} />
+          {cryptoSelector.displayType === "stack" && (
+            <CryptoStackTable
+              cryptoData={cryptoData.slice(
+                (cryptoSelector.pagination.current_page - 1) *
+                  cryptoSelector.pagination.offset,
+                cryptoSelector.pagination.offset *
+                  cryptoSelector.pagination.current_page
+              )}
+            />
           )}
-        </AnimatePresence>
-        <AnimatePresence>
-          {DisplayType === "stack" && (
-            <CryptoStackTable cryptoData={cryptoData} />
-          )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </motion.div>
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, type: "tween" }}
         className="pagination-container"
+        viewport={{ once: true }}
       >
         <ReactPaginate
           breakLabel="..."
           nextLabel="Next"
           onPageChange={(e) => {
-            const newOffset =
-              (e.selected * 10) % cryptoSelector.coinlist.length;
-            dispatch(setCurrentCryptoPage(newOffset / 10 + 1));
-            dispatch(setCryptoPageOffSet(newOffset));
-            window.scroll({ top: 850 });
+            dispatch(
+              setCryptoPagination({
+                current_page: e.selected + 1,
+                offset: cryptoSelector.pagination.offset,
+                total_pages: Math.ceil(
+                  cryptoData.length / cryptoSelector.pagination.offset
+                ),
+              } as typeof cryptoSelector.pagination)
+            );
+            console.log(cryptoData);
           }}
-          forcePage={
-            cryptoSelector.pagination.current_page === 1
-              ? cryptoSelector.pagination.current_page + 1
-              : cryptoSelector.pagination.current_page - 1
-          }
           pageRangeDisplayed={1}
           marginPagesDisplayed={1}
-          pageCount={cryptoSelector.pagination.total_pages}
+          pageCount={Math.ceil(
+            cryptoData.length / cryptoSelector.pagination.offset
+          )}
           previousLabel="Previous"
           renderOnZeroPageCount={null}
           containerClassName="crypto-pagination"
           pageLinkClassName="crypto-pagination-links"
           activeLinkClassName="activeClassName"
           onPageActive={() => {
-            window.scroll({ top: 850 });
+            window.scroll({ top: 1000 });
             toast.warn("you are already at this page");
           }}
           nextClassName="crypto-pagination-nav"
           previousClassName="crypto-pagination-nav"
           breakClassName="crypto-pagination-breaks"
         />
-      </motion.div>
-      <CryptoBlogs />
+      </motion.div> */}
+      {/* <CryptoBlogs /> */}
     </motion.div>
   );
 };

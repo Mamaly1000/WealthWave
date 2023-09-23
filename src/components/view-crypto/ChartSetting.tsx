@@ -24,7 +24,11 @@ const ChartSetting = () => {
       return {
         queryKey: ["charts-data", chart.id],
         queryFn: () => {
-          fetchChart(chart.id, cryptoSelector.cryptoDay)
+          fetchChart(
+            chart.id,
+            cryptoSelector.cryptoDay,
+            cryptoSelector.currentCurrency.name
+          )
             .then((res) => {
               dispatch(
                 updateCryptoChart({

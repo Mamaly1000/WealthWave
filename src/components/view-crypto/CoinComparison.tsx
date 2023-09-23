@@ -13,7 +13,12 @@ const CoinComparison = () => {
   const dispatch = useDispatch();
   const { cryptoSelector, cryptosList } = useCrypto();
   const [_isPending, startTransition] = useTransition();
-  const fetchAllCoins = cryptosList("fetch-coin", false, false);
+  const fetchAllCoins = cryptosList(
+    "fetch-coin",
+    false,
+    false,
+    cryptoSelector.currentCurrency.name
+  );
   const [selectedCoins, setSelectedCoins] = useState<IcryptoData[]>([]);
   const [displayCoins, setDisplayCoins] = useState<boolean>(false);
   const themeSelector = useSelector(selecttheme);

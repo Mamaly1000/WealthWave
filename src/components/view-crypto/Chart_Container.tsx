@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import useCrypto from "../../hooks/useCrypto";
 import Chart from "react-apexcharts";
 import moment from "moment";
@@ -12,7 +12,7 @@ const Chart_Container = () => {
   const [datasets, setDatasets] = useState([]);
   const [label, setLabel] = useState<string[]>([]);
   const themeSelector = useSelector(selecttheme);
-  const fetchcharts = useMemo(() => {
+  useMemo(() => {
     if (
       cryptoSelector.cryptoCharts.length > 0 &&
       cryptoSelector.cryptoChartDisplayType === "prices"
@@ -89,7 +89,7 @@ const Chart_Container = () => {
       setDatasets(datas as never[]);
     }
   }, [cryptoSelector.cryptoChartDisplayType, cryptoSelector.cryptoCharts]);
-  useEffect(() => {}, [fetchcharts]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}

@@ -156,36 +156,43 @@
     hr {
       @apply min-w-[1px] min-h-[20px];
     }
-    .input-btn {
-      @apply capitalize w-fit h-fit flex items-center justify-center gap-2 text-[.9rem];
-      .entry {
-        @apply hover:scale-105 cursor-pointer hover:drop-shadow-2xl uppercase font-semibold w-fit h-fit px-3 py-2 flex items-center justify-center gap-1 rounded-lg border-[1px];
-      }
-      .text {
-        @apply lowercase font-normal;
-      }
-      svg {
-        @apply w-[10px] h-[10px];
+    .search-input-component {
+      @apply min-w-fit min-h-fit flex items-center justify-center p-1 relative overflow-visible;
+      .input-btn {
+        @apply capitalize w-fit h-fit flex items-center justify-center gap-2 text-[.9rem];
+        .entry {
+          @apply hover:scale-105 cursor-pointer hover:drop-shadow-2xl uppercase font-semibold w-fit h-fit px-3 py-2 flex items-center justify-center gap-1 rounded-lg border-[1px];
+        }
+        .text {
+          @apply lowercase font-normal;
+        }
+        svg {
+          @apply w-[10px] h-[10px];
+        }
       }
     }
   }
   .crypto-table-container {
     @apply max-w-full w-full h-fit min-h-[400px]  overflow-auto lg:overflow-hidden lg:overflow-x-auto flex items-start justify-start flex-col;
     table {
-      @apply bg-light_medium_dark text-white w-fit min-w-full h-fit   flex justify-center items-center flex-col  overflow-hidden rounded-lg;
+      @apply bg-light_medium_dark   w-fit min-w-full max-h-fit   min-h-fit   flex justify-center items-center flex-col  overflow-hidden rounded-lg;
       thead {
         @apply w-full flex justify-start items-start;
         th {
           @apply w-full flex items-center gap-2;
           td {
-            .th-arrow {
-              @apply ms-1 w-[15px] h-[15px] min-w-[15px] min-h-[15px] max-w-[15px] max-h-[15px] transition-all;
+            @apply cursor-pointer hover:bg-light_dark flex items-center stroke-2 gap-2;
+            .arrow {
+              @apply w-fit h-fit p-1 rounded-full border-[1px] flex items-center justify-center;
+              svg {
+                @apply w-[10px] h-[10px] stroke-2;
+              }
             }
           }
         }
       }
       tbody {
-        @apply min-w-full flex-col flex items-start justify-between;
+        @apply min-w-full min-h-fit flex-col flex items-start justify-between;
         tr {
           border-width: 0.01px !important;
           @apply flex items-center

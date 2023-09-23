@@ -1,0 +1,18 @@
+.drop-down-component {
+  @apply absolute z-20   end-0    top-[110%] min-w-full dropdown:w-[150%]  sm:max-w-[400px] sm:min-w-[400px] h-fit max-h-fit p-3 rounded-lg border-[1px] flex flex-col items-start justify-start gap-3;
+  .title {
+    @apply text-[.9rem] capitalize flex items-center justify-start gap-2;
+  }
+  .items {
+    @apply w-full flex flex-wrap items-start justify-start gap-2;
+  }
+  .text {
+    @apply lowercase;
+  }
+  .item {
+    @apply cursor-pointer border-[1px] rounded-lg px-3 py-2 hover:scale-105 active:scale-90 uppercase font-light;
+  }
+  .container {
+    @apply w-full h-fit flex flex-col items-start justify-start gap-2 border-b-[1px] pb-2;
+  }
+}

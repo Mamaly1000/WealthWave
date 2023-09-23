@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useCrypto, { IcryptoData } from "../../hooks/useCrypto";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { componentViewMotion, cryptoRowMotion } from "../../motions/motions";
-import { useDispatch } from "react-redux";
-import { useContextFunction } from "../../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 import CryptoLine from "../crypto-component/CryptoLine";
-import { sortCryptoTable } from "../../features/crypto_slice/crypto_slice";
+import {
+  FilterType,
+  sortCryptoTable,
+} from "../../features/crypto_slice/crypto_slice";
 import ArrowIcon from "./ArrowIcon";
+import { selecttheme } from "../../features/theme_slice/theme_slice";
 const CryptoTableRow = ({
   header = true,
   crypto_data,
@@ -16,15 +19,28 @@ const CryptoTableRow = ({
   crypto_data: IcryptoData[];
 }) => {
   const nav = useNavigate();
-  const contextData = useContextFunction();
   const dispatch = useDispatch();
+  const theme = useSelector(selecttheme);
   const [displayCryptoLines, setDisplayCryptoLines] = useState<boolean>(false);
   const { cryptosList, cryptoSelector } = useCrypto();
-  const currentCryptoData = cryptosList("fetch-crypto-list", true, true);
-  const [filterTypeMode, setFilterTypeMode] = useState("ASC");
-  useEffect(() => {
-    setFilterTypeMode("ASC");
-  }, [cryptoSelector.filterType.type_name]);
+  const currentCryptoData = cryptosList(
+    "fetch-crypto-list",
+    true,
+    true,
+    cryptoSelector.currentCurrency.name
+  );
+  const selected_th_style = (
+    type: FilterType
+  ): {
+    borderInline: string;
+  } => {
+    return {
+      borderInline:
+        cryptoSelector.sortType.type_name === type
+          ? `1px solid ${theme.btnColor}`
+          : "none",
+    };
+  };
   return (
     <motion.div
       className="crypto-table-container"
@@ -54,205 +70,185 @@ const CryptoTableRow = ({
         >
           <motion.table>
             <thead>
-              <th>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "RANK"
-                      ? "selected-td"
-                      : ""
-                  } rank-td`}
+              <th
+                style={{
+                  background: theme.modalColor,
+                  color: theme.headerColor,
+                }}
+              >
+                <motion.td
+                  animate={selected_th_style("RANK")}
+                  className={`rank-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "RANK",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   #
-                  <ArrowIcon type="RANK" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "NAME"
-                      ? "selected-td"
-                      : ""
-                  } coin-td`}
+                  <ArrowIcon type="RANK" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("NAME")}
+                  className={`coin-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "NAME",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   coin
-                  <ArrowIcon type="NAME" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "PRICE"
-                      ? "selected-td"
-                      : ""
-                  } price-td`}
+                  <ArrowIcon type="NAME" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("PRICE")}
+                  className={`price-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "PRICE",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   price
-                  <ArrowIcon type="PRICE" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "LOW_24H"
-                      ? "selected-td"
-                      : ""
-                  } low-td`}
+                  <ArrowIcon type="PRICE" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("LOW_24H")}
+                  className={`low-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "LOW_24H",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   low-24h
-                  <ArrowIcon type="LOW_24H" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "HIGH_24H"
-                      ? "selected-td"
-                      : ""
-                  } high-td`}
+                  <ArrowIcon type="LOW_24H" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("HIGH_24H")}
+                  className={`high-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "HIGH_24H",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   high-24h
-                  <ArrowIcon type="HIGH_24H" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "24H"
-                      ? "selected-td"
-                      : ""
-                  } percentage-td`}
+                  <ArrowIcon type="HIGH_24H" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("24H")}
+                  className={`percentage-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "24H",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   24h
-                  <ArrowIcon type="24H" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "24H_VOLUME"
-                      ? "selected-td"
-                      : ""
-                  } volume-td`}
+                  <ArrowIcon type="24H" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("24H_VOLUME")}
+                  className={`volume-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "24H_VOLUME",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   24h volume
-                  <ArrowIcon type="24H_VOLUME" typeMode={filterTypeMode} />
-                </td>
-                <td
-                  className={`${
-                    cryptoSelector.filterType.type_name === "MKT_CAP"
-                      ? "selected-td"
-                      : ""
-                  } market-cap-td`}
+                  <ArrowIcon type="24H_VOLUME" />
+                </motion.td>
+                <motion.td
+                  animate={selected_th_style("MKT_CAP")}
+                  className={`market-cap-td`}
                   onClick={() => {
                     dispatch(
                       sortCryptoTable({
+                        mode:
+                          cryptoSelector.sortType.mode === "N/A"
+                            ? "ASC"
+                            : cryptoSelector.sortType.mode === "ASC"
+                            ? "DESC"
+                            : "ASC",
                         type_name: "MKT_CAP",
-                        type: filterTypeMode,
-                      })
+                      } as typeof cryptoSelector.sortType)
                     );
-                    if (filterTypeMode === "ASC") {
-                      setFilterTypeMode("DESC");
-                    } else {
-                      setFilterTypeMode("ASC");
-                    }
                   }}
                 >
                   mkt cap
-                  <ArrowIcon type="MKT_CAP" typeMode={filterTypeMode} />
-                </td>
-                <td className="chart-td">last 7 days</td>
-                <td className="td-actions">actions</td>
+                  <ArrowIcon type="MKT_CAP" />
+                </motion.td>
+                <motion.td className="chart-td">last 7 days</motion.td>
+                <motion.td className="td-actions">actions</motion.td>
               </th>
             </thead>
             <motion.tbody
-              initial={{ height: 200 }}
-              animate={{ height: displayCryptoLines ? 610 : 200 }}
+              style={{ color: theme.headerColor }}
               transition={{ duration: 1, type: "tween" }}
             >
-              {!currentCryptoData.isLoading || !currentCryptoData.isFetching
+              {!currentCryptoData.isLoading
                 ? crypto_data.map((coin, index) => {
                     return (
                       displayCryptoLines && (
-                        <CryptoLine coin={coin} index={index} key={index} />
+                        <CryptoLine coin={coin} index={index} key={coin.id} />
                       )
                     );
                   })
@@ -264,6 +260,7 @@ const CryptoTableRow = ({
                         animate="visible"
                         exit="exit"
                         key={c}
+                        style={{ cursor: "default" }}
                         className="loading-animation"
                       ></motion.tr>
                     );
