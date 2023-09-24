@@ -71,7 +71,7 @@
     @apply w-[50px] h-[50px] p-3 flex items-center justify-center rounded-full fixed top-24 right-4;
   }
   .profile-card {
-    @apply bg-light_dark fixed top-[100px] end-[100px] w-fit h-fit rounded-lg drop-shadow-2xl backdrop-blur-2xl border-[1px] p-5 flex flex-col items-start justify-start gap-2;
+    @apply bg-light_dark fixed w-[90%] top-[80px] sm:top-[100px]  end-[5%] sm:end-[100px] sm:w-fit h-fit rounded-lg drop-shadow-2xl backdrop-blur-2xl border-[1px] p-5 flex flex-col items-start justify-start gap-2;
     & > div {
       @apply border-b-[1px] py-2;
     }
@@ -94,7 +94,7 @@
       @apply w-full flex flex-col items-start justify-start gap-3;
 
       button {
-        @apply font-semibold w-full text-start rounded-lg border-[1px] border-transparent capitalize    ;
+        @apply font-semibold w-full text-start rounded-lg border-[1px] border-transparent capitalize;
       }
     }
   }
