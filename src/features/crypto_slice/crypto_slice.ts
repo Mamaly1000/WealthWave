@@ -8,7 +8,43 @@ export interface currencySymbol {
   name: string;
   symbol: string;
 }
-export type FilterType =
+export type filteringTypes =
+  | "crypto-ath"
+  | "crypto-ath_change_percentage"
+  | "crypto-ath_date"
+  | "crypto-atl"
+  | "crypto-atl_change_percentage"
+  | "crypto-atl_date"
+  | "crypto-circulating_supply"
+  | "crypto-current_price"
+  | "crypto-fully_diluted_valuation"
+  | "crypto-high_24h"
+  | "crypto-id"
+  | "crypto-image"
+  | "crypto-last_updated"
+  | "crypto-low_24h"
+  | "crypto-market_cap"
+  | "crypto-market_cap_change_24h"
+  | "crypto-market_cap_change_percentage_24h"
+  | "crypto-market_cap_rank"
+  | "crypto-max_supply"
+  | "crypto-name"
+  | "crypto-price_change_24h"
+  | "crypto-price_change_percentage_24h"
+  | "crypto-roi"
+  | "crypto-symbol"
+  | "crypto-total_supply"
+  | "crypto-total_volume";
+export type singleFilterType = {
+  type: filteringTypes;
+  value: {
+    type: "date" | "percentage" | "number";
+    min: number;
+    max: number;
+    strValue: string;
+  };
+};
+export type sortingTypes =
   | "RANK"
   | "NAME"
   | "PRICE"
@@ -46,6 +82,7 @@ export interface IviewPageChartData {
 }
 interface crypto_slice_interface {
   coinlist: IcryptoData[];
+  secondaryData: IcryptoData[];
   cryptoLoading: boolean;
   selectedCoin: ISingleCoin;
   cryptoCharts: IviewPageChartData[];
@@ -55,9 +92,10 @@ interface crypto_slice_interface {
   cryptoChartDisplayType: "prices" | "market-cap" | "total-volumes";
   cryptoDay: number;
   sortType: {
-    type_name: FilterType | "";
+    type_name: sortingTypes | "";
     mode: "ASC" | "DESC" | "N/A";
   };
+  filters: singleFilterType[];
   pagination: {
     total_pages: number;
     current_page: number;
@@ -73,6 +111,7 @@ type BookmarkedCrypto = {
 
 const initialState: crypto_slice_interface = {
   coinlist: [],
+  secondaryData: [],
   selectedCoin: {
     contract_address: "",
     id: "",
@@ -246,6 +285,7 @@ const initialState: crypto_slice_interface = {
     type_name: "N/A",
     mode: "N/A",
   },
+  filters: [],
   pagination: {
     total_pages: 0,
     current_page: 1,
@@ -347,7 +387,7 @@ const CryptoReducer = createSlice({
       if (state.coinlist.length === 0)
         toast.warn("please wait for fetching data !");
       let sortedArray = [...state.coinlist];
-      switch (action.payload.type_name as FilterType) {
+      switch (action.payload.type_name as sortingTypes) {
         case "RANK":
           sortedArray = state.coinlist.sort((a, b) => {
             return a.market_cap_rank > b.market_cap_rank ? 1 : -1;
@@ -452,6 +492,252 @@ const CryptoReducer = createSlice({
       toast.info(`you choosed ${action.payload} display !`);
       state.displayType = action.payload;
     },
+    filterCryptoTable: (state, action) => {
+      const checkingFilterIndex = state.filters.findIndex(
+        (f) => f.type === action.payload.type
+      );
+      const selectedFilter = state.filters.find(
+        (filter) => filter.type === action.payload.type
+      );
+      let newFilters = [...state.filters];
+      if (action.payload.entryType === "add") {
+        if (checkingFilterIndex > 0) {
+          state.filters[checkingFilterIndex] = {
+            type: action.payload.type,
+            value: action.payload.value,
+          };
+          newFilters[checkingFilterIndex] = {
+            type: action.payload.type,
+            value: action.payload.value,
+          };
+        } else {
+          state.filters.push(action.payload);
+          newFilters.push(action.payload);
+        }
+      } else if (action.payload.entryType === "delete") {
+        const updatedFilters = newFilters.filter(
+          (filter) => filter.type !== selectedFilter?.type
+        );
+        toast.warn(`you removed ${selectedFilter?.type} filter`);
+        state.filters = updatedFilters;
+        newFilters = updatedFilters;
+      }
+
+      state.secondaryData = state.coinlist;
+      let filteredData = [...state.coinlist];
+      if (state.filters.length > 0) {
+        for (const filterItem of newFilters) {
+          if (filterItem.type === "crypto-ath") {
+            const filter_by_ath = filteredData.filter((coin) => {
+              return (
+                coin.ath >= filterItem.value.min &&
+                coin.ath <= filterItem.value.max
+              );
+            });
+            filteredData = filter_by_ath;
+            toast.success(
+              "coins have been filtered by their ath(all-time-high) price"
+            );
+          } else if (filterItem.type === "crypto-atl") {
+            const filter_by_atl = filteredData.filter((coin) => {
+              return (
+                coin.atl >= filterItem.value.min &&
+                coin.atl <= filterItem.value.max
+              );
+            });
+            filteredData = filter_by_atl;
+            toast.success(
+              "coins have been filtered by their atl(all-time-low) price"
+            );
+          } else if (filterItem.type === "crypto-ath_change_percentage") {
+            const filter_by_ath_percentage = filteredData.filter(
+              (coin) =>
+                coin.ath_change_percentage <= filterItem.value.max &&
+                coin.ath_change_percentage >= filterItem.value.min
+            );
+            filteredData = filter_by_ath_percentage;
+            toast.success(
+              "coins have been filtered by their all-time-high-percentage-change"
+            );
+          } else if (filterItem.type === "crypto-atl_change_percentage") {
+            const filter_by_atl_percantage = filteredData.filter(
+              (coin) =>
+                +coin.atl_change_percentage >= filterItem.value.min &&
+                +coin.atl_change_percentage <= filterItem.value.max
+            );
+            filteredData = filter_by_atl_percantage;
+            toast.success(
+              "coins have been filtered by all-time-high-change-percentage"
+            );
+          } else if (filterItem.type === "crypto-circulating_supply") {
+            const filter_by_circ_supply = filteredData.filter(
+              (coin) =>
+                coin.circulating_supply <= filterItem.value.max &&
+                coin.circulating_supply >= filterItem.value.min
+            );
+            filteredData = filter_by_circ_supply;
+            toast.success(
+              "coins have been filtered by their circulating-supply"
+            );
+          } else if (filterItem.type === "crypto-current_price") {
+            const filter_by_price = filteredData.filter(
+              (coin) =>
+                coin.current_price >= filterItem.value.min &&
+                coin.current_price <= filterItem.value.max
+            );
+            filteredData = filter_by_price;
+            toast.success("coins have been filtered by their price");
+          } else if (filterItem.type === "crypto-fully_diluted_valuation") {
+            const filter_by_fully_diluted_valuation = filteredData.filter(
+              (coin) =>
+                coin.fully_diluted_valuation <= filterItem.value.max &&
+                coin.fully_diluted_valuation >= filterItem.value.min
+            );
+            filteredData = filter_by_fully_diluted_valuation;
+            toast.success(
+              "coins have been filtered by their fully-diluted-valuation"
+            );
+          } else if (filterItem.type === "crypto-high_24h") {
+            const filter_by_high_24 = filteredData.filter(
+              (coin) =>
+                coin.high_24h >= filterItem.value.min &&
+                coin.high_24h <= filterItem.value.max
+            );
+            filteredData = filter_by_high_24;
+            toast.success("coins have been filtered by their hight-24 price");
+          } else if (filterItem.type === "crypto-low_24h") {
+            const filter_by_low_24 = filteredData.filter(
+              (coin) =>
+                coin.low_24h >= filterItem.value.min &&
+                coin.low_24h <= filterItem.value.max
+            );
+            filteredData = filter_by_low_24;
+            toast.success("coins have been filtered by their low-24 price");
+          } else if (filterItem.type === "crypto-id") {
+            const filter_by_id = filteredData.filter((coin) =>
+              coin.id
+                .toLowerCase()
+                .includes(filterItem.value.strValue.toLowerCase())
+            );
+            filteredData = filter_by_id;
+            toast.success(
+              `coins have been filtered by their id. id=${filterItem.value.strValue}`
+            );
+          } else if (filterItem.type === "crypto-market_cap") {
+            const filter_by_mkt = filteredData.filter(
+              (coin) =>
+                coin.market_cap >= filterItem.value.min &&
+                coin.market_cap <= filterItem.value.max
+            );
+            filteredData = filter_by_mkt;
+            toast.success("coins have been filtered by their market-cap");
+          } else if (filterItem.type === "crypto-market_cap_change_24h") {
+            const filter_by_market_cap_change_24h = filteredData.filter(
+              (coin) =>
+                coin.market_cap_change_24h >= filterItem.value.min &&
+                coin.market_cap_change_24h <= filterItem.value.max
+            );
+            filteredData = filter_by_market_cap_change_24h;
+            toast.success(
+              "coins have been filtered by their market_cap_change_24h"
+            );
+          } else if (
+            filterItem.type === "crypto-market_cap_change_percentage_24h"
+          ) {
+            const filter_by_market_cap_change_percentage_24h =
+              filteredData.filter(
+                (coin) =>
+                  coin.market_cap_change_percentage_24h >=
+                    filterItem.value.min &&
+                  coin.market_cap_change_percentage_24h <= filterItem.value.max
+              );
+            filteredData = filter_by_market_cap_change_percentage_24h;
+            toast.success(
+              "coins have been filtered by their market_cap_change_percentage_24h"
+            );
+          } else if (filterItem.type === "crypto-market_cap_rank") {
+            const filter_by_market_cap_rank = filteredData.filter(
+              (coin) =>
+                coin.market_cap_rank >= filterItem.value.min &&
+                coin.market_cap_rank <= filterItem.value.max
+            );
+            filteredData = filter_by_market_cap_rank;
+            toast.success("coins have been filtered by their market-cap rank");
+          } else if (filterItem.type === "crypto-max_supply") {
+            const filter_by_max_supply = filteredData.filter(
+              (coin) =>
+                coin.max_supply >= filterItem.value.min &&
+                coin.max_supply <= filterItem.value.max
+            );
+            filteredData = filter_by_max_supply;
+            toast.success("coins have been filtered by their max_supply");
+          } else if (filterItem.type === "crypto-name") {
+            const filter_by_name = filteredData.filter((coin) =>
+              coin.name
+                .toLowerCase()
+                .includes(filterItem.value.strValue.toLowerCase())
+            );
+            filteredData = filter_by_name;
+            toast.success("coins have been filtered by their name");
+          } else if (filterItem.type === "crypto-price_change_24h") {
+            const filter_by_price_change_24h = filteredData.filter(
+              (coin) =>
+                coin.price_change_24h <= filterItem.value.max &&
+                coin.price_change_24h >= filterItem.value.min
+            );
+            filteredData = filter_by_price_change_24h;
+            toast.success("coins have been filtered by their price_change_24h");
+          } else if (filterItem.type === "crypto-price_change_percentage_24h") {
+            const filter_by_price_change_percentage_24h = filteredData.filter(
+              (coin) =>
+                coin.price_change_percentage_24h >= filterItem.value.min &&
+                coin.price_change_percentage_24h <= filterItem.value.max
+            );
+            filteredData = filter_by_price_change_percentage_24h;
+            toast.success(
+              "coins have been filtered by their price_change_percentage_24h"
+            );
+          } else if (filterItem.type === "crypto-roi") {
+            const filter_by_roi = filteredData.filter(
+              (coin) =>
+                coin.roi &&
+                coin.roi.percentage >= filterItem.value.min &&
+                coin.roi.percentage <= filterItem.value.max
+            );
+            filteredData = filter_by_roi;
+            toast.success("coins have been filtered by their roi");
+          } else if (filterItem.type === "crypto-symbol") {
+            const filter_by_symbol = filteredData.filter((coin) =>
+              coin.symbol
+                .toLowerCase()
+                .includes(filterItem.value.strValue.toLowerCase())
+            );
+            filteredData = filter_by_symbol;
+            toast.success("coins have been filtered by their symbol");
+          } else if (filterItem.type === "crypto-total_supply") {
+            const filter_by_total_supply = filteredData.filter(
+              (coin) =>
+                coin.total_supply >= filterItem.value.min &&
+                coin.total_supply <= filterItem.value.max
+            );
+            filteredData = filter_by_total_supply;
+            toast.success("coins have been filtered by their total_supply");
+          } else if (filterItem.type === "crypto-total_volume") {
+            const filter_by_total_volume = filteredData.filter(
+              (coin) =>
+                coin.total_volume >= filterItem.value.min &&
+                coin.total_volume <= filterItem.value.max
+            );
+            filteredData = filter_by_total_volume;
+            toast.success("coins have been filtered by their total_volume");
+          }
+        }
+        state.coinlist = filteredData;
+      } else if (state.filters.length === 0) {
+        toast.warn("you removed all filters !");
+        state.coinlist = state.secondaryData;
+      }
+    },
   },
 });
 export const {
@@ -473,6 +759,7 @@ export const {
   setCryptoPageOffSet,
   setCurrentCurrency,
   setDisplayType,
+  filterCryptoTable,
 } = CryptoReducer.actions;
 export default CryptoReducer.reducer;
 export const selectCrypto = (state: RootState) => {

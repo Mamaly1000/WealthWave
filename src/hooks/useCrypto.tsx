@@ -35,7 +35,11 @@ export interface IcryptoData {
   name: string;
   price_change_24h: number;
   price_change_percentage_24h: number;
-  roi: null;
+  roi: null | {
+    currency: string;
+    percentage: number;
+    times: number;
+  };
   sparkline_in_7d?: { price: number[] };
   symbol: string;
   total_supply: number;

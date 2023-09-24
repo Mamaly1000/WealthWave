@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { cryptoControlsType } from "../search-components/Crypto_Search";
 import {
-  FilterType,
+  sortingTypes,
   cryptoTableDisplayType,
   currencySymbol,
   setCryptoPagination,
@@ -28,7 +28,7 @@ export type crypto_favorites_type = {
   name: string;
   value: boolean;
 }[];
-export type crypto_sort_type = Array<FilterType | "asc" | "desc" | "N/A">;
+export type crypto_sort_type = Array<sortingTypes | "asc" | "desc" | "N/A">;
 
 const DropDown = ({
   content,
@@ -50,7 +50,7 @@ const DropDown = ({
       | crypto_diplay_type
       | crypto_entries_type
       | crypto_favorites_type
-      | { type: FilterType; name: string };
+      | { type: sortingTypes; name: string };
   };
   extras?: {
     currentValue: string;
@@ -211,7 +211,7 @@ const DropDown = ({
             </div>
             <div className="items">
               {(
-                content.items as unknown as { type: FilterType; name: string }[]
+                content.items as unknown as { type: sortingTypes; name: string }[]
               ).map((item) => {
                 return (
                   <Item

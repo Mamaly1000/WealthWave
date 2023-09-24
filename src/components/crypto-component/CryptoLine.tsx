@@ -11,7 +11,7 @@ import { downarrow, starIcon, uparrow } from "../../assets/crypto/cryptoImages";
 import { IoMdAdd } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { toast } from "react-toastify";
-import { FilterType } from "../../features/crypto_slice/crypto_slice";
+import { sortingTypes } from "../../features/crypto_slice/crypto_slice";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
@@ -22,7 +22,7 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
   const [displayChart, setDisplayChart] = useState<boolean>(false);
   const themeSelector = useSelector(selecttheme);
   const selected_td_style = (
-    type: FilterType
+    type: sortingTypes
   ): {
     borderInline: string;
     background: string;

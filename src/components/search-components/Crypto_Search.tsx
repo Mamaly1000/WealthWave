@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import useCrypto from "../../hooks/useCrypto";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  FilterType,
+  sortingTypes,
   currencySymbol,
   setCryptoSearch,
 } from "../../features/crypto_slice/crypto_slice";
@@ -231,7 +231,7 @@ const Crypto_Search = () => {
                   { name: "coin-name", type: "NAME" },
                   { name: "market-cap-rank", type: "RANK" },
                   { name: "reset-sorting", type: "N/A" },
-                ] as unknown as { name: string; type: FilterType },
+                ] as unknown as { name: string; type: sortingTypes },
                 text: "sort by:",
                 title: "sort",
                 type: "crypto-sort",
@@ -241,19 +241,19 @@ const Crypto_Search = () => {
         </AnimatePresence>
       </div>
       <hr style={{ background: themeSelector.btnColor }} />
-      <div className="input-btn">
-        filter:{" "}
-        <span
-          style={{
-            borderColor: themeSelector.btnColor,
-            background: themeSelector.modalColor,
+      <div className="search-input-component">
+        <Input_Btn
+          data="market-cap"
+          maintype="crypto-filter"
+          onclick={() => {
+            setSearchControl(
+              searchControl === "crypto-filter" ? "" : "crypto-filter"
+            );
           }}
-          className="entry"
-        >
-          market-cap
-          {/* <BsChevronDown /> */}
-        </span>
-      </div>{" "}
+          searchControl="crypto-filter"
+          title="filter"
+        />
+      </div>
       <hr style={{ background: themeSelector.btnColor }} />
       <div className="input-btn">
         favorites:{" "}

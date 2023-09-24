@@ -6,7 +6,7 @@ import { componentViewMotion, cryptoRowMotion } from "../../motions/motions";
 import { useDispatch, useSelector } from "react-redux";
 import CryptoLine from "../crypto-component/CryptoLine";
 import {
-  FilterType,
+  sortingTypes,
   sortCryptoTable,
 } from "../../features/crypto_slice/crypto_slice";
 import ArrowIcon from "./ArrowIcon";
@@ -30,7 +30,7 @@ const CryptoTableRow = ({
     cryptoSelector.currentCurrency.name
   );
   const selected_th_style = (
-    type: FilterType
+    type: sortingTypes
   ): {
     borderInline: string;
   } => {
