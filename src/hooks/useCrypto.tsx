@@ -7,6 +7,7 @@ import {
   ItrendCoin,
   fetchCoins,
   fetchTrendCoins,
+  filterCryptoTable,
   selectCrypto,
   setCryptoPagination,
 } from "../features/crypto_slice/crypto_slice";
@@ -93,10 +94,10 @@ const useCrypto = () => {
         cacheTime: 50000,
         refetchOnMount: refetchOnMount,
         enabled: enable,
-        onSuccess: (data) => {
-          dispatch(fetchCoins(data.data));
-          setLoacalCryptoList(data.data);
-          dispatch(
+        onSuccess: async (data) => {
+          await dispatch(fetchCoins(data.data));
+          await setLoacalCryptoList(data.data);
+          await dispatch(
             setCryptoPagination({
               total_pages: Math.ceil(
                 data.data / cryptoSelector.pagination.offset
@@ -104,6 +105,12 @@ const useCrypto = () => {
               offset: cryptoSelector.pagination.offset,
               current_page: 1,
             } as typeof cryptoSelector.pagination)
+          );
+          await dispatch(
+            filterCryptoTable({
+              data: cryptoSelector.filters,
+              entryType: "filter-all",
+            })
           );
         },
         onError: () => {

@@ -61,6 +61,8 @@ interface Icontext {
   setLocalToast: React.Dispatch<React.SetStateAction<ToastInterface>>;
   localProfile: Iprofile;
   setLocalProfile: React.Dispatch<React.SetStateAction<Iprofile>>;
+  displayCryptoFilterModal: boolean;
+  setDisplayCryptoFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
   addWork: (work: { title: string; value: string }) => void;
   editWork: (work: { title: string; value: string; id: string }) => void;
   deleteWork: (work: { title: string; value: string; id: string }) => void;
@@ -77,6 +79,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
+  const [displayCryptoFilterModal, setDisplayCryptoFilterModal] =
+    useState<boolean>(false);
   const {
     localProfile,
     setLocalProfile,
@@ -270,6 +274,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         addSocial,
         editSocial,
         deleteSocial,
+        displayCryptoFilterModal,
+        setDisplayCryptoFilterModal,
       }}
     >
       {children}

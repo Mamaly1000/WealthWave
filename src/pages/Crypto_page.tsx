@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import useCrypto from "../hooks/useCrypto";

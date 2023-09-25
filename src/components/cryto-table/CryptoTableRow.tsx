@@ -19,6 +19,7 @@ const CryptoTableRow = ({
   crypto_data: IcryptoData[];
 }) => {
   const nav = useNavigate();
+  const [crypto_id, setCrypto_id] = useState<string>("");
   const dispatch = useDispatch();
   const theme = useSelector(selecttheme);
   const [displayCryptoLines, setDisplayCryptoLines] = useState<boolean>(false);
@@ -248,7 +249,13 @@ const CryptoTableRow = ({
                 ? crypto_data.map((coin, index) => {
                     return (
                       displayCryptoLines && (
-                        <CryptoLine coin={coin} index={index} key={coin.id} />
+                        <CryptoLine
+                          crypto_id={crypto_id}
+                          setCrypto_id={setCrypto_id}
+                          coin={coin}
+                          index={index}
+                          key={coin.id}
+                        />
                       )
                     );
                   })

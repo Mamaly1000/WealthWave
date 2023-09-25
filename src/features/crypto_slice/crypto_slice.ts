@@ -38,7 +38,7 @@ export type filteringTypes =
 export type singleFilterType = {
   type: filteringTypes;
   value: {
-    type: "date" | "percentage" | "number";
+    type: "date" | "percentage" | "number" | "string";
     min: number;
     max: number;
     strValue: string;
@@ -493,6 +493,10 @@ const CryptoReducer = createSlice({
       state.displayType = action.payload;
     },
     filterCryptoTable: (state, action) => {
+      if (state.secondaryData.length === 0) {
+        state.secondaryData = state.coinlist;
+      }
+      let filteredData = [...state.coinlist];
       const checkingFilterIndex = state.filters.findIndex(
         (f) => f.type === action.payload.type
       );
@@ -514,18 +518,29 @@ const CryptoReducer = createSlice({
           state.filters.push(action.payload);
           newFilters.push(action.payload);
         }
-      } else if (action.payload.entryType === "delete") {
+        filter();
+      }
+      if (action.payload.entryType === "delete") {
         const updatedFilters = newFilters.filter(
           (filter) => filter.type !== selectedFilter?.type
         );
         toast.warn(`you removed ${selectedFilter?.type} filter`);
         state.filters = updatedFilters;
         newFilters = updatedFilters;
+        filter();
       }
-
-      state.secondaryData = state.coinlist;
-      let filteredData = [...state.coinlist];
-      if (state.filters.length > 0) {
+      if (action.payload.entryType === "delete-all") {
+        state.coinlist = state.secondaryData;
+        state.filters = [];
+      }
+      if (action.payload.entryType === "filter-all") {
+        const filters: typeof state.filters = action.payload.data;
+        newFilters = filters;
+        if (newFilters.length > 0) {
+          filter();
+        }
+      }
+      function filter() {
         for (const filterItem of newFilters) {
           if (filterItem.type === "crypto-ath") {
             const filter_by_ath = filteredData.filter((coin) => {
@@ -732,10 +747,11 @@ const CryptoReducer = createSlice({
             toast.success("coins have been filtered by their total_volume");
           }
         }
+        if (newFilters.length === 0) {
+          toast.warn("you removed all filters !");
+          filteredData = state.secondaryData;
+        }
         state.coinlist = filteredData;
-      } else if (state.filters.length === 0) {
-        toast.warn("you removed all filters !");
-        state.coinlist = state.secondaryData;
       }
     },
   },

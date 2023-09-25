@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import useCrypto from "../../hooks/useCrypto";
 import React from "react";
 import { motion } from "framer-motion";
-
 export type crypto_currency_type = currencySymbol[];
 
 export type crypto_diplay_type = Array<cryptoTableDisplayType>;
@@ -35,14 +34,18 @@ const DropDown = ({
   contentType,
   setDisplayDropDown,
   extras,
+  crypto_id,
+  setCrypto_id,
+  selected_crypto_id,
 }: {
   setDisplayDropDown: React.Dispatch<
-    React.SetStateAction<cryptoControlsType | "">
+    React.SetStateAction<cryptoControlsType | "" | string>
   >;
-  contentType: cryptoControlsType;
+  selected_crypto_id: string;
+  contentType: cryptoControlsType | "";
   content: {
     title: string;
-    type: cryptoControlsType;
+    type: cryptoControlsType | "";
     currentValue: string;
     text: undefined | string;
     items:
@@ -61,6 +64,8 @@ const DropDown = ({
       | crypto_favorites_type
       | crypto_sort_type;
   };
+  crypto_id?: string;
+  setCrypto_id?: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const theme = useSelector(selecttheme);
   const dispatch = useDispatch();
@@ -167,6 +172,7 @@ const DropDown = ({
                     );
                     setDisplayDropDown("");
                   }}
+                  key={item.value}
                 />
               );
             })}
@@ -174,7 +180,6 @@ const DropDown = ({
         </Container>
       )}
       {contentType == "crypto-favorites" && <></>}
-      {contentType == "crypto-filter" && <></>}
       {contentType == "crypto-sort" && (
         <>
           {extras && (
@@ -211,7 +216,10 @@ const DropDown = ({
             </div>
             <div className="items">
               {(
-                content.items as unknown as { type: sortingTypes; name: string }[]
+                content.items as unknown as {
+                  type: sortingTypes;
+                  name: string;
+                }[]
               ).map((item) => {
                 return (
                   <Item
@@ -237,6 +245,11 @@ const DropDown = ({
             </div>
           </div>
         </>
+      )}
+      {crypto_id === selected_crypto_id && setCrypto_id && (
+        <div onClick={() => setCrypto_id("")}>
+          this is a drop down {crypto_id}{" "}
+        </div>
       )}
     </motion.div>
   );

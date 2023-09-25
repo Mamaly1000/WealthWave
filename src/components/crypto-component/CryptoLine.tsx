@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IcryptoData } from "../../hooks/useCrypto";
 import { CryptoTable } from "../cryto-table/CryptoChart";
 import useCrypto from "../../hooks/useCrypto";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { downarrow, starIcon, uparrow } from "../../assets/crypto/cryptoImages";
@@ -12,11 +12,19 @@ import { IoMdAdd } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { toast } from "react-toastify";
 import { sortingTypes } from "../../features/crypto_slice/crypto_slice";
+import DropDown from "../drop-sown-component/DropDown";
 type CryptoLinePropsType = {
   index: number;
   coin: IcryptoData;
+  crypto_id: string;
+  setCrypto_id: React.Dispatch<React.SetStateAction<string>>;
 };
-const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
+const CryptoLine = ({
+  index,
+  coin,
+  crypto_id,
+  setCrypto_id,
+}: CryptoLinePropsType) => {
   const nav = useNavigate();
   const { cryptoSelector } = useCrypto();
   const [displayChart, setDisplayChart] = useState<boolean>(false);
@@ -157,10 +165,6 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
       </td>
       <td className="td-actions">
         <motion.button
-          whileHover={{
-            background: themeSelector.hoverColor,
-            border: `1px solid ${themeSelector.headerColor}`,
-          }}
           style={{
             border: `1px solid ${themeSelector.btnColor}`,
             background: "transparent",
@@ -174,19 +178,34 @@ const CryptoLine = ({ index, coin }: CryptoLinePropsType) => {
           <IoMdAdd />
         </motion.button>
         <motion.button
-          whileHover={{
-            border: `1px solid ${themeSelector.headerColor}`,
-            background: themeSelector.hoverColor,
-          }}
           transition={{ duration: 0.1 }}
           style={{
             border: `1px solid ${themeSelector.btnColor}`,
             color: themeSelector.headerColor,
             background: "transparent",
           }}
+          onClick={() => {
+            setCrypto_id(coin.id === crypto_id ? "" : coin.id);
+          }}
         >
           <GiHamburgerMenu />
         </motion.button>
+        {crypto_id === coin.id && (
+          <DropDown
+            content={{
+              currentValue: "",
+              items: [],
+              text: "",
+              title: "",
+              type: "",
+            }}
+            crypto_id={crypto_id}
+            setCrypto_id={setCrypto_id}
+            contentType=""
+            setDisplayDropDown={setCrypto_id}
+            selected_crypto_id={coin.id}
+          />
+        )}
       </td>
     </motion.tr>
   );

@@ -19,7 +19,9 @@ import {
   crypto_sort_type,
 } from "../drop-sown-component/DropDown";
 import ArrowComponent from "./ArrowComponent";
-
+import { TbFilterPlus, TbReload } from "react-icons/tb";
+import { useContextFunction } from "../../context/AppContext";
+import { toast } from "react-toastify";
 export type cryptoControlsType =
   | "crypto-currency"
   | "crypto-sort"
@@ -38,12 +40,13 @@ const Crypto_Search = () => {
   const dispatch = useDispatch();
   const { cryptosList, cryptoSelector } = useCrypto();
   const [searchText, setSearchText] = useState<string>("");
-  const { isLoading } = cryptosList(
+  const { isLoading, refetch } = cryptosList(
     "refresh-data",
     false,
     false,
     cryptoSelector.currentCurrency.name
   );
+  const contextData = useContextFunction();
   const controls = useAnimationControls();
   const [_pending, setTransition] = useTransition();
   const themeSelector = useSelector(selecttheme);
@@ -242,33 +245,51 @@ const Crypto_Search = () => {
       </div>
       <hr style={{ background: themeSelector.btnColor }} />
       <div className="search-input-component">
-        <Input_Btn
-          data="market-cap"
-          maintype="crypto-filter"
-          onclick={() => {
-            setSearchControl(
-              searchControl === "crypto-filter" ? "" : "crypto-filter"
-            );
-          }}
-          searchControl="crypto-filter"
-          title="filter"
-        />
+        <div className="input-btn">
+          favorites:{" "}
+          <span
+            style={{
+              borderColor: themeSelector.btnColor,
+              background: themeSelector.modalColor,
+            }}
+            className="entry"
+          >
+            off
+            {/* <BsChevronDown /> */}
+          </span>
+        </div>{" "}
       </div>
       <hr style={{ background: themeSelector.btnColor }} />
-      <div className="input-btn">
-        favorites:{" "}
-        <span
-          style={{
-            borderColor: themeSelector.btnColor,
-            background: themeSelector.modalColor,
-          }}
-          className="entry"
-        >
-          off
-          {/* <BsChevronDown /> */}
-        </span>
-      </div>{" "}
+      <button
+        style={{
+          background: themeSelector.modalColor,
+          border: `1px solid ${themeSelector.btnColor}`,
+        }}
+        className="search-btn"
+        onClick={() => contextData!.setDisplayCryptoFilterModal(true)}
+      >
+        filter
+        <hr style={{ background: themeSelector.btnColor }} />
+        <TbFilterPlus />
+      </button>
       <hr style={{ background: themeSelector.btnColor }} />
+      <button
+        className="search-btn"
+        style={{
+          background: themeSelector.modalColor,
+          color: themeSelector.headerColor,
+          border: `1px solid ${themeSelector.btnColor}`,
+        }}
+        onClick={() =>
+          toast.promise(refetch(), {
+            error: "failed to fetch data !",
+            pending: "fetching data ",
+            success: "data updated successfully !",
+          })
+        }
+      >
+        <TbReload />
+      </button>
     </motion.div>
   );
 };

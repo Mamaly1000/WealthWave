@@ -143,9 +143,9 @@
     }
   }
   .search-crypto-container {
-    @apply w-full flex justify-start items-center  flex-wrap gap-3;
+    @apply w-full flex justify-end lg:justify-start items-center  flex-wrap gap-3;
     .input-search {
-      @apply w-full sm:w-fit flex items-center justify-center relative;
+      @apply float-left w-full sm:w-fit flex items-center justify-center relative;
       input {
         @apply min-w-full pe-[35px] px-2 sm:min-w-[300px] rounded-lg border-[1px];
       }
@@ -154,7 +154,7 @@
       }
     }
     hr {
-      @apply min-w-[1px] min-h-[20px];
+      @apply min-w-[2px]  max-w-[2px]  max-h-[20px] min-h-[20px] border-0;
     }
     .search-input-component {
       @apply min-w-fit min-h-fit flex items-center justify-center p-1 relative overflow-visible;
@@ -170,6 +170,15 @@
           @apply w-[10px] h-[10px];
         }
       }
+    }
+    .search-btn {
+      @apply w-fit border-[1px] px-3 py-2 rounded-lg drop-shadow-2xl flex items-center justify-center gap-2 capitalize;
+      hr {
+        @apply w-[1px] h-[20px] border-0;
+      }
+    }
+    svg {
+      @apply w-[20px] h-[20px];
     }
   }
   .crypto-table-container {
@@ -196,7 +205,10 @@
         tr {
           border-width: 0.01px !important;
           @apply flex items-center
-            gap-2 overflow-hidden hover:rounded-sm  border-transparent  transition-all cursor-pointer min-w-full min-h-[60px];
+            gap-2   hover:rounded-sm  border-transparent  transition-all cursor-pointer min-w-full min-h-[60px];
+            .drop-down-component{
+              @apply end-3 top-[100%]
+            }
         }
         .chart-td {
           @apply overflow-hidden;
@@ -249,7 +261,7 @@
         }
       }
       .td-actions {
-        @apply min-w-[120px]  max-w-fit flex items-center justify-end gap-2;
+        @apply relative min-w-[120px]  max-w-fit flex items-center justify-end gap-2;
         button {
           @apply min-w-[40px] min-h-[40px] border-[1px] rounded-full p-[1px] flex items-center justify-center hover:scale-110 active:scale-90;
         }
