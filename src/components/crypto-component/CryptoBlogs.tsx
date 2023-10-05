@@ -43,7 +43,7 @@ const CryptoBlogs = () => {
           <motion.div
             whileHover={{
               y: -5,
-              boxShadow: `0 10px 20px ${themeSelector.btnColor}`,
+              boxShadow: `0 10px 5px ${themeSelector.btnColor}`,
             }}
             transition={{ duration: 0.1 }}
             className="single-blog"
@@ -51,25 +51,26 @@ const CryptoBlogs = () => {
             key={news.author}
           >
             <img src={news.image} />
+
+            <h3 style={{ color: themeSelector.headerColor }}>{news.title}</h3>
+            <p style={{ color: themeSelector.plainTextColor }}>
+              {news.content}
+            </p>
             <div className="blog-extras">
               {[news.source, news.category].map((d) => {
                 return (
                   <span
                     style={{
-                      background: themeSelector.btnColor,
                       color: themeSelector.headerColor,
+                      borderColor: themeSelector.btnColor,
                     }}
                     key={d}
                   >
-                    {d}
+                    {d.slice(0, 10) + "..."}
                   </span>
                 );
               })}
             </div>
-            <h3 style={{ color: themeSelector.headerColor }}>{news.title}</h3>
-            <p style={{ color: themeSelector.plainTextColor }}>
-              {news.content}
-            </p>
           </motion.div>
         );
       })}

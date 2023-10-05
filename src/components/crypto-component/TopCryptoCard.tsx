@@ -18,7 +18,16 @@ const TopCryptoCard = ({ index, coin }: topCryptoCardPropType) => {
       whileInView="visible"
       exit="exit"
       className="top-crypto-component"
-      whileHover={{ background: themeSelector.containerColor }}
+      style={{ border: "1px solid transparent", background: "rgba(0 0 0/.2)" }}
+      whileHover={{
+        background: themeSelector.modalColor,
+        border: `1px solid ${themeSelector.btnColor}`,
+        transition: {
+          duration: 0.1,
+          type: "tween",
+          delay: 0,
+        },
+      }}
     >
       <div className="component-row">
         <img src={coin!.image} alt="" className="coin-img" />{" "}

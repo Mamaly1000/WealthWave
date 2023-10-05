@@ -40,9 +40,10 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
       onAnimationComplete={() => {
         setDisplayChart(true);
       }}
-      style={{ background: "rgba(0 0 0/.2)" }}
+      style={{ border: "1px solid transparent", background: "rgba(0 0 0/.2)" }}
       whileHover={{
         background: themeSelector.modalColor,
+        border: `1px solid ${themeSelector.btnColor}`,
         transition: {
           duration: 0.1,
           type: "tween",
@@ -65,11 +66,13 @@ const TrendCryptoCard = ({ coin, index }: trendCryptoCardPropsType) => {
           <span
             style={{
               color: themeSelector.headerColor,
-              background: themeSelector.btnColor,
+              border: `1px solid ${themeSelector.btnColor}`,
             }}
             className="light"
           >
-            {coin.item.name}
+            {coin.item.name.length > 10
+              ? coin.item.name.slice(0, 10) + "..."
+              : coin.item.name}
           </span>
         </motion.div>
         <button style={{ background: themeSelector.btnColor }}>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { removingPageMotion } from "../motions/motions";
 import useCrypto from "../hooks/useCrypto";
@@ -9,9 +9,9 @@ import CryptoTableRow from "../components/cryto-table/CryptoTableRow";
 import CryptoTreeChart from "../components/crypto-component/CryptoTreeChart";
 import { useDispatch } from "react-redux";
 import { setCryptoPagination } from "../features/crypto_slice/crypto_slice";
-// import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
-// import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
-// import LearnCrypto from "../components/crypto-component/LearnCrypto";
+import CryptoPageIntro from "../components/crypto-component/CryptoPageIntro";
+import CryptoSecondIntro from "../components/crypto-component/CryptoSecondIntro";
+import LearnCrypto from "../components/crypto-component/LearnCrypto";
 import CryptoBlogs from "../components/crypto-component/CryptoBlogs";
 import CryptoStackTable from "../components/crypto-stack-table/CryptoStackTable";
 
@@ -45,9 +45,9 @@ const Crypto_page = () => {
       exit="exit"
       className="crypto-main-page"
     >
-      {/* <CryptoPageIntro /> */}
-      {/* <CryptoSecondIntro /> */}
-      {/* <LearnCrypto /> */}
+      <CryptoPageIntro />
+      <CryptoSecondIntro />
+      <LearnCrypto />
       <Crypto_Search />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -69,7 +69,7 @@ const Crypto_page = () => {
             />
           )}
         </AnimatePresence>
-        {/* <AnimatePresence>
+        <AnimatePresence>
           {cryptoSelector.displayType === "tree" && (
             <CryptoTreeChart
               width={"100%"}
@@ -94,9 +94,9 @@ const Crypto_page = () => {
               )}
             />
           )}
-        </AnimatePresence> */}
+        </AnimatePresence>
       </motion.div>
-      {/* <motion.div
+      <motion.div
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, type: "tween" }}
@@ -136,8 +136,8 @@ const Crypto_page = () => {
           previousClassName="crypto-pagination-nav"
           breakClassName="crypto-pagination-breaks"
         />
-      </motion.div> */}
-      {/* <CryptoBlogs /> */}
+      </motion.div>
+      <CryptoBlogs />
     </motion.div>
   );
 };

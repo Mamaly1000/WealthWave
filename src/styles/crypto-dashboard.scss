@@ -1,0 +1,53 @@
+.crypto-dashboard-section {
+  .dashboard-header {
+    @apply min-w-full flex items-center justify-start flex-col gap-2;
+    & > h1 {
+      @apply font-semibold capitalize text-[2rem] min-w-full text-start;
+    }
+    .bottom-section {
+      @apply min-w-full flex items-center justify-between;
+      p {
+        @apply w-fit text-start text-[.8rem] opacity-70 capitalize;
+      }
+      div {
+        @apply max-w-[50%] flex items-center justify-end gap-3 flex-wrap h-fit;
+        button {
+          @apply border-[1px] text-[.9rem] font-light capitalize whitespace-nowrap;
+        }
+      }
+    }
+  }
+  .wallet-preview {
+    @apply min-w-full flex items-center justify-start gap-5;
+    .budget-card {
+      @apply max-w-[320px] max-h-fit flex flex-col items-center justify-center gap-3;
+
+      .card {
+        @apply bg-light_dark drop-shadow-2xl rounded-lg max-w-[300px] max-h-[200px] flex items-center justify-center flex-col gap-3;
+        .balance {
+          @apply min-w-full flex items-center justify-between;
+        }
+        .amount {
+          @apply text-[1.7rem] font-bold;
+        }
+        .growth {
+          @apply text-green-600 text-[.8rem];
+        }
+        button {
+          @apply flex items-center justify-center min-w-full whitespace-nowrap;
+        }
+      }
+    }
+    .wallet-container {
+      @apply min-w-[50%] lg:max-w-[60%] max-h-[200px] min-h-[200px] bg-red-50;
+
+      .mySwiper {
+        .wallet-card {
+        }
+      }
+    }
+    h2 {
+      @apply text-[1.5rem] capitalize font-light w-full text-start;
+    }
+  }
+}

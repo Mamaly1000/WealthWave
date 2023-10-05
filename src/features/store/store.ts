@@ -6,6 +6,7 @@ import NewsReducer from "../news_slice/news_slice";
 import ProfileReducer from "../profile_slice/profile_slice";
 import DashboardReducer from "../dashboard_slice/dashboard_slice";
 import themeReducer from "../theme_slice/theme_slice";
+import userActionsReducer from "../user-actions-slice/actions_slice";
 const store = configureStore({
   reducer: {
     crypto: cryptoReducer,
@@ -14,6 +15,7 @@ const store = configureStore({
     profile: ProfileReducer,
     dashboard: DashboardReducer,
     theme: themeReducer,
+    userActions: userActionsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
