@@ -15,6 +15,7 @@ import ToolTipBtn from "../components/dashboard/ToolTipBtn.tsx";
 import { dashboardIcon } from "../assets/dashboard/dashboardIcons.ts";
 import ProfileCard from "../components/header-component/ProfileCard.tsx";
 import FilterModal from "../components/search-components/FilterModal.tsx";
+import Create_wallet_modal from "../components/dashboard-crypto-section/wallet/Create_wallet_modal.tsx";
 
 const Layout = ({ children }: any) => {
   const dasboard = useSelector(selectDashboard);
@@ -66,7 +67,8 @@ const Layout = ({ children }: any) => {
       <AnimatePresence>
         {dasboard.displayProfileCard && <ProfileCard />}
       </AnimatePresence>
-      <FilterModal  />
+      <FilterModal />
+      <Create_wallet_modal />
     </motion.div>
   );
 };

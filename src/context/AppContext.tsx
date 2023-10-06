@@ -63,6 +63,8 @@ interface Icontext {
   setLocalProfile: React.Dispatch<React.SetStateAction<Iprofile>>;
   displayCryptoFilterModal: boolean;
   setDisplayCryptoFilterModal: React.Dispatch<React.SetStateAction<boolean>>;
+  displayCreateWalletModal: boolean;
+  setDisplayCreateWalletModal: React.Dispatch<React.SetStateAction<boolean>>;
   addWork: (work: { title: string; value: string }) => void;
   editWork: (work: { title: string; value: string; id: string }) => void;
   deleteWork: (work: { title: string; value: string; id: string }) => void;
@@ -78,6 +80,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
   const { localTheme, setLocalTheme } = useTheme();
   const [tags, setTags] = useLocalStorage<TAG[]>("TAGS", []);
   const [showTagModal, setShowTagsModal] = useState<boolean>(false);
+  const [displayCreateWalletModal, setDisplayCreateWalletModal] =
+    useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<IAppleNews | null>(null);
   const [displayCryptoFilterModal, setDisplayCryptoFilterModal] =
     useState<boolean>(false);
@@ -276,6 +280,8 @@ const AppContextComponent = ({ children }: { children: React.ReactNode }) => {
         deleteSocial,
         displayCryptoFilterModal,
         setDisplayCryptoFilterModal,
+        displayCreateWalletModal,
+        setDisplayCreateWalletModal,
       }}
     >
       {children}

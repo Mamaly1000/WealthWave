@@ -5,11 +5,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { selectCrypto } from "../../features/crypto_slice/crypto_slice";
 import { BiPlus } from "react-icons/bi";
+import { selectUserActions } from "../../features/user-actions-slice/actions_slice";
 const Dashboard_wallet_preview = () => {
   const theme = useSelector(selecttheme);
   const {
     currentCurrency: { symbol },
   } = useSelector(selectCrypto);
+  const userActions = useSelector(selectUserActions);
   return (
     <div style={{ color: theme.headerColor }} className="wallet-preview">
       <div className="budget-card">
@@ -37,7 +39,6 @@ const Dashboard_wallet_preview = () => {
         <h2>your wallets</h2>
         <Swiper
           slidesPerView={"auto"}
-          spaceBetween={10}
           freeMode={true}
           autoplay={{
             delay: 3000,
@@ -48,15 +49,38 @@ const Dashboard_wallet_preview = () => {
           modules={[FreeMode, Autoplay]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <div className="wallet-card"></div>
-          </SwiperSlide>{" "}
-          <SwiperSlide>
-            <div className="wallet-card"></div>
-          </SwiperSlide>{" "}
-          <SwiperSlide>
-            <div className="wallet-card"></div>
-          </SwiperSlide>
+          {userActions.cryptoWallet.map((wallet) => {
+            return (
+              <SwiperSlide
+                key={wallet.walletAdd}
+                style={{ borderColor: theme.btnColor }}
+              >
+                <div className="wallet-card">
+                  <div className="top-section">
+                    <img className="coin-image" src="/images/bitcoin.png" />
+                    <span className="coin-name">bitcoin</span>
+                  </div>
+                  <div
+                    style={{
+                      background: theme.modalColor,
+                      borderColor: theme.btnColor,
+                    }}
+                    className="bottom-section"
+                  >
+                    <div className="amount">1.5BTC</div>
+                    <div className="growth">
+                      <BiPlus />
+                      13%
+                    </div>
+                    <div className="total">
+                      {symbol}
+                      {(324324).toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </div>

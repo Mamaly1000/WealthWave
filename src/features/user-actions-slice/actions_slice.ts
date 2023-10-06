@@ -12,6 +12,7 @@ export type cryptoWalletType = {
   balance: number;
   balanceInUSD: number;
   walletAdd: string;
+  amount: number;
 };
 export type cryptoTransactionType = {
   transactionDate: Date;

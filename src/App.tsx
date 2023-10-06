@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Crypto_page from "./pages/Crypto_page";
 import View_Crypto from "./pages/View_Crypto";
-import { QueryClient, QueryClientProvider } from "react-query"; 
+import { QueryClient, QueryClientProvider } from "react-query";
 import ScrollToTop from "./components/scroll-component/ScrollToTop";
 import Nft_Page from "./pages/Nft_Page";
 import Nft_Single_Page from "./pages/Nft_Single_Page";
@@ -22,10 +22,10 @@ function App() {
   const location = useLocation();
   const contextData = useContextFunction();
   return (
-    <Layout>
-      <ScrollToTop />
-      <AnimatePresence mode="wait">
-        <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={new QueryClient()}>
+      <Layout>
+        <ScrollToTop />
+        <AnimatePresence mode="wait">
           <Routes location={location} key={location.key}>
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to={"/"} />} />
@@ -79,24 +79,24 @@ function App() {
             <Route path="/nfts/:id" element={<Nft_Single_Page />} />
 
             <Route path="/dashboard" element={<Dashboard />} />
-          </Routes> 
-        </QueryClientProvider>
-      </AnimatePresence>
-      <ToastContainer
-        position={contextData!.localToast.position}
-        autoClose={contextData!.localToast.autoClose}
-        hideProgressBar={contextData!.localToast.hideProgressBar}
-        newestOnTop={contextData!.localToast.newestOnTop}
-        closeOnClick={contextData!.localToast.closeOnClick}
-        rtl={contextData!.localToast.rtl}
-        pauseOnFocusLoss={contextData!.localToast.pauseOnFocusLoss}
-        draggable={contextData!.localToast.draggable}
-        pauseOnHover={contextData!.localToast.pauseOnHover}
-        draggableDirection={contextData!.localToast.draggableDirection}
-        draggablePercent={contextData!.localToast.draggablePercent}
-        theme={contextData!.localToast.theme}
-      />
-    </Layout>
+          </Routes>
+        </AnimatePresence>
+        <ToastContainer
+          position={contextData!.localToast.position}
+          autoClose={contextData!.localToast.autoClose}
+          hideProgressBar={contextData!.localToast.hideProgressBar}
+          newestOnTop={contextData!.localToast.newestOnTop}
+          closeOnClick={contextData!.localToast.closeOnClick}
+          rtl={contextData!.localToast.rtl}
+          pauseOnFocusLoss={contextData!.localToast.pauseOnFocusLoss}
+          draggable={contextData!.localToast.draggable}
+          pauseOnHover={contextData!.localToast.pauseOnHover}
+          draggableDirection={contextData!.localToast.draggableDirection}
+          draggablePercent={contextData!.localToast.draggablePercent}
+          theme={contextData!.localToast.theme}
+        />
+      </Layout>
+    </QueryClientProvider>
   );
 }
 
