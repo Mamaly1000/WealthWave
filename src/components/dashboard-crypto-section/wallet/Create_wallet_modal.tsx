@@ -2,7 +2,7 @@ import { useContextFunction } from "../../../context/AppContext";
 import ModalComponent from "../../modal/ModalComponent";
 import { useState } from "react";
 import { cryptoWalletType } from "../../../features/user-actions-slice/actions_slice";
-import useCrypto from "../../../hooks/useCrypto";
+import useCrypto, { IcryptoData } from "../../../hooks/useCrypto";
 import { CircularProgress, TextField } from "@mui/material";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import Crypto_Select from "./Crypto_Select";
 import Currenc_select from "./Currenc_select";
 import { currencies } from "../../../Data/cryptoCurrencies";
+import { currencySymbol } from "../../../features/crypto_slice/crypto_slice";
 
 const Create_wallet_modal = () => {
   const contextData = useContextFunction();
@@ -17,12 +18,17 @@ const Create_wallet_modal = () => {
   const {
     cryptosList,
     cryptoSelector: {
-      currentCurrency: { name },
+      currentCurrency: { name, symbol },
       coinlist,
     },
   } = useCrypto();
   const { isLoading } = cryptosList("fetching-coins-wallet", true, false, name);
-  const [_formData, _setFormData] = useState<cryptoWalletType>({
+  const [_formData, _setFormData] = useState<
+    cryptoWalletType & {
+      coinData: null | IcryptoData;
+      currency: currencySymbol;
+    }
+  >({
     balance: 0,
     balanceInUSD: 0,
     icon: "",
@@ -32,7 +38,15 @@ const Create_wallet_modal = () => {
     totalSelling: 0,
     walletAdd: "",
     amount: 0,
+    coinData: null,
+    currency: { name: name, symbol: symbol },
   });
+  const clickClickHandler = (
+    type: "price" | "coin",
+    data: IcryptoData | currencySymbol
+  ) => {
+    console.log(data);
+  };
   const Div = styled.div`
     .css-q0jhri-MuiInputBase-root-MuiInput-root:after {
       border-bottom: 2px solid ${theme.btnColor} !important;
@@ -68,33 +82,35 @@ const Create_wallet_modal = () => {
       setShow={contextData!.setDisplayCreateWalletModal}
       show={contextData!.displayCreateWalletModal}
     >
-      {isLoading ? (
-        <CircularProgress variant="indeterminate" />
-      ) : (
-        <Div
-          style={{
-            color: theme.headerColor,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "start",
-            gap: 20,
-            maxWidth: "100%",
-            flexWrap: "wrap",
-          }}
-        >
-          <TextField
-            id="outlined-number"
-            label="Number"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
+      <div className="">
+        {isLoading ? (
+          <CircularProgress variant="indeterminate" />
+        ) : (
+          <Div
+            style={{
+              color: theme.headerColor,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "start",
+              gap: 20,
+              maxWidth: "100%",
+              flexWrap: "wrap",
             }}
-            style={{ minWidth: "45%", maxWidth: "45%" }}
-          />
-          <Crypto_Select coins={coinlist} />
-          <Currenc_select currencies={currencies} />
-        </Div>
-      )}
+          >
+            <TextField
+              id="outlined-number"
+              label="Number"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              style={{ minWidth: "45%", maxWidth: "45%" }}
+            />
+            <Crypto_Select coins={coinlist} />
+            <Currenc_select currencies={currencies} />
+          </Div>
+        )}
+      </div>
     </ModalComponent>
   );
 };

@@ -63,21 +63,6 @@ const Currenc_select = ({ currencies }: { currencies: currencySymbol[] }) => {
           })}
         </Select>
       </FormControl>
-      <span
-        style={{
-          minWidth: "50%",
-          maxWidth: "50%",
-          borderBottom: `2px solid ${theme.btnColor}`,
-          padding: 10,
-          minHeight: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: 5,
-          whiteSpace: "nowrap",
-        }}
-      >
-        price : {(23123).toLocaleString()}
-      </span>
     </div>
   );
 };
