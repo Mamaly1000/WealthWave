@@ -2,34 +2,41 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { CSSProperties } from "styled-components";
+import { currencySymbol } from "../../features/crypto_slice/crypto_slice";
+import { IcryptoData } from "../../hooks/useCrypto";
 
 const Select_component = ({
   label,
   value,
-  onchange,
   data,
   onclickHandler,
   dataType,
 }: {
-  dataType: string;
+  dataType: "coin" | "price";
   data: {
     name: string;
     image?: string;
     symbol?: string;
     mainData: object;
   }[];
-  onclickHandler: (type: string, data: unknown) => void;
+  onclickHandler: (
+    type: "coin" | "price",
+    data: IcryptoData | currencySymbol
+  ) => void;
   label: string;
   value: unknown;
-  onchange: (e: SelectChangeEvent<unknown>) => void;
 }) => {
+  const theme = useSelector(selecttheme);
+  const [open, setOpen] = useState(false);
+  const [inputVal, setInputVal] = useState<Array<string | unknown>>([value]);
   const [dataPagination, setDataPagination] = useState({
     total_pages: Math.ceil(data.length / 10),
     offset: 10,
@@ -65,18 +72,34 @@ const Select_component = ({
       });
     }
   };
-  const theme = useSelector(selecttheme);
+  const handleChange = (event: SelectChangeEvent<typeof inputVal>) => {
+    const {
+      target: { value },
+    } = event;
+    if (
+      value[value.length - 1] !== "next" ||
+      value[value.length - 1] !== "previous"
+    ) {
+      const arr = [value[value.length - 1]];
+      setInputVal(typeof value === "string" ? arr : arr);
+    }
+  };
   const menuItemStyle = {
     background: theme.modalColor,
     borderBottom: `1px solid ${theme.btnColor}`,
+    borderInline: `1px solid ${theme.btnColor}`,
     color: theme.headerColor,
     textTransform: "uppercase",
-  };
+  } as CSSProperties;
   return (
     <div className="select-component">
       <FormControl fullWidth>
         <InputLabel
-          style={{ color: theme.headerColor }}
+          style={{
+            color: theme.headerColor,
+            textTransform: "uppercase",
+            background: theme.modalColor,
+          }}
           id="demo-simple-select-label"
         >
           {label}
@@ -84,11 +107,25 @@ const Select_component = ({
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={value}
-          label={label}
-          onChange={onchange}
+          value={inputVal}
+          defaultOpen={open}
+          onChange={handleChange}
+          input={<OutlinedInput label={label} />}
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => (inputVal.length > 0 ? setOpen(true) : setOpen(false))}
+          multiple
         >
-          <MenuItem style={menuItemStyle as CSSProperties}>back</MenuItem>
+          {dataPagination.return_page && (
+            <MenuItem
+              style={menuItemStyle as CSSProperties}
+              className="paginatate-btn"
+              onClick={() => pageHandler("previous")}
+              value={["previous"]}
+            >
+              previous
+            </MenuItem>
+          )}
           {data
             .slice(
               dataPagination.offset * (dataPagination.current_page - 1),
@@ -100,15 +137,45 @@ const Select_component = ({
                   style={menuItemStyle as CSSProperties}
                   key={item.name}
                   value={item.name}
-                  onClick={() => onclickHandler(dataType, item.mainData)}
+                  onClick={() => {
+                    onclickHandler(
+                      dataType,
+                      item.mainData as unknown as IcryptoData as currencySymbol
+                    );
+                    setInputVal([item.name]);
+                    setOpen(false);
+                  }}
                 >
-                  {item.image && <img src={item.image} />}
+                  {item.image && (
+                    <img
+                      style={{
+                        maxWidth: 30,
+                        maxHeight: 30,
+                        minWidth: 30,
+                        minHeight: 30,
+                        marginInline: 10,
+                      }}
+                      src={item.image}
+                    />
+                  )}
                   {item.symbol && item.symbol}
                   {item.name}
                 </MenuItem>
               );
             })}
-          <MenuItem style={menuItemStyle as CSSProperties}>show more</MenuItem>
+          {dataPagination.next_page && (
+            <MenuItem
+              onClick={() => {
+                setOpen(true);
+                setInputVal(["next"]);
+                pageHandler("next");
+              }}
+              value={["next"]}
+              style={menuItemStyle as CSSProperties}
+            >
+              next
+            </MenuItem>
+          )}
         </Select>
       </FormControl>
     </div>
