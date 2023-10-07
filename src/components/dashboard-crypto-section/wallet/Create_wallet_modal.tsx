@@ -80,7 +80,17 @@ const Create_wallet_modal = () => {
     >
       <div className="create-wallet-modal">
         {isLoading ? (
-          <CircularProgress style={{ padding: 20, color: theme.btnColor }} />
+          <div
+            style={{
+              minWidth: "100%",
+              minHeight: 400,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CircularProgress style={{ color: theme.btnColor }} />
+          </div>
         ) : (
           <Div
             className="wallet-content"
@@ -114,7 +124,6 @@ const Create_wallet_modal = () => {
               dataType="coin"
               label="Currency"
               onclickHandler={clickHandler}
-              value={formData.symbol}
             />
             <div className="select-component">
               <TextField
@@ -130,6 +139,8 @@ const Create_wallet_modal = () => {
             {formData.coinData && (
               <Wallet_chart
                 sparkLine={formData.coinData?.sparkline_in_7d?.price}
+                currency={formData.currency}
+                name={formData.symbol}
               />
             )}
           </Div>

@@ -32,11 +32,13 @@ const Select_component = ({
     data: IcryptoData | currencySymbol
   ) => void;
   label: string;
-  value: unknown;
+  value?: unknown;
 }) => {
   const theme = useSelector(selecttheme);
   const [open, setOpen] = useState(false);
-  const [inputVal, setInputVal] = useState<Array<string | unknown>>([value]);
+  const [inputVal, setInputVal] = useState<Array<string | unknown>>([
+    value || "",
+  ]);
   const [dataPagination, setDataPagination] = useState({
     total_pages: Math.ceil(data.length / 10),
     offset: 10,
