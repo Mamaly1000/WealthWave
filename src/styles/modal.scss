@@ -87,5 +87,17 @@
     .coin-chart-preview {
       @apply py-1 min-w-full md:min-w-[45%] md:max-w-[45%] max-h-[300px] min-h-[300px];
     }
+    .coin-data-overview {
+      @apply min-w-full flex flex-wrap items-start justify-between gap-5 md:min-w-[47%] md:max-w-[47%];
+      .item {
+        @apply min-w-[46%] max-w-[46%] border-[1px] flex items-center justify-center rounded-lg px-3 py-2 relative;
+        .title {
+          @apply px-1 absolute start-1 top-[-30%] z-10 whitespace-nowrap font-semibold capitalize text-[.9rem];
+        }
+        .data {
+          @apply min-w-full text-start whitespace-nowrap text-[.8rem];
+        }
+      }
+    }
   }
 }

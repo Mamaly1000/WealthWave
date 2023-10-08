@@ -12,6 +12,7 @@ import { currencySymbol } from "../../../features/crypto_slice/crypto_slice";
 import Select_component from "../../select-component/Select_component";
 import { ThemeInterface } from "../../../hooks/useTheme";
 import Wallet_chart from "./Wallet_chart";
+import moment from "moment";
 
 const Create_wallet_modal = () => {
   const contextData = useContextFunction();
@@ -23,7 +24,6 @@ const Create_wallet_modal = () => {
       coinlist,
     },
   } = useCrypto();
-  const { isLoading } = cryptosList("fetching-coins-wallet", true, false, name);
   const [formData, setFormData] = useState<
     cryptoWalletType & {
       coinData: null | IcryptoData;
@@ -42,6 +42,12 @@ const Create_wallet_modal = () => {
     coinData: null,
     currency: { name: name, symbol: symbol },
   });
+  const { isLoading } = cryptosList(
+    "fetching-coins-wallet",
+    false,
+    false,
+    formData.currency.name
+  );
   const clickHandler = (
     type: "price" | "coin",
     data: IcryptoData | currencySymbol
@@ -59,16 +65,72 @@ const Create_wallet_modal = () => {
       });
     }
     if (type === "price") {
+      setFormData({
+        ...formData,
+        currency: data,
+      });
     }
   };
-  const CoinOverviewData = [
-    {
-      title: "",
-      data: {
-        priceUsd: "",
-      },
-    },
-  ];
+  const CoinOverviewData = formData.coinData
+    ? [
+        {
+          title: `price in ${formData.currency.name}`,
+          data: (
+            formData.amount * formData.coinData.current_price
+          ).toLocaleString(),
+        },
+        {
+          title: `ath`,
+          data: formData.coinData.ath.toLocaleString(),
+        },
+        {
+          title: `atl`,
+          data: formData.coinData.atl,
+        },
+        {
+          title: `balance In ${formData.currency.name.toLocaleUpperCase()}`,
+          data: formData.coinData.current_price,
+        },
+        {
+          title: `high 24h`,
+          data: formData.coinData.high_24h.toLocaleString(),
+        },
+        {
+          title: `low 24h`,
+          data: formData.coinData.low_24h,
+        },
+        {
+          title: `last updated`,
+          data: moment(formData.coinData.last_updated).format(
+            "dddd YYYY/MMM/DD HH:MM"
+          ),
+        },
+        {
+          title: `market cap`,
+          data: formData.coinData.market_cap.toLocaleString(),
+        },
+        {
+          title: `market cap change 24h`,
+          data: formData.coinData.market_cap_change_24h.toLocaleString(),
+        },
+        {
+          title: `price change 24h`,
+          data: formData.coinData.price_change_24h.toLocaleString(),
+        },
+        {
+          title: `price change percentage 24h`,
+          data: formData.coinData.price_change_percentage_24h,
+        },
+        {
+          title: `roi percentage`,
+          data: formData.coinData.roi?.percentage,
+        },
+        {
+          title: `total volume`,
+          data: formData.coinData.total_volume.toLocaleString(),
+        },
+      ]
+    : [];
   const Div = styleHandler(theme);
   return (
     <ModalComponent
@@ -124,17 +186,44 @@ const Create_wallet_modal = () => {
               dataType="coin"
               label="Currency"
               onclickHandler={clickHandler}
+              value={formData.symbol}
             />
             <div className="select-component">
               <TextField
                 id="outlined-number"
                 label="Amount"
                 type="number"
+                value={formData.amount}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 fullWidth
+                onChange={(e) => {
+                  setFormData({ ...formData, amount: +e.target.value });
+                }}
+                placeholder="how many coin do you want ?"
               />
+            </div>
+            <div className="coin-data-overview">
+              {CoinOverviewData.map((item) => {
+                return (
+                  item.data && (
+                    <div
+                      style={{ borderColor: theme.btnColor }}
+                      className="item"
+                      key={item.title}
+                    >
+                      <span
+                        style={{ background: theme.modalColor }}
+                        className="title"
+                      >
+                        {item.title}
+                      </span>
+                      <span className="data">{item.data}</span>
+                    </div>
+                  )
+                );
+              })}
             </div>
             {formData.coinData && (
               <Wallet_chart

@@ -32,13 +32,10 @@ const Select_component = ({
     data: IcryptoData | currencySymbol
   ) => void;
   label: string;
-  value?: unknown;
+  value: string;
 }) => {
   const theme = useSelector(selecttheme);
-  const [open, setOpen] = useState(false);
-  const [inputVal, setInputVal] = useState<Array<string | unknown>>([
-    value || "",
-  ]);
+  const [inputVal, setInputVal] = useState<string[]>([value]);
   const [dataPagination, setDataPagination] = useState({
     total_pages: Math.ceil(data.length / 10),
     offset: 10,
@@ -76,14 +73,14 @@ const Select_component = ({
   };
   const handleChange = (event: SelectChangeEvent<typeof inputVal>) => {
     const {
-      target: { value },
+      target: { value: targetVal },
     } = event;
     if (
-      value[value.length - 1] !== "next" ||
-      value[value.length - 1] !== "previous"
+      targetVal[targetVal.length - 1] !== "next" ||
+      targetVal[targetVal.length - 1] !== "previous"
     ) {
-      const arr = [value[value.length - 1]];
-      setInputVal(typeof value === "string" ? arr : arr);
+      const arr = [targetVal[targetVal.length - 1]];
+      setInputVal(arr);
     }
   };
   const menuItemStyle = {
@@ -102,28 +99,28 @@ const Select_component = ({
             textTransform: "uppercase",
             background: theme.modalColor,
           }}
-          id="demo-simple-select-label"
+          id="demo-multiple-name-label"
         >
           {label}
         </InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          multiple
           value={inputVal}
-          defaultOpen={open}
           onChange={handleChange}
           input={<OutlinedInput label={label} />}
-          open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => (inputVal.length > 0 ? setOpen(true) : setOpen(false))}
-          multiple
+          renderValue={(selected) => {
+            if (selected.length === 1) {
+              return <em>{inputVal[0]}</em>;
+            }
+          }}
         >
           {dataPagination.return_page && (
             <MenuItem
               style={menuItemStyle as CSSProperties}
-              className="paginatate-btn"
               onClick={() => pageHandler("previous")}
-              value={["previous"]}
+              value={"previous"}
             >
               previous
             </MenuItem>
@@ -144,8 +141,6 @@ const Select_component = ({
                       dataType,
                       item.mainData as unknown as IcryptoData as currencySymbol
                     );
-                    setInputVal([item.name]);
-                    setOpen(false);
                   }}
                 >
                   {item.image && (
@@ -168,11 +163,9 @@ const Select_component = ({
           {dataPagination.next_page && (
             <MenuItem
               onClick={() => {
-                setOpen(true);
-                setInputVal(["next"]);
                 pageHandler("next");
               }}
-              value={["next"]}
+              value={"next"}
               style={menuItemStyle as CSSProperties}
             >
               next
