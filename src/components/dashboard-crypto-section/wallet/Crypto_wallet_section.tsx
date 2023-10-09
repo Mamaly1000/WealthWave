@@ -3,6 +3,7 @@ import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useContextFunction } from "../../../context/AppContext";
 import { selectUserActions } from "../../../features/user-actions-slice/actions_slice";
+import SingleWalletCard from "./SingleWalletCard";
 const Crypto_wallet_section = () => {
   const theme = useSelector(selecttheme);
   const contextData = useContextFunction();
@@ -10,7 +11,7 @@ const Crypto_wallet_section = () => {
   return (
     <div style={{ color: theme.headerColor }} className="main-wallet-section">
       {userActions.cryptoWallet.map((wallet) => {
-        return <div className="single-wallet" key={wallet.walletAdd}></div>;
+        return <SingleWalletCard wallet={wallet} key={wallet.walletAdd} />;
       })}
       <div
         onClick={() => contextData!.setDisplayCreateWalletModal(true)}

@@ -102,8 +102,6 @@ const Wallet_chart = ({
             },
           ]}
           type="area"
-          height={"100%"}
-          width={"100%"}
         />
       )}
     </div>

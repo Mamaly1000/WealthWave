@@ -13,6 +13,7 @@ export type cryptoWalletType = {
   balanceInUSD: number;
   walletAdd: string;
   amount: number;
+  coin: IcryptoData | null;
 };
 export type cryptoTransactionType = {
   transactionDate: Date;
@@ -186,9 +187,39 @@ const userActionsReducer = createSlice({
         }
       }
     },
+    setCryptoWallet: (state, action) => {
+      const selectedWallet = state.cryptoWallet.findIndex(
+        (w) =>
+          (action.payload.wallet as cryptoWalletType).walletAdd === w.walletAdd
+      );
+      if (action.payload.type === "add") {
+        if (selectedWallet > 0) {
+          state.cryptoWallet[selectedWallet] = action.payload.wallet;
+          toast.success("This wallet updated successfully!");
+        } else {
+          state.cryptoWallet.push(action.payload.wallet);
+          toast.success(
+            `${action.payload.wallet.coin.name} wallet added successfully!`
+          );
+        }
+      }
+      if (action.payload.type === "delete") {
+        if (selectedWallet > 0) {
+          const newArray = state.cryptoWallet.filter(
+            (w) => w.walletAdd !== action.payload.wallet.walletAdd
+          );
+          state.cryptoWallet = newArray;
+          toast.error(
+            `The ${action.payload.wallet.coin.name} wallet deleted successfully!`
+          );
+        } else {
+          toast.error("there is no wallet that you want to delete !");
+        }
+      }
+    },
   },
 });
-export const { setLikedCryptos, setBookmarkCryptos } =
+export const { setLikedCryptos, setBookmarkCryptos, setCryptoWallet } =
   userActionsReducer.actions;
 export default userActionsReducer.reducer;
 export const selectUserActions = (state: RootState) => {
