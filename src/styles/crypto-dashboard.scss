@@ -39,8 +39,7 @@
       }
     }
     .wallet-container {
-      @apply min-w-[50%] lg:max-w-[60%] max-h-[200px] flex items-start justify-between gap-3 flex-col min-h-[200px];
-
+      @apply min-w-full max-w-full md:min-w-[50%] lg:max-w-[60%] max-h-[200px] flex items-start justify-between gap-3 flex-col min-h-[200px];
       .mySwiper {
         @apply bg-light_dark py-5 rounded-lg min-h-full;
         .swiper-slide {
@@ -77,9 +76,73 @@
     }
   }
   .main-wallet-section {
-    @apply min-w-full min-h-[500px] flex items-start justify-start gap-5 flex-wrap;
+    @apply min-w-full min-h-[500px] flex items-center justify-center gap-5 flex-wrap;
     .single-wallet {
-      @apply rounded-lg border-[1px];
+      @apply rounded-lg border-[1px] flex flex-col justify-between items-start;
+      .wallet-header {
+        @apply min-w-full p-3 border-b-[1px]   text-[1.1rem] font-bold capitalize text-start;
+      }
+      .wallet-name {
+        @apply min-w-full flex items-center justify-start gap-3 p-3;
+        img {
+          @apply min-w-[40px] max-w-[40px] object-contain;
+        }
+        .context {
+          @apply max-w-fit flex flex-col items-start justify-start gap-[1px];
+          .name {
+            @apply font-semibold capitalize text-[.9rem];
+          }
+          .price {
+            @apply font-light text-[.8rem] uppercase;
+          }
+        }
+      }
+      .table-content {
+        @apply p-3 min-w-full flex items-start justify-between gap-[.5%] flex-wrap;
+        .item {
+          @apply min-w-full lg:min-w-[49%] lg:max-w-[49%] flex items-center justify-between lg:justify-start gap-1;
+          .title,
+          .data {
+            @apply text-[.75rem] font-semibold capitalize;
+          }
+          .title {
+            @apply whitespace-nowrap;
+          }
+        }
+      }
+      .wallet-add-container {
+        @apply p-3 min-w-full max-w-full flex flex-col items-center justify-center gap-2;
+        .wallet-add-header {
+          @apply min-w-full text-start text-[.95rem] capitalize font-light;
+        }
+        .add-container {
+          @apply text-[.8rem] min-w-full max-w-full flex items-center border-[1px] rounded-lg justify-between gap-1;
+          .file-img {
+            @apply min-w-[40px] h-[40px] border-e-[1px] rounded-lg flex items-center justify-center;
+          }
+          .address {
+            @apply text-start max-w-[60%] overflow-hidden;
+          }
+          .copy-btn {
+            @apply min-w-fit whitespace-nowrap flex items-center justify-center gap-1  rounded-s-lg px-1;
+          }
+        }
+      }
+      .text-divider {
+        @apply text-[.9rem] p-2 uppercase min-w-full text-clip font-[400];
+      }
+      .qr-code-class {
+        @apply mx-auto max-w-[200px] min-w-[200px] flex flex-col items-start justify-center gap-2 max-h-[200px];
+        .header {
+          @apply h-fit flex items-center justify-center text-[.8rem]  whitespace-nowrap min-w-full text-center capitalize;
+        }
+      }
+      .wallet-actions {
+        @apply p-3 min-w-full flex items-center flex-wrap gap-2 justify-between;
+        button {
+          @apply min-w-full md:min-w-[45%] md:max-w-[45%];
+        }
+      }
     }
     .create-wallet {
       @apply active:scale-90 hover:scale-105 text-[.9rem] capitalize font-light  flex-col  border-dashed border-[2px] bg-light_dark rounded-lg cursor-pointer flex items-center justify-center;
@@ -89,7 +152,7 @@
     }
     .single-wallet,
     .create-wallet {
-      @apply min-w-full md:min-w-[29%] min-h-[400px];
+      @apply drop-shadow-2xl min-w-full sm:min-w-[45%] sm:max-w-[45%] lg:min-w-[450px] lg:max-w-[450px] min-h-[550px] max-h-fit sm:max-h-[620px] lg:max-h-[550px] overflow-hidden;
     }
   }
 }
