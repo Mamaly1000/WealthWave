@@ -3,6 +3,24 @@ import { RootState } from "../store/store";
 import { IcryptoData } from "../../hooks/useCrypto";
 import { ISingleCoin } from "../../types/singleCrypto.type";
 import { toast } from "react-toastify";
+export type budgetTransActionType = {
+  title: string;
+  amount: number;
+  transferedData: string;
+  from: {
+    name: string;
+    type: string;
+  };
+  to: {
+    name: string;
+    type: string;
+  };
+  status: "completed" | "pending" | "failed" | "proccessing";
+};
+export type BudgetType = {
+  amount: number;
+  transactions: budgetTransActionType[];
+};
 export type cryptoWalletType = {
   icon: string;
   symbol: string;
