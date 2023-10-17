@@ -182,14 +182,33 @@
       @apply md:min-w-[55%] md:max-w-[55%];
     }
     .add-budget-container {
-      @apply relative    z-20 overflow-visible md:min-h-[300px] md:max-h-[300px] flex flex-wrap items-start justify-between gap-2;
+      @apply relative z-20 overflow-visible md:min-h-[300px] md:max-h-[300px] flex flex-wrap items-start justify-between gap-2;
+      .section-header {
+        @apply min-w-full text-start font-semibold text-[1.2rem] capitalize;
+      }
       section {
-        @apply min-w-full   md:min-w-[45%] lg:min-w-[30%] p-2 flex flex-col items-start justify-between gap-3;
-        .bank-item {
-          @apply m-1 p-1 border-[1px] rounded-[4px];
-          & > img {
-            @apply max-w-[50px] min-w-[50px];
+        @apply min-w-full md:min-w-[45%] lg:min-w-[30%] p-2 flex flex-col items-start justify-between gap-3;
+        .bank-items-container {
+          @apply min-w-full flex flex-wrap items-start justify-start gap-2;
+          .bank-item {
+            @apply p-1 border-[1px] rounded-[4px];
+            & > img {
+              @apply max-w-[50px] min-w-[50px];
+            }
           }
+        }
+        .save-data {
+          @apply min-w-full flex items-center justify-between gap-1;
+        }
+        .submit-btn,
+        .reset-btn {
+          @apply min-w-full text-center;
+        }
+        .submit-btn {
+          @apply bg-green-800;
+        }
+        .reset-btn {
+          @apply bg-red-800;
         }
       }
     }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import DatePicker from "react-date-picker";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -9,22 +8,22 @@ type datevalue = ValuePiece | [ValuePiece, ValuePiece];
 const Custom_DateComponent = ({
   label,
   onchange,
+  value,
 }: {
+  value: Date;
   onchange: (e: any) => void;
   label: string;
 }) => {
   const theme = useSelector(selecttheme);
-  const [calenderValue, setCalendarValue] = useState<datevalue>(new Date());
 
   return (
     <Div theme={theme}>
       <div className="component-header">{label}</div>
       <DatePicker
         onChange={(e) => {
-          setCalendarValue(e);
           onchange(e);
         }}
-        value={calenderValue}
+        value={value}
         calendarClassName="calendar-container"
         maxDate={new Date(Date.now())}
         tileClassName="tile-class"

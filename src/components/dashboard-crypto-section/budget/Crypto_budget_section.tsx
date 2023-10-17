@@ -11,6 +11,8 @@ import {
   masterCardIcon,
 } from "./../../../assets/dashboard/dashboardIcons";
 import Custom_DateComponent from "./Custom_DateComponent";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import Custom_checkbox from "./Custom_checkbox";
 const banks = [
   {
     name: "mastercard",
@@ -23,6 +25,7 @@ const banks = [
 ];
 const Crypto_budget_section = () => {
   const theme = useSelector(selecttheme);
+  const [saveCardData, setSaveCardData] = useState(false);
   const [transactionData, setTransActionData] = useState({
     amount: "",
     card: {
@@ -52,6 +55,9 @@ const Crypto_budget_section = () => {
         </div>
       </Budget_child_container>
       <Budget_child_container classname="big-container add-budget-container">
+        <h2 style={{ color: theme.btnColor }} className="section-header">
+          add more invesments to your budget
+        </h2>
         <section>
           <Custom_textfield
             value={transactionData.card.card_number}
@@ -79,6 +85,19 @@ const Crypto_budget_section = () => {
               });
             }}
             label="expire-date"
+            value={new Date(transactionData.card.Ex_date)}
+          />
+          <Custom_textfield
+            value={transactionData.amount}
+            onchange={(e) => {
+              if (!isNaN(+e.target.value))
+                setTransActionData({
+                  ...transactionData,
+                  amount: e.target.value,
+                });
+            }}
+            type="text"
+            label="Transaction-Amount $"
           />
         </section>
         <section>
@@ -97,7 +116,7 @@ const Crypto_budget_section = () => {
             type="text"
             label="Cvv4"
           />
-          <div>
+          <div className="bank-items-container">
             {banks.map((bank) => {
               return (
                 <button
@@ -126,20 +145,34 @@ const Crypto_budget_section = () => {
               );
             })}
           </div>
+          <Custom_checkbox
+            value={saveCardData}
+            onclick={() => {
+              setSaveCardData((prev) => !prev);
+            }}
+            label="save your account data!"
+          />
         </section>
         <section>
-          <Custom_textfield
-            value={transactionData.amount}
-            onchange={(e) => {
-              if (!isNaN(+e.target.value))
-                setTransActionData({
-                  ...transactionData,
-                  amount: e.target.value,
-                });
+          <button className="submit-btn">add it to budget </button>
+          <button
+            className="reset-btn"
+            onClick={() => {
+              setTransActionData({
+                amount: "",
+                card: {
+                  card_number: "",
+                  cvv: "",
+                  Ex_date: Date.now(),
+                  icon: "",
+                  name: "",
+                },
+              });
+              setSaveCardData(false);
             }}
-            type="text"
-            label="Transaction-Amount $"
-          />
+          >
+            reset
+          </button>
         </section>
       </Budget_child_container>{" "}
       <Budget_child_container classname="big-container">

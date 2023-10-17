@@ -15,11 +15,12 @@ const Budget_child_container = ({
   const divStyle = {
     borderColor: theme.btnColor,
     background: theme.modalColor,
+    color: theme.headerColor,
   } as CSSProperties;
   return (
     <motion.div
-      initial={{   opacity: 0 }}
-      animate={{  opacity: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
         duration: 0.5,
         type: "spring",
