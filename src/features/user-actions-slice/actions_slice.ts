@@ -17,9 +17,17 @@ export type budgetTransActionType = {
   };
   status: "completed" | "pending" | "failed" | "proccessing";
 };
+export type budgetAccountsType = {
+  icon: string;
+  bgColor: string;
+  cvv: number;
+  EX_date: Date;
+  account_number: number;
+};
 export type BudgetType = {
   amount: number;
   transactions: budgetTransActionType[];
+  accounts: budgetAccountsType[];
 };
 export type cryptoWalletType = {
   icon: string;

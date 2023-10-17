@@ -16,9 +16,7 @@ const DateComponent = ({
   onchange: (e: any) => void;
 }) => {
   const [calenderValue, setCalendarValue] = useState<datevalue>(new Date());
-  useEffect(() => {
-    console.log(calenderValue);
-  }, [calenderValue]);
+
   return (
     <div className="input-group">
       <Header
