@@ -6,22 +6,16 @@ import { toast } from "react-toastify";
 export type budgetTransActionType = {
   title: string;
   amount: number;
-  transferedData: string;
-  from: {
-    name: string;
-    type: string;
-  };
-  to: {
-    name: string;
-    type: string;
-  };
+  transferedDate: string;
+  current_balance: number;
   status: "completed" | "pending" | "failed" | "proccessing";
+  icon: string;
 };
 export type budgetAccountsType = {
   icon: string;
   bgColor: string;
   cvv: number;
-  EX_date: Date;
+  EX_date: string;
   account_number: number;
 };
 export type BudgetType = {
@@ -86,6 +80,7 @@ export interface userActionsInterface {
   purchasedCryptoTokens: cryptoTokenType[];
   cryptoTadings: cryptoTradingType[];
   cryptoExchanges: cryptoExchangeType[];
+  budget: BudgetType;
 }
 
 const initialState: userActionsInterface = {
@@ -96,6 +91,11 @@ const initialState: userActionsInterface = {
   purchasedCryptoTokens: [],
   cryptoTadings: [],
   cryptoExchanges: [],
+  budget: {
+    amount: 0,
+    accounts: [],
+    transactions: [],
+  },
 };
 
 const userActionsReducer = createSlice({
@@ -243,10 +243,27 @@ const userActionsReducer = createSlice({
         }
       }
     },
+    setBudget: (state, action) => {
+      const new_Transaction: budgetTransActionType = action.payload.transaction;
+      state.budget.transactions.push(new_Transaction);
+      if (
+        !state.budget.accounts.some(
+          (b) => b.account_number === action.payload.account.account_number
+        ) &&
+        action.payload.account.allow_save
+      ) {
+        const new_Account: budgetAccountsType = action.payload.account;
+        state.budget.accounts.push(new_Account);
+      }
+    },
   },
 });
-export const { setLikedCryptos, setBookmarkCryptos, setCryptoWallet } =
-  userActionsReducer.actions;
+export const {
+  setLikedCryptos,
+  setBookmarkCryptos,
+  setCryptoWallet,
+  setBudget,
+} = userActionsReducer.actions;
 export default userActionsReducer.reducer;
 export const selectUserActions = (state: RootState) => {
   return state.userActions;

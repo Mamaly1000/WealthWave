@@ -11,6 +11,11 @@ const useActions = () => {
       cryptoWallet: [],
       likedCryptos: [],
       purchasedCryptoTokens: [],
+      budget: {
+        accounts: [],
+        amount: 0,
+        transactions: [],
+      },
     });
   return { localUserActions, setLocalUserActions };
 };

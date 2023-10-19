@@ -1,7 +1,7 @@
 import CountUp from "react-countup";
 import Budget_child_container from "./Budget_child_container";
 import ProgressBar from "./ProgressBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCrypto } from "../../../features/crypto_slice/crypto_slice";
 import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import Custom_textfield from "./Custom_textfield";
@@ -11,8 +11,15 @@ import {
   masterCardIcon,
 } from "./../../../assets/dashboard/dashboardIcons";
 import Custom_DateComponent from "./Custom_DateComponent";
-import { Checkbox, FormControlLabel } from "@mui/material";
 import Custom_checkbox from "./Custom_checkbox";
+import Section_Header from "./Section_Header";
+import {
+  budgetAccountsType,
+  budgetTransActionType,
+  selectUserActions,
+  setBudget,
+} from "../../../features/user-actions-slice/actions_slice";
+import { gradientGenerator } from "../../../utils/gradientGenerator";
 const banks = [
   {
     name: "mastercard",
@@ -25,6 +32,7 @@ const banks = [
 ];
 const Crypto_budget_section = () => {
   const theme = useSelector(selecttheme);
+  const UserActions = useSelector(selectUserActions);
   const [saveCardData, setSaveCardData] = useState(false);
   const [transactionData, setTransActionData] = useState({
     amount: "",
@@ -36,9 +44,11 @@ const Crypto_budget_section = () => {
       Ex_date: Date.now(),
     },
   });
+  const dispatch = useDispatch();
   return (
     <div className="budget-container">
       <Budget_child_container classname="mid-container">
+        <Section_Header text="add more invesments to your budget" />
         <div className="status">
           <ProgressBar percentage={50} color="#51d289" title="spent" />
           <div className="context">
@@ -55,9 +65,7 @@ const Crypto_budget_section = () => {
         </div>
       </Budget_child_container>
       <Budget_child_container classname="big-container add-budget-container">
-        <h2 style={{ color: theme.btnColor }} className="section-header">
-          add more invesments to your budget
-        </h2>
+        <Section_Header text="add more invesments to your budget" />
         <section>
           <Custom_textfield
             value={transactionData.card.card_number}
@@ -154,7 +162,35 @@ const Crypto_budget_section = () => {
           />
         </section>
         <section>
-          <button className="submit-btn">add it to budget </button>
+          <button
+            className="submit-btn"
+            onClick={() => {
+              dispatch(
+                setBudget({
+                  transaction: {
+                    amount: +transactionData.amount,
+                    current_balance: UserActions.budget.amount,
+                    icon: transactionData.card.icon,
+                    status: ["failed", "completed", "pending", "proccessing"][
+                      Math.floor(Math.random() * 3)
+                    ],
+                    title: "increasing budget for further investments",
+                    transferedDate: new Date(Date.now())+"",
+                  } as budgetTransActionType,
+                  account: {
+                    account_number: +transactionData.card.card_number,
+                    bgColor: gradientGenerator(),
+                    cvv: +transactionData.card.cvv,
+                    EX_date: new Date(transactionData.card.Ex_date) + "",
+                    icon: transactionData.card.icon,
+                    allow_save: saveCardData,
+                  } as budgetAccountsType,
+                })
+              );
+            }}
+          >
+            add it to budget{" "}
+          </button>
           <button
             className="reset-btn"
             onClick={() => {
