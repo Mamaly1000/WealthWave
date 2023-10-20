@@ -179,13 +179,13 @@
       }
     }
     .big-container {
-      @apply md:min-w-[55%] md:max-w-[55%]  min-h-fit lg:min-h-[350px] lg:max-h-[350px];
+      @apply relative md:min-w-[55%] md:max-w-[55%]  min-h-fit lg:min-h-[350px] lg:max-h-[350px] flex items-center justify-between;
     }
     .add-budget-container {
       @apply relative z-20 overflow-visible md:min-h-[350px] md:max-h-[350px] flex flex-wrap items-start justify-between gap-2;
 
       section {
-        @apply min-w-full md:min-w-[45%] lg:min-w-[30%] p-2 flex flex-col items-start justify-between gap-3;
+        @apply min-w-full h-fit md:min-w-[45%] lg:min-w-[30%] p-2 flex flex-col items-start justify-between gap-3;
         .bank-items-container {
           @apply min-w-full flex flex-wrap items-start justify-start gap-2;
           .bank-item {
@@ -212,6 +212,48 @@
     }
     .section-header {
       @apply min-w-full text-start font-semibold text-[1rem] capitalize;
+    }
+    .chart-container {
+      @apply relative md:min-w-[55%] md:max-w-[55%]  min-h-fit lg:min-h-[350px] lg:max-h-[350px] flex items-center justify-center;
+      .chart {
+        @apply min-w-full max-w-full min-h-full md:min-h-[330px] md:max-h-[330px];
+      }
+    }
+    .transactions-container {
+      @apply flex justify-start items-start   gap-2 overflow-x-hidden overflow-y-auto;
+      .transaction-item {
+        @apply min-w-full max-w-full flex flex-wrap items-center justify-between gap-2 border-b-[1px] py-1;
+        .context {
+          @apply order-3 md:order-1 w-fit md:max-w-[60%] flex items-center justify-start gap-2;
+          img {
+            @apply hidden md:block;
+          }
+        }
+        img {
+          @apply min-w-[40px] max-w-[40px];
+        }
+        .t-date {
+          @apply min-w-full text-start md:min-w-[10%] md:w-fit   flex flex-col items-start justify-between gap-1 capitalize text-[.9rem];
+          .date {
+            @apply text-[.8rem] whitespace-nowrap flex gap-1 items-center justify-start;
+          }
+          .bold {
+            @apply font-bold;
+          }
+        }
+        .amount {
+          @apply min-w-[50%] md:min-w-fit order-2 font-extrabold text-[1.1rem] max-w-[30%];
+        }
+        .small-pic {
+          @apply flex order-1  md:hidden;
+        }
+      }
+    }
+    .accounts-container {
+      @apply overflow-y-auto overflow-x-hidden flex flex-col items-start justify-start gap-2;
+      .account {
+        @apply bg-red-300 min-w-[320px] max-w-[320px] min-h-[180px] max-h-[180px] rounded-lg drop-shadow-2xl p-3;
+      }
     }
   }
 }

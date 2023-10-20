@@ -21,7 +21,9 @@ const Custom_textfield = ({
   onchange,
   type,
   label,
+  max = 12,
 }: {
+  max?: number;
   label: string;
   type: React.HTMLInputTypeAttribute | undefined;
   value: any;
@@ -40,6 +42,7 @@ const Custom_textfield = ({
         id="outlined-basic"
         label={label}
         variant="outlined"
+        maxRows={max}
       />
     </Div>
   );

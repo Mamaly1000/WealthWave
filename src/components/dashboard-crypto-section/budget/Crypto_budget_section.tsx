@@ -1,50 +1,21 @@
 import CountUp from "react-countup";
 import Budget_child_container from "./Budget_child_container";
 import ProgressBar from "./ProgressBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCrypto } from "../../../features/crypto_slice/crypto_slice";
 import { selecttheme } from "../../../features/theme_slice/theme_slice";
-import Custom_textfield from "./Custom_textfield";
-import { useState } from "react";
-import {
-  paypalIcon,
-  masterCardIcon,
-} from "./../../../assets/dashboard/dashboardIcons";
-import Custom_DateComponent from "./Custom_DateComponent";
-import Custom_checkbox from "./Custom_checkbox";
 import Section_Header from "./Section_Header";
-import {
-  budgetAccountsType,
-  budgetTransActionType,
-  selectUserActions,
-  setBudget,
-} from "../../../features/user-actions-slice/actions_slice";
-import { gradientGenerator } from "../../../utils/gradientGenerator";
-const banks = [
-  {
-    name: "mastercard",
-    icon: masterCardIcon,
-  },
-  {
-    name: "paypal",
-    icon: paypalIcon,
-  },
-];
+import { selectUserActions } from "../../../features/user-actions-slice/actions_slice";
+import BarColumnChart from "../../charts/BarColumnChart";
+import moment from "moment";
+import AddBudgetForm from "./AddBudgetForm";
+import TransactionItem from "./TransactionItem";
+import AccountItem from "./AccountItem";
+
 const Crypto_budget_section = () => {
   const theme = useSelector(selecttheme);
   const UserActions = useSelector(selectUserActions);
-  const [saveCardData, setSaveCardData] = useState(false);
-  const [transactionData, setTransActionData] = useState({
-    amount: "",
-    card: {
-      icon: "",
-      name: "",
-      card_number: "",
-      cvv: "",
-      Ex_date: Date.now(),
-    },
-  });
-  const dispatch = useDispatch();
+
   return (
     <div className="budget-container">
       <Budget_child_container classname="mid-container">
@@ -64,158 +35,47 @@ const Crypto_budget_section = () => {
           </div>
         </div>
       </Budget_child_container>
-      <Budget_child_container classname="big-container add-budget-container">
-        <Section_Header text="add more invesments to your budget" />
-        <section>
-          <Custom_textfield
-            value={transactionData.card.card_number}
-            onchange={(e) => {
-              if (!isNaN(+e.target.value) && e.target.value.length <= 12)
-                setTransActionData({
-                  ...transactionData,
-                  card: {
-                    ...transactionData.card,
-                    card_number: e.target.value,
-                  },
-                });
-            }}
-            type="text"
-            label="Account-number"
-          />
-          <Custom_DateComponent
-            onchange={(e) => {
-              setTransActionData({
-                ...transactionData,
-                card: {
-                  ...transactionData.card,
-                  Ex_date: e,
-                },
-              });
-            }}
-            label="expire-date"
-            value={new Date(transactionData.card.Ex_date)}
-          />
-          <Custom_textfield
-            value={transactionData.amount}
-            onchange={(e) => {
-              if (!isNaN(+e.target.value))
-                setTransActionData({
-                  ...transactionData,
-                  amount: e.target.value,
-                });
-            }}
-            type="text"
-            label="Transaction-Amount $"
-          />
-        </section>
-        <section>
-          <Custom_textfield
-            value={transactionData.card.cvv}
-            onchange={(e) => {
-              if (!isNaN(+e.target.value) && e.target.value.length < 5)
-                setTransActionData({
-                  ...transactionData,
-                  card: {
-                    ...transactionData.card,
-                    cvv: e.target.value,
-                  },
-                });
-            }}
-            type="text"
-            label="Cvv4"
-          />
-          <div className="bank-items-container">
-            {banks.map((bank) => {
-              return (
-                <button
-                  style={{
-                    background:
-                      transactionData.card.name === bank.name
-                        ? theme.btnColor
-                        : "",
-                    border: `1px solid ${theme.btnColor}`,
-                  }}
-                  key={bank.name}
-                  onClick={() =>
-                    setTransActionData({
-                      ...transactionData,
-                      card: {
-                        ...transactionData.card,
-                        icon: bank.icon,
-                        name: bank.name,
-                      },
-                    })
-                  }
-                  className="bank-item"
-                >
-                  <img src={bank.icon} />
-                </button>
-              );
-            })}
-          </div>
-          <Custom_checkbox
-            value={saveCardData}
-            onclick={() => {
-              setSaveCardData((prev) => !prev);
-            }}
-            label="save your account data!"
-          />
-        </section>
-        <section>
-          <button
-            className="submit-btn"
-            onClick={() => {
-              dispatch(
-                setBudget({
-                  transaction: {
-                    amount: +transactionData.amount,
-                    current_balance: UserActions.budget.amount,
-                    icon: transactionData.card.icon,
-                    status: ["failed", "completed", "pending", "proccessing"][
-                      Math.floor(Math.random() * 3)
-                    ],
-                    title: "increasing budget for further investments",
-                    transferedDate: new Date(Date.now())+"",
-                  } as budgetTransActionType,
-                  account: {
-                    account_number: +transactionData.card.card_number,
-                    bgColor: gradientGenerator(),
-                    cvv: +transactionData.card.cvv,
-                    EX_date: new Date(transactionData.card.Ex_date) + "",
-                    icon: transactionData.card.icon,
-                    allow_save: saveCardData,
-                  } as budgetAccountsType,
-                })
-              );
-            }}
-          >
-            add it to budget{" "}
-          </button>
-          <button
-            className="reset-btn"
-            onClick={() => {
-              setTransActionData({
-                amount: "",
-                card: {
-                  card_number: "",
-                  cvv: "",
-                  Ex_date: Date.now(),
-                  icon: "",
-                  name: "",
-                },
-              });
-              setSaveCardData(false);
-            }}
-          >
-            reset
-          </button>
-        </section>
-      </Budget_child_container>{" "}
-      <Budget_child_container classname="big-container">
-        hfgh
+      <AddBudgetForm />
+      <Budget_child_container classname="big-container chart-container">
+        <BarColumnChart
+          series={[
+            {
+              data: UserActions.budget.transactions.map((data) => {
+                return {
+                  x: moment(data.transferedDate).format(
+                    "dddd YYYY/MM/DD hh:mm:ss"
+                  ),
+                  y: [data.current_balance, data.amount],
+                  fillColor: !(data.current_balance > data.amount)
+                    ? "#00f5ff"
+                    : "#fe0000",
+                };
+              }),
+              name: "Your TransActions",
+              color: theme.btnColor,
+            },
+          ]}
+        />
       </Budget_child_container>
-      <Budget_child_container classname="mid-container">
-        rthyrt
+      <Budget_child_container classname="mid-container transactions-container">
+        <Section_Header text="your transactions" />
+        {UserActions.budget.transactions.map((transAction, index) => {
+          return (
+            <TransactionItem
+              t={transAction}
+              i={index}
+              key={transAction.transferedDate}
+            />
+          );
+        })}
+      </Budget_child_container>{" "}
+      <Budget_child_container classname="mid-container accounts-container">
+        <Section_Header text="your Accounts" />
+        {UserActions.budget.accounts.map((account, index) => {
+          return (
+            <AccountItem acc={account} i={index} key={account.account_number} />
+          );
+        })}
       </Budget_child_container>
     </div>
   );

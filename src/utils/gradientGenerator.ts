@@ -1,13 +1,13 @@
 export const gradientGenerator = (): string => {
-  let color_1 = `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+  let color_1 = `rgba(${Math.floor(Math.random() * 255)} ${Math.floor(
     Math.random() * 255
-  )},${Math.floor(Math.random() * 255)}/${Math.random()})`;
-  let color_2 = `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+  )} ${Math.floor(Math.random() * 255)}/${Math.random()})`;
+  let color_2 = `rgba(${Math.floor(Math.random() * 255)} ${Math.floor(
     Math.random() * 255
-  )},${Math.floor(Math.random() * 255)}/${Math.random()})`;
-  let color_3 = `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+  )} ${Math.floor(Math.random() * 255)}/${Math.random()})`;
+  let color_3 = `rgba(${Math.floor(Math.random() * 255)} ${Math.floor(
     Math.random() * 255
-  )},${Math.floor(Math.random() * 255)}/${Math.random()})`;
+  )} ${Math.floor(Math.random() * 255)}/${Math.random()})`;
   const directions = [
     "to top",
     "to top left",

@@ -1,113 +1,80 @@
-import DatePicker from "react-date-picker";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { selecttheme } from "../../../features/theme_slice/theme_slice";
-type ValuePiece = Date | null;
-type datevalue = ValuePiece | [ValuePiece, ValuePiece];
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
+import { useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
 const Custom_DateComponent = ({
   label,
   onchange,
   value,
 }: {
-  value: Date;
-  onchange: (e: any) => void;
+  value: number;
+  onchange: (value: Date | null) => void;
   label: string;
 }) => {
   const theme = useSelector(selecttheme);
-
+  const [date, setDate] = useState<Dayjs | null>(dayjs(value));
   return (
     <Div theme={theme}>
-      <div className="component-header">{label}</div>
-      <DatePicker
-        onChange={(e) => {
-          onchange(e);
-        }}
-        value={value}
-        calendarClassName="calendar-container"
-        maxDate={new Date(Date.now())}
-        tileClassName="tile-class"
-        defaultActiveStartDate={new Date(Date.now())}
-      />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label={label}
+          value={date}
+          onChange={(value) => {
+            setDate(dayjs(value));
+            onchange(dayjs(value).toDate());
+          }}
+          disableFuture
+          sx={{ borderColor: theme.btnColor, color: theme.headerColor }}
+        />
+      </LocalizationProvider>
     </Div>
   );
 };
 
 export default Custom_DateComponent;
 const Div = styled.div`
-  z-index: 9000;
-  padding-block: 10px;
   min-width: 100%;
-  position: relative;
-  .calendar-container {
-    background: ${(props) => props.theme.modalColor};
-    color: ${(props) => props.theme.btnColor};
-    border-color: ${(props) => props.theme.btnColor};
+  .MuiFormControl-root {
+    border: 1px solid ${(props) => props.theme.btnColor} !important;
+    min-width: 100%;
     border-radius: 4px;
-    z-index: 900000;
+    color: ${(props) => props.theme.headerColor} !important;
   }
-  .tile-class {
-    color: ${(props) => props.theme.btnColor};
-    background: ${(props) => props.theme.modalColor};
-    padding: 5px;
-    padding-block: 10px;
-    border-radius: 4px;
-    margin: 0px;
+  .MuiInputBase-root {
+    border-color: ${(props) => props.theme.btnColor} !important;
   }
-
-  .react-calendar__navigation > button {
+  .css-14lo706,
+  .MuiOutlinedInput-notchedOutline,
+  .css-14lo706 > span,
+  .MuiFormLabel-root,
+  .MuiInputBase-input {
+    color: ${(props) => props.theme.headerColor} !important;
+  }
+  .Mui-focused {
+    border: 0px solid ${(props) => props.theme.btnColor} !important;
+    color: ${(props) => props.theme.btnColor}!important;
+    box-shadow: none !important;
+  }
+  .Mui-focused {
+    // border: 1px solid ${(props) => props.theme.btnColor}!important;
+  }
+  .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    color: ${(props) => props.theme.headerColor} !important;
+    border: 0px solid ${(props) => props.theme.btnColor} !important;
+  }
+  .css-1d3z3hw-MuiOutlinedInput-notchedOutline.Mui-focused {
+    border-color: ${(props) => props.theme.btnColor} !important;
     color: ${(props) => props.theme.btnColor} !important;
-    font-size: 0.7rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    white-space: nowrap;
-    padding-inline: 1px;
-    font-weight: 700;
   }
-  .react-calendar__navigation {
-    display: flex;
-    align-items: center;
-    justify-content: between;
+  .MuiButtonBase-root {
+    stroke: ${(props) => props.theme.btnColor} !important;
   }
-  .react-date-picker {
-    min-width: 100% !important;
-    padding: 16.5px 0px;
-    border-radius: 4px;
-    border: 1px solid ${(props) => props.theme.btnColor};
-    & > .react-date-picker__inputGroup {
-      float: left;
-      max-width: fit-content;
-      padding-inline: 0px;
-      border-width: 0;
-    }
-    .react-date-picker__wrapper {
-      border-width: 0;
-    }
-    .react-date-picker__button__icon,
-    .react-date-picker__button:enabled:focus {
-      color: ${(props) => props.theme.btnColor};
-      stroke: ${(props) => props.theme.btnColor};
-      &:hover,
-      &:active,
-      &:focus,
-      &:enabled {
-        color: ${(props) => props.theme.headerColor};
-        stroke: ${(props) => props.theme.headerColor} !important;
-      }
-    }
-  }
-  .component-header {
-    position: absolute;
-    top: -2%;
-    left: 5%;
-    font-size: 0.9rem;
-    text-transform: capitalize;
-    font-weight: 400;
-    padding-inline: 5px;
-    background-color: ${(props) => props.theme.modalColor};
-    z-index: 10;
+  .MuiPickersPopper-root {
+    background: red;
   }
 `;
