@@ -60,7 +60,6 @@ const Budget_Accounts = () => {
         >
           delete account
         </button>
-        <button className="update-acc-btn">delete account</button>
       </div>
     </Budget_child_container>
   );

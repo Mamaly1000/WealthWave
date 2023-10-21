@@ -20,6 +20,9 @@ export type budgetAccountsType = {
 };
 export type BudgetType = {
   amount: number;
+  spent: number;
+  total_loss: number;
+  repay: number;
   transactions: budgetTransActionType[];
   accounts: budgetAccountsType[];
 };
@@ -93,6 +96,9 @@ const initialState: userActionsInterface = {
   cryptoExchanges: [],
   budget: {
     amount: 0,
+    spent: 0,
+    total_loss: 0,
+    repay: 0,
     accounts: [],
     transactions: [],
   },

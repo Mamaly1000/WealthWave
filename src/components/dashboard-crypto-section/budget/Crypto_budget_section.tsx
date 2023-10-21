@@ -12,26 +12,60 @@ import AddBudgetForm from "./AddBudgetForm";
 import TransactionItem from "./TransactionItem";
 import Budget_Accounts from "./Budget_Accounts";
 
+export const statusColor = (
+  status: "completed" | "pending" | "failed" | "proccessing"
+) => {
+  if (status === "failed") {
+    return "#fe0000";
+  } else if (status === "completed") {
+    return "#00f5ff";
+  } else if (status === "proccessing") {
+    return "#5CD2E6";
+  } else if (status === "pending") {
+    return "#F0DE36";
+  }
+};
+
 const Crypto_budget_section = () => {
   const theme = useSelector(selecttheme);
   const UserActions = useSelector(selectUserActions);
 
   return (
     <div className="budget-container">
-      <Budget_child_container classname="mid-container">
+      <Budget_child_container classname="mid-container overall-container">
         <Section_Header text="add more invesments to your budget" />
         <div className="status">
-          <ProgressBar percentage={50} color="#51d289" title="spent" />
+          <ProgressBar
+            percentage={
+              (UserActions.budget.spent * 100) / UserActions.budget.amount
+            }
+            color="#51d289"
+            title="spent"
+          />
           <div className="context">
-            <Context_component title="available" value={2334234} />
-            <Context_component title="spent" value={234234324} />
+            <Context_component
+              title="available"
+              value={UserActions.budget.amount}
+            />
+            <Context_component title="spent" value={UserActions.budget.spent} />
           </div>
         </div>
         <div className="status">
-          <ProgressBar percentage={21} color="#fe0020" title="loss" />
+          <ProgressBar
+            percentage={
+              ((UserActions.budget.total_loss - UserActions.budget.repay) *
+                100) /
+              UserActions.budget.amount
+            }
+            color="#fe0020"
+            title="loss"
+          />
           <div className="context">
-            <Context_component title="total loss" value={2334234} />
-            <Context_component title="repay" value={234234324} />
+            <Context_component
+              title="total loss"
+              value={UserActions.budget.total_loss}
+            />
+            <Context_component title="repay" value={UserActions.budget.repay} />
           </div>
         </div>
       </Budget_child_container>
@@ -46,9 +80,7 @@ const Crypto_budget_section = () => {
                     "dddd YYYY/MM/DD hh:mm:ss"
                   ),
                   y: [data.current_balance, data.amount],
-                  fillColor: !(data.current_balance > data.amount)
-                    ? "#00f5ff"
-                    : "#fe0000",
+                  fillColor: statusColor(data.status),
                 };
               }),
               name: "Your TransActions",

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import { selectCrypto } from "../../../features/crypto_slice/crypto_slice";
 import { motion } from "framer-motion";
+import { statusColor } from "./Crypto_budget_section";
 
 const TransactionItem = ({ t, i }: { t: budgetTransActionType; i: number }) => {
   const theme = useSelector(selecttheme);
@@ -28,6 +29,15 @@ const TransactionItem = ({ t, i }: { t: budgetTransActionType; i: number }) => {
             </div>
           </span>
         </div>
+      </div>
+      <div
+        className="status"
+        style={{
+          color: statusColor(t.status),
+          borderColor: statusColor(t.status),
+        }}
+      >
+        {t.status}
       </div>
       <motion.span
         animate={{ color: t.amount > 0 ? "#00f5ff" : "#fe0000" }}

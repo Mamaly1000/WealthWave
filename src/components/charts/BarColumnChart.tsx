@@ -30,9 +30,7 @@ const BarColumnChart = ({
             },
             foreColor: theme.btnColor,
             animations: {
-              enabled: true,
-              easing: "linear",
-              speed: 10000,
+              enabled: false,
             },
             redrawOnWindowResize: true,
           },

@@ -19,6 +19,8 @@ import {
 } from "../../../features/user-actions-slice/actions_slice";
 import { gradientGenerator } from "../../../utils/gradientGenerator";
 import moment from "moment";
+import useActions from "../../../hooks/useActions";
+import { toast } from "react-toastify";
 const banks = [
   {
     name: "mastercard",
@@ -44,6 +46,94 @@ const AddBudgetForm = () => {
       Ex_date: Date.now(),
     },
   });
+  const { AccountDetector } = useActions();
+  const validation = () => {
+    const savedAcc = AccountDetector(+transactionData.card.card_number);
+    if (transactionData.card.card_number.length !== 16) {
+      toast.error("your card-number must has 16 character");
+    } else if (transactionData.card.Ex_date > Date.now()) {
+      toast.error("please enter a valid date for your account card");
+    } else if (transactionData.amount.length === 0) {
+      toast.error("you must enter an amount ");
+    } else if (+transactionData.amount <= 0) {
+      toast.error("your amount is not valid");
+    } else if (transactionData.card.cvv.length === 0) {
+      toast.error("you must enter your card cvv");
+    } else if (transactionData.card.cvv.length !== 4) {
+      toast.error("your card-cvv must has 4 character");
+    } else if (transactionData.card.name.length === 0) {
+      toast.error("your card-bank must be entered");
+    } else if (savedAcc.exist === true) {
+      if (
+        moment(savedAcc.EX_date).format("YYYY/MM") !==
+        moment(transactionData.card.Ex_date).format("YYYY/MM")
+      ) {
+        toast.error("your card expiration date is not valid");
+      } else if (savedAcc.cvv !== +transactionData.card.cvv) {
+        toast.error("your account cvv is not valid");
+      } else if (savedAcc.icon !== transactionData.card.icon) {
+        toast.error("your selected bank is not valid");
+      } else {
+        dispatch(
+          setBudget({
+            transaction: {
+              amount: +transactionData.amount,
+              current_balance: UserActions.budget.amount,
+              icon: transactionData.card.icon,
+              status: ["failed", "completed", "pending", "proccessing"][
+                Math.floor(Math.random() * 3)
+              ],
+              title: "increasing budget for further investments",
+              transferedDate: new Date(Date.now()) + "",
+            } as budgetTransActionType,
+          })
+        );
+      }
+    } else if (savedAcc.exist === false) {
+      if (saveCardData) {
+        dispatch(
+          setBudget({
+            transaction: {
+              amount: +transactionData.amount,
+              current_balance: UserActions.budget.amount,
+              icon: transactionData.card.icon,
+              status: ["failed", "completed", "pending", "proccessing"][
+                Math.floor(Math.random() * 3)
+              ],
+              title: "increasing budget for further investments",
+              transferedDate: new Date(Date.now()) + "",
+            } as budgetTransActionType,
+          })
+        );
+        dispatch(
+          setAccounts({
+            type: "add",
+            account_number: +transactionData.card.card_number,
+            bgColor: gradientGenerator(),
+            cvv: +transactionData.card.cvv,
+            EX_date: new Date(transactionData.card.Ex_date) + "",
+            icon: transactionData.card.icon,
+            allow_save: saveCardData,
+          })
+        );
+      } else {
+        dispatch(
+          setBudget({
+            transaction: {
+              amount: +transactionData.amount,
+              current_balance: UserActions.budget.amount,
+              icon: transactionData.card.icon,
+              status: ["failed", "completed", "pending", "proccessing"][
+                Math.floor(Math.random() * 3)
+              ],
+              title: "increasing budget for further investments",
+              transferedDate: new Date(Date.now()) + "",
+            } as budgetTransActionType,
+          })
+        );
+      }
+    }
+  };
   return (
     <Budget_child_container classname="big-container add-budget-container">
       <Section_Header text="add more invesments to your budget" />
@@ -147,34 +237,10 @@ const AddBudgetForm = () => {
         <button
           className="submit-btn"
           onClick={() => {
-            dispatch(
-              setBudget({
-                transaction: {
-                  amount: +transactionData.amount,
-                  current_balance: UserActions.budget.amount,
-                  icon: transactionData.card.icon,
-                  status: ["failed", "completed", "pending", "proccessing"][
-                    Math.floor(Math.random() * 3)
-                  ],
-                  title: "increasing budget for further investments",
-                  transferedDate: new Date(Date.now()) + "",
-                } as budgetTransActionType,
-              })
-            );
-            dispatch(
-              setAccounts({
-                type: "add",
-                account_number: +transactionData.card.card_number,
-                bgColor: gradientGenerator(),
-                cvv: +transactionData.card.cvv,
-                EX_date: new Date(transactionData.card.Ex_date) + "",
-                icon: transactionData.card.icon,
-                allow_save: saveCardData,
-              })
-            );
+            validation();
           }}
         >
-          add it to budget{" "}
+          withdrawal
         </button>
         <button
           className="reset-btn"
