@@ -14,6 +14,7 @@ import {
   budgetAccountsType,
   budgetTransActionType,
   selectUserActions,
+  setAccounts,
   setBudget,
 } from "../../../features/user-actions-slice/actions_slice";
 import { gradientGenerator } from "../../../utils/gradientGenerator";
@@ -50,7 +51,7 @@ const AddBudgetForm = () => {
         <Custom_textfield
           value={transactionData.card.card_number}
           onchange={(e) => {
-            if (!isNaN(+e.target.value) && e.target.value.length <= 12)
+            if (!isNaN(+e.target.value) && e.target.value.length <= 16)
               setTransActionData({
                 ...transactionData,
                 card: {
@@ -158,14 +159,17 @@ const AddBudgetForm = () => {
                   title: "increasing budget for further investments",
                   transferedDate: new Date(Date.now()) + "",
                 } as budgetTransActionType,
-                account: {
-                  account_number: +transactionData.card.card_number,
-                  bgColor: gradientGenerator(),
-                  cvv: +transactionData.card.cvv,
-                  EX_date: new Date(transactionData.card.Ex_date) + "",
-                  icon: transactionData.card.icon,
-                  allow_save: saveCardData,
-                } as budgetAccountsType,
+              })
+            );
+            dispatch(
+              setAccounts({
+                type: "add",
+                account_number: +transactionData.card.card_number,
+                bgColor: gradientGenerator(),
+                cvv: +transactionData.card.cvv,
+                EX_date: new Date(transactionData.card.Ex_date) + "",
+                icon: transactionData.card.icon,
+                allow_save: saveCardData,
               })
             );
           }}

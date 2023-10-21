@@ -158,7 +158,7 @@
   .budget-container {
     @apply min-w-full min-h-[500px] flex flex-wrap items-start justify-between gap-5 [&>div]:border-[1px] [&>div]:rounded-lg [&>div]:p-3 [&>div]:drop-shadow-2xl [&>div]:overflow-hidden [&>div]:flex [&>div]:items-center [&>div]:justify-center [&>div]:gap-2 [&>div]:min-w-full;
     .mid-container {
-      @apply md:min-w-[43%] md:max-w-[43%] md:min-h-[350px] md:max-h-[350px] flex items-center justify-between flex-wrap;
+      @apply min-w-full md:min-w-[43%] md:max-w-[43%] md:min-h-[350px] md:max-h-[350px] flex items-center justify-between flex-wrap;
       .status {
         @apply min-w-full md:min-w-[45%] md:max-w-[45%] flex items-center justify-between flex-col gap-2;
         .progress-bar {
@@ -250,9 +250,48 @@
       }
     }
     .accounts-container {
-      @apply overflow-y-auto overflow-x-hidden flex flex-col items-start justify-start gap-2;
+      @apply overflow-y-auto overflow-x-hidden flex flex-col items-start justify-between gap-2;
+      .accounts-slider {
+        @apply min-w-[220px] md:min-w-[320px] max-w-[220px] md:max-w-[320px] pb-10;
+        .swiper-slide {
+          @apply max-w-fit max-h-fit bg-transparent;
+        }
+      }
       .account {
-        @apply bg-red-300 min-w-[320px] max-w-[320px] min-h-[180px] max-h-[180px] rounded-lg drop-shadow-2xl p-3;
+        @apply z-10 relative overflow-hidden min-w-[220px] md:min-w-[320px] max-w-[220px] md:max-w-[320px] min-h-[130px] md:min-h-[180px] max-h-[130px] md:max-h-[180px] rounded-lg drop-shadow-2xl p-3 flex items-center justify-center;
+        &::before {
+          @apply z-0 absolute content-[""] min-w-[200px] min-h-[200px] rounded-full drop-shadow-2xl bg-light_dark start-[-100px] bottom-[-100px];
+        }
+        &::after {
+          @apply z-0 absolute content-[""] min-w-[200px] min-h-[200px] rounded-full drop-shadow-2xl bg-light_dark end-[-100px] top-[-100px];
+        }
+        .icon {
+          @apply absolute z-10 end-4 top-3 min-w-[55px] max-w-[55px] object-contain;
+        }
+        .context {
+          @apply absolute z-10 text-[.9rem] top-3 start-4 w-fit flex flex-col items-start justify-start gap-1 capitalize;
+          .bold {
+            @apply text-[2rem] font-bold;
+          }
+        }
+        .acc-number {
+          @apply absolute z-10 bottom-3 start-4 flex items-center gap-2 font-mono text-[1rem] font-semibold;
+        }
+        .ex-date {
+          @apply absolute end-4 bottom-3 text-[1rem] font-semibold;
+        }
+      }
+      .actions-container {
+        @apply min-w-full flex flex-wrap items-center justify-between gap-2;
+        button {
+          @apply min-w-full md:max-w-[45%] md:min-w-[45%] capitalize;
+        }
+        .delete-acc-btn {
+          @apply bg-red-800;
+        }
+        .update-acc-btn {
+          @apply bg-yellow-800;
+        }
       }
     }
   }

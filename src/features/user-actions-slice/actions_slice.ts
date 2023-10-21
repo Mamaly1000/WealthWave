@@ -246,14 +246,31 @@ const userActionsReducer = createSlice({
     setBudget: (state, action) => {
       const new_Transaction: budgetTransActionType = action.payload.transaction;
       state.budget.transactions.push(new_Transaction);
+      const new_budget =
+        state.budget.amount + action.payload.transaction.amount;
+      state.budget.amount = new_budget;
+    },
+    setAccounts: (state, action) => {
       if (
+        action.payload.type === "add" &&
         !state.budget.accounts.some(
-          (b) => b.account_number === action.payload.account.account_number
+          (b) => b.account_number === action.payload.account_number
         ) &&
-        action.payload.account.allow_save
+        action.payload.allow_save
       ) {
-        const new_Account: budgetAccountsType = action.payload.account;
-        state.budget.accounts.push(new_Account);
+        state.budget.accounts.push({
+          account_number: action.payload.account_number,
+          bgColor: action.payload.bgColor,
+          cvv: action.payload.cvv,
+          EX_date: action.payload.EX_date,
+          icon: action.payload.icon,
+        } as budgetAccountsType);
+      }
+      if (action.payload.type === "delete") {
+        const new_array = state.budget.accounts.filter(
+          (acc) => acc.account_number !== +action.payload.account_number
+        );
+        state.budget.accounts = new_array;
       }
     },
   },
@@ -263,6 +280,7 @@ export const {
   setBookmarkCryptos,
   setCryptoWallet,
   setBudget,
+  setAccounts,
 } = userActionsReducer.actions;
 export default userActionsReducer.reducer;
 export const selectUserActions = (state: RootState) => {

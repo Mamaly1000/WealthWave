@@ -48,6 +48,7 @@ export default function CubeSlider() {
             "--swiper-pagination-bullet-horizontal-gap": "6px",
           } as CSSProperties
         }
+        centeredSlides={true}
       >
         {sliderData.map((data, index) => (
           <SwiperSlide key={index} style={{ background: data.bg_color }}>

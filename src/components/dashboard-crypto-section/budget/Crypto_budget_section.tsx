@@ -10,7 +10,7 @@ import BarColumnChart from "../../charts/BarColumnChart";
 import moment from "moment";
 import AddBudgetForm from "./AddBudgetForm";
 import TransactionItem from "./TransactionItem";
-import AccountItem from "./AccountItem";
+import Budget_Accounts from "./Budget_Accounts";
 
 const Crypto_budget_section = () => {
   const theme = useSelector(selecttheme);
@@ -69,14 +69,7 @@ const Crypto_budget_section = () => {
           );
         })}
       </Budget_child_container>{" "}
-      <Budget_child_container classname="mid-container accounts-container">
-        <Section_Header text="your Accounts" />
-        {UserActions.budget.accounts.map((account, index) => {
-          return (
-            <AccountItem acc={account} i={index} key={account.account_number} />
-          );
-        })}
-      </Budget_child_container>
+      {UserActions.budget.accounts.length > 0 && <Budget_Accounts />}
     </div>
   );
 };
