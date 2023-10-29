@@ -9,6 +9,28 @@ import { useNavigate } from "react-router-dom";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { motion } from "framer-motion";
 
+const actions: {
+  title: string;
+  address: dashboardSectionTypes;
+}[] = [
+  {
+    title: "profile",
+    address: "dashboard/profile",
+  },
+  {
+    title: "setting",
+    address: "dashboard/theme",
+  },
+  {
+    title: "check your wallet",
+    address: "dashboard/wallet",
+  },
+  {
+    title: "go to dashboard",
+    address: "dashboard/home",
+  },
+];
+
 const ProfileCard = () => {
   const profile = useSelector(selectProfile);
   const theme = useSelector(selecttheme);
@@ -17,7 +39,7 @@ const ProfileCard = () => {
   return (
     <motion.div
       initial={{ opacity: 0, borderColor: theme.btnColor }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 1, background: theme.containerColor }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
       onMouseLeave={() => dispatch(setDisplayProfileCard(false))}
@@ -34,45 +56,27 @@ const ProfileCard = () => {
         </div>
       </div>
       <div style={{ borderColor: theme.btnColor }} className="bottom-section">
-        <motion.button
-          style={{ background: theme.hoverColor, color: theme.headerColor }}
-          transition={{ duration: 0.1 }}
-          whileHover={{ background: theme.btnColor }}
-          onClick={() => {
-            dispatch(
-              setDashboardSection("dashboard/profile" as dashboardSectionTypes)
-            );
-            nav("/dashboard");
-          }}
-        >
-          profile
-        </motion.button>
-        <motion.button
-          style={{ background: theme.hoverColor, color: theme.headerColor }}
-          transition={{ duration: 0.1 }}
-          whileHover={{ background: theme.btnColor }}
-          onClick={() => {
-            dispatch(
-              setDashboardSection("dashboard/theme" as dashboardSectionTypes)
-            );
-            nav("/dashboard");
-          }}
-        >
-          setting
-        </motion.button>
-        <motion.button
-          style={{ background: theme.hoverColor, color: theme.headerColor }}
-          transition={{ duration: 0.1 }}
-          whileHover={{ background: theme.btnColor }}
-          onClick={() => {
-            dispatch(
-              setDashboardSection("dashboard/home" as dashboardSectionTypes)
-            );
-            nav("/dashboard");
-          }}
-        >
-          go to dashboard
-        </motion.button>
+        {actions.map((a) => {
+          return (
+            <motion.button
+              initial={{
+                background: "transparent",
+                border: `1px solid ${theme.btnColor}`,
+              }}
+              transition={{ duration: 0.1 }}
+              whileHover={{
+                background: theme.btnColor,
+              }}
+              onClick={() => {
+                dispatch(setDashboardSection(a.address));
+                dispatch(setDisplayProfileCard(false));
+                nav("/dashboard");
+              }}
+            >
+              {a.title}
+            </motion.button>
+          );
+        })}
       </div>
     </motion.div>
   );

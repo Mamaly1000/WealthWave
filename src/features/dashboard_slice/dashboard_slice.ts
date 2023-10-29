@@ -13,7 +13,8 @@ export type dashboardSectionTypes =
   | "dashboard/scheduler"
   | "dashboard/chart/crypto"
   | "dashboard/chart/nft"
-  | "dashboard/chart/news";
+  | "dashboard/chart/news"
+  | "dashboard/wallet";
 
 type initialStateType = {
   isAuthenticated: boolean;

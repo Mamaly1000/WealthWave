@@ -7,14 +7,13 @@ import {
   setDisplayDashboard,
   setShrinkDashboard,
 } from "../../features/dashboard_slice/dashboard_slice";
-import { AnimatePresence, motion } from "framer-motion";
-import Dashboard_Divider from "../divider-component/Dashboard_Divider";
+import { motion } from "framer-motion";
 import Divider from "../ntf-components/Divider";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { useMemo } from "react";
 import ToolTipBtn from "./ToolTipBtn";
-import { arrowIcon } from "../../assets/dashboard/icons/icons";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
+import { IoIosArrowForward } from "react-icons/io";
 
 const DashBoardSideBar = () => {
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const DashBoardSideBar = () => {
     <motion.div
       exit={{ opacity: 0 }}
       className="dashboard-sidebar"
-      animate={{ maxWidth: dashboard.shrinkDasboard ? 75 : 250, opacity: 1 }}
+      animate={{ maxWidth: dashboard.shrinkDasboard ? 55 : 250, opacity: 1 }}
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -49,7 +48,7 @@ const DashBoardSideBar = () => {
         <motion.img
           src={profile.profile_pic}
           animate={{
-            width: dashboard.shrinkDasboard ? 50 : 100,
+            width: dashboard.shrinkDasboard ? 30 : 100,
             border: `1px solid ${themeSelector.btnColor}`,
           }}
           onClick={() => dispatch(setShrinkDashboard(false))}
@@ -70,14 +69,16 @@ const DashBoardSideBar = () => {
         place="right"
         tooltip_id=""
       >
-        <motion.img
+        <motion.div
           animate={{ rotate: !dashboard.shrinkDasboard ? 180 : 0 }}
-          src={arrowIcon}
-        />
+          transition={{ delay: 0.1, type: "tween" }}
+        >
+          <IoIosArrowForward />
+        </motion.div>
       </ToolTipBtn>
       {dashboardLinks.map((link_section) => {
         return (
-          <div key={link_section.header} className="link-group">
+          <div className="link-group" key={link_section.header + ""}>
             {!dashboard.shrinkDasboard && (
               <motion.h2
                 className="header"
@@ -98,14 +99,15 @@ const DashBoardSideBar = () => {
                   <>
                     <motion.div
                       animate={{
+                        minWidth: 65,
                         width: dashboard.shrinkDasboard ? 65 : 160,
-                        flexDirection: dashboard.shrinkDasboard
-                          ? "row-reverse"
-                          : "row",
-                        gap: dashboard.shrinkDasboard ? 1 : 2,
                         color: themeSelector.headerColor,
+                        borderInlineStart:
+                          dashboard.dashboard_Section === link.route
+                            ? `3px solid ${themeSelector.btnColor}`
+                            : `1px solid ${themeSelector.headerColor}`,
                       }}
-                      key={link.name}
+                      key={link.route}
                       className="link"
                       data-tooltip-id={`my-tooltip-${link.route.replaceAll(
                         "/",
@@ -121,11 +123,6 @@ const DashBoardSideBar = () => {
                       }}
                       whileHover={{ x: dashboard.shrinkDasboard ? 0 : 20 }}
                     >
-                      <AnimatePresence>
-                        {link.route === dashboard.dashboard_Section && (
-                          <Dashboard_Divider width={5} height={20} />
-                        )}
-                      </AnimatePresence>
                       <motion.img src={link.icon} alt="" />
                       {!dashboard.shrinkDasboard && (
                         <motion.span>{link.name}</motion.span>

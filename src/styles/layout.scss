@@ -15,19 +15,14 @@
     overflow: auto;
     @apply bg-light_medium_dark   font-rail z-10 drop-shadow-2xl backdrop-blur-sm fixed top-[56px] sm:top-[60px] md:top-[80px] lg:top-[80px] start-0 w-[250px]  h-[93%] py-20 max-h-fit flex items-start justify-start gap-2 flex-col p-2;
     .link-group {
-      @apply relative overflow-visible   w-full flex items-start justify-start gap-3 flex-col;
+      @apply relative overflow-visible   w-full flex items-start justify-start gap-[.1px] flex-col;
       .header {
         @apply ps-1 flex justify-start items-start flex-col   capitalize text-[1.1rem] font-bold;
       }
       .links {
-        @apply overflow-visible relative w-full flex ps-5 flex-col justify-start text-[1rem] items-start gap-2;
+        @apply overflow-visible relative w-full flex ps-5 flex-col justify-start text-[1rem] items-start;
         .link {
-          background: linear-gradient(
-            90deg,
-            rgba(2, 0, 36, 0) 0%,
-            rgba(255, 255, 255, 0.21060924369747902) 100%
-          );
-          @apply overflow-visible relative z-10 cursor-pointer  p-2 rounded-2xl flex items-center gap-5 capitalize font-light;
+          @apply overflow-visible relative z-10 cursor-pointer  p-2   flex items-center gap-5 capitalize font-light;
           img {
             @apply w-[25px] h-[25px] drop-shadow-2xl;
           }
@@ -43,7 +38,8 @@
     .profile-section {
       @apply w-full flex flex-col justify-center items-center gap-3 p-3 text-center text-white;
       img {
-        @apply cursor-pointer object-contain rounded-full;
+        all: unset;
+        @apply cursor-pointer object-contain rounded-full overflow-hidden;
       }
       .profile-name {
         @apply w-full text-[.9rem] font-bold;
@@ -71,14 +67,14 @@
     @apply w-[50px] h-[50px] p-3 flex items-center justify-center rounded-full fixed top-24 right-4;
   }
   .profile-card {
-    @apply bg-light_dark fixed w-[90%] top-[80px] sm:top-[100px]  end-[5%] sm:end-[100px] sm:w-fit h-fit rounded-lg drop-shadow-2xl backdrop-blur-2xl border-[1px] p-5 flex flex-col items-start justify-start gap-2;
+    @apply z-[10000] bg-light_dark fixed w-[90%] top-[80px] sm:top-[100px]  end-[5%] sm:end-3 md:end-5 sm:w-fit h-fit rounded-lg drop-shadow-2xl backdrop-blur-2xl border-[1px] p-5 flex flex-col items-start justify-start gap-2 overflow-hidden;
     & > div {
       @apply border-b-[1px] py-2;
     }
     .top-section {
-      @apply w-full flex items-center justify-start gap-3;
+      @apply max-w-full flex items-center justify-start gap-3 overflow-hidden;
       img {
-        @apply max-w-[50px] max-h-[50px] object-contain rounded-full border-[1px];
+        @apply max-w-[50px] max-h-[50px] min-w-[50px] min-h-[50px] bg-light_medium_dark object-contain rounded-full border-[1px];
       }
       .context {
         @apply w-auto flex flex-col gap-2 items-start justify-start;
@@ -87,7 +83,7 @@
         @apply font-semibold capitalize w-full text-start text-[.9rem];
       }
       .light {
-        @apply w-full text-start capitalize text-[.8rem];
+        @apply whitespace-pre-wrap w-full text-start capitalize text-[.8rem] max-w-[80%] overflow-hidden;
       }
     }
     .bottom-section {

@@ -10,6 +10,7 @@ import {
   profileIcon,
   schedulerIcon,
   themeIcon,
+  CiWallet,
 } from "../assets/dashboard/dashboardIcons";
 
 export const dashboardLinks = [
@@ -31,10 +32,15 @@ export const dashboardLinks = [
         route: "dashboard/profile",
         icon: profileIcon,
       },
+      {
+        name: "wallet",
+        route: "dashboard/wallet",
+        icon: CiWallet,
+      },
     ],
   },
   {
-    header: "tables",
+    header: "analytics",
     links: [
       {
         name: "crypto",

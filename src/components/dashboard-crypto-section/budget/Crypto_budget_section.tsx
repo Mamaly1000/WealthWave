@@ -11,6 +11,8 @@ import moment from "moment";
 import AddBudgetForm from "./AddBudgetForm";
 import TransactionItem from "./TransactionItem";
 import Budget_Accounts from "./Budget_Accounts";
+import Header from "../../header-component/Header";
+import DashboardSection from "../../dashboard/DashboardSection";
 
 export const statusColor = (
   status: "completed" | "pending" | "failed" | "proccessing"
@@ -31,7 +33,15 @@ const Crypto_budget_section = () => {
   const UserActions = useSelector(selectUserActions);
 
   return (
-    <div className="budget-container">
+    <DashboardSection classname="dashboard-budget-container">
+      <Header
+        btnText=""
+        onclick={() => {}}
+        header={false}
+        height={3}
+        width={150}
+        text={"Budget Section"}
+      />
       <Budget_child_container classname="mid-container overall-container">
         <Section_Header text="add more invesments to your budget" />
         <div className="status">
@@ -102,7 +112,7 @@ const Crypto_budget_section = () => {
         })}
       </Budget_child_container>{" "}
       {UserActions.budget.accounts.length > 0 && <Budget_Accounts />}
-    </div>
+    </DashboardSection>
   );
 };
 

@@ -9,11 +9,22 @@ import OverAllDataBox from "./OverAllDataBox";
 import Transaction from "./Transaction";
 import VisitChart from "./VisitChart";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
+import Header from "../header-component/Header";
+import { selectProfile } from "../../features/profile_slice/profile_slice";
 
 const Dashboard_Home = () => {
   const themeSelector = useSelector(selecttheme);
+  const { name } = useSelector(selectProfile);
   return (
     <DashboardSection classname="dashboard-home-section">
+      <Header
+        btnText=""
+        onclick={() => {}}
+        header={false}
+        height={3}
+        width={150}
+        text={name + " Dashboard"}
+      />
       <div
         style={{ background: themeSelector.containerColor }}
         className="deal-container"

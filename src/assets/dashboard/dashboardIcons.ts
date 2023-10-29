@@ -16,3 +16,4 @@ export { default as deleteIcon } from "./icons/delete.svg";
 export { default as addIcon } from "./icons/add.svg";
 export { default as paypalIcon } from "./budget/Paypal-Logo.png";
 export { default as masterCardIcon } from "./budget/mastercard.svg";
+export { default as CiWallet } from "./icons8-wallet-100.png";

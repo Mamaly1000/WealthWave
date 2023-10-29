@@ -471,8 +471,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Yaldevi:wght@200;300;400;500;600;700&display=swap");
 @import "./newBlog.scss";
@@ -508,10 +506,13 @@ video {
 @import "./drop-down.scss";
 @import "./crypto-dashboard.scss";
 @import "./select-component.scss";
+@import "./font.scss";
+
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: Raleway;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;

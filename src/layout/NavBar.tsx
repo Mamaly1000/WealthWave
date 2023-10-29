@@ -15,9 +15,11 @@ import {
   setDisplayProfileCard,
 } from "../features/dashboard_slice/dashboard_slice";
 import { selectProfile } from "../features/profile_slice/profile_slice";
+import { selecttheme } from "../features/theme_slice/theme_slice";
 
 const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
   const dispatch = useDispatch();
+  const theme = useSelector(selecttheme);
   const dashborad = useSelector(selectDashboard);
   const contextData = useContextFunction();
   const { scrollYProgress } = useScroll();
@@ -110,7 +112,10 @@ const NavBar = ({ showSideBar }: { showSideBar: boolean }) => {
               )
             }
           >
-            <motion.img src={profile_pic} />
+            <motion.img
+              animate={{ border: `1px solid ${theme.btnColor}` }}
+              src={profile_pic}
+            />
           </button>
           <Link
             onMouseEnter={() => {
