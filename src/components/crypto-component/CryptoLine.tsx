@@ -202,7 +202,7 @@ const CryptoLine = ({
             crypto_id={crypto_id}
             setCrypto_id={setCrypto_id}
             contentType=""
-            setDisplayDropDown={setCrypto_id}
+            setDisplayDropDown={setCrypto_id as any}
             selected_crypto_id={coin.id}
           />
         )}

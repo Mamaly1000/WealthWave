@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selecttheme } from "../../features/theme_slice/theme_slice";
 import { Slider } from "@mui/material";
-import { Dispatch, SetStateAction, useMemo } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { singleFilterType } from "../../features/crypto_slice/crypto_slice";
 const Custom_range_input = ({
@@ -58,8 +58,8 @@ const Custom_range_input = ({
       The selected range is{" "}
       <span style={{ borderBottom: `2px solid ${theme.btnColor}` }}>
         {minVal}
-      </span>
-      {" "}-{" "}
+      </span>{" "}
+      -{" "}
       <span style={{ borderBottom: `2px solid ${theme.btnColor}` }}>
         {maxVal}
       </span>

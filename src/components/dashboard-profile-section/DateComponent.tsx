@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DatePicker from "react-date-picker";
 import Header from "../header-component/Header";
 type ValuePiece = Date | null;
@@ -16,6 +16,7 @@ const DateComponent = ({
   onchange: (e: any) => void;
 }) => {
   const [calenderValue, setCalendarValue] = useState<datevalue>(new Date());
+  console.log(placeholder, value);
 
   return (
     <div className="input-group">

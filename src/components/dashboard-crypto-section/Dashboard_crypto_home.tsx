@@ -19,8 +19,7 @@ const Dashboard_crypto_home = () => {
       />
       {cryptoSection === "home" && (
         <Crypto_home_section
-          cryptoSection={cryptoSection}
-          setCryptoSection={setCryptoSection}
+          
         />
       )}
       {cryptoSection === "wallet" && <Crypto_wallet_section />}

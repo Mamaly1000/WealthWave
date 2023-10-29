@@ -18,7 +18,7 @@ const AccountItem = ({
 }: {
   isActive: boolean;
   acc: budgetAccountsType;
-  i: number;
+  i?: number;
   setActiveACC: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const theme = useSelector(selecttheme);
@@ -36,7 +36,7 @@ const AccountItem = ({
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
-          transition={{ duration: 0.5, type: "tween" }}
+          transition={{ duration: 0.5 + (i || 0) / 10, type: "tween" }}
           style={{ background: acc.bgColor, color: theme.headerColor }}
           className="account"
         >

@@ -11,7 +11,6 @@ import Custom_DateComponent from "./Custom_DateComponent";
 import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import Custom_checkbox from "./Custom_checkbox";
 import {
-  budgetAccountsType,
   budgetTransActionType,
   selectUserActions,
   setAccounts,

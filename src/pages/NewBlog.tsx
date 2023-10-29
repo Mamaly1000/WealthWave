@@ -14,7 +14,6 @@ import Header from "../components/header-component/Header";
 import { useSelector } from "react-redux";
 import { selecttheme } from "../features/theme_slice/theme_slice";
 import Divider from "../components/ntf-components/Divider";
-import themeReducer from "../features/theme_slice/theme_slice";
 const NewBlog = ({ onSubmit, onAddTag, AllAvailableTags }: NoteFormProps) => {
   const [imgLoading, setImgLoading] = useState<boolean>(false);
   const [imageSRC, setImageSRC] = useState<string>("");

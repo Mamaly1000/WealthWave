@@ -28,7 +28,7 @@ const Div = styled.div`
 const SingleWalletCard = ({ wallet }: { wallet: cryptoWalletType }) => {
   const cryptoSelector = useSelector(selectCrypto);
   const theme = useSelector(selecttheme);
-  const [copy, setCopy] = useState(false);
+  const [_copy, setCopy] = useState(false);
   const copyHandler = () => {
     setCopy(true);
     toast.success("wallet address copied successfully!");

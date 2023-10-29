@@ -1,4 +1,3 @@
-import React from "react";
 import { budgetTransActionType } from "../../../features/user-actions-slice/actions_slice";
 import moment from "moment";
 import { useSelector } from "react-redux";

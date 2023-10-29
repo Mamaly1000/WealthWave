@@ -39,9 +39,9 @@ const DropDown = ({
   selected_crypto_id,
 }: {
   setDisplayDropDown: React.Dispatch<
-    React.SetStateAction<cryptoControlsType | "" | string>
+    React.SetStateAction<cryptoControlsType | "">
   >;
-  selected_crypto_id: string;
+  selected_crypto_id?: string;
   contentType: cryptoControlsType | "";
   content: {
     title: string;

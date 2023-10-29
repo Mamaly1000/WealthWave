@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import ReactSelect, { ThemeConfig } from "react-select";
+import ReactSelect from "react-select";
 import { BlogListProps, TAG } from "../types/noteTypes";
 import BlogCard from "../components/blog-car-component/BlogCard";
 import { useNavigate } from "react-router-dom";

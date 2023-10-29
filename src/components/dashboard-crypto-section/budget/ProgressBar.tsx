@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { selecttheme } from "../../../features/theme_slice/theme_slice";
 import CountUp from "react-countup";
 interface ProgressBarProps {
   percentage: number;
@@ -12,7 +10,6 @@ const ProgressBar = ({ percentage, title, color }: ProgressBarProps) => {
   const radius = 40;
   const circumference = radius * 2 * Math.PI;
   const progress = circumference - (percentage / 100) * circumference;
-  const theme = useSelector(selecttheme);
   return (
     <div className="progress-bar">
       <svg
@@ -43,15 +40,15 @@ const ProgressBar = ({ percentage, title, color }: ProgressBarProps) => {
           strokeDashoffset={progress}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: progress }}
-          transition={{ duration: .5, delay: 2, type: "just" }}
+          transition={{ duration: 0.5, delay: 2, type: "just" }}
         />
       </svg>
       <span className="title">
         <CountUp
           start={0}
           end={percentage}
-          duration={.5}
-          delay={2} 
+          duration={0.5}
+          delay={2}
           suffix={"%"}
         >
           {({ countUpRef }) => <span ref={countUpRef} />}
